@@ -15,6 +15,11 @@
   </header>
 
   <main>
+    <div class="modeswitch">
+      <button class="mode active" data-mode="clip">✂ Clip a video</button>
+      <button class="mode" data-mode="create">✨ Create a video</button>
+    </div>
+
     <!-- STEP 1: input -->
     <section class="card" id="inputCard">
       <h1>Turn any long video into viral shorts</h1>
@@ -77,6 +82,77 @@
       <div class="row">
         <button class="btn primary" id="startBtn">Find clips →</button>
       </div>
+    </section>
+
+    <!-- CREATE MODE: faceless video generator -->
+    <section class="card hidden" id="createCard">
+      <h1>Create a faceless video</h1>
+      <p class="sub">Script → AI voiceover → background → synced captions. All in one.</p>
+
+      <label class="muted small">Script (leave empty to auto-write from a topic)</label>
+      <textarea id="scriptInput" class="text-input" rows="4" placeholder="Type your narration here…"></textarea>
+
+      <div class="row opts-row">
+        <div class="mini" style="flex:1 1 220px">
+          <label class="muted small">Topic (used if script is empty / to auto-write)</label>
+          <input type="text" id="createTopic" class="text-input" placeholder="e.g. 3 productivity hacks" />
+        </div>
+        <div class="mini">
+          <label class="muted small">Voice</label>
+          <select id="voiceSelect" class="text-input compact"></select>
+        </div>
+      </div>
+
+      <div class="row opts-row">
+        <div class="mini">
+          <label class="muted small">Caption style</label>
+          <select id="createStyle" class="text-input compact"></select>
+        </div>
+        <div class="mini">
+          <label class="muted small">Aspect</label>
+          <select id="createAspect" class="text-input compact">
+            <option value="9:16" selected>9:16</option>
+            <option value="4:5">4:5</option>
+            <option value="1:1">1:1</option>
+            <option value="16:9">16:9</option>
+          </select>
+        </div>
+        <div class="mini">
+          <label class="muted small">Background</label>
+          <select id="bgSelect" class="text-input compact">
+            <option value="gradient" selected>Gradient</option>
+            <option value="color">Solid color</option>
+            <option value="video">Upload video (loop)</option>
+            <option value="pexels">Pexels stock</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row opts-row" id="bgExtra">
+        <div class="mini bg-color-only"><label class="muted small">Color A</label><input type="color" id="bgColorA" value="#111827" /></div>
+        <div class="mini bg-color-only"><label class="muted small">Color B</label><input type="color" id="bgColorB" value="#1f2937" /></div>
+        <div class="mini bg-video-only"><label class="muted small">Background file</label><input type="file" id="bgFile" accept="video/*" /></div>
+        <div class="mini bg-pexels-only"><label class="muted small">Stock search</label><input type="text" id="bgQuery" class="text-input compact" value="satisfying" /></div>
+        <div class="mini"><label class="muted small">Music</label><input type="file" id="createMusic" accept="audio/*" /><input type="range" id="createMusicVol" min="0" max="1" step="0.05" value="0" /></div>
+      </div>
+
+      <div class="toggles" style="margin-top:14px">
+        <label><input type="checkbox" id="c_captions" checked /> Captions</label>
+        <label><input type="checkbox" id="c_keywords" checked /> Highlight keywords</label>
+        <label><input type="checkbox" id="c_emojis" checked /> Auto emoji</label>
+        <label><input type="checkbox" id="c_hook" checked /> Hook title</label>
+        <label><input type="checkbox" id="c_bar" checked /> Progress bar</label>
+        <label><input type="checkbox" id="c_zoom" /> Auto zoom</label>
+      </div>
+
+      <div class="row"><button class="btn primary" id="createBtn">Generate video →</button></div>
+    </section>
+
+    <!-- CREATE RESULT -->
+    <section class="card hidden" id="createResult">
+      <h2>Your video</h2>
+      <video id="createPreview" controls playsinline style="width:100%;max-width:340px;border-radius:12px;background:#000;aspect-ratio:9/16"></video>
+      <a class="btn primary block" id="createDownload" download style="max-width:340px">Download video</a>
     </section>
 
     <!-- STEP 2: progress -->

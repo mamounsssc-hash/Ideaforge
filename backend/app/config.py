@@ -56,6 +56,11 @@ class Settings(BaseSettings):
     # ---- Optional B-roll (Pexels free API; empty => B-roll disabled) ----
     pexels_api_key: str = ""
 
+    # ---- Text-to-speech (faceless generator) ----
+    tts_engine: str = "auto"             # auto | piper | edge
+    piper_bin: str = ""                  # path to piper binary (offline TTS)
+    piper_voice: str = ""                # path to a piper voice .onnx
+
     # ---- Server ----
     host: str = "127.0.0.1"
     port: int = 8000

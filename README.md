@@ -1,10 +1,14 @@
 # IdeaForge Clipper
 
-A **free, fully local** alternative to Opus Clip / Crayo. Drop in a long video (file
-or URL) and it finds the best moments, reframes them to vertical 9:16 while tracking
-the speaker, and burns in professional animated captions — with **40+ styles**.
+A **free, fully local** alternative to Opus Clip / Crayo. Two modes:
 
-No paid APIs. No cloud. Your video never leaves your machine.
+- **Clip** — drop in a long video (file or URL); it finds the best moments, reframes
+  to vertical while tracking the speaker, and burns in professional animated captions.
+- **Create** — a faceless / story-video generator: script → AI voiceover →
+  background → synced captions, in one click (the Crayo workflow).
+
+No paid APIs. No cloud. Your video never leaves your machine (voiceover uses free
+edge-tts online, or piper fully offline).
 
 ---
 
@@ -60,6 +64,11 @@ dependency.
 - **Caption placement controls** — position + size overrides without editing the style.
 - **Progress bar** overlay along the bottom.
 - **Filler removal** — “um / uh” dropped from captions.
+- **In-browser transcript editing** — fix ASR mistakes word-by-word before render;
+  the clip text, keywords, and hashtags update from your edits.
+- **Faceless "Create" mode** — script (typed or AI-written from a topic) → free AI
+  voiceover → gradient / solid / uploaded / Pexels background → captions synced to
+  the voiceover → vertical short. Reuses every caption style and toggle.
 - **Social copy** — per-clip post caption + hashtags (heuristic, LLM-upgradable),
   one-click copy.
 - **Batch export** — render every clip in a chosen style and download one ZIP.
@@ -97,6 +106,19 @@ else set in config falls back to `large-v3`.
 The last two are the only real gaps. Auto-posting needs each platform's login and
 is out of scope for a private local tool; true diarization / split-screen is on the
 roadmap.
+
+## Compared to Crayo
+
+| Crayo feature | IdeaForge |
+|---|---|
+| Auto-clips from long video | ✅ (Clip mode) |
+| Faceless / story video generator | ✅ (Create mode) |
+| AI script generation | ✅ from a topic (optional LLM) |
+| AI voiceover | ✅ edge-tts (free) / piper (offline) |
+| Trending animated captions | ✅ 71 styles, synced to the voiceover |
+| Background (gameplay / stock / color) | ✅ upload / gradient / solid / Pexels |
+| Background music | ✅ mix at adjustable volume |
+| AI image / AI video generation | ❌ out of scope (no local gen models bundled) |
 
 ---
 
@@ -155,6 +177,8 @@ backend/app/
     score.py              heuristic 0–99 scoring + dedupe     [Layer 2]
     llm.py                optional OpenAI-compatible re-rank + social copy [Layer 3]
     keywords.py           keyword extraction, auto-emoji, hashtags
+    tts.py                text-to-speech (edge-tts / piper) for Create mode
+    create.py             faceless generator: script -> voiceover -> compose
     tighten.py            internal silence removal + caption retiming
     speakers.py           approximate speaker turns for color-coding
     reframe.py            face tracking → target-ratio crop path
@@ -187,8 +211,8 @@ Append an object to `backend/app/styles/catalog.json`:
 
 ## Roadmap ideas
 - True speaker diarization (pyannote) to replace the pause-based approximation.
-- In-browser transcript editing to fix ASR mistakes before render.
 - Split-screen layouts for two-speaker interviews.
+- Local AI image / video generation for Create-mode backgrounds.
 - Package the localhost app as a Windows `.exe` with Tauri.
 
 ## License

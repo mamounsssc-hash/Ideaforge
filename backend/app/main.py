@@ -12,7 +12,7 @@ import uuid
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -21,8 +21,9 @@ import zipfile
 
 from .config import UPLOAD_DIR, OUTPUT_DIR, WORK_DIR, settings
 from .jobs import store
-from .models import RenderRequest, BatchRenderRequest, AnalyzeOptions
-from .pipeline import orchestrator, render
+from .models import RenderRequest, BatchRenderRequest, AnalyzeOptions, WordsUpdate, CreateOptions
+from .pipeline import orchestrator, render, create as create_pipeline
+from .pipeline import tts
 from .styles import all_styles, get_style
 
 app = FastAPI(title="IdeaForge Clipper", version="0.1.0")
@@ -98,6 +99,36 @@ async def job_status(job_id: str):
     return job.to_public()
 
 
+# ---- In-browser transcript editing ----
+@app.get("/api/jobs/{job_id}/clips/{clip_id}/words")
+async def get_words(job_id: str, clip_id: str):
+    job = store.get(job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    clip = next((c for c in job.clips if c.id == clip_id), None)
+    if not clip:
+        raise HTTPException(404, "clip not found")
+    return {"words": [{"start": w.start, "end": w.end, "text": w.text} for w in clip.words]}
+
+
+@app.post("/api/jobs/{job_id}/clips/{clip_id}/words")
+async def set_words(job_id: str, clip_id: str, body: WordsUpdate):
+    from .models import Word
+    from .pipeline import keywords as kw
+    job = store.get(job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    clip = next((c for c in job.clips if c.id == clip_id), None)
+    if not clip:
+        raise HTTPException(404, "clip not found")
+    new_words = [Word(start=w.start, end=w.end, text=w.text) for w in body.words if w.text.strip()]
+    clip.words = new_words
+    clip.text = " ".join(w.text for w in new_words).strip()
+    clip.keywords = kw.extract_keywords(clip.text, top_n=6)
+    clip.hashtags = kw.hashtags(clip.text, extra=clip.keywords)
+    return {"ok": True, "text": clip.text}
+
+
 @app.websocket("/ws/{job_id}")
 async def ws_progress(ws: WebSocket, job_id: str):
     await ws.accept()
@@ -119,6 +150,44 @@ async def ws_progress(ws: WebSocket, job_id: str):
 @app.get("/api/styles")
 async def styles():
     return [s.model_dump() for s in all_styles()]
+
+
+# ----------------------------- Faceless generator (Crayo-style) --------
+@app.get("/api/voices")
+async def voices():
+    return tts.VOICES
+
+
+@app.post("/api/create")
+async def create_video(
+    options: str = Form(...),
+    background: UploadFile | None = File(None),
+    music: UploadFile | None = File(None),
+):
+    try:
+        opts = CreateOptions.model_validate_json(options)
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(422, f"invalid options: {e}")
+    if not opts.script.strip() and not opts.topic.strip():
+        raise HTTPException(400, "provide a script or a topic")
+
+    job = store.create()
+    bg_path = None
+    if background is not None:
+        bg_path = str(UPLOAD_DIR / f"{job.id}_bg{Path(background.filename or '.mp4').suffix or '.mp4'}")
+        with open(bg_path, "wb") as f:
+            shutil.copyfileobj(background.file, f)
+    music_path = ""
+    if music is not None:
+        music_path = str(UPLOAD_DIR / f"{job.id}_music{Path(music.filename or '.mp3').suffix or '.mp3'}")
+        with open(music_path, "wb") as f:
+            shutil.copyfileobj(music.file, f)
+
+    threading.Thread(
+        target=create_pipeline.create_faceless,
+        args=(job.id, opts, bg_path, music_path), daemon=True,
+    ).start()
+    return {"job_id": job.id}
 
 
 # ----------------------------- Render ---------------------------------

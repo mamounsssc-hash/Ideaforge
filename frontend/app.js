@@ -4,6 +4,20 @@ const API = "";
 
 let currentJob = null;
 let styles = [];
+let mode = "clip";
+
+// ---------- mode switch (clip vs create) ----------
+document.querySelectorAll(".mode").forEach((b) => {
+  b.addEventListener("click", async () => {
+    document.querySelectorAll(".mode").forEach((x) => x.classList.remove("active"));
+    b.classList.add("active");
+    mode = b.dataset.mode;
+    $("#inputCard").classList.toggle("hidden", mode !== "clip");
+    $("#createCard").classList.toggle("hidden", mode !== "create");
+    ["progressCard", "resultsSection", "createResult"].forEach((id) => $("#" + id).classList.add("hidden"));
+    if (mode === "create") await initCreate();
+  });
+});
 
 // ---------- tabs ----------
 document.querySelectorAll(".tab").forEach((t) => {
@@ -100,7 +114,76 @@ function handleState(s) {
   $("#progMsg").textContent = s.message || "";
   $("#progTitle").textContent = titleFor(s.status);
   if (s.status === "error") { $("#progMsg").textContent = "Error: " + s.error; return; }
-  if (s.status === "ready") { showResults(s); }
+  if (s.status === "ready") {
+    if (s.kind === "create") { showCreateResult(s); } else { showResults(s); }
+  }
+}
+
+// ---------- create mode ----------
+let createReady = false;
+async function initCreate() {
+  await loadStyles();
+  // clone styles into the create-mode select
+  const cs = $("#createStyle");
+  if (!cs.options.length) cs.innerHTML = $("#styleSelect").innerHTML;
+  const vs = $("#voiceSelect");
+  if (!vs.options.length) {
+    try {
+      const voices = await (await fetch("/api/voices")).json();
+      voices.forEach((v) => { const o = document.createElement("option"); o.value = v.id; o.textContent = v.name; vs.appendChild(o); });
+    } catch { /* ignore */ }
+  }
+}
+
+$("#bgSelect")?.addEventListener("change", () => {
+  const v = $("#bgSelect").value;
+  document.querySelectorAll(".bg-color-only").forEach((e) => e.style.display = v === "color" ? "" : "none");
+  document.querySelectorAll(".bg-video-only").forEach((e) => e.style.display = v === "video" ? "" : "none");
+  document.querySelectorAll(".bg-pexels-only").forEach((e) => e.style.display = v === "pexels" ? "" : "none");
+});
+
+$("#createBtn")?.addEventListener("click", async () => {
+  const script = $("#scriptInput").value.trim();
+  const topic = $("#createTopic").value.trim();
+  if (!script && !topic) { alert("Write a script or a topic."); return; }
+  const opts = {
+    script, topic, voice: $("#voiceSelect").value,
+    style_id: $("#createStyle").value, aspect_ratio: $("#createAspect").value,
+    background: $("#bgSelect").value,
+    background_color: $("#bgColorA").value.replace("#", ""),
+    background_color2: $("#bgColorB").value.replace("#", ""),
+    background_query: $("#bgQuery").value || "satisfying",
+    burn_captions: $("#c_captions").checked, highlight_keywords: $("#c_keywords").checked,
+    add_emojis: $("#c_emojis").checked, hook_title: $("#c_hook").checked,
+    progress_bar: $("#c_bar").checked, auto_zoom: $("#c_zoom").checked,
+    music_volume: parseFloat($("#createMusicVol").value) || 0,
+  };
+  const fd = new FormData();
+  fd.append("options", JSON.stringify(opts));
+  if ($("#bgFile").files[0]) fd.append("background", $("#bgFile").files[0]);
+  if ($("#createMusic").files[0]) fd.append("music", $("#createMusic").files[0]);
+  $("#createBtn").disabled = true;
+  try {
+    const r = await fetch("/api/create", { method: "POST", body: fd });
+    if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+    currentJob = (await r.json()).job_id;
+    $("#createCard").classList.add("hidden");
+    $("#progressCard").classList.remove("hidden");
+    trackProgress(currentJob);
+  } catch (err) {
+    alert("Failed: " + err.message);
+  } finally {
+    $("#createBtn").disabled = false;
+  }
+});
+
+function showCreateResult(s) {
+  $("#progressCard").classList.add("hidden");
+  $("#createResult").classList.remove("hidden");
+  if (s.output_url) {
+    $("#createPreview").src = s.output_url;
+    $("#createDownload").href = s.output_url;
+  }
 }
 function titleFor(st) {
   return {
@@ -165,18 +248,61 @@ function clipRow(c) {
       <div class="clip-text">${escapeHtml(c.text)}</div>
       <div class="hashtags">${(c.hashtags || []).map((h) => `<span>${escapeHtml(h)}</span>`).join("")}</div>
       <button class="edit-link">✎ Edit / trim</button>
+      <button class="edit-link cap-link">✎ Edit captions</button>
       ${c.social_caption ? `<button class="copy-cap" title="Copy post caption">⧉ Copy caption</button>` : ""}
       <div class="edit-panel">
         <input class="t-title" type="text" placeholder="Title / hook" value="${escapeHtml(c.title || "")}" />
         <input class="t-num t-start" type="number" step="0.1" value="${c.start}" title="start (s)" />
         <input class="t-num t-end" type="number" step="0.1" value="${c.end}" title="end (s)" />
       </div>
+      <div class="cap-editor"></div>
     </div>
     <div class="clip-actions">
       <button class="btn primary render-btn">Render</button>
     </div>`;
   const panel = el.querySelector(".edit-panel");
   el.querySelector(".edit-link").addEventListener("click", () => panel.classList.toggle("open"));
+
+  // in-browser transcript editing
+  const capEditor = el.querySelector(".cap-editor");
+  el.querySelector(".cap-link").addEventListener("click", async () => {
+    if (capEditor.classList.contains("open")) { capEditor.classList.remove("open"); return; }
+    capEditor.classList.add("open");
+    if (capEditor.dataset.loaded) return;
+    capEditor.innerHTML = "<span class='muted small'>Loading transcript…</span>";
+    try {
+      const data = await (await fetch(`/api/jobs/${currentJob}/clips/${c.id}/words`)).json();
+      capEditor.innerHTML = "";
+      const grid = document.createElement("div"); grid.className = "word-grid";
+      const inputs = data.words.map((w) => {
+        const inp = document.createElement("input");
+        inp.type = "text"; inp.value = w.text; inp.className = "word-inp";
+        inp.style.width = Math.max(3, w.text.length + 1) + "ch";
+        inp.dataset.start = w.start; inp.dataset.end = w.end;
+        inp.addEventListener("input", () => { inp.style.width = Math.max(3, inp.value.length + 1) + "ch"; });
+        grid.appendChild(inp); return inp;
+      });
+      capEditor.appendChild(grid);
+      const save = document.createElement("button");
+      save.className = "btn ghost"; save.textContent = "Save captions"; save.style.marginTop = "8px";
+      save.addEventListener("click", async () => {
+        const words = inputs.map((i) => ({ start: +i.dataset.start, end: +i.dataset.end, text: i.value }));
+        save.disabled = true; save.textContent = "Saving…";
+        try {
+          const res = await (await fetch(`/api/jobs/${currentJob}/clips/${c.id}/words`, {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ words }),
+          })).json();
+          c.text = res.text;
+          el.querySelector(".clip-text").textContent = res.text;
+          save.textContent = "✓ Saved";
+        } catch { save.textContent = "Failed"; }
+        setTimeout(() => { save.disabled = false; save.textContent = "Save captions"; }, 1400);
+      });
+      capEditor.appendChild(save);
+      capEditor.dataset.loaded = "1";
+    } catch { capEditor.innerHTML = "<span class='muted small'>Could not load transcript.</span>"; }
+  });
   el.querySelector(".render-btn").addEventListener("click", (e) => {
     c._title = el.querySelector(".t-title").value;
     c._start = parseFloat(el.querySelector(".t-start").value);

@@ -27,6 +27,8 @@ class Job:
     language: str = ""
     duration: float = 0.0
     clips: list[ClipCandidate] = field(default_factory=list)
+    output_url: str = ""      # faceless generator: the finished video
+    kind: str = "clip"        # "clip" | "create"
     error: str = ""
     created: float = field(default_factory=time.time)
 
@@ -38,6 +40,8 @@ class Job:
             "message": self.message,
             "language": self.language,
             "duration": self.duration,
+            "output_url": self.output_url,
+            "kind": self.kind,
             "error": self.error,
             "clips": [
                 {

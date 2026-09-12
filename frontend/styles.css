@@ -37,6 +37,13 @@ body {
 
 main { max-width: 960px; margin: 0 auto; padding: 28px 18px 80px; }
 
+.modeswitch { display: flex; gap: 8px; margin-bottom: 18px; }
+.mode { flex: 0 0 auto; background: var(--panel); color: var(--muted); border: 1px solid var(--line);
+  padding: 10px 18px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 14px; }
+.mode.active { color: var(--text); border-color: var(--brand); background: #182142; }
+textarea.text-input { resize: vertical; font-family: inherit; }
+input[type="color"] { width: 46px; height: 38px; border: 1px solid var(--line); border-radius: 8px; background: #0e131d; cursor: pointer; }
+
 .card {
   background: linear-gradient(180deg, var(--panel), var(--panel-2));
   border: 1px solid var(--line); border-radius: var(--radius);
@@ -106,6 +113,12 @@ h2 { font-size: 19px; margin: 0 0 14px; }
 .edit-panel .t-title { flex: 1 1 200px; }
 .edit-panel .t-num { width: 92px; }
 .edit-link { background: none; border: none; color: var(--brand); cursor: pointer; font-size: 12px; padding: 0; margin-top: 6px; }
+
+.cap-editor { display: none; margin-top: 10px; }
+.cap-editor.open { display: block; }
+.word-grid { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; background: #0e131d; border: 1px solid var(--line); border-radius: 10px; }
+.word-inp { background: #131a26; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; font-size: 13px; min-width: 3ch; }
+.word-inp:focus { border-color: var(--brand); outline: none; }
 
 .hashtags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 5px; }
 .hashtags span { font-size: 11px; color: #9fb0ff; background: #141c33; border: 1px solid #24305a; padding: 1px 7px; border-radius: 999px; }

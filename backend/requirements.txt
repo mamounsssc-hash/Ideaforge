@@ -16,6 +16,9 @@ mediapipe==0.10.20           # robust face + active-speaker signals
 # ---- LLM (optional, all local by default) ----
 httpx==0.28.1                # talks to Ollama / LM Studio / Qwen3-VL server (OpenAI-compatible)
 
+# ---- Text-to-speech for the faceless generator (free) ----
+edge-tts==7.0.0              # free high-quality neural voices (online). Offline: use piper.
+
 # Notes:
 # - ffmpeg + ffprobe must be installed on the system (see scripts/ and README).
 # - Everything above is free and runs locally. No paid API keys required.

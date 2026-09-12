@@ -155,3 +155,78 @@ def extract_keyframe(source: Path, t: float, out: Path) -> Path:
     _run(["ffmpeg", "-y", "-ss", f"{t:.3f}", "-i", str(source),
           "-frames:v", "1", "-q:v", "3", str(out)])
     return out
+
+
+def render_faceless(
+    clip: ClipCandidate,
+    voiceover: Path,
+    style: StylePreset,
+    job_id: str,
+    opts,                       # CreateOptions
+    background: Path | None,
+    music_path: str = "",
+) -> Path:
+    """Compose a faceless short: background + voiceover + synced captions (+ music)."""
+    tw, th = ratio_dims(opts.aspect_ratio)
+    dur = max(clip.end - clip.start, 0.5)
+    out_path = OUTPUT_DIR / f"{job_id}_faceless_{style.id}_{opts.aspect_ratio.replace(':', 'x')}.mp4"
+
+    # ---- inputs: [0]=background, [1]=voiceover, [2]=music? ----
+    inputs: list[str] = []
+    bg = opts.background
+    if bg == "video" and background and background.exists():
+        inputs += ["-stream_loop", "-1", "-i", str(background)]
+    elif bg == "pexels" and background and background.exists():
+        inputs += ["-stream_loop", "-1", "-i", str(background)]
+    elif bg == "color":
+        inputs += ["-f", "lavfi", "-i", f"color=c=0x{opts.background_color}:s={tw}x{th}:d={dur:.2f}"]
+    else:  # gradient (default, offline)
+        inputs += ["-f", "lavfi", "-i",
+                   f"gradients=s={tw}x{th}:c0=0x{opts.background_color}:c1=0x{opts.background_color2}"
+                   f":x0=0:y0=0:x1={tw}:y1={th}:d={dur:.2f}:speed=0.015"]
+    inputs += ["-i", str(voiceover)]
+    has_music = opts.music_volume > 0 and music_path and Path(music_path).exists()
+    if has_music:
+        inputs += ["-stream_loop", "-1", "-i", str(music_path)]
+
+    # ---- captions ASS (word timing from the voiceover) ----
+    vchain = f"[0:v]scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th},setsar=1"
+    if opts.auto_zoom:
+        frames = max(1, int(dur * 30))
+        vchain += (f",zoompan=z='min(1.0+0.08*on/{frames},1.08)':d=1"
+                   f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={tw}x{th}:fps=30")
+    if opts.burn_captions and clip.words:
+        ass_path = WORK_DIR / f"{job_id}_faceless.ass"
+        captions.write_ass(
+            ass_path, clip.words, 0.0, dur, style, play_w=tw, play_h=th,
+            keyword_set=set(clip.keywords) if opts.highlight_keywords else set(),
+            add_emojis=opts.add_emojis, remove_fillers=False,
+            hook_text=(clip.title if opts.hook_title else None),
+            position_override=opts.caption_position, scale=opts.caption_scale,
+            offset=opts.caption_offset,
+        )
+        fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
+        vchain += f",subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}"
+    if opts.progress_bar:
+        bar_h = max(6, th // 240)
+        vchain += f",drawbox=x=0:y=ih-{bar_h}:w='iw*t/{dur:.3f}':h={bar_h}:color=white@0.92:t=fill"
+    vchain += "[v]"
+
+    # ---- audio: voiceover (+ music) ----
+    vo_idx = 1
+    if has_music:
+        achain = (f"[{vo_idx}:a]volume=1.0[vo];[{vo_idx+1}:a]volume={min(1.0, opts.music_volume):.2f}[mu];"
+                  f"[vo][mu]amix=inputs=2:duration=first:dropout_transition=0[a]")
+        amap = "[a]"
+    else:
+        achain = ""
+        amap = f"{vo_idx}:a"
+    filter_complex = vchain + ((";" + achain) if achain else "")
+
+    cmd = ["ffmpeg", "-y", *inputs, "-filter_complex", filter_complex,
+           "-map", "[v]", "-map", amap, "-t", f"{dur:.3f}",
+           "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+           "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-shortest",
+           str(out_path)]
+    _run(cmd)
+    return out_path

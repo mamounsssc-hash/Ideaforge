@@ -108,6 +108,27 @@ class BatchRenderRequest(RenderOptions):
     clip_ids: list[str] = Field(default_factory=list)   # empty => all clips
 
 
+class CreateOptions(RenderOptions):
+    """Faceless / story-video generation (Crayo-style)."""
+    script: str = ""                     # narration text; if empty, generated from topic
+    topic: str = ""                      # used to auto-write a script when script is empty
+    voice: str = "en-US-GuyNeural"
+    background: Literal["gradient", "color", "video", "pexels"] = "gradient"
+    background_color: str = "111827"
+    background_color2: str = "1F2937"
+    background_query: str = "satisfying"  # Pexels search when background == "pexels"
+
+
+class WordEdit(BaseModel):
+    start: float
+    end: float
+    text: str
+
+
+class WordsUpdate(BaseModel):
+    words: list[WordEdit] = Field(default_factory=list)
+
+
 class StylePreset(BaseModel):
     id: str
     name: str
