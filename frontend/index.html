@@ -88,7 +88,35 @@
         <label><input type="checkbox" id="opt_hook" checked /> Hook title</label>
         <label><input type="checkbox" id="opt_bar" checked /> Progress bar</label>
         <label><input type="checkbox" id="opt_fillers" checked /> Remove um/uh</label>
+        <label><input type="checkbox" id="opt_silence" /> Remove silences</label>
+        <label><input type="checkbox" id="opt_zoom" /> Auto zoom</label>
+        <label><input type="checkbox" id="opt_speakers" /> Speaker colors</label>
         <label><input type="checkbox" id="opt_broll" /> B-roll (Pexels)</label>
+      </div>
+
+      <div class="toggles" id="advanced">
+        <div class="adv-item">
+          <label class="muted small">Caption position</label>
+          <select id="opt_cappos" class="text-input compact">
+            <option value="auto" selected>Style default</option>
+            <option value="top">Top</option>
+            <option value="center">Center</option>
+            <option value="bottom">Bottom</option>
+          </select>
+        </div>
+        <div class="adv-item">
+          <label class="muted small">Caption size <span id="capScaleVal">100%</span></label>
+          <input type="range" id="opt_capscale" min="0.6" max="1.6" step="0.05" value="1" />
+        </div>
+        <div class="adv-item">
+          <label class="muted small">Watermark / handle</label>
+          <input type="text" id="opt_watermark" class="text-input compact" placeholder="@yourhandle" />
+        </div>
+        <div class="adv-item">
+          <label class="muted small">Music</label>
+          <input type="file" id="musicInput" accept="audio/*" />
+          <input type="range" id="opt_musicvol" min="0" max="1" step="0.05" value="0" title="music volume" />
+        </div>
       </div>
 
       <div class="clips" id="clipList"></div>

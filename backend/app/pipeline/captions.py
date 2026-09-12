@@ -16,6 +16,7 @@ from pathlib import Path
 from ..config import settings
 from ..models import StylePreset, Word
 from . import keywords as kw
+from . import speakers as spk
 
 FILLERS = {"um", "uh", "erm", "mm", "hmm", "uhh", "umm", "ah", "eh"}
 
@@ -85,6 +86,10 @@ def build_ass(
     remove_fillers: bool = True,
     hook_text: str | None = None,
     max_emojis: int = 4,
+    position_override: str = "auto",
+    scale: float = 1.0,
+    offset: int = 0,
+    speaker_colors: bool = False,
 ) -> str:
     pw = play_w or settings.target_width
     ph = play_h or settings.target_height
@@ -94,12 +99,21 @@ def build_ass(
     back = _ass_color(style.back_color) if style.back_color else _ass_color("000000", "80")
     border_style = 3 if style.back_color else 1
     bold = -1 if style.bold else 0
-    align = _alignment(style.position)
+    position = style.position if position_override in ("auto", "") else position_override
+    align = _alignment(position)
+    font_size = max(20, int(round(style.font_size * max(0.4, scale))))
+    margin_v = max(0, style.margin_v + int(offset))
     kwset = keyword_set or set()
 
     # Filter filler words up-front so they never appear.
     if remove_fillers:
         words = [w for w in words if _norm(w.text) not in FILLERS]
+
+    # Per-word highlight colors (speaker coloring) if requested.
+    hi_colors: list[str] | None = None
+    if speaker_colors and words:
+        sp = spk.assign(words)
+        hi_colors = [_ass_color(spk.color_for(s)) for s in sp]
 
     # Pre-compute emoji insertions (cap + no repeats) mapped by word identity index.
     emoji_at: dict[int, str] = {}
@@ -122,8 +136,8 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Main,{style.font},{style.font_size},{primary},{primary},{outline},{back},{bold},0,0,0,100,100,{style.letter_spacing},0,{border_style},{style.outline},{style.shadow},{align},60,60,{style.margin_v},1
-Style: Hook,{style.font},{int(style.font_size * 0.72)},{_ass_color('FFFFFF')},{_ass_color('FFFFFF')},{_ass_color('000000')},{_ass_color('000000','60')},-1,0,0,0,100,100,1,0,3,4,2,8,80,80,140,1
+Style: Main,{style.font},{font_size},{primary},{primary},{outline},{back},{bold},0,0,0,100,100,{style.letter_spacing},0,{border_style},{style.outline},{style.shadow},{align},60,60,{margin_v},1
+Style: Hook,{style.font},{int(font_size * 0.72)},{_ass_color('FFFFFF')},{_ass_color('FFFFFF')},{_ass_color('000000')},{_ass_color('000000','60')},-1,0,0,0,100,100,1,0,3,4,2,8,80,80,140,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -145,10 +159,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         base = _display(w.text, style)
         emoji = (" " + emoji_at[idx]) if idx in emoji_at else ""
         is_kw = _norm(w.text) in kwset
+        hi = hi_colors[idx] if (hi_colors and idx < len(hi_colors)) else highlight
         if active:
-            return "{\\c" + highlight + anim + "}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
+            return "{\\c" + hi + anim + "}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
         if is_kw:
-            return "{\\c" + highlight + "}" + base + "{\\c" + primary + "}" + emoji
+            return "{\\c" + hi + "}" + base + "{\\c" + primary + "}" + emoji
         return base + emoji
 
     for group_idx, group in enumerate(_chunk(words, style.max_words)):

@@ -93,6 +93,18 @@ h2 { font-size: 19px; margin: 0 0 14px; }
 .toggles label { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #c3cad9; cursor: pointer; }
 .toggles input { accent-color: var(--brand); width: 16px; height: 16px; }
 
+#advanced { align-items: flex-end; gap: 14px 20px; }
+.adv-item { display: flex; flex-direction: column; gap: 4px; }
+.adv-item input[type="range"] { width: 150px; accent-color: var(--brand); }
+.adv-item input[type="file"] { max-width: 190px; font-size: 12px; color: var(--muted); }
+
+.edit-panel { display: none; margin-top: 10px; padding: 10px; background: #0e131d; border: 1px solid var(--line); border-radius: 10px; gap: 8px; flex-wrap: wrap; }
+.edit-panel.open { display: flex; }
+.edit-panel input { background: #131a26; color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; font-size: 13px; }
+.edit-panel .t-title { flex: 1 1 200px; }
+.edit-panel .t-num { width: 92px; }
+.edit-link { background: none; border: none; color: var(--brand); cursor: pointer; font-size: 12px; padding: 0; margin-top: 6px; }
+
 .hashtags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 5px; }
 .hashtags span { font-size: 11px; color: #9fb0ff; background: #141c33; border: 1px solid #24305a; padding: 1px 7px; border-radius: 999px; }
 .copy-cap { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 11px; padding: 0; margin-top: 4px; text-decoration: underline; }

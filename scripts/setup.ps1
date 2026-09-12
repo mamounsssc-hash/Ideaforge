@@ -18,5 +18,8 @@ python -m venv .venv
 Write-Host "> Installing Python dependencies..."
 & ".\.venv\Scripts\pip.exe" install -r backend\requirements.txt
 
+Write-Host "> Pre-downloading the two Whisper models (large-v3, medium)..."
+& ".\.venv\Scripts\python.exe" scripts\fetch_models.py
+
 Write-Host ""
 Write-Host "+ Setup complete. Start the app with:  .\scripts\run.ps1" -ForegroundColor Green

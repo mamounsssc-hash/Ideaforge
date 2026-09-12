@@ -149,12 +149,25 @@ function clipRow(c) {
       <div class="clip-meta">${c.reason ? escapeHtml(c.reason) : hookLabel(c.score)}</div>
       <div class="clip-text">${escapeHtml(c.text)}</div>
       <div class="hashtags">${(c.hashtags || []).map((h) => `<span>${escapeHtml(h)}</span>`).join("")}</div>
+      <button class="edit-link">✎ Edit / trim</button>
       ${c.social_caption ? `<button class="copy-cap" title="Copy post caption">⧉ Copy caption</button>` : ""}
+      <div class="edit-panel">
+        <input class="t-title" type="text" placeholder="Title / hook" value="${escapeHtml(c.title || "")}" />
+        <input class="t-num t-start" type="number" step="0.1" value="${c.start}" title="start (s)" />
+        <input class="t-num t-end" type="number" step="0.1" value="${c.end}" title="end (s)" />
+      </div>
     </div>
     <div class="clip-actions">
       <button class="btn primary render-btn">Render</button>
     </div>`;
-  el.querySelector(".render-btn").addEventListener("click", (e) => renderClip(c, e.target));
+  const panel = el.querySelector(".edit-panel");
+  el.querySelector(".edit-link").addEventListener("click", () => panel.classList.toggle("open"));
+  el.querySelector(".render-btn").addEventListener("click", (e) => {
+    c._title = el.querySelector(".t-title").value;
+    c._start = parseFloat(el.querySelector(".t-start").value);
+    c._end = parseFloat(el.querySelector(".t-end").value);
+    renderClip(c, e.target);
+  });
   const cc = el.querySelector(".copy-cap");
   if (cc) cc.addEventListener("click", () => {
     navigator.clipboard.writeText((c.social_caption || "") + "\n\n" + (c.hashtags || []).join(" "));
@@ -183,16 +196,44 @@ function collectOptions() {
     hook_title: $("#opt_hook").checked,
     progress_bar: $("#opt_bar").checked,
     remove_fillers: $("#opt_fillers").checked,
+    remove_silence: $("#opt_silence").checked,
+    auto_zoom: $("#opt_zoom").checked,
+    speaker_colors: $("#opt_speakers").checked,
     broll: $("#opt_broll").checked,
+    watermark_text: $("#opt_watermark").value || "",
+    music_volume: parseFloat($("#opt_musicvol").value) || 0,
+    caption_position: $("#opt_cappos").value,
+    caption_scale: parseFloat($("#opt_capscale").value) || 1,
+    caption_offset: 0,
   };
 }
+
+// caption-size label
+$("#opt_capscale").addEventListener("input", (e) => {
+  $("#capScaleVal").textContent = Math.round(parseFloat(e.target.value) * 100) + "%";
+});
+
+// music upload (attaches to the current job)
+$("#musicInput").addEventListener("change", async () => {
+  const f = $("#musicInput").files[0];
+  if (!f || !currentJob) return;
+  const fd = new FormData(); fd.append("file", f);
+  try {
+    await fetch(`/api/jobs/${currentJob}/music`, { method: "POST", body: fd });
+    if (parseFloat($("#opt_musicvol").value) === 0) $("#opt_musicvol").value = "0.3";
+  } catch { /* ignore */ }
+});
 
 async function renderClip(c, btn) {
   btn.disabled = true; btn.textContent = "Rendering…";
   try {
+    const overrides = {};
+    if (c._title != null && c._title !== c.title) overrides.title_override = c._title;
+    if (c._start != null && !isNaN(c._start)) overrides.start_override = c._start;
+    if (c._end != null && !isNaN(c._end)) overrides.end_override = c._end;
     const r = await fetch("/api/render", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ job_id: currentJob, clip_id: c.id, ...collectOptions() }),
+      body: JSON.stringify({ job_id: currentJob, clip_id: c.id, ...collectOptions(), ...overrides }),
     });
     if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
     const data = await r.json();

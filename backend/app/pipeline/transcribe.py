@@ -9,7 +9,7 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 
-from ..config import settings
+from ..config import settings, resolve_whisper_model
 from ..models import Segment, Word
 
 
@@ -28,7 +28,8 @@ def _get_model():
             device = "cpu"
     if compute == "auto":
         compute = "float16" if device == "cuda" else "int8"
-    return WhisperModel(settings.whisper_model, device=device, compute_type=compute)
+    model = resolve_whisper_model(settings.whisper_model)
+    return WhisperModel(model, device=device, compute_type=compute)
 
 
 def transcribe(media_path: Path, language: str | None = None, progress=None) -> tuple[list[Segment], str]:

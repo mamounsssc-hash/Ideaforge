@@ -72,12 +72,25 @@ class RenderOptions(BaseModel):
     hook_title: bool = True          # render the clip title as a top banner
     progress_bar: bool = True
     remove_fillers: bool = True
+    remove_silence: bool = False     # drop internal dead-air, retime captions
+    auto_zoom: bool = False          # subtle slow punch-in
+    speaker_colors: bool = False     # color captions per (approx) speaker turn
     broll: bool = False              # optional Pexels B-roll overlay
+    watermark_text: str = ""         # e.g. "@yourhandle" burned in a corner
+    music_volume: float = 0.0        # 0 = off; else mix job's music at this gain
+    # caption placement overrides (do not require editing the style)
+    caption_position: Literal["auto", "top", "center", "bottom"] = "auto"
+    caption_scale: float = 1.0       # multiply the style font size (0.6–1.6)
+    caption_offset: int = 0          # extra vertical margin in pixels
 
 
 class RenderRequest(RenderOptions):
     job_id: str
     clip_id: str
+    # per-clip edits made in the UI before rendering
+    start_override: float | None = None
+    end_override: float | None = None
+    title_override: str | None = None
 
 
 class BatchRenderRequest(RenderOptions):

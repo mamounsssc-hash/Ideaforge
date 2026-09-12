@@ -26,7 +26,9 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="IDEAFORGE_", env_file=".env", extra="ignore")
 
     # ---- Transcription ----
-    whisper_model: str = "base"          # tiny/base/small/medium/large-v3
+    # Only the two best models are supported/pre-downloaded:
+    #   large-v3 = highest accuracy (default), medium = lighter/faster.
+    whisper_model: str = "large-v3"
     whisper_device: str = "auto"         # auto/cpu/cuda
     whisper_compute_type: str = "auto"   # auto/int8/float16
     default_language: str | None = "en"  # None => auto-detect
@@ -60,3 +62,10 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+# The only two Whisper models this app ships with. Anything else falls back.
+ALLOWED_WHISPER_MODELS = ("large-v3", "medium")
+
+
+def resolve_whisper_model(name: str) -> str:
+    return name if name in ALLOWED_WHISPER_MODELS else "large-v3"

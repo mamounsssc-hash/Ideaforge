@@ -37,12 +37,20 @@ dependency.
 - **Speaker-tracking auto-reframe** (MediaPipe / OpenCV), with graceful
   center-crop and blurred-letterbox fallbacks.
 - **Multiple aspect ratios:** 9:16, 4:5, 1:1, 16:9.
-- **41 animated caption styles** (Hormozi, CapCut, Beast, Submagic-like, Gold, Neon,
-  Fire, and more) — word-by-word highlight, pop / bounce / fade, custom colors & fonts.
+- **71 animated caption styles** (Hormozi, CapCut, Beast, Submagic-like, Gold, Neon,
+  Fire, Cyber, Retro, and more) — word-by-word highlight, pop / bounce / fade,
+  custom colors & fonts.
 - **Persistent keyword highlighting** — important words stay colored, not just the
   spoken one.
 - **Auto-emoji insertion** — a relevant emoji dropped next to punchy keywords.
 - **Hook title banner** — the AI title rendered as a top overlay.
+- **Silence removal** — internal dead-air is cut and captions are retimed to match.
+- **Auto zoom / punch-in** — a subtle push-in for energy.
+- **Speaker color-coding** — captions tinted per (approx) speaker turn.
+- **Watermark / handle** — burn `@yourhandle` into a corner.
+- **Background music** — mix a track under the clip at an adjustable volume.
+- **Per-clip trim & title edit** — nudge start/end and rewrite the hook before render.
+- **Caption placement controls** — position + size overrides without editing the style.
 - **Progress bar** overlay along the bottom.
 - **Filler removal** — “um / uh” dropped from captions.
 - **Social copy** — per-clip post caption + hashtags (heuristic, LLM-upgradable),
@@ -56,6 +64,10 @@ dependency.
 
 Every feature above is a toggle in the results view, applied per-render and to the
 batch export.
+
+**Transcription models:** only the two best are used and pre-downloaded —
+`large-v3` (highest accuracy, default) and `medium` (lighter / faster). Anything
+else set in config falls back to `large-v3`.
 
 ---
 
@@ -114,12 +126,14 @@ backend/app/
     score.py              heuristic 0–99 scoring + dedupe     [Layer 2]
     llm.py                optional OpenAI-compatible re-rank + social copy [Layer 3]
     keywords.py           keyword extraction, auto-emoji, hashtags
+    tighten.py            internal silence removal + caption retiming
+    speakers.py           approximate speaker turns for color-coding
     reframe.py            face tracking → target-ratio crop path
-    captions.py           style → animated ASS (highlight, emoji, hook, fillers)
+    captions.py           style → animated ASS (highlight, emoji, hook, speakers…)
     broll.py              optional Pexels B-roll cutaways
-    render.py             ffmpeg: cut + reframe + captions + bar + B-roll
+    render.py             ffmpeg chain: tighten → reframe/zoom/captions/watermark/bar → B-roll → music
     orchestrator.py       runs the whole flow, updates progress
-  styles/catalog.json     40+ caption styles (edit to add more)
+  styles/catalog.json     71 caption styles (edit to add more)
 frontend/                 vanilla JS single-page UI
 scripts/                  setup / run / fonts (bash + PowerShell)
 ```
@@ -143,9 +157,9 @@ Append an object to `backend/app/styles/catalog.json`:
 - `animation`: `pop` · `bounce` · `fade` · `none`.
 
 ## Roadmap ideas
-- Multi-speaker color coding via diarization.
-- Internal silence compression (retime captions to match).
-- Trim/adjust clip boundaries in the UI before rendering.
+- True speaker diarization (pyannote) to replace the pause-based approximation.
+- In-browser transcript editing to fix ASR mistakes before render.
+- Split-screen layouts for two-speaker interviews.
 - Package the localhost app as a Windows `.exe` with Tauri.
 
 ## License

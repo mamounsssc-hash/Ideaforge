@@ -20,6 +20,9 @@ python -m pip install --upgrade pip
 echo "▶ Installing Python dependencies (this pulls faster-whisper, mediapipe, etc.)…"
 pip install -r backend/requirements.txt
 
+echo "▶ Pre-downloading the two Whisper models (large-v3, medium)…"
+python scripts/fetch_models.py || echo "  (you can run scripts/fetch_models.py later)"
+
 echo ""
 echo "✓ Setup complete. Start the app with:  ./scripts/run.sh"
 echo "  (Optional) better fonts:            ./scripts/fetch_fonts.sh"
