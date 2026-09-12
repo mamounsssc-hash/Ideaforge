@@ -75,13 +75,23 @@ class RenderOptions(BaseModel):
     remove_silence: bool = False     # drop internal dead-air, retime captions
     auto_zoom: bool = False          # subtle slow punch-in
     speaker_colors: bool = False     # color captions per (approx) speaker turn
+    enhance_audio: bool = False      # denoise + loudness-normalize the voice
+    reframe_layout: Literal["track", "fill", "fit"] = "track"
     broll: bool = False              # optional Pexels B-roll overlay
-    watermark_text: str = ""         # e.g. "@yourhandle" burned in a corner
     music_volume: float = 0.0        # 0 = off; else mix job's music at this gain
     # caption placement overrides (do not require editing the style)
     caption_position: Literal["auto", "top", "center", "bottom"] = "auto"
     caption_scale: float = 1.0       # multiply the style font size (0.6–1.6)
     caption_offset: int = 0          # extra vertical margin in pixels
+
+
+class AnalyzeOptions(BaseModel):
+    language: str | None = None              # speech language; None => auto-detect
+    caption_language: Literal["original", "english"] = "original"
+    topic: str = ""                          # ClipAnything-style: bias clips to a topic
+    min_seconds: float | None = None
+    max_seconds: float | None = None
+    target_count: int | None = None
 
 
 class RenderRequest(RenderOptions):

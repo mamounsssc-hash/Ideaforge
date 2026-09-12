@@ -8,7 +8,6 @@ feature can break a render. Fonts come from assets/fonts via fontconfig.
 """
 from __future__ import annotations
 
-import re
 import subprocess
 from copy import deepcopy
 from pathlib import Path
@@ -25,10 +24,6 @@ def _escape_ass_path(p: Path) -> str:
 
 def _run(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True, capture_output=True, text=True)
-
-
-def _safe_text(s: str) -> str:
-    return re.sub(r"[^A-Za-z0-9@#_. -]", "", s)[:40]
 
 
 def render_clip(
@@ -57,11 +52,18 @@ def render_clip(
 
     duration = max(clip.end - clip.start, 0.1)
 
-    # ---- 1. base video filter ----
-    if opts.reframe:
-        vf = reframe.build_filter(source, clip.start, clip.end, tw, th)
-    else:
+    # ---- 1. base video filter (layout) ----
+    if not opts.reframe or opts.reframe_layout == "fill":
         vf = f"scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th}"
+    elif opts.reframe_layout == "fit":
+        vf = (
+            f"split=2[bg][fg];"
+            f"[bg]scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th},boxblur=40[bgb];"
+            f"[fg]scale={tw}:{th}:force_original_aspect_ratio=decrease[fgs];"
+            f"[bgb][fgs]overlay=(W-w)/2:(H-h)/2"
+        )
+    else:  # "track" — follow the active speaker
+        vf = reframe.build_filter(source, clip.start, clip.end, tw, th)
 
     # ---- 2. auto zoom / punch-in (before captions so text doesn't scale) ----
     if opts.auto_zoom:
@@ -89,31 +91,25 @@ def render_clip(
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
         vf += f",subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}"
 
-    # ---- 4. watermark / handle ----
-    if opts.watermark_text.strip():
-        wm = _safe_text(opts.watermark_text.strip())
-        if wm:
-            fs = max(22, th // 40)
-            vf += (
-                f",drawtext=text='{wm}':fontcolor=white@0.85:fontsize={fs}"
-                f":x=(w-text_w)/2:y=h-text_h-{max(24, th // 30)}"
-                f":box=1:boxcolor=black@0.28:boxborderw=8"
-            )
-
-    # ---- 5. progress bar ----
+    # ---- 4. progress bar ----
     if opts.progress_bar:
         bar_h = max(6, th // 240)
         vf += f",drawbox=x=0:y=ih-{bar_h}:w='iw*t/{duration:.3f}':h={bar_h}:color=white@0.92:t=fill"
 
-    # ---- main pass ----
+    # ---- main pass (+ optional speech enhancement on the audio) ----
     stage = WORK_DIR / f"{job_id}_{clip.id}_stageA.mp4"
-    _run([
+    cmd = [
         "ffmpeg", "-y", "-ss", f"{clip.start:.3f}", "-to", f"{clip.end:.3f}", "-i", str(source),
         "-vf", vf,
+    ]
+    if opts.enhance_audio:
+        cmd += ["-af", "afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3,loudnorm=I=-16:TP=-1.5:LRA=11"]
+    cmd += [
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
         "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart",
         str(stage),
-    ])
+    ]
+    _run(cmd)
     current = stage
 
     # ---- optional B-roll overlay pass ----

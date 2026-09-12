@@ -36,6 +36,14 @@ dependency.
 - **Highlight detection** with a transparent 0–99 virality-style score.
 - **Speaker-tracking auto-reframe** (MediaPipe / OpenCV), with graceful
   center-crop and blurred-letterbox fallbacks.
+- **Prompt-based clipping (ClipAnything-style):** type a topic ("pricing tips",
+  "funny moments") and clips that match are surfaced and scored higher.
+- **Clip length & count controls:** pick a duration band (<30s, 30–60s, 60–90s)
+  and how many clips to return.
+- **Caption translation:** turn any spoken language into English captions
+  (Whisper translate task) while keeping word-level timing — free.
+- **Speech enhancement:** denoise + compress + loudness-normalize the voice.
+- **Reframe layouts:** track speaker, fill (center crop), or fit (blurred pad).
 - **Multiple aspect ratios:** 9:16, 4:5, 1:1, 16:9.
 - **71 animated caption styles** (Hormozi, CapCut, Beast, Submagic-like, Gold, Neon,
   Fire, Cyber, Retro, and more) — word-by-word highlight, pop / bounce / fade,
@@ -47,7 +55,6 @@ dependency.
 - **Silence removal** — internal dead-air is cut and captions are retimed to match.
 - **Auto zoom / punch-in** — a subtle push-in for energy.
 - **Speaker color-coding** — captions tinted per (approx) speaker turn.
-- **Watermark / handle** — burn `@yourhandle` into a corner.
 - **Background music** — mix a track under the clip at an adjustable volume.
 - **Per-clip trim & title edit** — nudge start/end and rewrite the hook before render.
 - **Caption placement controls** — position + size overrides without editing the style.
@@ -68,6 +75,28 @@ batch export.
 **Transcription models:** only the two best are used and pre-downloaded —
 `large-v3` (highest accuracy, default) and `medium` (lighter / faster). Anything
 else set in config falls back to `large-v3`.
+
+## Compared to Opus Clip
+
+| Opus Clip feature | IdeaForge |
+|---|---|
+| ClipAnything (topic / prompt clipping) | ✅ topic bias in scoring + LLM |
+| Virality score 0–99 | ✅ transparent heuristic (+ optional LLM) |
+| ReframeAnything (speaker tracking) | ✅ track / fill / fit layouts |
+| Animated captions, 20+ languages | ✅ 71 styles, Whisper multilingual |
+| Keyword highlight + auto emoji | ✅ |
+| AI titles + visual hooks | ✅ |
+| B-roll (stock / AI) | ✅ Pexels stock (optional) |
+| Filler + silence removal | ✅ with caption retiming |
+| Speech enhancement | ✅ denoise + loudness |
+| Translate captions | ✅ to English (free), keeps timing |
+| Clip length controls | ✅ |
+| Speaker diarization + **split-screen** | ⚠️ approximate color-coding only |
+| Auto-post + social scheduler | ❌ out of scope (a local tool) |
+
+The last two are the only real gaps. Auto-posting needs each platform's login and
+is out of scope for a private local tool; true diarization / split-screen is on the
+roadmap.
 
 ---
 

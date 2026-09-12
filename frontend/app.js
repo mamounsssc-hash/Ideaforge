@@ -33,9 +33,23 @@ fileInput.addEventListener("change", () => {
 // ---------- start ----------
 $("#startBtn").addEventListener("click", start);
 
+function analyzeParams() {
+  const language = $("#langSelect").value || null;
+  const len = $("#lenSelect").value;
+  const [mn, mx] = len ? len.split("-").map(Number) : [null, null];
+  return {
+    language,
+    caption_language: $("#capLang").value,
+    topic: $("#topicInput").value.trim(),
+    min_seconds: mn,
+    max_seconds: mx,
+    target_count: parseInt($("#countInput").value) || null,
+  };
+}
+
 async function start() {
   const activeTab = document.querySelector(".tab.active").dataset.tab;
-  const language = $("#langSelect").value || null;
+  const p = analyzeParams();
   $("#startBtn").disabled = true;
   try {
     let jobId;
@@ -43,15 +57,16 @@ async function start() {
       if (!chosenFile) { alert("Choose a video file first."); return; }
       const fd = new FormData();
       fd.append("file", chosenFile);
-      const url = "/api/upload" + (language ? `?language=${language}` : "");
-      const r = await fetch(url, { method: "POST", body: fd });
+      const qs = new URLSearchParams();
+      Object.entries(p).forEach(([k, v]) => { if (v !== null && v !== "") qs.append(k, v); });
+      const r = await fetch("/api/upload?" + qs.toString(), { method: "POST", body: fd });
       jobId = (await r.json()).job_id;
     } else {
       const u = $("#urlInput").value.trim();
       if (!u) { alert("Paste a video URL first."); return; }
       const r = await fetch("/api/url", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: u, language }),
+        body: JSON.stringify({ url: u, ...p }),
       });
       jobId = (await r.json()).job_id;
     }
@@ -199,8 +214,9 @@ function collectOptions() {
     remove_silence: $("#opt_silence").checked,
     auto_zoom: $("#opt_zoom").checked,
     speaker_colors: $("#opt_speakers").checked,
+    enhance_audio: $("#opt_enhance").checked,
+    reframe_layout: $("#opt_layout").value,
     broll: $("#opt_broll").checked,
-    watermark_text: $("#opt_watermark").value || "",
     music_volume: parseFloat($("#opt_musicvol").value) || 0,
     caption_position: $("#opt_cappos").value,
     caption_scale: parseFloat($("#opt_capscale").value) || 1,

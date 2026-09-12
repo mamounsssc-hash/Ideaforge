@@ -32,13 +32,19 @@ def _get_model():
     return WhisperModel(model, device=device, compute_type=compute)
 
 
-def transcribe(media_path: Path, language: str | None = None, progress=None) -> tuple[list[Segment], str]:
-    """Return (segments, detected_language). `progress` is an optional callback(pct, msg)."""
+def transcribe(media_path: Path, language: str | None = None, progress=None,
+               task: str = "transcribe") -> tuple[list[Segment], str]:
+    """Return (segments, detected_language). `progress` is an optional callback(pct, msg).
+
+    task="translate" makes Whisper output English regardless of the spoken language,
+    keeping word-level timing — free multi-language -> English captions.
+    """
     model = _get_model()
     lang = language if language is not None else settings.default_language
     seg_iter, info = model.transcribe(
         str(media_path),
         language=lang,
+        task=task,
         word_timestamps=True,
         vad_filter=True,                    # skip long silences => tighter timestamps
         vad_parameters={"min_silence_duration_ms": 300},

@@ -56,6 +56,7 @@ def _keyframe_data_url(path: Path | None) -> str | None:
 def rerank(
     cands: list[ClipCandidate],
     keyframes: dict[int, Path] | None = None,
+    topic: str = "",
 ) -> list[ClipCandidate]:
     """Return candidates with LLM scores/titles merged in. On any error, return input unchanged."""
     if not available() or not cands:
@@ -64,6 +65,11 @@ def rerank(
     try:
         content: list | str
         prompt = _build_prompt(cands)
+        if topic.strip():
+            prompt = (
+                f"The user wants clips specifically about: \"{topic.strip()}\". "
+                "Score clips that match this topic much higher.\n\n" + prompt
+            )
         if settings.llm_vision and keyframes:
             parts: list[dict] = [{"type": "text", "text": prompt}]
             for i, _c in enumerate(cands):

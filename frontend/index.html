@@ -41,12 +41,40 @@
                placeholder="https://youtube.com/watch?v=…  or TikTok / X / etc." />
       </div>
 
+      <input type="text" id="topicInput" class="text-input"
+             placeholder="Optional: what should the clips be about?  e.g. “pricing tips”, “funny moments”" />
+
+      <div class="row opts-row">
+        <div class="mini">
+          <label class="muted small">Spoken language</label>
+          <select id="langSelect" class="text-input compact">
+            <option value="en" selected>English</option>
+            <option value="">Auto-detect</option>
+            <option value="ar">Arabic</option>
+          </select>
+        </div>
+        <div class="mini">
+          <label class="muted small">Captions in</label>
+          <select id="capLang" class="text-input compact">
+            <option value="original" selected>Original</option>
+            <option value="english">English (translate)</option>
+          </select>
+        </div>
+        <div class="mini">
+          <label class="muted small">Clip length</label>
+          <select id="lenSelect" class="text-input compact">
+            <option value="">Any</option>
+            <option value="0-30">&lt; 30s</option>
+            <option value="30-60" selected>30–60s</option>
+            <option value="60-90">60–90s</option>
+          </select>
+        </div>
+        <div class="mini">
+          <label class="muted small">Max clips</label>
+          <input type="number" id="countInput" class="text-input compact" value="10" min="1" max="30" style="width:80px" />
+        </div>
+      </div>
       <div class="row">
-        <select id="langSelect" class="text-input compact">
-          <option value="en" selected>English</option>
-          <option value="">Auto-detect</option>
-          <option value="ar">Arabic</option>
-        </select>
         <button class="btn primary" id="startBtn">Find clips →</button>
       </div>
     </section>
@@ -91,10 +119,19 @@
         <label><input type="checkbox" id="opt_silence" /> Remove silences</label>
         <label><input type="checkbox" id="opt_zoom" /> Auto zoom</label>
         <label><input type="checkbox" id="opt_speakers" /> Speaker colors</label>
+        <label><input type="checkbox" id="opt_enhance" /> Enhance audio</label>
         <label><input type="checkbox" id="opt_broll" /> B-roll (Pexels)</label>
       </div>
 
       <div class="toggles" id="advanced">
+        <div class="adv-item">
+          <label class="muted small">Layout</label>
+          <select id="opt_layout" class="text-input compact">
+            <option value="track" selected>Track speaker</option>
+            <option value="fill">Fill (center crop)</option>
+            <option value="fit">Fit (blurred pad)</option>
+          </select>
+        </div>
         <div class="adv-item">
           <label class="muted small">Caption position</label>
           <select id="opt_cappos" class="text-input compact">
@@ -107,10 +144,6 @@
         <div class="adv-item">
           <label class="muted small">Caption size <span id="capScaleVal">100%</span></label>
           <input type="range" id="opt_capscale" min="0.6" max="1.6" step="0.05" value="1" />
-        </div>
-        <div class="adv-item">
-          <label class="muted small">Watermark / handle</label>
-          <input type="text" id="opt_watermark" class="text-input compact" placeholder="@yourhandle" />
         </div>
         <div class="adv-item">
           <label class="muted small">Music</label>

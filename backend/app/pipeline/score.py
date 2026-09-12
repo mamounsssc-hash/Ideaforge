@@ -84,22 +84,37 @@ def _pacing(words: list[Word], duration: float) -> float:
     return max(0.0, closeness - penalty)
 
 
-def score_candidate(start: float, end: float, text: str, words: list[Word]) -> ScoreBreakdown:
+def _topic_match(text: str, topic_terms: set[str]) -> float:
+    """0..1 overlap between the clip and a user topic ('find clips about X')."""
+    if not topic_terms:
+        return 0.0
+    words = {w.lower().strip(".,!?;:\"'") for w in text.split()}
+    hits = len(topic_terms & words)
+    return min(1.0, hits / max(1, len(topic_terms)) + (0.15 if hits else 0.0))
+
+
+def score_candidate(start: float, end: float, text: str, words: list[Word],
+                    topic_terms: set[str] | None = None) -> ScoreBreakdown:
     duration = end - start
     hook = _hook(text, words)
     emotion = _emotion(text)
     info = _info(text)
     completeness = _completeness(text)
     pacing = _pacing(words, duration)
+    topic = _topic_match(text, topic_terms or set())
 
     # Weighted blend -> 0..1, then scale to a 20..99 band (nothing scores a flat 0).
+    # When a topic is given, matching clips get a strong, transparent boost.
     blend = (
-        0.30 * hook
-        + 0.20 * emotion
-        + 0.18 * info
-        + 0.17 * completeness
-        + 0.15 * pacing
+        0.28 * hook
+        + 0.18 * emotion
+        + 0.16 * info
+        + 0.16 * completeness
+        + 0.12 * pacing
+        + 0.10 * topic
     )
+    if topic_terms and topic == 0.0:
+        blend *= 0.6            # off-topic clips are pushed down when a topic is set
     total = round(20 + blend * 79, 1)
     return ScoreBreakdown(
         hook=round(hook, 3),

@@ -16,13 +16,12 @@ from fastapi import FastAPI, File, HTTPException, UploadFile, WebSocket, WebSock
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
 
 import zipfile
 
 from .config import UPLOAD_DIR, OUTPUT_DIR, WORK_DIR, settings
 from .jobs import store
-from .models import RenderRequest, BatchRenderRequest
+from .models import RenderRequest, BatchRenderRequest, AnalyzeOptions
 from .pipeline import orchestrator, render
 from .styles import all_styles, get_style
 
@@ -36,23 +35,32 @@ FRONTEND_DIR = Path(__file__).resolve().parent.parent.parent / "frontend"
 
 
 # ----------------------------- API models -----------------------------
-class UrlRequest(BaseModel):
+class UrlRequest(AnalyzeOptions):
     url: str
-    language: str | None = None
 
 
 # ----------------------------- Analysis -------------------------------
 @app.post("/api/upload")
-async def upload(file: UploadFile = File(...), language: str | None = None):
+async def upload(
+    file: UploadFile = File(...),
+    language: str | None = None,
+    caption_language: str = "original",
+    topic: str = "",
+    min_seconds: float | None = None,
+    max_seconds: float | None = None,
+    target_count: int | None = None,
+):
     job = store.create()
     suffix = Path(file.filename or "video.mp4").suffix or ".mp4"
     dest = UPLOAD_DIR / f"{job.id}{suffix}"
     with dest.open("wb") as f:
         shutil.copyfileobj(file.file, f)
+    opts = AnalyzeOptions(
+        language=language, caption_language=caption_language, topic=topic,
+        min_seconds=min_seconds, max_seconds=max_seconds, target_count=target_count,
+    )
     threading.Thread(
-        target=orchestrator.analyze,
-        args=(job.id, str(dest), False, language),
-        daemon=True,
+        target=orchestrator.analyze, args=(job.id, str(dest), False, opts), daemon=True,
     ).start()
     return {"job_id": job.id}
 
@@ -62,10 +70,9 @@ async def from_url(req: UrlRequest):
     if not req.url.strip():
         raise HTTPException(400, "url is required")
     job = store.create()
+    opts = AnalyzeOptions(**req.model_dump(exclude={"url"}))
     threading.Thread(
-        target=orchestrator.analyze,
-        args=(job.id, req.url.strip(), True, req.language),
-        daemon=True,
+        target=orchestrator.analyze, args=(job.id, req.url.strip(), True, opts), daemon=True,
     ).start()
     return {"job_id": job.id}
 

@@ -70,6 +70,8 @@ h2 { font-size: 19px; margin: 0 0 14px; }
 .compact { width: auto; padding: 10px 12px; }
 
 .row { display: flex; gap: 10px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
+.opts-row { align-items: flex-end; }
+.mini { display: flex; flex-direction: column; gap: 4px; }
 .btn {
   border: none; border-radius: 10px; padding: 12px 20px; font-weight: 700;
   cursor: pointer; font-size: 15px; color: #fff; text-decoration: none;

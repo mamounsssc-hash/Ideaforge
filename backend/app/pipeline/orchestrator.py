@@ -14,13 +14,20 @@ from pathlib import Path
 
 from ..config import settings, WORK_DIR
 from ..jobs import store
-from ..models import ClipCandidate
+from ..models import ClipCandidate, AnalyzeOptions
 from . import download, transcribe, segment, score, llm, render, keywords
 
 log = logging.getLogger("ideaforge.orchestrator")
 
+_TOPIC_STOP = {"the", "a", "an", "and", "or", "of", "to", "in", "on", "for", "about", "with", "clips", "clip", "video"}
 
-def analyze(job_id: str, source: str, is_url: bool, language: str | None) -> None:
+
+def _topic_terms(topic: str) -> set[str]:
+    terms = {w.lower().strip(".,!?;:\"'") for w in topic.split()}
+    return {t for t in terms if len(t) > 2 and t not in _TOPIC_STOP}
+
+
+def analyze(job_id: str, source: str, is_url: bool, opts: AnalyzeOptions) -> None:
     """Run the full analysis pipeline for a job. Intended to run in a worker thread."""
     try:
         # ---- 1. acquire media ----
@@ -32,29 +39,32 @@ def analyze(job_id: str, source: str, is_url: bool, language: str | None) -> Non
         dur = download.probe_duration(src_path)
         store.update(job_id, source_path=str(src_path), duration=dur)
 
-        # ---- 2. transcribe (local, word timestamps) ----
+        # ---- 2. transcribe (local, word timestamps; optional translate->English) ----
         store.set_progress(job_id, "transcribing", 0.08, "Transcribing audio…")
+        task = "translate" if opts.caption_language == "english" else "transcribe"
 
         def _tp(pct: float, msg: str):
             store.set_progress(job_id, "transcribing", 0.08 + pct * 0.5, msg)
 
-        segments, lang = transcribe.transcribe(src_path, language, progress=_tp)
+        segments, lang = transcribe.transcribe(src_path, opts.language, progress=_tp, task=task)
         store.update(job_id, language=lang)
         if not segments:
             raise RuntimeError("No speech detected in the video.")
 
+        topic_terms = _topic_terms(opts.topic)
+
         # ---- 3. natural-boundary units + candidates ----
         store.set_progress(job_id, "analyzing", 0.62, "Finding clean cut points…")
         units = segment.build_units(segments)
-        raw = segment.build_candidates(units)
+        raw = segment.build_candidates(units, min_s=opts.min_seconds, max_s=opts.max_seconds)
         if not raw:
             raise RuntimeError("Could not form any clip candidates.")
 
-        # ---- 4. heuristic scoring (Layer 2 — always) ----
+        # ---- 4. heuristic scoring (Layer 2 — always), topic-aware ----
         store.set_progress(job_id, "analyzing", 0.72, "Scoring highlights…")
         candidates: list[ClipCandidate] = []
         for (start, end, text, words) in raw:
-            sb = score.score_candidate(start, end, text, words)
+            sb = score.score_candidate(start, end, text, words, topic_terms=topic_terms)
             candidates.append(
                 ClipCandidate(
                     id=uuid.uuid4().hex[:8],
@@ -66,7 +76,8 @@ def analyze(job_id: str, source: str, is_url: bool, language: str | None) -> Non
                     score=sb,
                 )
             )
-        ranked = score.dedupe_and_rank(candidates, settings.target_clip_count)
+        target = opts.target_count or settings.target_clip_count
+        ranked = score.dedupe_and_rank(candidates, target)
 
         # ---- 5. optional LLM / Qwen3-VL rerank (Layer 3 — best effort) ----
         if llm.available():
@@ -81,7 +92,7 @@ def analyze(job_id: str, source: str, is_url: bool, language: str | None) -> Non
                         keyframes[i] = kf
                     except Exception:  # noqa: BLE001
                         pass
-            ranked = llm.rerank(ranked, keyframes)
+            ranked = llm.rerank(ranked, keyframes, topic=opts.topic)
             ranked.sort(key=lambda c: c.score.total, reverse=True)
 
         # ---- 6. per-clip metadata (keywords, emojis source, hashtags, caption) ----
