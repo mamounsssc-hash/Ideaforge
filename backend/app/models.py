@@ -39,18 +39,50 @@ class ClipCandidate(BaseModel):
     title: str = ""
     score: ScoreBreakdown = Field(default_factory=ScoreBreakdown)
     reason: str = ""
+    keywords: list[str] = Field(default_factory=list)
+    hashtags: list[str] = Field(default_factory=list)
+    social_caption: str = ""
 
     @property
     def duration(self) -> float:
         return round(self.end - self.start, 2)
 
 
-class RenderRequest(BaseModel):
-    job_id: str
-    clip_id: str
+# aspect ratio -> (width, height)
+ASPECT_RATIOS: dict[str, tuple[int, int]] = {
+    "9:16": (1080, 1920),
+    "4:5": (1080, 1350),
+    "1:1": (1080, 1080),
+    "16:9": (1920, 1080),
+}
+AspectRatio = Literal["9:16", "4:5", "1:1", "16:9"]
+
+
+def ratio_dims(ratio: str) -> tuple[int, int]:
+    return ASPECT_RATIOS.get(ratio, ASPECT_RATIOS["9:16"])
+
+
+class RenderOptions(BaseModel):
     style_id: str = "hormozi_yellow"
+    aspect_ratio: AspectRatio = "9:16"
     reframe: bool = True
     burn_captions: bool = True
+    add_emojis: bool = True
+    highlight_keywords: bool = True
+    hook_title: bool = True          # render the clip title as a top banner
+    progress_bar: bool = True
+    remove_fillers: bool = True
+    broll: bool = False              # optional Pexels B-roll overlay
+
+
+class RenderRequest(RenderOptions):
+    job_id: str
+    clip_id: str
+
+
+class BatchRenderRequest(RenderOptions):
+    job_id: str
+    clip_ids: list[str] = Field(default_factory=list)   # empty => all clips
 
 
 class StylePreset(BaseModel):

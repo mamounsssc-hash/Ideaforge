@@ -18,9 +18,11 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from .config import UPLOAD_DIR, OUTPUT_DIR, settings
+import zipfile
+
+from .config import UPLOAD_DIR, OUTPUT_DIR, WORK_DIR, settings
 from .jobs import store
-from .models import RenderRequest
+from .models import RenderRequest, BatchRenderRequest
 from .pipeline import orchestrator, render
 from .styles import all_styles, get_style
 
@@ -116,13 +118,44 @@ async def render_clip(req: RenderRequest):
     loop = asyncio.get_event_loop()
     try:
         out_path: Path = await loop.run_in_executor(
-            _executor,
-            render.render_clip,
-            source, clip, style, job.id, req.reframe, req.burn_captions,
+            _executor, render.render_clip, source, clip, style, job.id, req,
         )
     except Exception as e:  # noqa: BLE001
         raise HTTPException(500, f"render failed: {type(e).__name__}: {e}")
     return {"file": out_path.name, "url": f"/api/file/{out_path.name}"}
+
+
+@app.post("/api/render_batch")
+async def render_batch(req: BatchRenderRequest):
+    """Render several clips in one style and return a single downloadable ZIP."""
+    job = store.get(req.job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    source = Path(job.source_path)
+    if not source.exists():
+        raise HTTPException(410, "source media no longer available")
+    style = get_style(req.style_id)
+    clips = job.clips if not req.clip_ids else [c for c in job.clips if c.id in req.clip_ids]
+    if not clips:
+        raise HTTPException(400, "no clips to render")
+
+    def _work() -> Path:
+        outputs: list[Path] = []
+        for c in clips:
+            outputs.append(render.render_clip(source, c, style, job.id, req))
+        zip_path = OUTPUT_DIR / f"{job.id}_{req.style_id}_{req.aspect_ratio.replace(':', 'x')}_batch.zip"
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_STORED) as zf:
+            for i, (c, p) in enumerate(zip(clips, outputs), start=1):
+                safe = "".join(ch for ch in (c.title or f"clip{i}") if ch.isalnum() or ch in " -_")[:40].strip()
+                zf.write(p, arcname=f"{i:02d}_{safe or 'clip'}.mp4")
+        return zip_path
+
+    loop = asyncio.get_event_loop()
+    try:
+        zip_path: Path = await loop.run_in_executor(_executor, _work)
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(500, f"batch render failed: {type(e).__name__}: {e}")
+    return {"file": zip_path.name, "url": f"/api/file/{zip_path.name}", "count": len(clips)}
 
 
 @app.get("/api/file/{name}")
@@ -130,7 +163,8 @@ async def get_file(name: str):
     path = OUTPUT_DIR / name
     if not path.exists() or path.parent != OUTPUT_DIR:
         raise HTTPException(404, "file not found")
-    return FileResponse(path, media_type="video/mp4", filename=name)
+    media = "application/zip" if name.endswith(".zip") else "video/mp4"
+    return FileResponse(path, media_type=media, filename=name)
 
 
 @app.get("/api/health")

@@ -62,12 +62,37 @@
     <section class="hidden" id="resultsSection">
       <div class="results-head">
         <h2>Clips <span class="muted" id="clipCount"></span></h2>
-        <div class="style-picker">
-          <label class="muted small">Caption style</label>
-          <select id="styleSelect" class="text-input compact"></select>
+        <div class="controls">
+          <div class="style-picker">
+            <label class="muted small">Caption style</label>
+            <select id="styleSelect" class="text-input compact"></select>
+          </div>
+          <div class="style-picker">
+            <label class="muted small">Aspect</label>
+            <select id="aspectSelect" class="text-input compact">
+              <option value="9:16" selected>9:16</option>
+              <option value="4:5">4:5</option>
+              <option value="1:1">1:1</option>
+              <option value="16:9">16:9</option>
+            </select>
+          </div>
+          <button class="btn ghost" id="batchBtn">Export all (ZIP)</button>
         </div>
       </div>
+
+      <div class="toggles" id="toggles">
+        <label><input type="checkbox" id="opt_reframe" checked /> Track speaker</label>
+        <label><input type="checkbox" id="opt_captions" checked /> Captions</label>
+        <label><input type="checkbox" id="opt_keywords" checked /> Highlight keywords</label>
+        <label><input type="checkbox" id="opt_emojis" checked /> Auto emoji</label>
+        <label><input type="checkbox" id="opt_hook" checked /> Hook title</label>
+        <label><input type="checkbox" id="opt_bar" checked /> Progress bar</label>
+        <label><input type="checkbox" id="opt_fillers" checked /> Remove um/uh</label>
+        <label><input type="checkbox" id="opt_broll" /> B-roll (Pexels)</label>
+      </div>
+
       <div class="clips" id="clipList"></div>
+      <div class="batch-status muted small hidden" id="batchStatus"></div>
     </section>
   </main>
 

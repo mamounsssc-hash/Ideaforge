@@ -34,13 +34,28 @@ dependency.
 - **Input:** file upload or URL (YouTube / TikTok / X / … via `yt-dlp`).
 - **Local transcription** with word-level timestamps (`faster-whisper`).
 - **Highlight detection** with a transparent 0–99 virality-style score.
-- **Speaker-tracking auto-reframe** to 9:16 (MediaPipe / OpenCV), with graceful
+- **Speaker-tracking auto-reframe** (MediaPipe / OpenCV), with graceful
   center-crop and blurred-letterbox fallbacks.
-- **40+ animated caption styles** (Hormozi, CapCut, Beast, Submagic-like, Gold, Neon,
+- **Multiple aspect ratios:** 9:16, 4:5, 1:1, 16:9.
+- **41 animated caption styles** (Hormozi, CapCut, Beast, Submagic-like, Gold, Neon,
   Fire, and more) — word-by-word highlight, pop / bounce / fade, custom colors & fonts.
+- **Persistent keyword highlighting** — important words stay colored, not just the
+  spoken one.
+- **Auto-emoji insertion** — a relevant emoji dropped next to punchy keywords.
+- **Hook title banner** — the AI title rendered as a top overlay.
+- **Progress bar** overlay along the bottom.
+- **Filler removal** — “um / uh” dropped from captions.
+- **Social copy** — per-clip post caption + hashtags (heuristic, LLM-upgradable),
+  one-click copy.
+- **Batch export** — render every clip in a chosen style and download one ZIP.
+- **Optional B-roll** — keyword-driven Pexels cutaways (free API key, safe no-op
+  without one).
 - **Add your own styles** by editing one JSON file — no code.
 - **Optional Qwen3-VL vision re-ranking** — sends a keyframe per clip so a visual
   model can judge on-screen action, not just the transcript.
+
+Every feature above is a toggle in the results view, applied per-render and to the
+batch export.
 
 ---
 
@@ -97,10 +112,12 @@ backend/app/
     transcribe.py         faster-whisper (word timestamps)   [Layer 1]
     segment.py            sentence/silence boundaries + candidates
     score.py              heuristic 0–99 scoring + dedupe     [Layer 2]
-    llm.py                optional OpenAI-compatible re-rank   [Layer 3]
-    reframe.py            face tracking → 9:16 crop path
-    captions.py           style → animated ASS subtitles
-    render.py             ffmpeg: cut + reframe + burn captions
+    llm.py                optional OpenAI-compatible re-rank + social copy [Layer 3]
+    keywords.py           keyword extraction, auto-emoji, hashtags
+    reframe.py            face tracking → target-ratio crop path
+    captions.py           style → animated ASS (highlight, emoji, hook, fillers)
+    broll.py              optional Pexels B-roll cutaways
+    render.py             ffmpeg: cut + reframe + captions + bar + B-roll
     orchestrator.py       runs the whole flow, updates progress
   styles/catalog.json     40+ caption styles (edit to add more)
 frontend/                 vanilla JS single-page UI
@@ -126,9 +143,9 @@ Append an object to `backend/app/styles/catalog.json`:
 - `animation`: `pop` · `bounce` · `fade` · `none`.
 
 ## Roadmap ideas
-- B-roll & auto emoji insertion (Crayo-style).
 - Multi-speaker color coding via diarization.
-- Batch export of all clips.
+- Internal silence compression (retime captions to match).
+- Trim/adjust clip boundaries in the UI before rendering.
 - Package the localhost app as a Windows `.exe` with Tauri.
 
 ## License

@@ -15,7 +15,7 @@ from pathlib import Path
 from ..config import settings, WORK_DIR
 from ..jobs import store
 from ..models import ClipCandidate
-from . import download, transcribe, segment, score, llm, render
+from . import download, transcribe, segment, score, llm, render, keywords
 
 log = logging.getLogger("ideaforge.orchestrator")
 
@@ -84,10 +84,15 @@ def analyze(job_id: str, source: str, is_url: bool, language: str | None) -> Non
             ranked = llm.rerank(ranked, keyframes)
             ranked.sort(key=lambda c: c.score.total, reverse=True)
 
-        # ---- 6. titles fallback (if no model gave one) ----
+        # ---- 6. per-clip metadata (keywords, emojis source, hashtags, caption) ----
         for c in ranked:
             if not c.title:
                 c.title = _fallback_title(c.text)
+            c.keywords = keywords.extract_keywords(c.text, top_n=6)
+            if not c.hashtags:
+                c.hashtags = keywords.hashtags(c.text, extra=c.keywords)
+            if not c.social_caption:
+                c.social_caption = keywords.social_caption(c.title, c.text)
 
         store.update(job_id, clips=ranked)
         store.set_progress(job_id, "ready", 1.0, f"Ready — {len(ranked)} clips")

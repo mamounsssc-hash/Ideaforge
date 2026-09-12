@@ -148,11 +148,19 @@ function clipRow(c) {
       </div>
       <div class="clip-meta">${c.reason ? escapeHtml(c.reason) : hookLabel(c.score)}</div>
       <div class="clip-text">${escapeHtml(c.text)}</div>
+      <div class="hashtags">${(c.hashtags || []).map((h) => `<span>${escapeHtml(h)}</span>`).join("")}</div>
+      ${c.social_caption ? `<button class="copy-cap" title="Copy post caption">⧉ Copy caption</button>` : ""}
     </div>
     <div class="clip-actions">
-      <button class="btn primary">Render</button>
+      <button class="btn primary render-btn">Render</button>
     </div>`;
-  el.querySelector("button").addEventListener("click", (e) => renderClip(c, e.target));
+  el.querySelector(".render-btn").addEventListener("click", (e) => renderClip(c, e.target));
+  const cc = el.querySelector(".copy-cap");
+  if (cc) cc.addEventListener("click", () => {
+    navigator.clipboard.writeText((c.social_caption || "") + "\n\n" + (c.hashtags || []).join(" "));
+    cc.textContent = "✓ Copied";
+    setTimeout(() => (cc.textContent = "⧉ Copy caption"), 1500);
+  });
   return el;
 }
 function hookLabel(sb) {
@@ -164,14 +172,27 @@ function hookLabel(sb) {
   return parts.join(" · ") || "clean cut";
 }
 
+function collectOptions() {
+  return {
+    style_id: $("#styleSelect").value,
+    aspect_ratio: $("#aspectSelect").value,
+    reframe: $("#opt_reframe").checked,
+    burn_captions: $("#opt_captions").checked,
+    highlight_keywords: $("#opt_keywords").checked,
+    add_emojis: $("#opt_emojis").checked,
+    hook_title: $("#opt_hook").checked,
+    progress_bar: $("#opt_bar").checked,
+    remove_fillers: $("#opt_fillers").checked,
+    broll: $("#opt_broll").checked,
+  };
+}
+
 async function renderClip(c, btn) {
-  const styleId = $("#styleSelect").value;
   btn.disabled = true; btn.textContent = "Rendering…";
   try {
     const r = await fetch("/api/render", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ job_id: currentJob, clip_id: c.id, style_id: styleId,
-        reframe: true, burn_captions: true }),
+      body: JSON.stringify({ job_id: currentJob, clip_id: c.id, ...collectOptions() }),
     });
     if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
     const data = await r.json();
@@ -182,6 +203,29 @@ async function renderClip(c, btn) {
     btn.disabled = false; btn.textContent = "Render";
   }
 }
+
+// ---------- batch export ----------
+$("#batchBtn").addEventListener("click", async () => {
+  const btn = $("#batchBtn");
+  const status = $("#batchStatus");
+  btn.disabled = true; btn.textContent = "Rendering all…";
+  status.classList.remove("hidden");
+  status.textContent = "Rendering every clip in this style — this can take a while…";
+  try {
+    const r = await fetch("/api/render_batch", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ job_id: currentJob, clip_ids: [], ...collectOptions() }),
+    });
+    if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+    const data = await r.json();
+    status.innerHTML = `✓ ${data.count} clips rendered. <a href="${data.url}" download>Download ZIP</a>`;
+    const a = document.createElement("a"); a.href = data.url; a.download = ""; a.click();
+  } catch (err) {
+    status.textContent = "Batch failed: " + err.message;
+  } finally {
+    btn.disabled = false; btn.textContent = "Export all (ZIP)";
+  }
+});
 
 // ---------- modal ----------
 function openModal(url) {

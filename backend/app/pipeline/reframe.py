@@ -98,9 +98,11 @@ def _smooth(values: list[float]) -> list[float]:
     return list(np.convolve(padded, kernel, mode="valid"))
 
 
-def build_filter(src: Path, start: float, end: float) -> str:
-    """Return the ffmpeg -vf chain to reframe [start,end] of src to target 9:16."""
-    tw, th = settings.target_width, settings.target_height
+def build_filter(src: Path, start: float, end: float,
+                 tw: int | None = None, th: int | None = None) -> str:
+    """Return the ffmpeg -vf chain to reframe [start,end] of src to target tw:th."""
+    tw = tw or settings.target_width
+    th = th or settings.target_height
 
     if not settings.reframe_enabled:
         # letterbox: scale to fit, blurred background fill (no cropping)

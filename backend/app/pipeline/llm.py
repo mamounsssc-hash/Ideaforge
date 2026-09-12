@@ -28,7 +28,8 @@ SYSTEM = (
     "candidates from a long video. For each, judge how well it would perform as a "
     "standalone vertical short. Reply with STRICT JSON only: a list of objects "
     '{"id": <int>, "score": <0-99 int>, "title": "<hooky 3-6 word title>", '
-    '"reason": "<one short sentence>"}. Higher score = stronger hook, emotion, '
+    '"reason": "<one short sentence>", "caption": "<a social post caption with 1-2 '
+    'emojis>", "hashtags": ["#tag", ...]}. Higher score = stronger hook, emotion, '
     "payoff, and completeness. Do not include any text outside the JSON."
 )
 
@@ -103,6 +104,10 @@ def rerank(
                 c.title = str(o["title"])[:80]
             if o.get("reason"):
                 c.reason = str(o["reason"])[:200]
+            if o.get("caption"):
+                c.social_caption = str(o["caption"])[:280]
+            if isinstance(o.get("hashtags"), list) and o["hashtags"]:
+                c.hashtags = [str(h)[:40] for h in o["hashtags"][:8]]
         log.info("LLM rerank applied to %d candidates", len(by_id))
         return cands
     except Exception as e:  # noqa: BLE001 — deliberate: never let the model break the run

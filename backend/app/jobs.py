@@ -48,6 +48,9 @@ class Job:
                     "text": c.text,
                     "score": c.score.model_dump(),
                     "reason": c.reason,
+                    "keywords": c.keywords,
+                    "hashtags": c.hashtags,
+                    "social_caption": c.social_caption,
                 }
                 for c in self.clips
             ],

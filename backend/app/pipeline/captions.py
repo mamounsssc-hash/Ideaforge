@@ -1,18 +1,23 @@
 """Animated caption generator -> ASS subtitle file (burned in by ffmpeg/libass).
 
 Free, fast, GPU-free, and expressive enough for CapCut / Hormozi / Submagic-style
-looks: word-level karaoke highlight, active-word color, pop/bounce/fade animation,
-outline, shadow, box background, custom fonts, positioning.
+looks: word-level karaoke highlight, persistent keyword highlight, auto-emoji,
+filler removal, a top hook banner, pop/bounce/fade animation, outline, shadow,
+box background, custom fonts, positioning, and any aspect ratio.
 
 A "style" is pure data (StylePreset / styles/catalog.json), so adding a new look
-is a config edit — no code. This is what gives us 36+ styles and easy growth.
+is a config edit — no code.
 """
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 from ..config import settings
 from ..models import StylePreset, Word
+from . import keywords as kw
+
+FILLERS = {"um", "uh", "erm", "mm", "hmm", "uhh", "umm", "ah", "eh"}
 
 
 def _ass_color(rrggbb: str, alpha: str = "00") -> str:
@@ -43,20 +48,16 @@ def _fmt_time(t: float) -> str:
     return f"{h}:{m:02d}:{s:02d}.{cs:02d}"
 
 
-def _active_prefix(style: StylePreset) -> tuple[str, str]:
-    """Return (open, close) override tags applied around the active word."""
-    hi = _ass_color(style.highlight_color)
-    pri = _ass_color(style.primary_color)
-    anim = ""
+def _norm(word: str) -> str:
+    return re.sub(r"[^a-z0-9']", "", word.lower())
+
+
+def _active_anim(style: StylePreset) -> str:
     if style.animation == "pop":
-        anim = r"\fscx72\fscy72\t(0,110,\fscx100\fscy100)"
-    elif style.animation == "bounce":
-        anim = r"\fscx60\fscy60\t(0,90,\fscx112\fscy112)\t(90,170,\fscx100\fscy100)"
-    elif style.animation == "fade":
-        anim = ""  # handled at line level via \fad
-    open_tag = "{\\c" + hi + anim + "}"
-    close_tag = "{\\c" + pri + r"\fscx100\fscy100}"
-    return open_tag, close_tag
+        return r"\fscx72\fscy72\t(0,110,\fscx100\fscy100)"
+    if style.animation == "bounce":
+        return r"\fscx60\fscy60\t(0,90,\fscx112\fscy112)\t(90,170,\fscx100\fscy100)"
+    return ""
 
 
 def _line_prefix(style: StylePreset) -> str:
@@ -67,21 +68,50 @@ def _line_prefix(style: StylePreset) -> str:
     return ""
 
 
-def _txt(word: str, style: StylePreset) -> str:
+def _display(word: str, style: StylePreset) -> str:
     w = word.strip().replace("{", "(").replace("}", ")")
     return w.upper() if style.uppercase else w
 
 
-def build_ass(words: list[Word], clip_start: float, clip_end: float, style: StylePreset) -> str:
-    """Return an ASS document string for the clip's words zero-based to clip_start."""
-    pw, ph = settings.target_width, settings.target_height
+def build_ass(
+    words: list[Word],
+    clip_start: float,
+    clip_end: float,
+    style: StylePreset,
+    play_w: int | None = None,
+    play_h: int | None = None,
+    keyword_set: set[str] | None = None,
+    add_emojis: bool = False,
+    remove_fillers: bool = True,
+    hook_text: str | None = None,
+    max_emojis: int = 4,
+) -> str:
+    pw = play_w or settings.target_width
+    ph = play_h or settings.target_height
     primary = _ass_color(style.primary_color)
+    highlight = _ass_color(style.highlight_color)
     outline = _ass_color(style.outline_color)
     back = _ass_color(style.back_color) if style.back_color else _ass_color("000000", "80")
-    border_style = 3 if style.back_color else 1     # 3 = opaque box, 1 = outline+shadow
+    border_style = 3 if style.back_color else 1
     bold = -1 if style.bold else 0
     align = _alignment(style.position)
-    spacing = style.letter_spacing
+    kwset = keyword_set or set()
+
+    # Filter filler words up-front so they never appear.
+    if remove_fillers:
+        words = [w for w in words if _norm(w.text) not in FILLERS]
+
+    # Pre-compute emoji insertions (cap + no repeats) mapped by word identity index.
+    emoji_at: dict[int, str] = {}
+    if add_emojis:
+        used: set[str] = set()
+        for i, w in enumerate(words):
+            if len(emoji_at) >= max_emojis:
+                break
+            e = kw.emoji_for(w.text)
+            if e and e not in used:
+                emoji_at[i] = e
+                used.add(e)
 
     header = f"""[Script Info]
 ScriptType: v4.00+
@@ -92,39 +122,54 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Main,{style.font},{style.font_size},{primary},{primary},{outline},{back},{bold},0,0,0,100,100,{spacing},0,{border_style},{style.outline},{style.shadow},{align},60,60,{style.margin_v},1
+Style: Main,{style.font},{style.font_size},{primary},{primary},{outline},{back},{bold},0,0,0,100,100,{style.letter_spacing},0,{border_style},{style.outline},{style.shadow},{align},60,60,{style.margin_v},1
+Style: Hook,{style.font},{int(style.font_size * 0.72)},{_ass_color('FFFFFF')},{_ass_color('FFFFFF')},{_ass_color('000000')},{_ass_color('000000','60')},-1,0,0,0,100,100,1,0,3,4,2,8,80,80,140,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
 
     events: list[str] = []
-    open_tag, close_tag = _active_prefix(style)
+    anim = _active_anim(style)
     line_prefix = _line_prefix(style)
 
-    for group in _chunk(words, style.max_words):
+    # optional top hook banner spanning the whole clip
+    if hook_text:
+        htxt = hook_text.strip().replace("{", "(").replace("}", ")").upper()
+        events.append(
+            f"Dialogue: 1,{_fmt_time(0)},{_fmt_time(clip_end - clip_start)},Hook,,0,0,0,,"
+            + "{\\fad(120,80)}" + htxt
+        )
+
+    def token_for(idx: int, w: Word, active: bool) -> str:
+        base = _display(w.text, style)
+        emoji = (" " + emoji_at[idx]) if idx in emoji_at else ""
+        is_kw = _norm(w.text) in kwset
+        if active:
+            return "{\\c" + highlight + anim + "}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
+        if is_kw:
+            return "{\\c" + highlight + "}" + base + "{\\c" + primary + "}" + emoji
+        return base + emoji
+
+    for group_idx, group in enumerate(_chunk(words, style.max_words)):
         if not group:
             continue
         g_start = group[0].start
         g_end = group[-1].end
+        # indices of these words within the full list (for emoji lookup)
+        base_i = group_idx * style.max_words
+
         if style.mode == "line":
-            # whole group shown together, no per-word highlight
-            text = line_prefix + " ".join(_txt(w.text, style) for w in group)
+            parts = [token_for(base_i + j, w, active=False) for j, w in enumerate(group)]
+            text = line_prefix + " ".join(parts)
             events.append(_dialogue(g_start - clip_start, g_end - clip_start, text))
             continue
 
-        # karaoke / word_pop: one event per active word, whole group visible.
         for i, w in enumerate(group):
             start = w.start
             end = group[i + 1].start if i + 1 < len(group) else g_end
-            pieces = []
-            for j, gw in enumerate(group):
-                token = _txt(gw.text, style)
-                if j == i:
-                    pieces.append(open_tag + token + close_tag)
-                else:
-                    pieces.append(token)
-            text = line_prefix + " ".join(pieces)
+            parts = [token_for(base_i + j, gw, active=(j == i)) for j, gw in enumerate(group)]
+            text = line_prefix + " ".join(parts)
             events.append(_dialogue(start - clip_start, end - clip_start, text))
 
     return header + "\n".join(events) + "\n"
@@ -134,6 +179,7 @@ def _dialogue(start: float, end: float, text: str) -> str:
     return f"Dialogue: 0,{_fmt_time(start)},{_fmt_time(end)},Main,,0,0,0,,{text}"
 
 
-def write_ass(path: Path, words: list[Word], clip_start: float, clip_end: float, style: StylePreset) -> Path:
-    path.write_text(build_ass(words, clip_start, clip_end, style), encoding="utf-8")
+def write_ass(path: Path, words: list[Word], clip_start: float, clip_end: float,
+              style: StylePreset, **kw) -> Path:
+    path.write_text(build_ass(words, clip_start, clip_end, style, **kw), encoding="utf-8")
     return path

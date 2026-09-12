@@ -51,6 +51,9 @@ class Settings(BaseSettings):
     target_width: int = 1080
     target_height: int = 1920            # 9:16
 
+    # ---- Optional B-roll (Pexels free API; empty => B-roll disabled) ----
+    pexels_api_key: str = ""
+
     # ---- Server ----
     host: str = "127.0.0.1"
     port: int = 8000
