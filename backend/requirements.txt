@@ -1,0 +1,21 @@
+# ---- Core web ----
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+websockets==14.1
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# ---- Media / ML ----
+faster-whisper==1.1.0        # local, free speech-to-text with word timestamps
+yt-dlp==2024.12.13           # download from YouTube/TikTok/etc.
+numpy==2.2.1
+opencv-python-headless==4.10.0.84   # face detection / reframe
+mediapipe==0.10.20           # robust face + active-speaker signals
+
+# ---- LLM (optional, all local by default) ----
+httpx==0.28.1                # talks to Ollama / LM Studio / Qwen3-VL server (OpenAI-compatible)
+
+# Notes:
+# - ffmpeg + ffprobe must be installed on the system (see scripts/ and README).
+# - Everything above is free and runs locally. No paid API keys required.

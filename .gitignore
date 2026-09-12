@@ -1,0 +1,21 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# App data / generated media
+backend/data/
+assets/fonts/*.ttf
+assets/fonts/*.otf
+
+# Whisper model cache
+*.bin
+.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

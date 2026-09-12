@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IdeaForge Clipper</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">◆</span> IdeaForge <span class="muted">Clipper</span>
+    </div>
+    <div class="pill" id="enginePill">local engine</div>
+  </header>
+
+  <main>
+    <!-- STEP 1: input -->
+    <section class="card" id="inputCard">
+      <h1>Turn any long video into viral shorts</h1>
+      <p class="sub">Free & local. Auto highlights, speaker tracking, and 40+ caption styles.</p>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="file">Upload file</button>
+        <button class="tab" data-tab="url">Paste URL</button>
+      </div>
+
+      <div class="tabpane" id="pane-file">
+        <label class="dropzone" id="dropzone">
+          <input type="file" id="fileInput" accept="video/*" hidden />
+          <div class="dz-inner">
+            <div class="dz-icon">⬆</div>
+            <div>Drop a video here or <b>browse</b></div>
+            <div class="muted small" id="fileName">MP4, MOV, MKV…</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="tabpane hidden" id="pane-url">
+        <input type="text" id="urlInput" class="text-input"
+               placeholder="https://youtube.com/watch?v=…  or TikTok / X / etc." />
+      </div>
+
+      <div class="row">
+        <select id="langSelect" class="text-input compact">
+          <option value="en" selected>English</option>
+          <option value="">Auto-detect</option>
+          <option value="ar">Arabic</option>
+        </select>
+        <button class="btn primary" id="startBtn">Find clips →</button>
+      </div>
+    </section>
+
+    <!-- STEP 2: progress -->
+    <section class="card hidden" id="progressCard">
+      <h2 id="progTitle">Working…</h2>
+      <div class="progress"><div class="bar" id="progBar"></div></div>
+      <div class="muted" id="progMsg">Starting…</div>
+    </section>
+
+    <!-- STEP 3: results -->
+    <section class="hidden" id="resultsSection">
+      <div class="results-head">
+        <h2>Clips <span class="muted" id="clipCount"></span></h2>
+        <div class="style-picker">
+          <label class="muted small">Caption style</label>
+          <select id="styleSelect" class="text-input compact"></select>
+        </div>
+      </div>
+      <div class="clips" id="clipList"></div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">✕</button>
+      <video id="preview" controls playsinline></video>
+      <a class="btn primary block" id="downloadBtn" download>Download clip</a>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
