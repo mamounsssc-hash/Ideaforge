@@ -24,6 +24,7 @@ from .jobs import store
 from .models import RenderRequest, BatchRenderRequest, AnalyzeOptions, WordsUpdate, CreateOptions
 from .pipeline import orchestrator, render, create as create_pipeline
 from .pipeline import tts
+from .pipeline import model as model_dl
 from .styles import all_styles, get_style
 
 app = FastAPI(title="IdeaForge Clipper", version="0.1.0")
@@ -274,6 +275,18 @@ async def get_file(name: str):
 @app.get("/api/health")
 async def health():
     return {"ok": True, "llm": settings.llm_enabled, "styles": len(all_styles())}
+
+
+# --------------------- Speech model (one-click download) ---------------
+@app.get("/api/model/status")
+async def model_status():
+    return model_dl.status()
+
+
+@app.post("/api/model/download")
+async def model_download(body: dict | None = None):
+    name = (body or {}).get("model") if isinstance(body, dict) else None
+    return model_dl.start_download(name)
 
 
 # ----------------------------- Frontend -------------------------------

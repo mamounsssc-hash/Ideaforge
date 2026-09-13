@@ -15,6 +15,23 @@
   </header>
 
   <main>
+    <!-- Speech model banner: shows only when the model isn't downloaded yet -->
+    <section class="card model-banner hidden" id="modelBanner">
+      <div class="mb-row">
+        <div class="mb-text">
+          <b id="mbTitle">Speech model needed</b>
+          <div class="muted small" id="mbMsg">
+            The app needs a one-time speech model to read your video. Click to download it.
+          </div>
+        </div>
+        <button class="btn primary" id="mbDownloadBtn">⬇ Download model</button>
+      </div>
+      <div class="mb-progress hidden" id="mbProgressWrap">
+        <div class="mb-bar"><div class="mb-fill" id="mbFill"></div></div>
+        <div class="muted small" id="mbPct">0%</div>
+      </div>
+    </section>
+
     <div class="modeswitch">
       <button class="mode active" data-mode="clip">✂ Clip a video</button>
       <button class="mode" data-mode="create">✨ Create a video</button>

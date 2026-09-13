@@ -153,3 +153,14 @@ h2 { font-size: 19px; margin: 0 0 14px; }
   .clip-actions { width: 100%; }
   .clip-actions .btn { width: 100%; }
 }
+
+/* ---- Speech model banner (one-click download) ---- */
+.model-banner { border: 1px solid #f0c36d; background: #fff8e6; }
+.model-banner .mb-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.model-banner.ready { border-color: #7bd88f; background: #eafbef; }
+.model-banner.error { border-color: #f08d8d; background: #fdeaea; }
+.mb-text { min-width: 200px; }
+.mb-progress { margin-top: 12px; display: flex; align-items: center; gap: 10px; }
+.mb-bar { flex: 1; height: 12px; background: #eee; border-radius: 999px; overflow: hidden; }
+.mb-fill { height: 100%; width: 0%; background: #3b82f6; transition: width .5s ease; }
+#mbPct { min-width: 42px; text-align: right; }

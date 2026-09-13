@@ -435,3 +435,90 @@ function escapeHtml(s) {
 fetch("/api/health").then((r) => r.json()).then((h) => {
   $("#enginePill").textContent = h.llm ? "local + model" : "local engine";
 }).catch(() => {});
+
+/* =========================================================================
+   Speech-model banner: detect if the Whisper model is present, and let the
+   user download it with one button + a progress bar. Fully self-contained.
+   ========================================================================= */
+(function () {
+  const banner = document.getElementById("modelBanner");
+  if (!banner) return;
+  const btn = document.getElementById("mbDownloadBtn");
+  const msg = document.getElementById("mbMsg");
+  const title = document.getElementById("mbTitle");
+  const progWrap = document.getElementById("mbProgressWrap");
+  const fill = document.getElementById("mbFill");
+  const pct = document.getElementById("mbPct");
+  let timer = null;
+
+  function render(s) {
+    if (!s) return;
+    if (s.status === "done" || s.present) {
+      // Model ready: briefly confirm, then hide.
+      banner.classList.remove("error");
+      banner.classList.add("ready");
+      title.textContent = "✓ Speech model ready";
+      msg.textContent = "You're all set. You can clip videos now.";
+      progWrap.classList.add("hidden");
+      btn.classList.add("hidden");
+      clearInterval(timer); timer = null;
+      setTimeout(() => banner.classList.add("hidden"), 2500);
+      return;
+    }
+    banner.classList.remove("hidden");
+    if (s.status === "downloading") {
+      banner.classList.remove("error");
+      btn.disabled = true;
+      btn.textContent = "Downloading…";
+      progWrap.classList.remove("hidden");
+      const p = Math.round((s.progress || 0) * 100);
+      fill.style.width = p + "%";
+      pct.textContent = p + "%";
+      title.textContent = "Downloading speech model (" + s.model + ")";
+      msg.textContent = "One time only, about " + (s.size_hint || "") +
+        ". Keep this page open — it can take a while.";
+    } else if (s.status === "error") {
+      banner.classList.add("error");
+      btn.disabled = false;
+      btn.textContent = "↻ Try again";
+      progWrap.classList.add("hidden");
+      title.textContent = "Download failed";
+      msg.textContent = s.error || "Something went wrong. Check your internet and try again.";
+    } else {
+      // idle + not present
+      banner.classList.remove("error");
+      btn.disabled = false;
+      btn.textContent = "⬇ Download model (" + (s.size_hint || "") + ")";
+      progWrap.classList.add("hidden");
+      title.textContent = "Speech model needed (one time)";
+      msg.textContent = "The app needs a one-time speech model to read your video. " +
+        "Click to download it — needs normal internet, not a VPN.";
+    }
+  }
+
+  async function poll() {
+    try {
+      const r = await fetch("/api/model/status");
+      render(await r.json());
+    } catch (e) { /* server not up yet; ignore */ }
+  }
+
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    btn.textContent = "Starting…";
+    try {
+      const r = await fetch("/api/model/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      render(await r.json());
+    } catch (e) {
+      render({ status: "error", error: "Could not reach the app. Is it running?" });
+    }
+    if (!timer) timer = setInterval(poll, 1500);
+  });
+
+  // On load: check once; if the model is missing, keep an eye on it.
+  poll().then(() => { if (!timer) timer = setInterval(poll, 3000); });
+})();
