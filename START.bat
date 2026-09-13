@@ -2,6 +2,7 @@
 setlocal
 cd /d "%~dp0"
 title IdeaForge Clipper
+set "VPY=.venv\Scripts\python.exe"
 
 echo ============================================
 echo    IdeaForge Clipper - one-click launcher
@@ -20,35 +21,52 @@ if errorlevel 1 (
 where ffmpeg >nul 2>nul
 if errorlevel 1 (
   echo [!] ffmpeg was not found. Rendering may fail without it.
-  echo     To install it, open PowerShell and run:  winget install Gyan.FFmpeg
-  echo     Then close PowerShell and double-click this file again.
-  echo     ^(Continuing anyway in case it is installed elsewhere...^)
+  echo     Install it: open PowerShell and run  winget install Gyan.FFmpeg
+  echo     ^(Continuing anyway...^)
   echo.
 )
 
-if not exist ".venv\Scripts\python.exe" (
-  echo === First-time setup: installing everything once. This takes a few minutes. ===
-  echo === Please leave this window open until it finishes.                       ===
-  echo.
+if not exist "%VPY%" (
+  echo === Creating environment... ===
   python -m venv .venv
-  ".venv\Scripts\python.exe" -m pip install --upgrade pip
-  ".venv\Scripts\pip.exe" install -r "backend\requirements.txt"
+)
+
+REM --- make sure the app's packages are actually installed ---
+"%VPY%" -c "import uvicorn, fastapi, numpy, httpx" >nul 2>nul
+if errorlevel 1 (
+  echo === Installing packages. First time only - takes a few minutes. Please wait... ===
+  echo.
+  "%VPY%" -m pip install --upgrade pip
+  echo --- core (required) ---
+  "%VPY%" -m pip install fastapi "uvicorn[standard]" python-multipart pydantic pydantic-settings numpy httpx websockets
   if errorlevel 1 (
     echo.
-    echo [X] Setup failed while downloading packages. Check your internet and run this file again.
+    echo [X] Could not install the core packages. Check your internet, then run this file again.
     pause
     exit /b 1
   )
+  echo --- media (for clipping) ---
+  "%VPY%" -m pip install faster-whisper yt-dlp opencv-python-headless edge-tts
+  echo --- optional extras ^(ok if this one warns/fails^) ---
+  "%VPY%" -m pip install mediapipe
   echo.
-  echo === Setup done. ===
+  echo === Packages installed. ===
   echo.
+)
+
+REM --- final check ---
+"%VPY%" -c "import uvicorn" >nul 2>nul
+if errorlevel 1 (
+  echo [X] uvicorn still missing. Run this file again, or ask for help.
+  pause
+  exit /b 1
 )
 
 echo === Starting the app. Your browser will open at http://127.0.0.1:8000 ===
 echo === Keep THIS window open while using the app. Close it to stop.      ===
 echo.
-echo Note: the FIRST time you press "Find clips", it downloads the speech model
-echo       (this needs normal internet, NOT a VPN). Later runs are offline.
+echo Note: the FIRST time you press "Find clips" it downloads the speech model
+echo       (normal internet, NOT a VPN). Later runs work offline.
 echo.
 start "" "http://127.0.0.1:8000"
 cd backend
