@@ -87,9 +87,13 @@ dependency.
 Every feature above is a toggle in the results view, applied per-render and to the
 batch export.
 
-**Transcription models:** only the two best are used and pre-downloaded —
-`large-v3` (highest accuracy, default) and `medium` (lighter / faster). Anything
-else set in config falls back to `large-v3`.
+**Transcription models:** only the two best are supported — `large-v3` (highest
+accuracy, default) and `medium` (lighter / faster). Anything else falls back to
+`large-v3`. The app **auto-detects** any model you drop into `backend/models/`
+and uses it instantly, offline; if none is present it downloads on first use.
+To fetch one on demand: `python scripts/fetch_models.py` (or `medium`). To see
+what the app detects: `python scripts/check_models.py`. Full step-by-step
+(including a no-internet manual method): **`MODELS_AR.md`**.
 
 ## Compared to Opus Clip
 

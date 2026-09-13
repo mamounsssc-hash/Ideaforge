@@ -19,3 +19,7 @@ assets/fonts/*.otf
 Thumbs.db
 .idea/
 .vscode/
+
+# Whisper models dropped in locally (keep the folder + its Arabic readme only)
+backend/models/*
+!backend/models/README_AR.txt

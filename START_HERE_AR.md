@@ -97,6 +97,9 @@ IDEAFORGE_LLM_VISION=true
 
 ## ملاحظات سريعة
 
+- **نماذج Whisper (التفريغ الصوتي):** التطبيق يكتشف أي نموذج تضعه في `backend/models/`
+  ويشغّله فوراً بلا إنترنت. لتحميله بسهولة: `python scripts/fetch_models.py` — وللتأكد أنه
+  يراه: `python scripts/check_models.py`. الدليل الكامل (وطريقة يدوية بلا إنترنت) في **`MODELS_AR.md`**.
 - **الجهاز ضعيف / مساحة قليلة؟** أضف هذا السطر في `backend\.env` لاستخدام النموذج الأخف:
   ```ini
   IDEAFORGE_WHISPER_MODEL=medium

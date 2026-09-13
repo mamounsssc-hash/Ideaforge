@@ -9,8 +9,12 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 
-from ..config import settings, resolve_whisper_model
+from ..config import settings, resolve_whisper_model, find_local_whisper_model, WHISPER_REPO
 from ..models import Segment, Word
+
+
+class WhisperModelMissing(RuntimeError):
+    """Raised when no model is available locally and it can't be downloaded."""
 
 
 @lru_cache(maxsize=1)
@@ -28,8 +32,30 @@ def _get_model():
             device = "cpu"
     if compute == "auto":
         compute = "float16" if device == "cuda" else "int8"
-    model = resolve_whisper_model(settings.whisper_model)
-    return WhisperModel(model, device=device, compute_type=compute)
+
+    name = settings.whisper_model
+    model = resolve_whisper_model(name)               # a local folder path, or the name
+    is_local = find_local_whisper_model(name) is not None
+    print(f"[whisper] loading '{name}' from "
+          f"{'local folder: ' + model if is_local else 'name (cache/download)'} "
+          f"on {device}/{compute}", flush=True)
+
+    try:
+        return WhisperModel(model, device=device, compute_type=compute)
+    except Exception as e:  # noqa: BLE001
+        # Most common cause: no model locally AND no internet to download it.
+        repo = WHISPER_REPO.get(resolve_whisper_model(name) if is_local else name, "the model")
+        raise WhisperModelMissing(
+            f"Could not load the Whisper model '{name}'.\n"
+            f"Nothing was found in backend/models/ and it could not be downloaded "
+            f"(you may be offline).\n\n"
+            f"Fix it in ONE of these ways:\n"
+            f"  1) Run the downloader:   python scripts/fetch_models.py {name}\n"
+            f"  2) Or download it by hand from https://huggingface.co/{repo} and put its\n"
+            f"     files inside:  backend/models/faster-whisper-{name}/  (must include model.bin)\n"
+            f"See MODELS_AR.md for step-by-step instructions.\n\n"
+            f"Original error: {e}"
+        ) from e
 
 
 def transcribe(media_path: Path, language: str | None = None, progress=None,

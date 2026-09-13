@@ -18,7 +18,11 @@ WORK_DIR = DATA_DIR / "work"
 STYLES_DIR = Path(__file__).resolve().parent / "styles"
 FONTS_DIR = ROOT.parent / "assets" / "fonts"
 
-for _d in (DATA_DIR, UPLOAD_DIR, OUTPUT_DIR, WORK_DIR):
+# Drop a manually-downloaded Whisper model here and the app finds it instantly,
+# with no internet needed. See MODELS_AR.md for exactly what to put inside.
+MODELS_DIR = ROOT / "models"
+
+for _d in (DATA_DIR, UPLOAD_DIR, OUTPUT_DIR, WORK_DIR, MODELS_DIR):
     _d.mkdir(parents=True, exist_ok=True)
 
 
@@ -32,6 +36,10 @@ class Settings(BaseSettings):
     whisper_device: str = "auto"         # auto/cpu/cuda
     whisper_compute_type: str = "auto"   # auto/int8/float16
     default_language: str | None = "en"  # None => auto-detect
+    # Optional: absolute path to a folder that contains a model.bin (a CTranslate2
+    # faster-whisper model). If set and valid, it wins over everything else — use
+    # it when your model lives outside the project. Empty => auto-detect (below).
+    whisper_model_dir: str = ""
 
     # ---- Clip selection ----
     min_clip_seconds: float = 15.0
@@ -68,9 +76,74 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-# The only two Whisper models this app ships with. Anything else falls back.
+# The only two Whisper models this app supports. Anything else falls back.
 ALLOWED_WHISPER_MODELS = ("large-v3", "medium")
+
+# The exact Hugging Face repositories the models come from (faster-whisper / CT2).
+# You can download these by hand and drop the files into backend/models/.
+WHISPER_REPO = {
+    "large-v3": "Systran/faster-whisper-large-v3",
+    "medium": "Systran/faster-whisper-medium",
+}
+
+
+def _is_ct2_model_dir(p: Path) -> bool:
+    """A folder is a usable faster-whisper model if it contains a model.bin."""
+    try:
+        return p.is_dir() and (p / "model.bin").is_file()
+    except OSError:
+        return False
+
+
+def find_local_whisper_model(name: str) -> Path | None:
+    """Return a local folder holding this model, or None. No network, instant.
+
+    Search order:
+      1. IDEAFORGE_WHISPER_MODEL_DIR (explicit override), if it has a model.bin.
+      2. backend/models/<various common folder names>, incl. a Hugging Face
+         snapshot layout (…/snapshots/<hash>/model.bin) if you copied a cache folder.
+    """
+    if settings.whisper_model_dir.strip():
+        p = Path(settings.whisper_model_dir).expanduser()
+        if _is_ct2_model_dir(p):
+            return p
+
+    candidates = [
+        f"faster-whisper-{name}",                      # our downloader uses this
+        name,                                          # e.g. models/large-v3
+        f"whisper-{name}",
+        f"models--Systran--faster-whisper-{name}",     # a copied HF cache folder
+    ]
+    for c in candidates:
+        p = MODELS_DIR / c
+        if _is_ct2_model_dir(p):
+            return p
+        snaps = p / "snapshots"                        # HF cache layout
+        if snaps.is_dir():
+            for s in sorted(snaps.iterdir()):
+                if _is_ct2_model_dir(s):
+                    return s
+    return None
 
 
 def resolve_whisper_model(name: str) -> str:
-    return name if name in ALLOWED_WHISPER_MODELS else "large-v3"
+    """What to hand faster-whisper: a local folder path if we have one, else the
+    model name (faster-whisper then uses its own cache, or downloads once)."""
+    name = name if name in ALLOWED_WHISPER_MODELS else "large-v3"
+    local = find_local_whisper_model(name)
+    return str(local) if local else name
+
+
+def describe_whisper_model(name: str | None = None) -> dict:
+    """Human-readable status of a model: is it local, and where. Used for logs
+    and the check_models.py helper so you can confirm the app 'sees' your files."""
+    name = name or settings.whisper_model
+    name = name if name in ALLOWED_WHISPER_MODELS else "large-v3"
+    local = find_local_whisper_model(name)
+    return {
+        "name": name,
+        "repo": WHISPER_REPO.get(name, ""),
+        "local_found": local is not None,
+        "path": str(local) if local else "",
+        "models_dir": str(MODELS_DIR),
+    }
