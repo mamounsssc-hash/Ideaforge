@@ -143,6 +143,37 @@
         <label><input type="checkbox" id="c_hook" checked /> Hook title</label>
         <label><input type="checkbox" id="c_bar" checked /> Progress bar</label>
         <label><input type="checkbox" id="c_zoom" /> Auto zoom</label>
+        <label><input type="checkbox" id="c_zoompunch" /> Zoom punches</label>
+      </div>
+
+      <div class="toggles">
+        <div class="adv-item">
+          <label class="muted small">Color grade</label>
+          <select id="c_grade" class="text-input compact">
+            <option value="none" selected>None</option>
+            <option value="cinematic">Cinematic</option>
+            <option value="vibrant">Vibrant</option>
+            <option value="punchy">Punchy</option>
+            <option value="warm">Warm</option>
+            <option value="cold">Cold</option>
+            <option value="mono">Mono</option>
+          </select>
+        </div>
+        <div class="adv-item">
+          <label class="muted small">Sound FX</label>
+          <select id="c_sfx" class="text-input compact">
+            <option value="none" selected>None</option>
+            <option value="mixed">Mixed</option>
+            <option value="pop">Pop</option>
+            <option value="whoosh">Whoosh</option>
+            <option value="ding">Ding</option>
+            <option value="boom">Boom</option>
+          </select>
+        </div>
+        <div class="adv-item">
+          <label class="muted small">End CTA</label>
+          <input type="text" id="c_cta" class="text-input compact" placeholder="Follow for more" />
+        </div>
       </div>
 
       <div class="row"><button class="btn primary" id="createBtn">Generate video →</button></div>
@@ -196,10 +227,38 @@
         <label><input type="checkbox" id="opt_zoom" /> Auto zoom</label>
         <label><input type="checkbox" id="opt_speakers" /> Speaker colors</label>
         <label><input type="checkbox" id="opt_enhance" /> Enhance audio</label>
+        <label><input type="checkbox" id="opt_zoompunch" /> Zoom punches</label>
         <label><input type="checkbox" id="opt_broll" /> B-roll (Pexels)</label>
       </div>
 
       <div class="toggles" id="advanced">
+        <div class="adv-item">
+          <label class="muted small">Color grade</label>
+          <select id="opt_grade" class="text-input compact">
+            <option value="none" selected>None</option>
+            <option value="cinematic">Cinematic</option>
+            <option value="vibrant">Vibrant</option>
+            <option value="punchy">Punchy</option>
+            <option value="warm">Warm</option>
+            <option value="cold">Cold</option>
+            <option value="mono">Mono</option>
+          </select>
+        </div>
+        <div class="adv-item">
+          <label class="muted small">Sound FX</label>
+          <select id="opt_sfx" class="text-input compact">
+            <option value="none" selected>None</option>
+            <option value="mixed">Mixed</option>
+            <option value="pop">Pop</option>
+            <option value="whoosh">Whoosh</option>
+            <option value="ding">Ding</option>
+            <option value="boom">Boom</option>
+          </select>
+        </div>
+        <div class="adv-item">
+          <label class="muted small">End CTA</label>
+          <input type="text" id="opt_cta" class="text-input compact" placeholder="Follow for more" />
+        </div>
         <div class="adv-item">
           <label class="muted small">Layout</label>
           <select id="opt_layout" class="text-input compact">

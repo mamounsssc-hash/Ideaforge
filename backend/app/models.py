@@ -79,6 +79,11 @@ class RenderOptions(BaseModel):
     reframe_layout: Literal["track", "fill", "fit"] = "track"
     broll: bool = False              # optional Pexels B-roll overlay
     music_volume: float = 0.0        # 0 = off; else mix job's music at this gain
+    # retention / pro-polish
+    color_grade: Literal["none", "cinematic", "vibrant", "warm", "cold", "mono", "punchy"] = "none"
+    zoom_punch: bool = False         # quick zoom beats on keyword moments
+    sfx: Literal["none", "pop", "whoosh", "ding", "boom", "mixed"] = "none"
+    cta_text: str = ""               # end card, e.g. "Follow for more"
     # caption placement overrides (do not require editing the style)
     caption_position: Literal["auto", "top", "center", "bottom"] = "auto"
     caption_scale: float = 1.0       # multiply the style font size (0.6–1.6)

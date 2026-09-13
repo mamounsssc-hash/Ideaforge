@@ -14,7 +14,17 @@ from pathlib import Path
 
 from ..config import OUTPUT_DIR, WORK_DIR, FONTS_DIR, settings
 from ..models import ClipCandidate, RenderOptions, StylePreset, ratio_dims
-from . import captions, reframe, broll, tighten
+from . import captions, reframe, broll, tighten, effects, sfx
+
+
+def _keyword_times(clip: ClipCandidate) -> list[float]:
+    kws = {k.lower() for k in clip.keywords}
+    ts: list[float] = []
+    for w in clip.words:
+        norm = "".join(ch for ch in w.text.lower() if ch.isalnum())
+        if norm in kws:
+            ts.append(round(w.start - clip.start, 3))
+    return ts
 
 
 def _escape_ass_path(p: Path) -> str:
@@ -65,7 +75,16 @@ def render_clip(
     else:  # "track" — follow the active speaker
         vf = reframe.build_filter(source, clip.start, clip.end, tw, th)
 
-    # ---- 2. auto zoom / punch-in (before captions so text doesn't scale) ----
+    # ---- 1b. cinematic color grade (on footage, before captions) ----
+    grade = effects.color_grade(opts.color_grade)
+    if grade:
+        vf += "," + grade
+
+    # ---- 2. motion: keyword zoom-punches + optional slow push-in ----
+    if opts.zoom_punch:
+        zp = effects.zoom_punch(_keyword_times(clip), tw, th)
+        if zp:
+            vf += "," + zp
     if opts.auto_zoom:
         frames = max(1, int(duration * 30))
         vf += (
@@ -73,7 +92,7 @@ def render_clip(
             f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={tw}x{th}:fps=30"
         )
 
-    # ---- 3. captions ----
+    # ---- 3. captions (+ end CTA card) ----
     if opts.burn_captions and clip.words:
         ass_path = WORK_DIR / f"{job_id}_{clip.id}_{style.id}.ass"
         captions.write_ass(
@@ -87,6 +106,7 @@ def render_clip(
             scale=opts.caption_scale,
             offset=opts.caption_offset,
             speaker_colors=opts.speaker_colors,
+            cta_text=opts.cta_text or None,
         )
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
         vf += f",subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}"
@@ -123,32 +143,20 @@ def render_clip(
         except Exception:  # noqa: BLE001
             pass
 
-    # ---- optional background music pass ----
-    if opts.music_volume > 0 and music_path and Path(music_path).exists():
+    # ---- unified audio sweetening pass: SFX at keyword moments + music ----
+    hits = sfx.plan(clip, opts.sfx)
+    wants_music = opts.music_volume > 0 and music_path and Path(music_path).exists()
+    if hits or wants_music:
         try:
             nxt = WORK_DIR / f"{job_id}_{clip.id}_stageM.mp4"
-            _mix_music(current, Path(music_path), nxt, opts.music_volume)
-            current = nxt
+            sfx.mix(current, hits, music_path if wants_music else "", opts.music_volume, nxt)
+            if nxt.exists():
+                current = nxt
         except Exception:  # noqa: BLE001
             pass
 
     Path(current).replace(out_path)
     return out_path
-
-
-def _mix_music(video: Path, music: Path, out: Path, vol: float) -> Path:
-    vol = max(0.0, min(1.0, vol))
-    fc = (
-        f"[0:a]volume=1.0[a0];[1:a]volume={vol:.2f}[a1];"
-        f"[a0][a1]amix=inputs=2:duration=first:dropout_transition=0[aout]"
-    )
-    _run([
-        "ffmpeg", "-y", "-i", str(video), "-stream_loop", "-1", "-i", str(music),
-        "-filter_complex", fc, "-map", "0:v", "-map", "[aout]",
-        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest",
-        str(out),
-    ])
-    return out
 
 
 def extract_keyframe(source: Path, t: float, out: Path) -> Path:
@@ -191,6 +199,13 @@ def render_faceless(
 
     # ---- captions ASS (word timing from the voiceover) ----
     vchain = f"[0:v]scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th},setsar=1"
+    grade = effects.color_grade(opts.color_grade)
+    if grade:
+        vchain += "," + grade
+    if opts.zoom_punch:
+        zp = effects.zoom_punch(_keyword_times(clip), tw, th)
+        if zp:
+            vchain += "," + zp
     if opts.auto_zoom:
         frames = max(1, int(dur * 30))
         vchain += (f",zoompan=z='min(1.0+0.08*on/{frames},1.08)':d=1"
@@ -203,7 +218,7 @@ def render_faceless(
             add_emojis=opts.add_emojis, remove_fillers=False,
             hook_text=(clip.title if opts.hook_title else None),
             position_override=opts.caption_position, scale=opts.caption_scale,
-            offset=opts.caption_offset,
+            offset=opts.caption_offset, cta_text=opts.cta_text or None,
         )
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
         vchain += f",subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}"
@@ -229,4 +244,15 @@ def render_faceless(
            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-shortest",
            str(out_path)]
     _run(cmd)
+
+    # SFX post-pass (music is already mixed above, so don't re-add it)
+    hits = sfx.plan(clip, opts.sfx)
+    if hits:
+        try:
+            sweetened = WORK_DIR / f"{job_id}_faceless_sfx.mp4"
+            sfx.mix(out_path, hits, "", 0.0, sweetened)
+            if sweetened.exists():
+                sweetened.replace(out_path)
+        except Exception:  # noqa: BLE001
+            pass
     return out_path

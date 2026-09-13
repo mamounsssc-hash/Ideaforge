@@ -90,6 +90,7 @@ def build_ass(
     scale: float = 1.0,
     offset: int = 0,
     speaker_colors: bool = False,
+    cta_text: str | None = None,
 ) -> str:
     pw = play_w or settings.target_width
     ph = play_h or settings.target_height
@@ -138,6 +139,7 @@ ScaledBorderAndShadow: yes
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Main,{style.font},{font_size},{primary},{primary},{outline},{back},{bold},0,0,0,100,100,{style.letter_spacing},0,{border_style},{style.outline},{style.shadow},{align},60,60,{margin_v},1
 Style: Hook,{style.font},{int(font_size * 0.72)},{_ass_color('FFFFFF')},{_ass_color('FFFFFF')},{_ass_color('000000')},{_ass_color('000000','60')},-1,0,0,0,100,100,1,0,3,4,2,8,80,80,140,1
+Style: CTA,{style.font},{int(font_size * 0.8)},{highlight},{highlight},{_ass_color('000000')},{_ass_color('000000','40')},-1,0,0,0,100,100,1,0,1,5,2,2,80,80,300,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -147,12 +149,23 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     anim = _active_anim(style)
     line_prefix = _line_prefix(style)
 
+    clip_dur = clip_end - clip_start
+
     # optional top hook banner spanning the whole clip
     if hook_text:
         htxt = hook_text.strip().replace("{", "(").replace("}", ")").upper()
         events.append(
-            f"Dialogue: 1,{_fmt_time(0)},{_fmt_time(clip_end - clip_start)},Hook,,0,0,0,,"
+            f"Dialogue: 1,{_fmt_time(0)},{_fmt_time(clip_dur)},Hook,,0,0,0,,"
             + "{\\fad(120,80)}" + htxt
+        )
+
+    # optional end CTA card (retention loop-back)
+    if cta_text and cta_text.strip():
+        ctxt = cta_text.strip().replace("{", "(").replace("}", ")").upper()
+        cta_start = max(0.0, clip_dur - 1.8)
+        events.append(
+            f"Dialogue: 2,{_fmt_time(cta_start)},{_fmt_time(clip_dur)},CTA,,0,0,0,,"
+            + r"{\fad(150,0)\fscx60\fscy60\t(0,140,\fscx100\fscy100)}" + ctxt
         )
 
     def token_for(idx: int, w: Word, active: bool) -> str:

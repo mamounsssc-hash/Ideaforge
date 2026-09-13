@@ -58,6 +58,12 @@ dependency.
 - **Hook title banner** — the AI title rendered as a top overlay.
 - **Silence removal** — internal dead-air is cut and captions are retimed to match.
 - **Auto zoom / punch-in** — a subtle push-in for energy.
+- **Keyword zoom-punches** — quick beat-style zoom hits on the emphasized words, so
+  the footage pulses with the delivery (a big retention lever).
+- **Sound effects** — synthesized locally (pop / whoosh / ding / boom, or mixed) and
+  mixed in on keyword moments. No asset files, works offline.
+- **Cinematic color grades** — cinematic, vibrant, punchy, warm, cold, mono.
+- **End CTA card** — an animated "Follow for more" in the last ~1.8s to loop viewers.
 - **Speaker color-coding** — captions tinted per (approx) speaker turn.
 - **Background music** — mix a track under the clip at an adjustable volume.
 - **Per-clip trim & title edit** — nudge start/end and rewrite the hook before render.
@@ -177,6 +183,8 @@ backend/app/
     score.py              heuristic 0–99 scoring + dedupe     [Layer 2]
     llm.py                optional OpenAI-compatible re-rank + social copy [Layer 3]
     keywords.py           keyword extraction, auto-emoji, hashtags
+    effects.py            color grades + keyword zoom-punch filters
+    sfx.py                locally-synthesized sound effects + audio mixing
     tts.py                text-to-speech (edge-tts / piper) for Create mode
     create.py             faceless generator: script -> voiceover -> compose
     tighten.py            internal silence removal + caption retiming

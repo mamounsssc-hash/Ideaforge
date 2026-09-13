@@ -156,6 +156,8 @@ $("#createBtn")?.addEventListener("click", async () => {
     burn_captions: $("#c_captions").checked, highlight_keywords: $("#c_keywords").checked,
     add_emojis: $("#c_emojis").checked, hook_title: $("#c_hook").checked,
     progress_bar: $("#c_bar").checked, auto_zoom: $("#c_zoom").checked,
+    zoom_punch: $("#c_zoompunch").checked, color_grade: $("#c_grade").value,
+    sfx: $("#c_sfx").value, cta_text: $("#c_cta").value || "",
     music_volume: parseFloat($("#createMusicVol").value) || 0,
   };
   const fd = new FormData();
@@ -347,6 +349,10 @@ function collectOptions() {
     caption_position: $("#opt_cappos").value,
     caption_scale: parseFloat($("#opt_capscale").value) || 1,
     caption_offset: 0,
+    color_grade: $("#opt_grade").value,
+    zoom_punch: $("#opt_zoompunch").checked,
+    sfx: $("#opt_sfx").value,
+    cta_text: $("#opt_cta").value || "",
   };
 }
 
