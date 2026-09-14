@@ -36,12 +36,24 @@ def _detect_face_centers(src: Path, start: float, end: float):
     h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     detector = None
+    cascade = None
     try:
         import mediapipe as mp
 
         detector = mp.solutions.face_detection.FaceDetection(model_selection=1, min_detection_confidence=0.5)
     except Exception:
-        cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+        detector = None
+    if detector is None:
+        try:
+            path = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+            c = cv2.CascadeClassifier(path)
+            cascade = c if (c is not None and not c.empty()) else None
+        except Exception:
+            cascade = None
+    # No face detector available at all -> caller will center-crop.
+    if detector is None and cascade is None:
+        cap.release()
+        return [], (w, h)
 
     samples: list[tuple[float, float]] = []
     step = 1.0 / _SAMPLE_FPS
@@ -54,30 +66,34 @@ def _detect_face_centers(src: Path, start: float, end: float):
             break
         cx = None
         best = -1.0
-        if detector is not None:
-            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            res = detector.process(rgb)
-            if res.detections:
-                for d in res.detections:
-                    box = d.location_data.relative_bounding_box
-                    fcx = box.xmin + box.width / 2
-                    size = box.width * box.height
+        try:
+            if detector is not None:
+                rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                res = detector.process(rgb)
+                if res.detections:
+                    for d in res.detections:
+                        box = d.location_data.relative_bounding_box
+                        fcx = box.xmin + box.width / 2
+                        size = box.width * box.height
+                        centrality = 1 - abs(fcx - 0.5)
+                        weight = size * (0.5 + centrality)
+                        if weight > best:
+                            best = weight
+                            cx = fcx
+            elif cascade is not None:
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                faces = cascade.detectMultiScale(gray, 1.1, 5, minSize=(60, 60))
+                for (fx, fy, fw, fh) in faces:
+                    fcx = (fx + fw / 2) / w
+                    size = (fw * fh) / (w * h)
                     centrality = 1 - abs(fcx - 0.5)
                     weight = size * (0.5 + centrality)
                     if weight > best:
                         best = weight
                         cx = fcx
-        else:
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            faces = cascade.detectMultiScale(gray, 1.1, 5, minSize=(60, 60))
-            for (fx, fy, fw, fh) in faces:
-                fcx = (fx + fw / 2) / w
-                size = (fw * fh) / (w * h)
-                centrality = 1 - abs(fcx - 0.5)
-                weight = size * (0.5 + centrality)
-                if weight > best:
-                    best = weight
-                    cx = fcx
+        except Exception:
+            # Any per-frame detection failure is non-fatal; skip this frame.
+            pass
         if cx is not None:
             samples.append((t - start, float(cx)))
         t += step
@@ -113,7 +129,11 @@ def build_filter(src: Path, start: float, end: float,
             f"[bgb][fgs]overlay=(W-w)/2:(H-h)/2"
         )
 
-    samples, (w, h) = _detect_face_centers(src, start, end)
+    try:
+        samples, (w, h) = _detect_face_centers(src, start, end)
+    except Exception as e:  # noqa: BLE001 — never let face detection break a render
+        log.warning("reframe: face detection failed (%s); using center crop", e)
+        samples, (w, h) = [], (0, 0)
     if w == 0 or h == 0:
         return f"scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th}"
 
