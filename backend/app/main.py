@@ -125,6 +125,32 @@ async def get_words(job_id: str, clip_id: str):
     return {"words": [{"start": w.start, "end": w.end, "text": w.text} for w in clip.words]}
 
 
+@app.get("/api/jobs/{job_id}/clips/{clip_id}/thumb")
+async def clip_thumb(job_id: str, clip_id: str):
+    """A single downscaled frame from the middle of the clip, for the frame picker."""
+    import subprocess
+    job = store.get(job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    clip = next((c for c in job.clips if c.id == clip_id), None)
+    if not clip:
+        raise HTTPException(404, "clip not found")
+    source = Path(job.source_path)
+    if not source.exists():
+        raise HTTPException(410, "source media no longer available")
+    t = max(0.0, (clip.start + clip.end) / 2.0)
+    out = WORK_DIR / f"{job_id}_{clip_id}_thumb.jpg"
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-ss", f"{t:.3f}", "-i", str(source),
+             "-frames:v", "1", "-vf", "scale=640:-2", "-q:v", "4", str(out)],
+            check=True, capture_output=True, text=True,
+        )
+    except Exception as e:  # noqa: BLE001
+        raise HTTPException(500, f"thumb failed: {type(e).__name__}")
+    return FileResponse(out, media_type="image/jpeg")
+
+
 @app.post("/api/jobs/{job_id}/clips/{clip_id}/words")
 async def set_words(job_id: str, clip_id: str, body: WordsUpdate):
     from .models import Word

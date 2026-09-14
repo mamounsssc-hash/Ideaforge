@@ -116,6 +116,14 @@ h2 { font-size: 19px; margin: 0 0 14px; }
 
 .cap-editor { display: none; margin-top: 10px; }
 .cap-editor.open { display: block; }
+
+/* visual frame picker */
+.frame-picker { display: none; margin-top: 10px; }
+.frame-picker.open { display: block; }
+.frame-picker .fp-wrap { position: relative; display: inline-block; max-width: 100%; margin-top: 6px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); touch-action: none; user-select: none; }
+.frame-picker .fp-img { display: block; max-width: 100%; height: auto; pointer-events: none; }
+.frame-picker .fp-box { position: absolute; top: 0; bottom: 0; box-sizing: border-box; border: 3px solid var(--brand); border-radius: 6px; background: rgba(46,124,246,0.14); box-shadow: 0 0 0 2000px rgba(0,0,0,0.45); cursor: grab; }
+.frame-picker .fp-box:active { cursor: grabbing; }
 .word-grid { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; background: #0e131d; border: 1px solid var(--line); border-radius: 10px; }
 .word-inp { background: #131a26; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; font-size: 13px; min-width: 3ch; }
 .word-inp:focus { border-color: var(--brand); outline: none; }

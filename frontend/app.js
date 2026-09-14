@@ -251,7 +251,9 @@ function clipRow(c) {
       <div class="hashtags">${(c.hashtags || []).map((h) => `<span>${escapeHtml(h)}</span>`).join("")}</div>
       <button class="edit-link">✎ Edit / trim</button>
       <button class="edit-link cap-link">✎ Edit captions</button>
+      <button class="edit-link frame-link" title="Choose which person / where to frame">🎯 Frame</button>
       ${c.social_caption ? `<button class="copy-cap" title="Copy post caption">⧉ Copy caption</button>` : ""}
+      <div class="frame-picker"></div>
       <div class="edit-panel">
         <input class="t-title" type="text" placeholder="Title / hook" value="${escapeHtml(c.title || "")}" />
         <input class="t-num t-start" type="number" step="0.1" value="${c.start}" title="start (s)" />
@@ -317,7 +319,85 @@ function clipRow(c) {
     cc.textContent = "✓ Copied";
     setTimeout(() => (cc.textContent = "⧉ Copy caption"), 1500);
   });
+
+  // visual frame picker: see the video, drag a 9:16 box onto the person you want
+  const fp = el.querySelector(".frame-picker");
+  el.querySelector(".frame-link").addEventListener("click", () => {
+    if (fp.classList.contains("open")) { fp.classList.remove("open"); return; }
+    fp.classList.add("open");
+    if (fp.dataset.loaded) return;
+    buildFramePicker(fp, c);
+  });
+
   return el;
+}
+
+// Show a frame from the clip with a draggable vertical (9:16) crop box.
+// Dragging the box sets c._crop_x, and switches Layout to "Fill" so it applies.
+function buildFramePicker(fp, c) {
+  if (!currentJob) { fp.innerHTML = "<span class='muted small'>Analyze a video first.</span>"; return; }
+  fp.innerHTML = "<span class='muted small'>Loading frame…</span>";
+  const img = new Image();
+  img.className = "fp-img";
+  img.src = `/api/jobs/${currentJob}/clips/${c.id}/thumb?ts=${Date.now()}`;
+  img.onerror = () => { fp.innerHTML = "<span class='muted small'>Could not load frame.</span>"; };
+  img.onload = () => {
+    fp.innerHTML = "";
+    const hint = document.createElement("div");
+    hint.className = "muted small";
+    hint.textContent = "اسحب المربّع فوق الشخص الذي تريده · Drag the box onto the person to keep";
+    const wrap = document.createElement("div");
+    wrap.className = "fp-wrap";
+    const box = document.createElement("div");
+    box.className = "fp-box";
+    wrap.appendChild(img.cloneNode());
+    wrap.appendChild(box);
+    fp.appendChild(hint);
+    fp.appendChild(wrap);
+
+    // box width as a fraction of the image = (9/16) / imageAspect, capped at 1
+    const aspect = img.naturalWidth / img.naturalHeight;   // e.g. 1.777 for 16:9
+    const boxWFrac = Math.min(1, (9 / 16) / aspect);       // ~0.316 for 16:9
+    const travel = Math.max(0, 1 - boxWFrac);              // horizontal room to move
+    box.style.width = (boxWFrac * 100) + "%";
+
+    let cropX = (c._crop_x != null) ? c._crop_x : parseFloat($("#opt_cropx").value) || 0.5;
+    const place = () => { box.style.left = (cropX * travel * 100) + "%"; };
+    place();
+
+    const setFromClientX = (clientX) => {
+      const r = wrap.getBoundingClientRect();
+      let leftFrac = (clientX - r.left) / r.width - boxWFrac / 2;   // center under cursor
+      leftFrac = Math.max(0, Math.min(travel, leftFrac));
+      cropX = travel > 0 ? leftFrac / travel : 0.5;
+      place();
+    };
+
+    let dragging = false;
+    const down = (e) => { dragging = true; setFromClientX((e.touches ? e.touches[0] : e).clientX); e.preventDefault(); };
+    const move = (e) => { if (dragging) setFromClientX((e.touches ? e.touches[0] : e).clientX); };
+    const up = () => {
+      if (!dragging) return;
+      dragging = false;
+      c._crop_x = Math.round(cropX * 100) / 100;
+      // make the choice take effect: Fill layout uses crop_x
+      const lay = $("#opt_layout"); if (lay) lay.value = "fill";
+      $("#opt_cropx").value = c._crop_x;
+      $("#opt_cropx").dispatchEvent(new Event("input"));
+      saved.textContent = "✅ محفوظ · saved (Layout → Fill)";
+    };
+    wrap.addEventListener("mousedown", down);
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mouseup", up);
+    wrap.addEventListener("touchstart", down, { passive: false });
+    wrap.addEventListener("touchmove", move, { passive: false });
+    wrap.addEventListener("touchend", up);
+
+    const saved = document.createElement("div");
+    saved.className = "muted small";
+    fp.appendChild(saved);
+    fp.dataset.loaded = "1";
+  };
 }
 function hookLabel(sb) {
   const parts = [];
@@ -409,6 +489,7 @@ async function renderClip(c, btn) {
     if (c._title != null && c._title !== c.title) overrides.title_override = c._title;
     if (c._start != null && !isNaN(c._start)) overrides.start_override = c._start;
     if (c._end != null && !isNaN(c._end)) overrides.end_override = c._end;
+    if (c._crop_x != null) { overrides.crop_x = c._crop_x; overrides.reframe_layout = "fill"; }
     const r = await fetch("/api/render", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ job_id: currentJob, clip_id: c.id, ...collectOptions(), ...overrides }),
