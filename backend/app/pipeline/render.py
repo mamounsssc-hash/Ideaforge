@@ -64,7 +64,12 @@ def render_clip(
 
     # ---- 1. base video filter (layout) ----
     if not opts.reframe or opts.reframe_layout == "fill":
-        vf = f"scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th}"
+        # manual frame position: crop_x 0=left, 0.5=center, 1=right
+        cx = max(0.0, min(1.0, getattr(opts, "crop_x", 0.5)))
+        vf = (
+            f"scale={tw}:{th}:force_original_aspect_ratio=increase,"
+            f"crop={tw}:{th}:x='(iw-ow)*{cx:.3f}':y='(ih-oh)*0.5',setsar=1"
+        )
     elif opts.reframe_layout == "fit":
         vf = (
             f"split=2[bg][fg];"

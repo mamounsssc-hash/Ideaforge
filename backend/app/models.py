@@ -77,6 +77,7 @@ class RenderOptions(BaseModel):
     speaker_colors: bool = False     # color captions per (approx) speaker turn
     enhance_audio: bool = False      # denoise + loudness-normalize the voice
     reframe_layout: Literal["track", "fill", "fit"] = "track"
+    crop_x: float = 0.5              # manual horizontal frame position for "fill" (0=left,0.5=center,1=right)
     broll: bool = False              # optional Pexels B-roll overlay
     music_volume: float = 0.0        # 0 = off; else mix job's music at this gain
     # retention / pro-polish

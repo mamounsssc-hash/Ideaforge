@@ -349,6 +349,7 @@ function collectOptions() {
     caption_position: $("#opt_cappos").value,
     caption_scale: parseFloat($("#opt_capscale").value) || 1,
     caption_offset: 0,
+    crop_x: parseFloat($("#opt_cropx").value),
     color_grade: $("#opt_grade").value,
     zoom_punch: $("#opt_zoompunch").checked,
     sfx: $("#opt_sfx").value,
@@ -359,6 +360,13 @@ function collectOptions() {
 // caption-size label
 $("#opt_capscale").addEventListener("input", (e) => {
   $("#capScaleVal").textContent = Math.round(parseFloat(e.target.value) * 100) + "%";
+});
+
+// frame-position label
+$("#opt_cropx")?.addEventListener("input", (e) => {
+  const v = parseFloat(e.target.value);
+  const label = v < 0.34 ? "Left" : v > 0.66 ? "Right" : "Center";
+  $("#cropXVal").textContent = label + " (" + Math.round(v * 100) + "%)";
 });
 
 // music upload (attaches to the current job)
