@@ -63,76 +63,110 @@ So picture the two of you, standing in the same room. A human from the year 3000
 
 > الرموز: 🎥 = فيديو (image-to-video) · 😄 = لمسة ضحك · 📝 = كارت نص. فوق كل بلوك: رقم اللقطة + الجملة من السكريبت.
 
+### 🔗 نظام الصور المرجعية (اقرأه أولًا يا صديقي المولِّد)
+
+عندما يظهر نفس العنصر (شخصية أو مكان) في أكثر من لقطة، يجب أن يبدو **نفسه تمامًا**. الحل: عند **أول ظهور** ولّد الصورة واحفظها، ثم في كل لقطة تالية لنفس العنصر **اربط تلك الصورة كـ reference/style image**. وضعتُ فوق كل لقطة معنية سطر `🔗 مرجع` يخبرك ماذا تربط.
+
+**جدول العناصر المتكررة (أول ظهور ← اللقطات التي تعيده):**
+
+| العنصر | أول ظهور (احفظه) | يتكرر في اللقطات |
+|---|---|---|
+| الراوي (بيني برتقالي) | ورقة الشخصية | كل لقطات الراوي (29 لقطة) |
+| إنسان المستقبل | اللقطة 1 | 2، 3، 4، 5، 12، 49، 50، 69، 72، 86، 89، 90، 111، 112، 114، 140، 165، 166، 167، 170، 176، 177، 178، 179، 182، 201، 202، 203، 204، 205، 206، 211، 212، 213، 214، 215، 217، 218، 220 |
+| الكهف/الإنسان البدائي | اللقطة 8 | 35، 36، 37، 56، 57، 176، 182، 219 |
+| العالِم (معطف أبيض) | اللقطة 27 | 28، 116، 122، 192، 224 |
+| رائدا الفضاء التوأم | اللقطة 143 | 144، 145، 147، 148 |
+| إنسان المريخ (طويل نحيل) | اللقطة 153 | 155، 158، 159، 160، 163 |
+| التوأم المُعدَّل (رضيعان) | اللقطة 117 | 134 |
+| المسودة (إنسان اليوم رسم ناقص) | اللقطة 6 | 7، 171 |
+| خزانة المتحف الزجاجية | اللقطة 184 | 211 |
+| قائمة صفات الطفل | اللقطة 136 | 137، 194 |
+| شريط الفيلم | اللقطة 218 | 219، 220، 221 |
+
+> ملاحظة: الراوي له **ورقة شخصية** جاهزة في أعلى الملف — اربطها في كل لقطات الراوي. باقي العناصر اربط لها صورة أول ظهورها.
+
 ### 🟦 COLD OPEN — الهوك (أهم 40 ثانية · صوّرها بأقوى إيقاع)
 
 **1 — مشهد مستقبلي 🎥**
 🗣️ "A thousand years from now,"
+> 🔗 **مرجع:** [إنسان المستقبل] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 2، 3، 4، 5، 12، 49، 50، 69، 72، 86، 89، 90، 111، 112، 114، 140، 165، 166، 167، 170، 176، 177، 178، 179، 182، 201، 202، 203، 204، 205، 206، 211، 212، 213، 214، 215، 217، 218، 220.
 ```
 A sleek bright minimalist future room. A tall calm future-human STICKMAN (smooth slightly elongated white head, oversized calm dot eyes, pale sleek bodysuit, faint thin glowing lines, exactly the narrator crude doodle style) sits holding up a thin glowing tablet, about to look at it. Slow 2-second push-in. cool clean daylight. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **2 — كائن قريب**
 🗣️ "a human is going to look at a photo of you."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up on the glowing tablet screen held by the future-human: on the screen is a photo of an ordinary present-day STICKMAN person (round white head, orange beanie, blue coat) standing plainly, like an old archive photo with a thin frame. cool light. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **3 — مشهد مستقبلي 🎥**
 🗣️ "And feel a little sick."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The same tall future-human STICKMAN leans back from the tablet with a subtle queasy, slightly disgusted expression — brows raised, small grimace, one hand lifting slightly. bright minimalist future room, cool light. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **4 — مشهد مستقبلي**
 🗣️ "Not because of your face."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The tall future-human STICKMAN gives a small dismissive wave of one hand near its own smooth face, calmly shaking its head "no", bright minimalist future room. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **5 — كائن قريب**
 🗣️ "Because of your body."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up on the tablet again: the archive photo of the ordinary present-day STICKMAN person, but now a glowing outline highlights the whole BODY, and a thin future-human finger points at it. cool light. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **6 — كائن قريب**
 🗣️ "To them, you look like a rough draft."
+> 🔗 **مرجع:** [المسودة (إنسان اليوم رسم ناقص)] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 7، 171.
 ```
 Close-up of the ordinary present-day STICKMAN person shown as a messy unfinished pencil sketch — loose scratchy construction lines, eraser smudges, an unfinished doodle version of a human. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **7 — كائن قريب 😄**
 🗣️ "Almost an animal."
+> 🔗 **مرجع:** [المسودة (إنسان اليوم رسم ناقص)]: اربط مرجع اللقطة **6** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The same rough-sketch STICKMAN person now drawn slightly ape-like — a little hunched, longer arms, a mildly dumb blank expression, still the crude doodle style, lightly comedic. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **8 — مشهد سينمائي 🎥**
 🗣️ "The same way you look at a caveman chewing on a bone."
+> 🔗 **مرجع:** [الكهف/الإنسان البدائي] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 35، 36، 37، 56، 57، 176، 182، 219.
 ```
 A dim prehistoric cave lit by warm orange firelight. A rough hunched caveman STICKMAN (crude doodle, thick outline) gnaws on a large bone, moody shadows on the cave wall. Strictly non-graphic, no blood, suggestion only. slow subtle motion. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, blood, gore, extra fingers, gibberish letters.
 ```
 
 **9 — شخصيتنا**
 🗣️ "And here is the uncomfortable part."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (round white head, orange beanie with pom-pom, blue coat, mitten hands) leans in toward the camera with a serious, slightly uneasy face, lowering his voice, one hand slightly raised. keep exact colors (orange beanie, blue coat, white head); simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **10 — شخصيتنا**
 🗣️ "They are right."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (round white head, orange beanie, blue coat, mitten hands) gives a slow, grim, reluctant nod, eyes half-lidded and serious. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **11 — شخصيتنا**
 🗣️ "Your body is primitive."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN looks down at his own stick body and gestures at it with both mitten hands, a slightly unimpressed look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **12 — انتقال 🎥**
 🗣️ "And it is already being replaced."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A plain present-day STICKMAN human silhouette on the left slowly morphs / dissolves into a tall smooth future-human silhouette on the right, a soft transition sweep between them. plain white background, one warm side and one cool side. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -169,6 +203,7 @@ An extreme slow push-in toward a single simple cartoon eye (dot pupil, thick out
 
 **18 — شخصيتنا**
 🗣️ "Give me the next few minutes,"
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) holds up a tiny simple hourglass in one hand and points at the viewer with the other, an inviting confident look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -211,12 +246,14 @@ A simple film clapperboard / movie camera doodle icon with a bold black X crosse
 
 **25 — شخصيتنا**
 🗣️ "In real biology, based on things happening to your body today."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) points directly at the viewer with one finger, a grounded serious expression. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **26 — شخصيتنا**
 🗣️ "Let's start with the one you can feel right now."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) points at his own eye with one mitten hand, eyebrows raised, a "watch this" look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -225,12 +262,14 @@ Our narrator STICKMAN (orange beanie, blue coat, mitten hands) points at his own
 
 **27 — مرساة موثوقية**
 🗣️ "In 2016, researchers at the Brien Holden Vision Institute…"
+> 🔗 **مرجع:** [العالِم (معطف أبيض)] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 28، 116، 122، 192، 224.
 ```
 A simple STICKMAN scientist (round white head, tiny dot eyes, thin round glasses, a white lab coat, mitten hands) stands beside a large document/report page marked with a big "2016" at the top, holding a pointer. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: watermark, real human faces, photorealism, misspelling, extra fingers, gibberish letters.
 ```
 
 **28 — كائن قريب**
 🗣️ "…published a number that stunned them."
+> 🔗 **مرجع:** [العالِم (معطف أبيض)]: اربط مرجع اللقطة **27** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up of the report page held up, a huge bold number printed on it, and the STICKMAN scientist behind it with wide shocked eyes and a dropped jaw. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: watermark, real human faces, photorealism, extra fingers, gibberish letters.
 ```
@@ -249,12 +288,14 @@ A clean pure-white screen with large bold hand-written style black text reading 
 
 **31 — شخصيتنا**
 🗣️ "Here is why it is happening."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) raises one finger with a knowing look, about to explain. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **32 — شخصيتنا**
 🗣️ "Think about how close everything you look at really is."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN holds a small glowing phone very close to his own face, eyes slightly crossed looking at it. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -273,18 +314,21 @@ Three simple close everyday objects grouped together in one frame: a computer sc
 
 **35 — مشهد سينمائي 🎥**
 🗣️ "For almost all of human history, our eyes watched the horizon."
+> 🔗 **مرجع:** [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A caveman STICKMAN stands on a hill from behind, looking out over a wide open prehistoric landscape toward a distant horizon at golden hour, tiny distant animals far away. slow gentle camera drift. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **36 — مشهد سينمائي**
 🗣️ "Hunting. Tracking movement far away."
+> 🔗 **مرجع:** [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A caveman STICKMAN crouches and points a spear toward a tiny distant animal on the far horizon, focused eyes, dotted sight-lines going into the distance. open landscape. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **37 — كائن قريب**
 🗣️ "Staring into the distance for hours."
+> 🔗 **مرجع:** [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up of a caveman STICKMAN face with steady focused eyes, thin dotted "line of sight" rays extending far out to a tiny horizon dot. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, clutter, gibberish letters.
 ```
@@ -357,12 +401,14 @@ A big simple calendar/clock doodle spinning its pages and hands forward fast, mo
 
 **49 — مشهد مستقبلي**
 🗣️ "The normal human eye may simply be built for close range."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A future-human STICKMAN (smooth elongated white head, larger calm eyes) holds a small object very close to its face and sees it perfectly clearly, calm and content. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **50 — مشهد مستقبلي**
 🗣️ "And sharp distance vision… becomes a rare, lucky trait."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A crowd of future-human STICKMANs squinting at a blurry distant horizon, while one single figure among them clearly sees far and has a small glowing star badge above its head. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -375,6 +421,7 @@ A simple cartoon eye doodle next to a slow snail carrying a tiny clock on its sh
 
 **52 — شخصيتنا**
 🗣️ "Your face is moving faster."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) points at his own face/jaw with one mitten hand, eyebrows raised, teasing the next topic. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -389,6 +436,7 @@ A first-person point-of-view looking into a simple cartoon open mouth in a small
 
 **54 — شخصيتنا 😄**
 🗣️ "If you still have your wisdom teeth, they probably hurt coming in."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) winces in pain with one mitten hand pressed to his cheek, a small red throb mark and pain lines near his jaw. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -401,12 +449,14 @@ A cheerful STICKMAN dentist (white coat, tiny head mirror) holds up a pair of pl
 
 **56 — مشهد سينمائي**
 🗣️ "Those teeth are a leftover from an ancestor with a much bigger jaw."
+> 🔗 **مرجع:** [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A caveman STICKMAN in profile with a noticeably large, strong, heavy jaw, standing in a dim cave, calm. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **57 — مشهد سينمائي**
 🗣️ "For most of human history, we chewed raw plants, tough roots, and uncooked meat for hours every day."
+> 🔗 **مرجع:** [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A caveman STICKMAN with a big jaw chewing hard on a tough root/raw plant, cheeks working, tiny effort lines around the jaw, dim cave. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -479,6 +529,7 @@ A big simple calendar/clock doodle spinning forward with speed streaks, a sense 
 
 **69 — مشهد مستقبلي**
 🗣️ "and the future human may have a smaller, flatter face, a delicate jaw,"
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A future-human STICKMAN in profile with a small, smooth, flat, delicate face and a fine narrow jaw, calm expression, bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -497,18 +548,21 @@ A simple split doodle: on the left a plate of soft food, on the right a small de
 
 **72 — مشهد مستقبلي 😄**
 🗣️ "Your descendants might look at your jaw the way you look at a bulldog's."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A future-human STICKMAN holds up a small photo of a present-day STICKMAN with a big heavy jaw, right next to a chunky wrinkly bulldog, glancing between them with an amused raised eyebrow. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **73 — شخصيتنا**
 🗣️ "But your body does not only respond to what you eat."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) raises one finger with a "but wait" look, mid-turn. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **74 — شخصيتنا**
 🗣️ "It responds to the sky."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) looks up and points a mitten hand toward a bright sun above him, a small curious look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background with a simple sun. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -517,6 +571,7 @@ Our narrator STICKMAN (orange beanie, blue coat, mitten hands) looks up and poin
 
 **75 — شخصيتنا**
 🗣️ "Your body answers the temperature around it."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) holds up a simple thermometer and glances at it, calm explaining pose. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -529,6 +584,7 @@ A simple round planet Earth doodle beside a tall thermometer whose red level slo
 
 **77 — شخصيتنا**
 🗣️ "There is a simple, old pattern in biology."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) gestures toward an empty space like a teacher about to show a rule, one mitten hand open. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -583,6 +639,7 @@ A tall thin STICKMAN figure with a small green check mark and a tiny heart above
 
 **86 — رسم توضيحي**
 🗣️ "Longer arms and legs."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A tall thin future-human STICKMAN with noticeably long arms and legs, thin bold arrows pointing out along the limbs to show their length. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
@@ -601,12 +658,14 @@ A tall thin STICKMAN figure with small wavy heat lines radiating gently off the 
 
 **89 — مقارنة 🎥**
 🗣️ "The human of the future may be clearly taller and thinner than you,"
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Our present-day narrator STICKMAN (orange beanie, blue coat) stands next to a much taller, thinner future-human STICKMAN for scale, the future one towering calmly beside him. slow gentle reveal. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **90 — مشهد**
 🗣️ "not because it looks better on camera, but because it does not overheat."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Under a hot sun: a tall thin future-human STICKMAN standing cool and calm, while a shorter broad STICKMAN beside it sweats with big drops and a red flushed face. plain simple hot background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -693,6 +752,7 @@ A light-toned STICKMAN figure under a small weak pale sun with few thin rays, sm
 
 **104 — شخصيتنا**
 🗣️ "That is almost the entire story."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) gives a small easy shrug with both mitten hands turned up, calm matter-of-fact look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -735,30 +795,35 @@ Many small dots of different flat skin-tone colors slowly drifting together and 
 
 **111 — مشهد مستقبلي**
 🗣️ "A thousand years from now, the sharp categories people argue about today may melt into a single, brown-toned, mixed human,"
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A single calm future-human STICKMAN with a warm mid-brown flat skin tone standing centered, neutral peaceful expression, bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **112 — رسم توضيحي**
 🗣️ "carrying features pulled from every corner of the map."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The same warm-brown future-human STICKMAN in the center with thin lines connecting to small simple world-map region icons around it, suggesting features gathered from everywhere. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
 
 **113 — شخصيتنا**
 🗣️ "The strange part is not that we will all look different."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) gives a small dismissive wave of one mitten hand, shaking his head "no". keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **114 — مشهد مستقبلي**
 🗣️ "It is that we might slowly start to look the same."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A row of several near-identical warm-brown future-human STICKMANs standing side by side, all looking the same, calm and uniform. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **115 — شخصيتنا**
 🗣️ "But even that is nothing next to what happens when people stop leaving their children to chance."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) leans in with a serious lowered-voice look, one mitten hand slightly raised, teasing something bigger. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -767,12 +832,14 @@ Our narrator STICKMAN (orange beanie, blue coat, mitten hands) leans in with a s
 
 **116 — مرساة موثوقية**
 🗣️ "In November 2018, a scientist in China named He Jiankui told the world something it was not ready for."
+> 🔗 **مرجع:** [العالِم (معطف أبيض)]: اربط مرجع اللقطة **27** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A simple STICKMAN scientist (white lab coat, tiny round glasses) standing nervously at a lecture podium in front of a plain wall with a bold "2018" sign above, a microphone in front of him. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: watermark, real human faces, photorealism, misspelling, extra fingers, gibberish letters.
 ```
 
 **117 — مشهد**
 🗣️ "Twin girls had just been born from embryos he had edited before birth,"
+> 🔗 **مرجع:** [التوأم المُعدَّل (رضيعان)] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 134.
 ```
 Two identical small baby STICKMAN doodles side by side wrapped in simple blankets, tiny and calm. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
@@ -803,6 +870,7 @@ A small crowd of simple STICKMAN people with angry faces, furrowed brows and rai
 
 **122 — مشهد**
 🗣️ "He went to prison."
+> 🔗 **مرجع:** [العالِم (معطف أبيض)]: اربط مرجع اللقطة **27** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The STICKMAN scientist (lab coat, round glasses) standing behind simple thick prison bars, looking down glumly. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -875,6 +943,7 @@ A simple checklist doodle with another line ticked and a slow clock icon with a 
 
 **134 — مشهد 😄**
 🗣️ "Want a child who never needs glasses and actually sleeps through the night?"
+> 🔗 **مرجع:** [التوأم المُعدَّل (رضيعان)]: اربط مرجع اللقطة **117** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A happy little baby STICKMAN sleeping peacefully with tiny "z z z" above it, and a pair of eyeglasses floating nearby with a bold black X crossed over the glasses. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
@@ -887,12 +956,14 @@ A simple clock/calendar doodle ticking forward a short way with small motion lin
 
 **136 — رسم متحرك 😄 🎥**
 🗣️ "There will be a menu."
+> 🔗 **مرجع:** [قائمة صفات الطفل] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 137، 194.
 ```
 A simple restaurant-style menu doodle held open by mitten hands, its lines showing little baby-trait icons (an eye, a height arrow, a muscle, a brain), like ordering from a menu. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
 
 **137 — رسم توضيحي 😄**
 🗣️ "Probably with a subscription."
+> 🔗 **مرجع:** [قائمة صفات الطفل]: اربط مرجع اللقطة **136** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The same trait menu doodle now with a small round "subscribe" badge and a little recurring-payment loop arrow stamped on the corner. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, gibberish letters, clutter.
 ```
@@ -911,6 +982,7 @@ An ordinary present-day STICKMAN person standing plainly, a small "same old" fee
 
 **140 — مشهد مستقبلي**
 🗣️ "You get a person who was designed. On purpose. By someone."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A sleek tall future-human STICKMAN standing centered with thin blueprint grid lines and small design markers drawn around its body, like an engineered product. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -919,6 +991,7 @@ A sleek tall future-human STICKMAN standing centered with thin blueprint grid li
 
 **141 — شخصيتنا**
 🗣️ "And some humans will not be shaped by Earth at all."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) points one mitten hand upward toward a small doodle of space and stars above him, looking up with curiosity. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background with a few simple stars. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -931,18 +1004,21 @@ A simple official-looking report/folder doodle with a small rocket badge on it s
 
 **143 — مشهد**
 🗣️ "They had two brothers who were both astronauts, and happened to be identical twins."
+> 🔗 **مرجع:** [رائدا الفضاء التوأم] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 144، 145، 147، 148.
 ```
 Two identical STICKMAN astronauts in simple white space suits standing side by side, exactly alike, friendly. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **144 — مشهد**
 🗣️ "Scott and Mark Kelly."
+> 🔗 **مرجع:** [رائدا الفضاء التوأم]: اربط مرجع اللقطة **143** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The two identical STICKMAN astronauts, each with a tiny blank name tag on the chest, one raising a mitten hand in a small wave. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **145 — رسم متحرك 🎥**
 🗣️ "They sent one of them to space for almost a year, and kept the other one on the ground."
+> 🔗 **مرجع:** [رائدا الفضاء التوأم]: اربط مرجع اللقطة **143** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A split screen: on the left one STICKMAN astronaut floats in space beside a small station among stars, on the right the identical STICKMAN astronaut stands on the ground on grass under a blue sky. gentle motion on both sides. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -955,12 +1031,14 @@ Two identical DNA strand doodles side by side (same genes), with a small Earth i
 
 **147 — مشهد**
 🗣️ "When Scott came back, his body had changed."
+> 🔗 **مرجع:** [رائدا الفضاء التوأم]: اربط مرجع اللقطة **143** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A STICKMAN astronaut just back from space stepping out, looking down at his own body with a surprised raised-eyebrow expression. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **148 — رسم متحرك 🎥**
 🗣️ "He was actually taller for a while, because with no gravity pulling down on it, his spine had stretched out."
+> 🔗 **مرجع:** [رائدا الفضاء التوأم]: اربط مرجع اللقطة **143** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A STICKMAN astronaut floating weightless in space as his simple doodle spine visibly stretches and lengthens, making him a bit taller, small up-arrows along the spine. among stars. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -991,6 +1069,7 @@ A small simple calendar doodle with just a few pages/months flipped, a tiny cloc
 
 **153 — مشهد مستقبلي 🎥**
 🗣️ "Now picture humans born and raised on Mars, in one third of Earth's gravity, generation after generation."
+> 🔗 **مرجع:** [إنسان المريخ (طويل نحيل)] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 155، 158، 159، 160، 163.
 ```
 A domed colony on the red surface of Mars with a couple of tall thin young STICKMAN children playing inside the dome, the small distant Earth as a dot in the pink-red sky. gentle motion. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1003,6 +1082,7 @@ Two STICKMAN figures side by side: the Earth one with heavy thick downward gravi
 
 **155 — مشهد مستقبلي**
 🗣️ "They would grow up taller."
+> 🔗 **مرجع:** [إنسان المريخ (طويل نحيل)]: اربط مرجع اللقطة **153** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A very tall thin Mars-born STICKMAN child standing inside the Mars dome, noticeably tall, with a small height arrow going up beside it. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1021,18 +1101,21 @@ A simple doodle of a thin, light, slightly hollow-looking bone with small "light
 
 **158 — مشهد مستقبلي 😄**
 🗣️ "A Mars-born human might look incredible standing on Mars."
+> 🔗 **مرجع:** [إنسان المريخ (طويل نحيل)]: اربط مرجع اللقطة **153** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A graceful tall thin Mars-born STICKMAN standing proudly and elegantly on the red Mars surface under the dome, looking great, a small confident sparkle. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **159 — مشهد 😄**
 🗣️ "They just could not survive the trip to visit family on Earth."
+> 🔗 **مرجع:** [إنسان المريخ (طويل نحيل)]: اربط مرجع اللقطة **153** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The tall thin Mars-born STICKMAN steps onto green Earth ground and immediately sags and struggles, knees buckling, arms drooping heavily, a strained expression, small strain lines. plain simple Earth background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **160 — رسم متحرك 😄 🎥**
 🗣️ "Their own skeleton would crack under the weight of a planet they came from."
+> 🔗 **مرجع:** [إنسان المريخ (طويل نحيل)]: اربط مرجع اللقطة **153** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The tall thin Mars-born STICKMAN buckling under heavy Earth gravity, thick downward arrows pressing on it, small comedic "crack" marks on its thin legs, non-graphic and cartoonish. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, blood, gore, extra fingers, clutter, gibberish letters.
 ```
@@ -1051,6 +1134,7 @@ A sturdy normal-proportioned STICKMAN standing firmly on green Earth ground unde
 
 **163 — مشهد مستقبلي**
 🗣️ "And one that can never come home."
+> 🔗 **مرجع:** [إنسان المريخ (طويل نحيل)]: اربط مرجع اللقطة **153** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A tall thin Mars-born STICKMAN standing alone on the red Mars surface, looking up at a tiny distant blue Earth in the sky with a quiet, slightly longing expression. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1059,24 +1143,28 @@ A tall thin Mars-born STICKMAN standing alone on the red Mars surface, looking u
 
 **164 — شخصيتنا**
 🗣️ "Okay. Now the part that flips this entire video around."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) makes a "flip it over" gesture with both mitten hands, eyebrows raised, an intriguing look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **165 — رسم توضيحي**
 🗣️ "We keep describing future humans like they are the weird ones."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A tall future-human STICKMAN standing while two present-day STICKMAN people point at it and whisper, small "?" marks above them, treating it as strange. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
 
 **166 — مشهد مستقبلي**
 🗣️ "The tall thin ones."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A single very tall, thin, calm future-human STICKMAN standing centered, smooth and elegant. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **167 — رسم توضيحي**
 🗣️ "The ones with the redesigned eyes, the shrunken jaw, the chosen genes, the Martian bones."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A tall future-human STICKMAN in the center with four small callout icons pointing to it: a big eye, a small jaw, a DNA strand, and a light bone. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
@@ -1095,12 +1183,14 @@ A big simple curved turn-around arrow sweeping 180 degrees across the frame in a
 
 **170 — مشهد مستقبلي**
 🗣️ "And look back at us."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 From behind a tall future-human STICKMAN, we see it calmly looking down at a small ordinary present-day STICKMAN person standing in front of it. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **171 — كائن قريب**
 🗣️ "To them, you are the rough draft."
+> 🔗 **مرجع:** [المسودة (إنسان اليوم رسم ناقص)]: اربط مرجع اللقطة **6** (أول ظهور) ليبقى الشكل نفسه.
 ```
 An ordinary present-day STICKMAN person drawn as a messy unfinished pencil sketch with loose scratchy construction lines and eraser smudges. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1131,30 +1221,35 @@ A split doodle: on the left a STICKMAN body covered in random messy scribbles an
 
 **176 — مشهد مستقبلي**
 🗣️ "They would look at a photo of you the exact same way you look at a hunched caveman gnawing on a bone."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه. · [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A tall future-human STICKMAN calmly holding up and studying a small framed photo of an ordinary present-day STICKMAN person, tilting its head slightly, the same way one studies a caveman in a museum. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **177 — مشهد مستقبلي**
 🗣️ "Not with hate."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up of the tall future-human STICKMAN face looking calm and gentle, clearly not angry, soft neutral eyes. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, clutter, gibberish letters.
 ```
 
 **178 — مشهد مستقبلي**
 🗣️ "With a little bit of pity."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up of the tall future-human STICKMAN face with a soft, slightly sad, pitying expression, gentle downturned eyes, looking down at the photo. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, clutter, gibberish letters.
 ```
 
 **179 — مشهد مستقبلي**
 🗣️ "That was us, they will say. Before we learned how to fix it."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The tall future-human STICKMAN gently gesturing toward the small framed photo of the present-day human, a soft explaining pose, calm. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **180 — شخصيتنا**
 🗣️ "And here is the thing almost nobody wants to say out loud."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) leans in close, lowering his voice with one mitten hand beside his mouth, serious quiet look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1167,18 +1262,21 @@ A left-to-right line of slowly changing STICKMAN figures that keeps going off th
 
 **182 — رسم توضيحي**
 🗣️ "Every single version of us thinks it is the finished one."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه. · [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Three figures in a row — a caveman STICKMAN, a present-day STICKMAN with an orange beanie, and a tall future-human STICKMAN — each with a small thought bubble containing a check mark, each sure it is the final one. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
 
 **183 — شخصيتنا**
 🗣️ "The caveman thought it. You think it right now, watching this."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) points directly at the viewer with one mitten finger, a knowing look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **184 — مشهد مستقبلي 🎥**
 🗣️ "And you are simply the model they will one day put behind glass."
+> 🔗 **مرجع:** [خزانة المتحف الزجاجية] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 211.
 ```
 An ordinary present-day STICKMAN person standing inside a museum glass display case like an exhibit, a small blank placard below, in a clean bright future museum. slow gentle push-in on the case. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1187,6 +1285,7 @@ An ordinary present-day STICKMAN person standing inside a museum glass display c
 
 **185 — شخصيتنا**
 🗣️ "There is one last thing, and it is the heaviest one in this whole video."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) holds up a big heavy round weight in both mitten hands with a slightly strained serious look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1211,6 +1310,7 @@ A big simple mitten hand sorting little STICKMAN figures: placing some onto a "k
 
 **189 — شخصيتنا**
 🗣️ "What is happening now is completely different."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) holds up one mitten hand in a "but now" stop gesture, serious focused look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1229,6 +1329,7 @@ A simple doodle of a finger pressing a big round button, or ticking one box amon
 
 **192 — مشهد**
 🗣️ "Made by scientists."
+> 🔗 **مرجع:** [العالِم (معطف أبيض)]: اربط مرجع اللقطة **27** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A simple STICKMAN scientist (white lab coat, round glasses) standing and adjusting a DNA strand thoughtfully. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1241,6 +1342,7 @@ A simple tall plain corporate office building doodle with blank windows, cold an
 
 **194 — مشهد 🎥**
 🗣️ "By parents scrolling through a list of traits before their child is even born."
+> 🔗 **مرجع:** [قائمة صفات الطفل]: اربط مرجع اللقطة **136** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Two STICKMAN parents leaning over a glowing tablet, scrolling a list of small baby-trait icons (eye, height, hair, brain) with a mitten finger, calm and casual like online shopping. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1283,6 +1385,7 @@ A STICKMAN parent figure giving an easy shrug with both mitten hands turned up, 
 
 **201 — مشهد مستقبلي**
 🗣️ "And a thousand years from now, someone will wake up inside the result of all those tiny choices, and simply assume it was always meant to look this way."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A tall future-human STICKMAN calmly waking up and stretching in a bright minimalist future bedroom, totally at ease, as if this body was always normal. cool morning light. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1291,36 +1394,42 @@ A tall future-human STICKMAN calmly waking up and stretching in a bright minimal
 
 **202 — مشهد مستقبلي 🎥**
 🗣️ "So picture the two of you, standing in the same room."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 An ordinary present-day narrator STICKMAN (orange beanie, blue coat) standing next to a tall calm future-human STICKMAN in one clean bright minimalist room, facing each other. slow gentle push-in. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **203 — مشهد مستقبلي**
 🗣️ "A human from the year 3000."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A single tall, sleek, calm future-human STICKMAN standing centered, smooth elongated head, oversized calm eyes, pale sleek bodysuit with faint glowing lines. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **204 — مشهد مستقبلي**
 🗣️ "Tall, lean, calm."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The tall lean future-human STICKMAN standing in a relaxed calm posture, serene neutral face, hands at its sides. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **205 — رسم توضيحي**
 🗣️ "Eyes and genes chosen before they were born."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The future-human STICKMAN with two small callout icons beside it — a big eye and a DNA strand — each with a small check mark, labeled as chosen. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
 
 **206 — مشهد مستقبلي**
 🗣️ "A body that has never felt a single one of the diseases you live with."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The future-human STICKMAN standing with a soft clean glow around its body and a small shield check icon, healthy and untouched. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **207 — شخصيتنا**
 🗣️ "And then you."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our ordinary narrator STICKMAN (orange beanie, blue coat, mitten hands) standing small and plain, looking up slightly, a modest ordinary pose. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1345,66 +1454,77 @@ A close-up of a single plain ordinary cartoon human hand with five simple finger
 
 **211 — مشهد مستقبلي**
 🗣️ "They would study you like something behind glass in a museum,"
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه. · [خزانة المتحف الزجاجية]: اربط مرجع اللقطة **184** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The tall future-human STICKMAN leaning in to study an ordinary present-day STICKMAN standing inside a museum glass display case, hands behind its back, curious. clean bright museum. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
 
 **212 — مشهد مستقبلي**
 🗣️ "amazed you survived at all with a body that literally no one designed."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up of the tall future-human STICKMAN face with wide amazed eyes and slightly raised brows, marveling. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, clutter, gibberish letters.
 ```
 
 **213 — شخصيتنا**
 🗣️ "And you would look back at them,"
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة. · [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) looking up at the tall future-human, head tilted back slightly, a searching look. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **214 — شخصيتنا**
 🗣️ "and quietly wonder if anything human was still left in there,"
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة. · [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) with an uncertain, slightly worried expression and a small "?" above his beanie, gazing up at the future-human. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain simple background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **215 — مشهد مستقبلي**
 🗣️ "or if it had all been polished away."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 Close-up of the tall future-human STICKMAN face, extremely smooth, blank and expressionless, almost too perfect, a faint cold glow. bright minimalist background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, clutter, gibberish letters.
 ```
 
 **216 — شخصيتنا**
 🗣️ "Here is the truth."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) faces the camera directly, calm and sincere, one mitten hand resting on his chest. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **217 — رسم توضيحي**
 🗣️ "Neither of you is the real human."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A present-day STICKMAN and a tall future-human STICKMAN side by side, each with a small "?" above its head, neither marked as the real one. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
 
 **218 — رسم متحرك 🎥**
 🗣️ "You are two frames from the same long film."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه. · [شريط الفيلم] **أول ظهور** — احفظ هذه الصورة كمرجع واربطها في اللقطات: 219، 220، 221.
 ```
 A long simple film strip stretching across the frame, and within two of its frames sit two little pictures: a present-day STICKMAN in one frame and a tall future-human STICKMAN in another frame. gentle motion of the strip. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, gibberish letters, clutter.
 ```
 
 **219 — رسم توضيحي**
 🗣️ "One near the beginning."
+> 🔗 **مرجع:** [الكهف/الإنسان البدائي]: اربط مرجع اللقطة **8** (أول ظهور) ليبقى الشكل نفسه. · [شريط الفيلم]: اربط مرجع اللقطة **218** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A film strip with a small bold circle highlighting a frame near the left/start of the strip that holds a caveman-ish present-day STICKMAN. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, gibberish letters, clutter.
 ```
 
 **220 — رسم توضيحي**
 🗣️ "One much further in."
+> 🔗 **مرجع:** [إنسان المستقبل]: اربط مرجع اللقطة **1** (أول ظهور) ليبقى الشكل نفسه. · [شريط الفيلم]: اربط مرجع اللقطة **218** (أول ظهور) ليبقى الشكل نفسه.
 ```
 The same film strip with a small bold circle highlighting a frame far to the right that holds a tall future-human STICKMAN. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, gibberish letters, clutter.
 ```
 
 **221 — رسم متحرك 🎥**
 🗣️ "And the film is still rolling. Right now."
+> 🔗 **مرجع:** [شريط الفيلم]: اربط مرجع اللقطة **218** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A simple film reel doodle spinning, with a strip feeding out of it, gentle continuous rolling motion, motion lines. plain white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, gibberish letters, clutter.
 ```
@@ -1423,6 +1543,7 @@ A simple wide sky doodle shifting toward warm orange-red flat tones with a large
 
 **224 — مشهد**
 🗣️ "In a lab, tonight, where someone is learning to spell in the language of genes."
+> 🔗 **مرجع:** [العالِم (معطف أبيض)]: اربط مرجع اللقطة **27** (أول ظهور) ليبقى الشكل نفسه.
 ```
 A single lit window of a small lab at night, a lone STICKMAN scientist silhouette inside working over a glowing DNA strand, quiet and dark outside. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, clutter, gibberish letters.
 ```
@@ -1441,12 +1562,14 @@ A single ordinary cartoon hand doodle with a small "..." trailing beside it and 
 
 **227 — شخصيتنا**
 🗣️ "And if you could change one thing about the human body, and hand it to the people of the year 3000, what would you change?"
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) leans toward the camera with an open inviting gesture of both mitten hands, warm curious face, asking the viewer. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **228 — شخصيتنا**
 🗣️ "Tell me in the comments. I actually want to know."
+> 🔗 **مرجع:** [الراوي (بيني برتقالي)]: اربط **ورقة الشخصية** الثابتة.
 ```
 Our narrator STICKMAN (orange beanie, blue coat, mitten hands) points down toward a small comment/speech-bubble icon with a warm friendly smile. keep exact colors; simple mitten hands, no separate fingers; keep lower frame clear for subtitles. plain solid white background. Simple flat 2D STICKMAN cartoon, thick BOLD black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle. NOT anime, NOT 3D, NOT realistic. 16:9. Avoid: text, watermark, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
