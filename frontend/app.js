@@ -354,6 +354,8 @@ function collectOptions() {
     zoom_punch: $("#opt_zoompunch").checked,
     sfx: $("#opt_sfx").value,
     cta_text: $("#opt_cta").value || "",
+    gameplay: $("#opt_gameplay")?.checked || false,
+    gameplay_split: parseFloat($("#opt_gamesplit")?.value) || 0.6,
   };
 }
 
@@ -378,6 +380,26 @@ $("#musicInput").addEventListener("change", async () => {
     await fetch(`/api/jobs/${currentJob}/music`, { method: "POST", body: fd });
     if (parseFloat($("#opt_musicvol").value) === 0) $("#opt_musicvol").value = "0.3";
   } catch { /* ignore */ }
+});
+
+// gameplay split label
+$("#opt_gamesplit")?.addEventListener("input", (e) => {
+  const top = Math.round(parseFloat(e.target.value) * 100);
+  $("#gameSplitVal").textContent = top + "% / " + (100 - top) + "%";
+});
+
+// gameplay video upload (attaches to the current job)
+$("#gameplayInput")?.addEventListener("change", async () => {
+  const f = $("#gameplayInput").files[0];
+  if (!f) return;
+  $("#gameplayName").textContent = "⏳ " + f.name;
+  if (!currentJob) { $("#gameplayName").textContent = "Upload a video first, then add gameplay."; return; }
+  const fd = new FormData(); fd.append("file", f);
+  try {
+    await fetch(`/api/jobs/${currentJob}/gameplay`, { method: "POST", body: fd });
+    $("#opt_gameplay").checked = true;
+    $("#gameplayName").textContent = "✅ " + f.name;
+  } catch { $("#gameplayName").textContent = "⚠️ upload failed"; }
 });
 
 async function renderClip(c, btn) {

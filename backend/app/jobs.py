@@ -24,6 +24,7 @@ class Job:
     message: str = "Queued"
     source_path: str = ""
     music_path: str = ""
+    gameplay_path: str = ""    # optional looping gameplay video for split-screen
     language: str = ""
     duration: float = 0.0
     clips: list[ClipCandidate] = field(default_factory=list)

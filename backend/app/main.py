@@ -91,6 +91,20 @@ async def upload_music(job_id: str, file: UploadFile = File(...)):
     return {"ok": True, "music": dest.name}
 
 
+@app.post("/api/jobs/{job_id}/gameplay")
+async def upload_gameplay(job_id: str, file: UploadFile = File(...)):
+    """Upload a looping gameplay video (e.g. Subway Surfers) for split-screen."""
+    job = store.get(job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    suffix = Path(file.filename or "game.mp4").suffix or ".mp4"
+    dest = UPLOAD_DIR / f"{job_id}_gameplay{suffix}"
+    with dest.open("wb") as f:
+        shutil.copyfileobj(file.file, f)
+    store.update(job_id, gameplay_path=str(dest))
+    return {"ok": True, "gameplay": dest.name}
+
+
 @app.get("/api/jobs/{job_id}")
 async def job_status(job_id: str):
     job = store.get(job_id)
@@ -208,7 +222,8 @@ async def render_clip(req: RenderRequest):
     loop = asyncio.get_event_loop()
     try:
         out_path: Path = await loop.run_in_executor(
-            _executor, render.render_clip, source, clip, style, job.id, req, job.music_path,
+            _executor, render.render_clip, source, clip, style, job.id, req,
+            job.music_path, job.gameplay_path,
         )
     except Exception as e:  # noqa: BLE001
         raise HTTPException(500, f"render failed: {type(e).__name__}: {e}")
@@ -246,7 +261,8 @@ async def render_batch(req: BatchRenderRequest):
     def _work() -> Path:
         outputs: list[Path] = []
         for c in clips:
-            outputs.append(render.render_clip(source, c, style, job.id, req, job.music_path))
+            outputs.append(render.render_clip(source, c, style, job.id, req,
+                                              job.music_path, job.gameplay_path))
         zip_path = OUTPUT_DIR / f"{job.id}_{req.style_id}_{req.aspect_ratio.replace(':', 'x')}_batch.zip"
         with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_STORED) as zf:
             for i, (c, p) in enumerate(zip(clips, outputs), start=1):

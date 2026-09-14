@@ -289,6 +289,17 @@
           <input type="file" id="musicInput" accept="audio/*" />
           <input type="range" id="opt_musicvol" min="0" max="1" step="0.05" value="0" title="music volume" />
         </div>
+        <div class="adv-item">
+          <label class="muted small">
+            <input type="checkbox" id="opt_gameplay" /> 🎮 Gameplay (clip on top, game below)
+          </label>
+          <input type="file" id="gameplayInput" accept="video/*" title="A vertical looping gameplay video (Subway Surfers, Minecraft…)" />
+          <span id="gameplayName" class="muted small"></span>
+        </div>
+        <div class="adv-item">
+          <label class="muted small">Clip / game split <span id="gameSplitVal">60% / 40%</span></label>
+          <input type="range" id="opt_gamesplit" min="0.35" max="0.8" step="0.05" value="0.6" title="How much of the height the clip takes" />
+        </div>
       </div>
 
       <div class="clips" id="clipList"></div>

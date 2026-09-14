@@ -14,7 +14,7 @@ from pathlib import Path
 
 from ..config import OUTPUT_DIR, WORK_DIR, FONTS_DIR, settings
 from ..models import ClipCandidate, RenderOptions, StylePreset, ratio_dims
-from . import captions, reframe, broll, tighten, effects, sfx
+from . import captions, reframe, broll, tighten, effects, sfx, gameplay
 
 
 def _keyword_times(clip: ClipCandidate) -> list[float]:
@@ -36,6 +36,41 @@ def _run(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True, capture_output=True, text=True)
 
 
+def _layout_vf(source: Path, clip: ClipCandidate, opts: RenderOptions,
+               tw: int, target_h: int, duration: float) -> str:
+    """Build the clip's own footage chain (layout + grade + zoom) at tw×target_h."""
+    if not opts.reframe or opts.reframe_layout == "fill":
+        cx = max(0.0, min(1.0, getattr(opts, "crop_x", 0.5)))
+        vf = (
+            f"scale={tw}:{target_h}:force_original_aspect_ratio=increase,"
+            f"crop={tw}:{target_h}:x='(iw-ow)*{cx:.3f}':y='(ih-oh)*0.5',setsar=1"
+        )
+    elif opts.reframe_layout == "fit":
+        vf = (
+            f"split=2[bg][fg];"
+            f"[bg]scale={tw}:{target_h}:force_original_aspect_ratio=increase,crop={tw}:{target_h},boxblur=40[bgb];"
+            f"[fg]scale={tw}:{target_h}:force_original_aspect_ratio=decrease[fgs];"
+            f"[bgb][fgs]overlay=(W-w)/2:(H-h)/2"
+        )
+    else:  # "track" — follow the active speaker
+        vf = reframe.build_filter(source, clip.start, clip.end, tw, target_h)
+
+    grade = effects.color_grade(opts.color_grade)
+    if grade:
+        vf += "," + grade
+    if opts.zoom_punch:
+        zp = effects.zoom_punch(_keyword_times(clip), tw, target_h)
+        if zp:
+            vf += "," + zp
+    if opts.auto_zoom:
+        frames = max(1, int(duration * 30))
+        vf += (
+            f",zoompan=z='min(1.0+0.08*on/{frames},1.08)':d=1"
+            f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={tw}x{target_h}:fps=30"
+        )
+    return vf
+
+
 def render_clip(
     source: Path,
     clip: ClipCandidate,
@@ -43,6 +78,7 @@ def render_clip(
     job_id: str,
     opts: RenderOptions,
     music_path: str = "",
+    gameplay_path: str = "",
 ) -> Path:
     tw, th = ratio_dims(opts.aspect_ratio)
     tag = f"{opts.aspect_ratio.replace(':', 'x')}"
@@ -62,42 +98,19 @@ def render_clip(
 
     duration = max(clip.end - clip.start, 0.1)
 
-    # ---- 1. base video filter (layout) ----
-    if not opts.reframe or opts.reframe_layout == "fill":
-        # manual frame position: crop_x 0=left, 0.5=center, 1=right
-        cx = max(0.0, min(1.0, getattr(opts, "crop_x", 0.5)))
-        vf = (
-            f"scale={tw}:{th}:force_original_aspect_ratio=increase,"
-            f"crop={tw}:{th}:x='(iw-ow)*{cx:.3f}':y='(ih-oh)*0.5',setsar=1"
-        )
-    elif opts.reframe_layout == "fit":
-        vf = (
-            f"split=2[bg][fg];"
-            f"[bg]scale={tw}:{th}:force_original_aspect_ratio=increase,crop={tw}:{th},boxblur=40[bgb];"
-            f"[fg]scale={tw}:{th}:force_original_aspect_ratio=decrease[fgs];"
-            f"[bgb][fgs]overlay=(W-w)/2:(H-h)/2"
-        )
-    else:  # "track" — follow the active speaker
-        vf = reframe.build_filter(source, clip.start, clip.end, tw, th)
+    # Gameplay split-screen: clip fills the top, a looping game fills the bottom.
+    use_game = bool(opts.gameplay and gameplay_path and Path(gameplay_path).exists())
+    if use_game:
+        top_h, _ = gameplay.split_heights(th, opts.gameplay_split)
+        content_h = top_h                 # the clip footage only fills the top region
+    else:
+        content_h = th
 
-    # ---- 1b. cinematic color grade (on footage, before captions) ----
-    grade = effects.color_grade(opts.color_grade)
-    if grade:
-        vf += "," + grade
+    # ---- 1–2. footage chain (layout + grade + zoom), sized for its region ----
+    vf = _layout_vf(source, clip, opts, tw, content_h, duration)
 
-    # ---- 2. motion: keyword zoom-punches + optional slow push-in ----
-    if opts.zoom_punch:
-        zp = effects.zoom_punch(_keyword_times(clip), tw, th)
-        if zp:
-            vf += "," + zp
-    if opts.auto_zoom:
-        frames = max(1, int(duration * 30))
-        vf += (
-            f",zoompan=z='min(1.0+0.08*on/{frames},1.08)':d=1"
-            f":x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={tw}x{th}:fps=30"
-        )
-
-    # ---- 3. captions (+ end CTA card) ----
+    # ---- 3–4. captions (+ CTA) and progress bar, targeting the FULL frame ----
+    extras: list[str] = []
     if opts.burn_captions and clip.words:
         ass_path = WORK_DIR / f"{job_id}_{clip.id}_{style.id}.ass"
         captions.write_ass(
@@ -114,27 +127,38 @@ def render_clip(
             cta_text=opts.cta_text or None,
         )
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
-        vf += f",subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}"
-
-    # ---- 4. progress bar ----
+        extras.append(f"subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}")
     if opts.progress_bar:
         bar_h = max(6, th // 240)
-        vf += f",drawbox=x=0:y=ih-{bar_h}:w='iw*t/{duration:.3f}':h={bar_h}:color=white@0.92:t=fill"
+        extras.append(f"drawbox=x=0:y=ih-{bar_h}:w='iw*t/{duration:.3f}':h={bar_h}:color=white@0.92:t=fill")
+    cap_bar = ",".join(extras)
 
-    # ---- main pass (+ optional speech enhancement on the audio) ----
+    af = "afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3,loudnorm=I=-16:TP=-1.5:LRA=11" if opts.enhance_audio else ""
+
+    # ---- main pass ----
     stage = WORK_DIR / f"{job_id}_{clip.id}_stageA.mp4"
-    cmd = [
-        "ffmpeg", "-y", "-ss", f"{clip.start:.3f}", "-to", f"{clip.end:.3f}", "-i", str(source),
-        "-vf", vf,
-    ]
-    if opts.enhance_audio:
-        cmd += ["-af", "afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3,loudnorm=I=-16:TP=-1.5:LRA=11"]
-    cmd += [
-        "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-        "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart",
-        str(stage),
-    ]
-    _run(cmd)
+    if use_game:
+        try:
+            gameplay.compose(
+                source, Path(gameplay_path), clip.start, clip.end, duration,
+                tw, th, vf, cap_bar, af, stage, top_frac=opts.gameplay_split,
+            )
+        except Exception:  # noqa: BLE001 — gameplay must never break a render
+            use_game = False
+    if not use_game:
+        full_vf = vf + (("," + cap_bar) if cap_bar else "")
+        cmd = [
+            "ffmpeg", "-y", "-ss", f"{clip.start:.3f}", "-to", f"{clip.end:.3f}", "-i", str(source),
+            "-vf", full_vf,
+        ]
+        if af:
+            cmd += ["-af", af]
+        cmd += [
+            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart",
+            str(stage),
+        ]
+        _run(cmd)
     current = stage
 
     # ---- optional B-roll overlay pass ----

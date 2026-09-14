@@ -80,6 +80,9 @@ class RenderOptions(BaseModel):
     crop_x: float = 0.5              # manual horizontal frame position for "fill" (0=left,0.5=center,1=right)
     broll: bool = False              # optional Pexels B-roll overlay
     music_volume: float = 0.0        # 0 = off; else mix job's music at this gain
+    # split-screen gameplay (clip on top, looping game like Subway/Minecraft on bottom)
+    gameplay: bool = False
+    gameplay_split: float = 0.6      # top clip fraction of the frame (0.35–0.8)
     # retention / pro-polish
     color_grade: Literal["none", "cinematic", "vibrant", "warm", "cold", "mono", "punchy"] = "none"
     zoom_punch: bool = False         # quick zoom beats on keyword moments
