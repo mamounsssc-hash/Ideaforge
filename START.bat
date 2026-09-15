@@ -84,27 +84,27 @@ if exist "%CUDNN%" (
   echo GPU libraries found - using CUDA if possible.
 )
 
-REM ---------- optional local AI (LM Studio / Qwen3-VL) ----------
-REM Enabled by default: if LM Studio's server is ON it picks the best clips;
-REM if it's OFF the app fails over to the built-in heuristics instantly.
+REM ---------- AI clip selection (Gemini free — recommended) ----------
+REM Get a free key: aistudio.google.com/app/apikey (use phone VPN to open the site)
+REM Then paste it below. The app connects through your phone (see PROXY below).
 set "IDEAFORGE_LLM_ENABLED=true"
-set "IDEAFORGE_LLM_BASE_URL=http://localhost:1234/v1"
-set "IDEAFORGE_LLM_MODEL=qwen/qwen3-vl-8b"
-set "IDEAFORGE_LLM_VISION=true"
+set "IDEAFORGE_LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai"
+set "IDEAFORGE_LLM_MODEL=gemini-2.5-flash"
+set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_GEMINI_KEY"
+set "IDEAFORGE_LLM_VISION=false"
 
-REM ---------- SMARTER clip picking with a FREE cloud model (recommended) ----------
-REM A local 8B model is weak at judging clips. A free Gemini or Groq key picks
-REM MUCH stronger clips. Get a free key, then DELETE the 4 lines above and
-REM uncomment ONE block below (needs internet while analyzing):
-REM
-REM  -- Google Gemini (free tier) -- key: aistudio.google.com/app/apikey
-REM set "IDEAFORGE_LLM_ENABLED=true"
-REM set "IDEAFORGE_LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai"
-REM set "IDEAFORGE_LLM_MODEL=gemini-2.5-flash"
-REM set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_GEMINI_KEY"
-REM set "IDEAFORGE_LLM_VISION=false"
-REM
-REM  -- Groq (free, very fast) -- key: console.groq.com/keys
+REM ---------- PHONE PROXY (for Syria / blocked countries) ----------
+REM If Gemini is blocked in your country, route AI requests through your phone:
+REM   1. Install "Every Proxy" app on your Android phone (free from Play Store)
+REM   2. Open it, tap "HTTP Proxy", tap START — note the IP:Port shown
+REM   3. Make sure phone and laptop are on the SAME WiFi
+REM   4. Replace the IP below with your phone's IP (e.g. 192.168.1.5:8080)
+REM   5. Phone must have VPN ON — only AI requests go through it, not YouTube
+REM Uncomment the line below and set your phone's IP:
+REM set "IDEAFORGE_LLM_PROXY=http://192.168.1.5:8080"
+
+REM ---------- Alternative: Groq (free, very fast) ----------
+REM key: console.groq.com/keys
 REM set "IDEAFORGE_LLM_ENABLED=true"
 REM set "IDEAFORGE_LLM_BASE_URL=https://api.groq.com/openai/v1"
 REM set "IDEAFORGE_LLM_MODEL=llama-3.3-70b-versatile"

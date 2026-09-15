@@ -103,7 +103,10 @@ def rerank(
         }
         headers = {"Authorization": f"Bearer {settings.llm_api_key}"}
         url = settings.llm_base_url.rstrip("/") + "/chat/completions"
-        resp = httpx.post(url, json=payload, headers=headers, timeout=settings.llm_timeout)
+        # Route ONLY AI requests through the proxy (e.g. phone with VPN).
+        # The rest of the system (browser, YouTube, etc.) stays direct.
+        proxy = settings.llm_proxy.strip() or None
+        resp = httpx.post(url, json=payload, headers=headers, timeout=settings.llm_timeout, proxy=proxy)
         resp.raise_for_status()
         raw = resp.json()["choices"][0]["message"]["content"]
         data = _extract_json(raw)

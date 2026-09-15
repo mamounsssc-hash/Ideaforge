@@ -49,6 +49,9 @@ class Settings(BaseSettings):
     llm_api_key: str = "not-needed"      # local servers ignore this
     llm_timeout: float = 45.0
     llm_vision: bool = False             # True when pointing at Qwen3-VL (sends keyframes)
+    llm_proxy: str = ""                  # HTTP/SOCKS5 proxy for LLM calls ONLY
+                                         # e.g. http://192.168.1.5:8080 (phone proxy)
+                                         # Only AI requests use this — browser/YouTube untouched.
 
     # ---- Reframe ----
     reframe_enabled: bool = True
