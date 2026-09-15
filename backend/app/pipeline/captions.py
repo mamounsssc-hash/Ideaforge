@@ -93,11 +93,15 @@ def build_ass(
     cta_text: str | None = None,
     progressive: bool = True,
     emoji_font: str = "",
+    keyword_color: str = "",
 ) -> str:
     pw = play_w or settings.target_width
     ph = play_h or settings.target_height
     primary = _ass_color(style.primary_color)
     highlight = _ass_color(style.highlight_color)
+    # A distinct, fixed colour for "important" (keyword) words, separate from the
+    # active (currently-spoken) word colour. Defaults to the style highlight.
+    kwcol = _ass_color(keyword_color) if keyword_color else highlight
     outline = _ass_color(style.outline_color)
     back = _ass_color(style.back_color) if style.back_color else _ass_color("000000", "80")
     border_style = 3 if style.back_color else 1
@@ -186,10 +190,12 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         is_kw = _norm(w.text) in kwset
         hi = hi_colors[idx] if (hi_colors and idx < len(hi_colors)) else highlight
         if active:
+            # the word being spoken RIGHT NOW: highlight colour + pop animation.
             return "{\\c" + hi + anim + "}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
         if is_kw:
-            # persistent emphasis: power words stay coloured AND slightly larger
-            return "{\\c" + hi + r"\fscx114\fscy114}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
+            # an "important" word: its own FIXED colour, always on, slightly larger —
+            # so key words stand out even before/after they are spoken.
+            return "{\\c" + kwcol + r"\fscx114\fscy114}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
         return base + emoji
 
     for group_idx, group in enumerate(_chunk(words, style.max_words)):

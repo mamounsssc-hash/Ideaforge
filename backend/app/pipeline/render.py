@@ -132,6 +132,7 @@ def render_clip(
             cta_text=opts.cta_text or None,
             progressive=opts.caption_reveal,
             emoji_font=settings.emoji_font,
+            keyword_color=getattr(opts, "keyword_color", ""),
         )
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
         extras.append(f"subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}")
@@ -266,6 +267,7 @@ def render_faceless(
             offset=opts.caption_offset, cta_text=opts.cta_text or None,
             progressive=getattr(opts, "caption_reveal", True),
             emoji_font=settings.emoji_font,
+            keyword_color=getattr(opts, "keyword_color", ""),
         )
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
         vchain += f",subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}"

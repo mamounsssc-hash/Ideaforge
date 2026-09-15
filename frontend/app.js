@@ -1,7 +1,7 @@
 // IdeaForge Clipper — front-end logic (vanilla JS, no build step).
 const $ = (s) => document.querySelector(s);
 const API = "";
-const APP_VERSION = "2.4";
+const APP_VERSION = "2.5";
 
 // On load, confirm the backend is the same version as this page. A mismatch
 // means the Python files weren't updated (or the browser cached the old page).
@@ -531,6 +531,7 @@ function collectOptions() {
     gameplay: $("#opt_gameplay")?.checked || false,
     gameplay_split: parseFloat($("#opt_gamesplit")?.value) || 0.6,
     caption_reveal: $("#opt_reveal") ? $("#opt_reveal").checked : true,
+    keyword_color: ($("#opt_kwcolor")?.value || "#31E981").replace("#", ""),
   };
 }
 

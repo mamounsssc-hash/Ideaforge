@@ -69,6 +69,7 @@ class RenderOptions(BaseModel):
     burn_captions: bool = True
     add_emojis: bool = True
     highlight_keywords: bool = True
+    keyword_color: str = "31E981"      # fixed colour (RRGGBB) for important words
     hook_title: bool = True          # render the clip title as a top banner
     progress_bar: bool = True
     remove_fillers: bool = True

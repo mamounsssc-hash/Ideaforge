@@ -10,7 +10,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-APP_VERSION = "2.4"          # bump when shipping an update the user should verify
+APP_VERSION = "2.5"          # bump when shipping an update the user should verify
 
 ROOT = Path(__file__).resolve().parent.parent          # backend/
 DATA_DIR = ROOT / "data"
