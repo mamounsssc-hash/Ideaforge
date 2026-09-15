@@ -1,7 +1,7 @@
 // IdeaForge Clipper — front-end logic (vanilla JS, no build step).
 const $ = (s) => document.querySelector(s);
 const API = "";
-const APP_VERSION = "2.6";
+const APP_VERSION = "2.7";
 
 // On load, confirm the backend is the same version as this page. A mismatch
 // means the Python files weren't updated (or the browser cached the old page).
@@ -234,6 +234,49 @@ async function loadStyles() {
     sel.appendChild(og);
   });
 }
+
+// ---------- visual style gallery ----------
+function buildStyleGallery() {
+  const grid = $("#styleGrid");
+  if (!grid) return;
+  grid.innerHTML = "";
+  const cur = $("#styleSelect").value;
+  const sample = ["MAKE", "THIS", "VIRAL"];
+  styles.forEach((s) => {
+    const prim = "#" + s.primary_color, hi = "#" + s.highlight_color, out = "#" + s.outline_color;
+    const back = s.back_color ? "#" + s.back_color : null;
+    const strokeW = Math.max(1, Math.round((s.outline || 3) / 2));
+    const card = document.createElement("button");
+    card.className = "style-card" + (s.id === cur ? " sel" : "");
+    const canvas = document.createElement("div");
+    canvas.className = "sp-canvas";
+    canvas.style.fontFamily = `'${s.font}', Impact, Arial, sans-serif`;
+    canvas.style.webkitTextStroke = `${strokeW}px ${out}`;
+    canvas.style.fontWeight = s.bold ? "800" : "600";
+    canvas.innerHTML = sample.map((w, i) => {
+      const isHi = i === 1;
+      const txt = s.uppercase ? w : w.toLowerCase();
+      const box = (isHi && back) ? `background:${back};border-radius:6px;padding:0 5px;` : "";
+      return `<span style="color:${isHi ? hi : prim};${box}">${txt}</span>`;
+    }).join(" ");
+    const name = document.createElement("div");
+    name.className = "sp-name"; name.textContent = s.name;
+    card.appendChild(canvas); card.appendChild(name);
+    card.addEventListener("click", () => {
+      $("#styleSelect").value = s.id;
+      $("#styleGallery").classList.add("hidden");
+    });
+    grid.appendChild(card);
+  });
+}
+$("#browseStyles")?.addEventListener("click", async (e) => {
+  e.preventDefault();
+  await loadStyles();
+  buildStyleGallery();
+  $("#styleGallery").classList.remove("hidden");
+});
+$("#galleryClose")?.addEventListener("click", () => $("#styleGallery").classList.add("hidden"));
+$("#styleGallery")?.addEventListener("click", (e) => { if (e.target.id === "styleGallery") $("#styleGallery").classList.add("hidden"); });
 
 async function showResults(s) {
   await loadStyles();

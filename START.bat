@@ -72,6 +72,25 @@ if errorlevel 1 (
   echo [X] Something is still missing. Please run this file once more.
   goto end
 )
+
+REM ---------- optional GPU acceleration (NVIDIA) ----------
+REM If the CUDA libraries are installed (SETUP.bat installs them), use the GPU.
+REM transcribe.py falls back to CPU automatically if CUDA is unavailable, so this is safe.
+set "CUDNN=%CD%\.venv\Lib\site-packages\nvidia\cudnn\bin"
+set "CUBLAS=%CD%\.venv\Lib\site-packages\nvidia\cublas\bin"
+if exist "%CUDNN%" (
+  set "PATH=%CUDNN%;%CUBLAS%;%PATH%"
+  set "IDEAFORGE_WHISPER_DEVICE=cuda"
+  echo GPU libraries found - using CUDA if possible.
+)
+
+REM ---------- optional local AI (LM Studio / Qwen3-VL) ----------
+REM Enabled by default: if LM Studio's server is ON it picks the best clips;
+REM if it's OFF the app fails over to the built-in heuristics instantly.
+set "IDEAFORGE_LLM_ENABLED=true"
+set "IDEAFORGE_LLM_BASE_URL=http://localhost:1234/v1"
+set "IDEAFORGE_LLM_MODEL=qwen/qwen3-vl-8b"
+set "IDEAFORGE_LLM_VISION=true"
 echo.
 echo ==========================================
 echo  Starting. Your browser opens at:

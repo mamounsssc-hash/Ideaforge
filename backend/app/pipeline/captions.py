@@ -138,12 +138,12 @@ def build_ass(
 ScriptType: v4.00+
 PlayResX: {pw}
 PlayResY: {ph}
-WrapStyle: 2
+WrapStyle: 0
 ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Main,{style.font},{font_size},{primary},{primary},{outline},{back},{bold},0,0,0,100,100,{style.letter_spacing},0,{border_style},{style.outline},{style.shadow},{align},60,60,{margin_v},1
+Style: Main,{style.font},{font_size},{primary},{primary},{outline},{back},{bold},0,0,0,100,100,{style.letter_spacing},0,{border_style},{style.outline},{style.shadow},{align},90,90,{margin_v},1
 Style: Hook,{style.font},{int(font_size * 0.72)},{_ass_color('FFFFFF')},{_ass_color('FFFFFF')},{_ass_color('000000')},{_ass_color('000000','60')},-1,0,0,0,100,100,1,0,3,4,2,8,80,80,140,1
 Style: CTA,{style.font},{int(font_size * 0.8)},{highlight},{highlight},{_ass_color('000000')},{_ass_color('000000','40')},-1,0,0,0,100,100,1,0,1,5,2,2,80,80,300,1
 

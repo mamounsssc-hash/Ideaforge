@@ -4,13 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IdeaForge Clipper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Bebas+Neue&family=Montserrat:wght@700;800;900&family=Poppins:wght@700;800;900&display=swap" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
       <span class="logo">◆</span> IdeaForge <span class="muted">Clipper</span>
-      <span class="pill" id="versionPill" title="App version — confirms your update is live">v2.6</span>
+      <span class="pill" id="versionPill" title="App version — confirms your update is live">v2.7</span>
     </div>
     <div class="pill" id="enginePill">local engine</div>
   </header>
@@ -222,7 +225,10 @@
           </div>
           <div class="style-picker">
             <label class="muted small">Caption style</label>
-            <select id="styleSelect" class="text-input compact"></select>
+            <div style="display:flex;gap:6px">
+              <select id="styleSelect" class="text-input compact"></select>
+              <button class="btn ghost" id="browseStyles" title="See all styles and pick visually">🎨</button>
+            </div>
           </div>
           <div class="style-picker">
             <label class="muted small">Aspect</label>
@@ -339,6 +345,14 @@
       <button class="modal-close" id="modalClose">✕</button>
       <video id="preview" controls playsinline></video>
       <a class="btn primary block" id="downloadBtn" download>Download clip</a>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="styleGallery">
+    <div class="modal-box gallery-box">
+      <button class="modal-close" id="galleryClose">✕</button>
+      <h3 style="margin:0 0 12px">Choose a caption style</h3>
+      <div class="style-grid" id="styleGrid"></div>
     </div>
   </div>
 
