@@ -46,6 +46,8 @@ class Settings(BaseSettings):
     llm_enabled: bool = False
     llm_base_url: str = ""               # e.g. http://localhost:11434/v1 (Ollama) or Qwen3-VL server
     llm_model: str = "qwen2.5:7b"
+    llm_fallback_models: str = ""        # comma-separated backup models, tried in order
+                                         # e.g. "meta-llama/llama-3.3-70b-instruct:free,mistralai/mistral-small-3.1-24b-instruct:free"
     llm_api_key: str = "not-needed"      # local servers ignore this
     llm_timeout: float = 45.0
     llm_vision: bool = False             # True when pointing at Qwen3-VL (sends keyframes)

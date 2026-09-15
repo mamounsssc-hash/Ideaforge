@@ -84,32 +84,15 @@ if exist "%CUDNN%" (
   echo GPU libraries found - using CUDA if possible.
 )
 
-REM ---------- AI clip selection (Gemini free — recommended) ----------
-REM Get a free key: aistudio.google.com/app/apikey (use phone VPN to open the site)
-REM Then paste it below. The app connects through your phone (see PROXY below).
+REM ---------- AI clip selection via OpenRouter (works worldwide) ----------
+REM Get a free key: openrouter.ai/keys (no VPN needed)
+REM Primary model = Gemini. If it fails, auto-tries the free fallback models.
 set "IDEAFORGE_LLM_ENABLED=true"
-set "IDEAFORGE_LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai"
-set "IDEAFORGE_LLM_MODEL=gemini-2.5-flash"
-set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_GEMINI_KEY"
+set "IDEAFORGE_LLM_BASE_URL=https://openrouter.ai/api/v1"
+set "IDEAFORGE_LLM_MODEL=google/gemini-2.5-flash-preview-05-20:free"
+set "IDEAFORGE_LLM_FALLBACK_MODELS=meta-llama/llama-3.3-70b-instruct:free,mistralai/mistral-small-3.1-24b-instruct:free"
+set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_OPENROUTER_KEY"
 set "IDEAFORGE_LLM_VISION=false"
-
-REM ---------- PHONE PROXY (for Syria / blocked countries) ----------
-REM If Gemini is blocked in your country, route AI requests through your phone:
-REM   1. Install "Every Proxy" app on your Android phone (free from Play Store)
-REM   2. Open it, tap "HTTP Proxy", tap START — note the IP:Port shown
-REM   3. Make sure phone and laptop are on the SAME WiFi
-REM   4. Replace the IP below with your phone's IP (e.g. 192.168.1.5:8080)
-REM   5. Phone must have VPN ON — only AI requests go through it, not YouTube
-REM Uncomment the line below and set your phone's IP:
-REM set "IDEAFORGE_LLM_PROXY=http://192.168.1.5:8080"
-
-REM ---------- Alternative: Groq (free, very fast) ----------
-REM key: console.groq.com/keys
-REM set "IDEAFORGE_LLM_ENABLED=true"
-REM set "IDEAFORGE_LLM_BASE_URL=https://api.groq.com/openai/v1"
-REM set "IDEAFORGE_LLM_MODEL=llama-3.3-70b-versatile"
-REM set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_GROQ_KEY"
-REM set "IDEAFORGE_LLM_VISION=false"
 echo.
 echo ==========================================
 echo  Starting. Your browser opens at:

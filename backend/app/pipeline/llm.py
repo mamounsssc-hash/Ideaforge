@@ -1,8 +1,8 @@
 """Optional LLM re-ranking — Layer 3.
 
-Talks to ANY OpenAI-compatible local server: Ollama, LM Studio, or a Qwen3-VL
-server (set IDEAFORGE_LLM_VISION=true to send keyframes for visual judgement).
-Hermes desktop / Qwen3-VL both fit here.
+Talks to ANY OpenAI-compatible server via a single base URL (OpenRouter,
+Gemini, Groq, Ollama, LM Studio, …). Supports automatic model fallback:
+if the primary model fails, the engine tries each fallback model in order.
 
 CRITICAL DESIGN RULE: this layer is best-effort. Any failure — server down,
 timeout, bad JSON, disabled — is swallowed and the caller keeps the heuristic
@@ -49,6 +49,17 @@ def available() -> bool:
     return settings.llm_enabled and bool(settings.llm_base_url.strip())
 
 
+def _get_models() -> list[str]:
+    """Return [primary, fallback1, fallback2, ...] model list."""
+    models = [settings.llm_model]
+    if settings.llm_fallback_models.strip():
+        for m in settings.llm_fallback_models.split(","):
+            m = m.strip()
+            if m and m not in models:
+                models.append(m)
+    return models
+
+
 def _build_prompt(cands: list[ClipCandidate]) -> str:
     lines = []
     for i, c in enumerate(cands):
@@ -62,6 +73,25 @@ def _keyframe_data_url(path: Path | None) -> str | None:
         return None
     b = path.read_bytes()
     return "data:image/jpeg;base64," + base64.b64encode(b).decode()
+
+
+def _call_model(model: str, content, headers: dict, proxy: str | None) -> list:
+    """Send one request to a specific model. Raises on any failure."""
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": SYSTEM},
+            {"role": "user", "content": content},
+        ],
+        "temperature": 0.2,
+        "stream": False,
+    }
+    url = settings.llm_base_url.rstrip("/") + "/chat/completions"
+    resp = httpx.post(url, json=payload, headers=headers,
+                      timeout=settings.llm_timeout, proxy=proxy)
+    resp.raise_for_status()
+    raw = resp.json()["choices"][0]["message"]["content"]
+    return _extract_json(raw)
 
 
 def rerank(
@@ -92,24 +122,25 @@ def rerank(
         else:
             content = prompt
 
-        payload = {
-            "model": settings.llm_model,
-            "messages": [
-                {"role": "system", "content": SYSTEM},
-                {"role": "user", "content": content},
-            ],
-            "temperature": 0.2,
-            "stream": False,
-        }
         headers = {"Authorization": f"Bearer {settings.llm_api_key}"}
-        url = settings.llm_base_url.rstrip("/") + "/chat/completions"
-        # Route ONLY AI requests through the proxy (e.g. phone with VPN).
-        # The rest of the system (browser, YouTube, etc.) stays direct.
         proxy = settings.llm_proxy.strip() or None
-        resp = httpx.post(url, json=payload, headers=headers, timeout=settings.llm_timeout, proxy=proxy)
-        resp.raise_for_status()
-        raw = resp.json()["choices"][0]["message"]["content"]
-        data = _extract_json(raw)
+
+        # Try primary model, then each fallback in order
+        models = _get_models()
+        data = None
+        for model in models:
+            try:
+                data = _call_model(model, content, headers, proxy)
+                log.info("LLM model '%s' responded successfully.", model)
+                break
+            except Exception as e:
+                log.warning("Model '%s' failed (%s: %s). Trying next...",
+                            model, type(e).__name__, e)
+                continue
+
+        if data is None:
+            log.warning("All %d models failed. Falling back to heuristics.", len(models))
+            return cands
 
         by_id = {int(o["id"]): o for o in data if "id" in o}
         for i, c in enumerate(cands):
@@ -117,7 +148,6 @@ def rerank(
             if not o:
                 continue
             llm_score = float(max(0, min(99, o.get("score", c.score.total))))
-            # Trust a decisive model heavily; keep a little heuristic as an anchor.
             c.score.total = round(0.8 * llm_score + 0.2 * c.score.total, 1)
             c.score.source = "hybrid"
             if o.get("title"):
@@ -137,7 +167,6 @@ def rerank(
 
 def _extract_json(raw: str) -> list:
     raw = raw.strip()
-    # strip code fences if present
     if raw.startswith("```"):
         raw = raw.split("```", 2)[1]
         if raw.lstrip().startswith("json"):
