@@ -1,0 +1,28 @@
+{
+  "video": "",
+  "durationInSeconds": 6,
+  "words": [
+    {"text": "هذا", "start": 0.0, "end": 0.5},
+    {"text": "الكابشن", "start": 0.5, "end": 1.1},
+    {"text": "سيغيّر", "start": 1.1, "end": 1.7},
+    {"text": "طريقة", "start": 1.7, "end": 2.2},
+    {"text": "عملك", "start": 2.2, "end": 2.8},
+    {"text": "بشكل", "start": 2.9, "end": 3.4},
+    {"text": "احترافي", "start": 3.4, "end": 4.1},
+    {"text": "جداً", "start": 4.1, "end": 4.7},
+    {"text": "الآن", "start": 4.8, "end": 5.4}
+  ],
+  "keywords": ["الكابشن", "احترافي"],
+  "style": {
+    "font": "cairo",
+    "primary": "#FFFFFF",
+    "active": "#FFD60A",
+    "activeText": "#111111",
+    "activeBox": true,
+    "keyword": "#31E981",
+    "maxWords": 4,
+    "uppercase": false,
+    "fontSize": 84,
+    "bottomPct": 22
+  }
+}

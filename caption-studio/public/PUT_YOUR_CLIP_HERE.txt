@@ -1,0 +1,7 @@
+Put your clip video here and name it exactly:  clip.mp4
+
+Then, in input.json, set:   "video": "clip.mp4"
+
+The clip should be vertical 1080x1920 (9:16). Use a clip exported from the
+CliPro app WITHOUT burned captions — Caption Studio will draw the premium
+captions on top of it.
