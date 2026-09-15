@@ -37,8 +37,12 @@ def _run(cmd: list[str]) -> None:
 
 
 def _layout_vf(source: Path, clip: ClipCandidate, opts: RenderOptions,
-               tw: int, target_h: int, duration: float) -> str:
-    """Build the clip's own footage chain (layout + grade + zoom) at tw×target_h."""
+               tw: int, target_h: int, duration: float, safe: bool = False) -> str:
+    """Build the clip's own footage chain (layout + grade + zoom) at tw×target_h.
+
+    safe=True strips the optional visual effects (grade, zoom-punch, auto-zoom)
+    so a render that failed with them can be retried with just the layout.
+    """
     if not opts.reframe or opts.reframe_layout == "fill":
         cx = max(0.0, min(1.0, getattr(opts, "crop_x", 0.5)))
         vf = (
@@ -54,6 +58,9 @@ def _layout_vf(source: Path, clip: ClipCandidate, opts: RenderOptions,
         )
     else:  # "track" — follow the active speaker
         vf = reframe.build_filter(source, clip.start, clip.end, tw, target_h)
+
+    if safe:
+        return vf
 
     grade = effects.color_grade(opts.color_grade)
     if grade:
@@ -100,16 +107,9 @@ def render_clip(
 
     # Gameplay split-screen: clip fills the top, a looping game fills the bottom.
     use_game = bool(opts.gameplay and gameplay_path and Path(gameplay_path).exists())
-    if use_game:
-        top_h, _ = gameplay.split_heights(th, opts.gameplay_split)
-        content_h = top_h                 # the clip footage only fills the top region
-    else:
-        content_h = th
+    top_h = gameplay.split_heights(th, opts.gameplay_split)[0] if use_game else th
 
-    # ---- 1–2. footage chain (layout + grade + zoom), sized for its region ----
-    vf = _layout_vf(source, clip, opts, tw, content_h, duration)
-
-    # ---- 3–4. captions (+ CTA) and progress bar, targeting the FULL frame ----
+    # ---- captions (+ CTA) and progress bar, targeting the FULL frame ----
     extras: list[str] = []
     if opts.burn_captions and clip.words:
         ass_path = WORK_DIR / f"{job_id}_{clip.id}_{style.id}.ass"
@@ -125,6 +125,7 @@ def render_clip(
             offset=opts.caption_offset,
             speaker_colors=opts.speaker_colors,
             cta_text=opts.cta_text or None,
+            progressive=opts.caption_reveal,
         )
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
         extras.append(f"subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}")
@@ -135,30 +136,35 @@ def render_clip(
 
     af = "afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3,loudnorm=I=-16:TP=-1.5:LRA=11" if opts.enhance_audio else ""
 
-    # ---- main pass ----
+    # ---- main pass: try with all effects, then retry with a safe layout-only
+    # chain if anything in the filter graph fails. A clip must always render.
     stage = WORK_DIR / f"{job_id}_{clip.id}_stageA.mp4"
-    if use_game:
-        try:
+
+    def _single_pass(safe: bool) -> None:
+        target_h = top_h if use_game else th
+        vf = _layout_vf(source, clip, opts, tw, target_h, duration, safe=safe)
+        if use_game:
             gameplay.compose(
                 source, Path(gameplay_path), clip.start, clip.end, duration,
                 tw, th, vf, cap_bar, af, stage, top_frac=opts.gameplay_split,
             )
-        except Exception:  # noqa: BLE001 — gameplay must never break a render
-            use_game = False
-    if not use_game:
+            return
         full_vf = vf + (("," + cap_bar) if cap_bar else "")
-        cmd = [
-            "ffmpeg", "-y", "-ss", f"{clip.start:.3f}", "-to", f"{clip.end:.3f}", "-i", str(source),
-            "-vf", full_vf,
-        ]
+        cmd = ["ffmpeg", "-y", "-ss", f"{clip.start:.3f}", "-to", f"{clip.end:.3f}",
+               "-i", str(source), "-vf", full_vf]
         if af:
             cmd += ["-af", af]
-        cmd += [
-            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
-            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart",
-            str(stage),
-        ]
+        cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+                "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(stage)]
         _run(cmd)
+
+    try:
+        _single_pass(safe=False)
+    except Exception:  # noqa: BLE001
+        # Second chance: if the split-screen compose was the problem, drop it too.
+        if use_game:
+            use_game = False
+        _single_pass(safe=True)
     current = stage
 
     # ---- optional B-roll overlay pass ----
@@ -248,6 +254,7 @@ def render_faceless(
             hook_text=(clip.title if opts.hook_title else None),
             position_override=opts.caption_position, scale=opts.caption_scale,
             offset=opts.caption_offset, cta_text=opts.cta_text or None,
+            progressive=getattr(opts, "caption_reveal", True),
         )
         fonts_arg = f":fontsdir='{_escape_ass_path(FONTS_DIR)}'" if FONTS_DIR.exists() else ""
         vchain += f",subtitles='{_escape_ass_path(ass_path)}'{fonts_arg}"

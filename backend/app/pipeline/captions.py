@@ -91,6 +91,7 @@ def build_ass(
     offset: int = 0,
     speaker_colors: bool = False,
     cta_text: str | None = None,
+    progressive: bool = True,
 ) -> str:
     pw = play_w or settings.target_width
     ph = play_h or settings.target_height
@@ -196,7 +197,10 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         for i, w in enumerate(group):
             start = w.start
             end = group[i + 1].start if i + 1 < len(group) else g_end
-            parts = [token_for(base_i + j, gw, active=(j == i)) for j, gw in enumerate(group)]
+            # progressive: reveal words as they are spoken (never show unsaid words);
+            # otherwise show the whole phrase and just recolor the active word.
+            visible = group[: i + 1] if progressive else group
+            parts = [token_for(base_i + j, gw, active=(j == i)) for j, gw in enumerate(visible)]
             text = line_prefix + " ".join(parts)
             events.append(_dialogue(start - clip_start, end - clip_start, text))
 

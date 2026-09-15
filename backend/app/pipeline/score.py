@@ -23,6 +23,16 @@ EMOTION_WORDS = {
     "unbelievable", "terrible", "beautiful", "scary", "hilarious", "wow",
     "honestly", "literally", "actually", "seriously", "painful", "proud",
 }
+# Markers of a payoff / conclusion — the "so what" that makes a clip feel complete
+# and meaningful instead of a random slice. Strongly favoured.
+CONCLUSION_WORDS = {
+    "so", "because", "therefore", "which means", "that's why", "the point",
+    "the reason", "in the end", "bottom line", "the lesson", "the truth is",
+    "here's the thing", "what i learned", "the key", "this is how", "that means",
+    "and that's", "the result", "turns out", "the takeaway", "moral",
+}
+# A meaningful clip usually lands in this length band (seconds).
+_SWEET_MIN, _SWEET_MAX = 16.0, 45.0
 NUM_RE = re.compile(r"\b\d+([.,]\d+)?%?\b")
 QUESTION_RE = re.compile(r"\?")
 FILLER_RE = re.compile(r"\b(um+|uh+|erm+|like|you know)\b", re.I)
@@ -84,6 +94,35 @@ def _pacing(words: list[Word], duration: float) -> float:
     return max(0.0, closeness - penalty)
 
 
+def _payoff(text: str) -> float:
+    """Does the clip resolve into a point? Setup->payoff reads as complete & meaningful."""
+    low = text.lower()
+    score = 0.0
+    for kw in CONCLUSION_WORDS:
+        if kw in low:
+            score += 0.5
+            break
+    # a question early that is then answered by later statements (classic arc)
+    qpos = low.find("?")
+    if 0 <= qpos < len(low) * 0.6:
+        score += 0.35
+    # explicit list/steps signal structured value ("three things", "first… then…")
+    if re.search(r"\b(first|second|third|number one|step one|reason (one|1))\b", low):
+        score += 0.25
+    return min(1.0, score)
+
+
+def _length_fit(duration: float) -> float:
+    """1.0 inside the sweet-spot band, tapering off for very short/long clips."""
+    if duration <= 0:
+        return 0.0
+    if _SWEET_MIN <= duration <= _SWEET_MAX:
+        return 1.0
+    if duration < _SWEET_MIN:
+        return max(0.0, duration / _SWEET_MIN)
+    return max(0.35, 1 - (duration - _SWEET_MAX) / 60.0)
+
+
 def _topic_match(text: str, topic_terms: set[str]) -> float:
     """0..1 overlap between the clip and a user topic ('find clips about X')."""
     if not topic_terms:
@@ -101,18 +140,29 @@ def score_candidate(start: float, end: float, text: str, words: list[Word],
     info = _info(text)
     completeness = _completeness(text)
     pacing = _pacing(words, duration)
+    payoff = _payoff(text)
     topic = _topic_match(text, topic_terms or set())
 
+    # Fold the "meaningful arc" signals into the shown dimensions so the UI still
+    # reads clearly: a resolved point lifts both completeness and info.
+    completeness = min(1.0, completeness + 0.35 * payoff)
+    info = min(1.0, info + 0.25 * payoff)
+
     # Weighted blend -> 0..1, then scale to a 20..99 band (nothing scores a flat 0).
-    # When a topic is given, matching clips get a strong, transparent boost.
     blend = (
-        0.28 * hook
-        + 0.18 * emotion
-        + 0.16 * info
-        + 0.16 * completeness
-        + 0.12 * pacing
-        + 0.10 * topic
+        0.24 * hook
+        + 0.15 * emotion
+        + 0.15 * info
+        + 0.17 * completeness
+        + 0.11 * pacing
+        + 0.10 * payoff
+        + 0.08 * topic
     )
+    # Synergy: a strong hook AND a resolved ending is what actually retains viewers.
+    if hook > 0.4 and (completeness > 0.7 or payoff > 0.4):
+        blend = min(1.0, blend + 0.06)
+    # Prefer clips that sit in the natural short-form length band.
+    blend *= 0.75 + 0.25 * _length_fit(duration)
     if topic_terms and topic == 0.0:
         blend *= 0.6            # off-topic clips are pushed down when a topic is set
     total = round(20 + blend * 79, 1)

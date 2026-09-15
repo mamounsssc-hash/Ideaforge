@@ -27,6 +27,7 @@ document.querySelectorAll(".tab").forEach((t) => {
     const tab = t.dataset.tab;
     $("#pane-file").classList.toggle("hidden", tab !== "file");
     $("#pane-url").classList.toggle("hidden", tab !== "url");
+    $("#pane-local").classList.toggle("hidden", tab !== "local");
   });
 });
 
@@ -74,6 +75,15 @@ async function start() {
       const qs = new URLSearchParams();
       Object.entries(p).forEach(([k, v]) => { if (v !== null && v !== "") qs.append(k, v); });
       const r = await fetch("/api/upload?" + qs.toString(), { method: "POST", body: fd });
+      jobId = (await r.json()).job_id;
+    } else if (activeTab === "local") {
+      const path = $("#localInput").value.trim();
+      if (!path) { alert("Paste the full path to a video file on your PC."); return; }
+      const r = await fetch("/api/local", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path, ...p }),
+      });
+      if (!r.ok) { alert("Could not open that file: " + (await r.json()).detail); return; }
       jobId = (await r.json()).job_id;
     } else {
       const u = $("#urlInput").value.trim();
@@ -436,6 +446,7 @@ function collectOptions() {
     cta_text: $("#opt_cta").value || "",
     gameplay: $("#opt_gameplay")?.checked || false,
     gameplay_split: parseFloat($("#opt_gamesplit")?.value) || 0.6,
+    caption_reveal: $("#opt_reveal") ? $("#opt_reveal").checked : true,
   };
 }
 

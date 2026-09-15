@@ -21,15 +21,21 @@ def color_grade(preset: str) -> str:
 def zoom_punch(times: list[float], tw: int, th: int, amp: float = 0.08, width: float = 0.11) -> str:
     """A quick scale 'beat' at each moment in `times` (clip-relative seconds).
 
-    Implemented with a time-varying crop + rescale, so captions layered afterward
-    stay perfectly still while the footage pulses on emphasis.
+    Scales the (already tw×th) footage up per frame with eval=frame, then centre-
+    crops back to tw×th, so the picture pulses on emphasis while captions layered
+    afterward stay perfectly still. Avoids the '^' operator (unsupported by some
+    ffmpeg builds) by squaring via multiplication, and keeps the intermediate
+    dimensions even.
     """
     times = [t for t in times if t is not None][:8]
     if not times:
         return ""
-    bumps = "+".join(f"{amp}*exp(-((t-{t:.2f})/{width})^2)" for t in times)
+    # Gaussian bump per moment: amp * exp(-(( t - ti ) / width)^2)
+    bumps = "+".join(
+        f"{amp}*exp(-((t-{t:.2f})/{width})*((t-{t:.2f})/{width}))" for t in times
+    )
     z = f"(1+{bumps})"
     return (
-        f"crop=w='iw/{z}':h='ih/{z}':x='(iw-iw/{z})/2':y='(ih-ih/{z})/2',"
-        f"scale={tw}:{th}"
+        f"scale=w='trunc(iw*{z}/2)*2':h='trunc(ih*{z}/2)*2':eval=frame,"
+        f"crop={tw}:{th}"
     )

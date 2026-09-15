@@ -92,6 +92,7 @@ class RenderOptions(BaseModel):
     caption_position: Literal["auto", "top", "center", "bottom"] = "auto"
     caption_scale: float = 1.0       # multiply the style font size (0.6–1.6)
     caption_offset: int = 0          # extra vertical margin in pixels
+    caption_reveal: bool = True      # reveal words as spoken (hide unsaid words) — pro look
 
 
 class AnalyzeOptions(BaseModel):

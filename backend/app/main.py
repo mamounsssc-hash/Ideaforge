@@ -40,6 +40,10 @@ class UrlRequest(AnalyzeOptions):
     url: str
 
 
+class LocalRequest(AnalyzeOptions):
+    path: str
+
+
 # ----------------------------- Analysis -------------------------------
 @app.post("/api/upload")
 async def upload(
@@ -74,6 +78,28 @@ async def from_url(req: UrlRequest):
     opts = AnalyzeOptions(**req.model_dump(exclude={"url"}))
     threading.Thread(
         target=orchestrator.analyze, args=(job.id, req.url.strip(), True, opts), daemon=True,
+    ).start()
+    return {"job_id": job.id}
+
+
+@app.post("/api/local")
+async def from_local(req: LocalRequest):
+    """Analyze a file already on disk (no upload) — ideal for huge 4–5 GB videos.
+
+    The user downloads the video (e.g. from Google Drive) and just pastes its
+    path; we read it in place, so there's no slow browser upload and no second
+    copy eating disk space.
+    """
+    raw = req.path.strip().strip('"').strip("'")
+    if not raw:
+        raise HTTPException(400, "path is required")
+    p = Path(raw).expanduser()
+    if not p.exists() or not p.is_file():
+        raise HTTPException(400, f"file not found: {p}")
+    job = store.create()
+    opts = AnalyzeOptions(**req.model_dump(exclude={"path"}))
+    threading.Thread(
+        target=orchestrator.analyze, args=(job.id, str(p), False, opts), daemon=True,
     ).start()
     return {"job_id": job.id}
 

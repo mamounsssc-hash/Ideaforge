@@ -28,6 +28,7 @@
       <div class="tabs">
         <button class="tab active" data-tab="file">Upload file</button>
         <button class="tab" data-tab="url">Paste URL</button>
+        <button class="tab" data-tab="local">Big file (path)</button>
       </div>
 
       <div class="tabpane" id="pane-file">
@@ -44,6 +45,14 @@
       <div class="tabpane hidden" id="pane-url">
         <input type="text" id="urlInput" class="text-input"
                placeholder="https://youtube.com/watch?v=…  or TikTok / X / etc." />
+      </div>
+
+      <div class="tabpane hidden" id="pane-local">
+        <input type="text" id="localInput" class="text-input"
+               placeholder="C:\Users\me\Downloads\video.mp4  — path to a file on your PC" />
+        <div class="muted small" style="margin-top:6px">
+          For big 4–5 GB videos: download it to your PC, then paste the full path here — no slow upload.
+        </div>
       </div>
 
       <input type="text" id="topicInput" class="text-input"
@@ -219,6 +228,7 @@
         <label><input type="checkbox" id="opt_reframe" checked /> Track speaker</label>
         <label><input type="checkbox" id="opt_captions" checked /> Captions</label>
         <label><input type="checkbox" id="opt_keywords" checked /> Highlight keywords</label>
+        <label title="Reveal words as they are spoken — never show words before they are said"><input type="checkbox" id="opt_reveal" checked /> Reveal words (pro)</label>
         <label><input type="checkbox" id="opt_emojis" checked /> Auto emoji</label>
         <label><input type="checkbox" id="opt_hook" checked /> Hook title</label>
         <label><input type="checkbox" id="opt_bar" checked /> Progress bar</label>
@@ -227,8 +237,8 @@
         <label><input type="checkbox" id="opt_zoom" /> Auto zoom</label>
         <label><input type="checkbox" id="opt_speakers" /> Speaker colors</label>
         <label><input type="checkbox" id="opt_enhance" /> Enhance audio</label>
-        <label><input type="checkbox" id="opt_zoompunch" /> Zoom punches</label>
-        <label><input type="checkbox" id="opt_broll" /> B-roll (Pexels)</label>
+        <label title="Quick zoom beat on keyword moments"><input type="checkbox" id="opt_zoompunch" /> Zoom punches</label>
+        <label title="Needs a free Pexels API key (IDEAFORGE_PEXELS_API_KEY) + internet; otherwise it is skipped"><input type="checkbox" id="opt_broll" /> B-roll (needs Pexels key)</label>
       </div>
 
       <div class="toggles" id="advanced">
