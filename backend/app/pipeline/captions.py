@@ -92,6 +92,7 @@ def build_ass(
     speaker_colors: bool = False,
     cta_text: str | None = None,
     progressive: bool = True,
+    emoji_font: str = "",
 ) -> str:
     pw = play_w or settings.target_width
     ph = play_h or settings.target_height
@@ -169,9 +170,19 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             + r"{\fad(150,0)\fscx60\fscy60\t(0,140,\fscx100\fscy100)}" + ctxt
         )
 
+    # Wrap emoji in a colour-emoji font (e.g. Segoe UI Emoji on Windows) so libass
+    # renders them in colour instead of monochrome, then switch back to the caption
+    # font. Colour output still depends on the ffmpeg/libass build supporting it.
+    ef = emoji_font.strip()
+
+    def _emoji_str(e: str) -> str:
+        if ef:
+            return " {\\fn" + ef + "}" + e + "{\\fn" + style.font + "}"
+        return " " + e
+
     def token_for(idx: int, w: Word, active: bool) -> str:
         base = _display(w.text, style)
-        emoji = (" " + emoji_at[idx]) if idx in emoji_at else ""
+        emoji = _emoji_str(emoji_at[idx]) if idx in emoji_at else ""
         is_kw = _norm(w.text) in kwset
         hi = hi_colors[idx] if (hi_colors and idx < len(hi_colors)) else highlight
         if active:

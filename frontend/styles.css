@@ -124,6 +124,12 @@ h2 { font-size: 19px; margin: 0 0 14px; }
 .frame-picker .fp-img { display: block; max-width: 100%; height: auto; pointer-events: none; }
 .frame-picker .fp-box { position: absolute; top: 0; bottom: 0; box-sizing: border-box; border: 3px solid var(--brand); border-radius: 6px; background: rgba(46,124,246,0.14); box-shadow: 0 0 0 2000px rgba(0,0,0,0.45); cursor: grab; }
 .frame-picker .fp-box:active { cursor: grabbing; }
+.frame-picker .fp-tag { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; letter-spacing: .5px; }
+.fp-quick { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.fp-quick .btn { padding: 6px 12px; font-size: 13px; }
+/* make the Frame button stand out as a real button, not a text link */
+.frame-link { display: inline-block; margin-top: 8px; margin-right: 8px; background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.frame-link:hover { filter: brightness(1.08); }
 .word-grid { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; background: #0e131d; border: 1px solid var(--line); border-radius: 10px; }
 .word-inp { background: #131a26; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; font-size: 13px; min-width: 3ch; }
 .word-inp:focus { border-color: var(--brand); outline: none; }

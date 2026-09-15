@@ -10,7 +10,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-APP_VERSION = "2.1"          # bump when shipping an update the user should verify
+APP_VERSION = "2.2"          # bump when shipping an update the user should verify
 
 ROOT = Path(__file__).resolve().parent.parent          # backend/
 DATA_DIR = ROOT / "data"
@@ -54,6 +54,11 @@ class Settings(BaseSettings):
     reframe_enabled: bool = True
     target_width: int = 1080
     target_height: int = 1920            # 9:16
+
+    # ---- Captions ----
+    # Colour-emoji font used for emoji glyphs (Windows ships "Segoe UI Emoji").
+    # Set IDEAFORGE_EMOJI_FONT="" to disable the override (fall back to the style font).
+    emoji_font: str = "Segoe UI Emoji"
 
     # ---- Optional B-roll (Pexels free API; empty => B-roll disabled) ----
     pexels_api_key: str = ""

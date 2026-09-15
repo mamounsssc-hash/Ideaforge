@@ -1,7 +1,7 @@
 // IdeaForge Clipper — front-end logic (vanilla JS, no build step).
 const $ = (s) => document.querySelector(s);
 const API = "";
-const APP_VERSION = "2.1";
+const APP_VERSION = "2.2";
 
 // On load, confirm the backend is the same version as this page. A mismatch
 // means the Python files weren't updated (or the browser cached the old page).
@@ -274,7 +274,7 @@ function clipRow(c) {
       <div class="hashtags">${(c.hashtags || []).map((h) => `<span>${escapeHtml(h)}</span>`).join("")}</div>
       <button class="edit-link">✎ Edit / trim</button>
       <button class="edit-link cap-link">✎ Edit captions</button>
-      <button class="edit-link frame-link" title="Choose which person / where to frame">🎯 Frame</button>
+      <button class="frame-link" title="See the video and choose which person / where to frame">🎯 اختر الوجه / Frame</button>
       ${c.social_caption ? `<button class="copy-cap" title="Copy post caption">⧉ Copy caption</button>` : ""}
       <div class="frame-picker"></div>
       <div class="edit-panel">
@@ -355,72 +355,81 @@ function clipRow(c) {
   return el;
 }
 
-// Show a frame from the clip with a draggable vertical (9:16) crop box.
-// Dragging the box sets c._crop_x, and switches Layout to "Fill" so it applies.
+// Frame picker: shows a real frame from the clip; click/drag on the person to
+// keep them when cropping 16:9 -> 9:16. Quick Left/Center/Right buttons always
+// work (even if the preview image can't load), so there is always a way to pick.
 function buildFramePicker(fp, c) {
   if (!currentJob) { fp.innerHTML = "<span class='muted small'>Analyze a video first.</span>"; return; }
-  fp.innerHTML = "<span class='muted small'>Loading frame…</span>";
-  const img = new Image();
-  img.className = "fp-img";
-  img.src = `/api/jobs/${currentJob}/clips/${c.id}/thumb?ts=${Date.now()}`;
-  img.onerror = () => { fp.innerHTML = "<span class='muted small'>Could not load frame.</span>"; };
-  img.onload = () => {
-    fp.innerHTML = "";
-    const hint = document.createElement("div");
-    hint.className = "muted small";
-    hint.textContent = "اسحب المربّع فوق الشخص الذي تريده · Drag the box onto the person to keep";
-    const wrap = document.createElement("div");
-    wrap.className = "fp-wrap";
-    const box = document.createElement("div");
-    box.className = "fp-box";
-    wrap.appendChild(img.cloneNode());
-    wrap.appendChild(box);
-    fp.appendChild(hint);
-    fp.appendChild(wrap);
+  fp.innerHTML = "";
 
-    // box width as a fraction of the image = (9/16) / imageAspect, capped at 1
-    const aspect = img.naturalWidth / img.naturalHeight;   // e.g. 1.777 for 16:9
-    const boxWFrac = Math.min(1, (9 / 16) / aspect);       // ~0.316 for 16:9
-    const travel = Math.max(0, 1 - boxWFrac);              // horizontal room to move
-    box.style.width = (boxWFrac * 100) + "%";
+  const title = document.createElement("div");
+  title.className = "muted small"; title.style.marginBottom = "6px";
+  title.innerHTML = "🎯 <b>اضغط على الشخص الذي تريد إبقاءه</b> · click the person to keep";
+  fp.appendChild(title);
 
-    let cropX = (c._crop_x != null) ? c._crop_x : parseFloat($("#opt_cropx").value) || 0.5;
-    const place = () => { box.style.left = (cropX * travel * 100) + "%"; };
+  // always-visible quick buttons
+  const quick = document.createElement("div"); quick.className = "fp-quick";
+  [["◀ يسار", 0.0], ["● وسط", 0.5], ["يمين ▶", 1.0]].forEach(([label, val]) => {
+    const b = document.createElement("button"); b.className = "btn ghost"; b.textContent = label;
+    b.addEventListener("click", () => applyCrop(val));
+    quick.appendChild(b);
+  });
+  fp.appendChild(quick);
+
+  const wrap = document.createElement("div"); wrap.className = "fp-wrap"; wrap.style.display = "none";
+  const box = document.createElement("div"); box.className = "fp-box";
+  box.innerHTML = "<span class='fp-tag'>KEEP</span>";
+  const imgEl = document.createElement("img"); imgEl.className = "fp-img";
+  wrap.appendChild(imgEl); wrap.appendChild(box);
+  fp.appendChild(wrap);
+
+  const status = document.createElement("div"); status.className = "muted small"; status.style.marginTop = "6px";
+  fp.appendChild(status);
+
+  let cropX = (c._crop_x != null) ? c._crop_x : 0.5;
+  let boxWFrac = 0.316, travel = 0.684;
+  const place = () => { box.style.left = (cropX * travel * 100) + "%"; };
+
+  function applyCrop(v) {
+    cropX = Math.max(0, Math.min(1, v));
+    c._crop_x = Math.round(cropX * 100) / 100;
     place();
+    // this clip renders in Fill at this position (per-clip override in renderClip);
+    // other clips keep the global layout, so we don't touch #opt_layout here.
+    status.innerHTML = "✅ <b>محفوظ</b> — سيُطبّق عند Render · saved (" + Math.round(cropX * 100) + "%)";
+  }
+  place();
 
-    const setFromClientX = (clientX) => {
-      const r = wrap.getBoundingClientRect();
-      let leftFrac = (clientX - r.left) / r.width - boxWFrac / 2;   // center under cursor
-      leftFrac = Math.max(0, Math.min(travel, leftFrac));
-      cropX = travel > 0 ? leftFrac / travel : 0.5;
-      place();
-    };
-
-    let dragging = false;
-    const down = (e) => { dragging = true; setFromClientX((e.touches ? e.touches[0] : e).clientX); e.preventDefault(); };
-    const move = (e) => { if (dragging) setFromClientX((e.touches ? e.touches[0] : e).clientX); };
-    const up = () => {
-      if (!dragging) return;
-      dragging = false;
-      c._crop_x = Math.round(cropX * 100) / 100;
-      // make the choice take effect: Fill layout uses crop_x
-      const lay = $("#opt_layout"); if (lay) lay.value = "fill";
-      $("#opt_cropx").value = c._crop_x;
-      $("#opt_cropx").dispatchEvent(new Event("input"));
-      saved.textContent = "✅ محفوظ · saved (Layout → Fill)";
-    };
-    wrap.addEventListener("mousedown", down);
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
-    wrap.addEventListener("touchstart", down, { passive: false });
-    wrap.addEventListener("touchmove", move, { passive: false });
-    wrap.addEventListener("touchend", up);
-
-    const saved = document.createElement("div");
-    saved.className = "muted small";
-    fp.appendChild(saved);
-    fp.dataset.loaded = "1";
+  status.textContent = "⏳ جاري تحميل صورة من الفيديو…";
+  imgEl.onerror = () => { status.textContent = "تعذّر تحميل الصورة — استخدم أزرار يسار/وسط/يمين بالأعلى."; };
+  imgEl.onload = () => {
+    const aspect = imgEl.naturalWidth / imgEl.naturalHeight;
+    boxWFrac = Math.min(1, (9 / 16) / aspect); travel = Math.max(0, 1 - boxWFrac);
+    box.style.width = (boxWFrac * 100) + "%";
+    wrap.style.display = "inline-block";
+    place();
+    status.textContent = "اضغط أو اسحب على الشخص · click or drag on the person";
   };
+  imgEl.src = `/api/jobs/${currentJob}/clips/${c.id}/thumb?ts=${Date.now()}`;
+
+  const setFromClientX = (clientX) => {
+    const r = wrap.getBoundingClientRect();
+    let leftFrac = (clientX - r.left) / r.width - boxWFrac / 2;
+    leftFrac = Math.max(0, Math.min(travel, leftFrac));
+    applyCrop(travel > 0 ? leftFrac / travel : 0.5);
+  };
+  let dragging = false;
+  const down = (e) => { dragging = true; setFromClientX((e.touches ? e.touches[0] : e).clientX); e.preventDefault(); };
+  const move = (e) => { if (dragging) setFromClientX((e.touches ? e.touches[0] : e).clientX); };
+  const up = () => { dragging = false; };
+  wrap.addEventListener("mousedown", down);
+  window.addEventListener("mousemove", move);
+  window.addEventListener("mouseup", up);
+  wrap.addEventListener("touchstart", down, { passive: false });
+  wrap.addEventListener("touchmove", move, { passive: false });
+  wrap.addEventListener("touchend", up);
+
+  fp.dataset.loaded = "1";
 }
 function hookLabel(sb) {
   const parts = [];
