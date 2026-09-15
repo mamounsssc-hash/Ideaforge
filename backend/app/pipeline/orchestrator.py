@@ -80,20 +80,26 @@ def analyze(job_id: str, source: str, is_url: bool, opts: AnalyzeOptions) -> Non
         ranked = score.dedupe_and_rank(candidates, target)
 
         # ---- 5. optional LLM / Qwen3-VL rerank (Layer 3 — best effort) ----
+        # Only the top slice goes to the model: sending 100 clips (and 100 frames)
+        # would swamp a local model and be slow. The best clips get refined; the
+        # long tail keeps its heuristic rank and is appended unchanged.
         if llm.available():
             store.set_progress(job_id, "ranking", 0.85, "Refining with local model…")
+            cap = min(len(ranked), 24)
+            head, tail = ranked[:cap], ranked[cap:]
             keyframes = None
             if settings.llm_vision:
                 keyframes = {}
-                for i, c in enumerate(ranked):
+                for i, c in enumerate(head):
                     kf = WORK_DIR / f"{job_id}_{c.id}_kf.jpg"
                     try:
                         render.extract_keyframe(src_path, (c.start + c.end) / 2, kf)
                         keyframes[i] = kf
                     except Exception:  # noqa: BLE001
                         pass
-            ranked = llm.rerank(ranked, keyframes, topic=opts.topic)
-            ranked.sort(key=lambda c: c.score.total, reverse=True)
+            head = llm.rerank(head, keyframes, topic=opts.topic)
+            head.sort(key=lambda c: c.score.total, reverse=True)
+            ranked = head + tail
 
         # ---- 6. per-clip metadata (keywords, emojis source, hashtags, caption) ----
         for c in ranked:

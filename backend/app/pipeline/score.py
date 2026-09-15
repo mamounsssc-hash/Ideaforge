@@ -177,20 +177,46 @@ def score_candidate(start: float, end: float, text: str, words: list[Word],
     )
 
 
-def dedupe_and_rank(cands: list[ClipCandidate], target: int) -> list[ClipCandidate]:
-    """Sort by score, then greedily drop candidates that overlap a better one > 50%."""
+def _overlap_frac(c: ClipCandidate, k: ClipCandidate) -> float:
+    inter = max(0.0, min(c.end, k.end) - max(c.start, k.start))
+    shorter = min(c.duration, k.duration) or 1.0
+    return inter / shorter
+
+
+def dedupe_and_rank(cands: list[ClipCandidate], target: int,
+                    min_start_gap: float = 4.0) -> list[ClipCandidate]:
+    """Rank by score and select up to `target` clips.
+
+    Pass 1 keeps the best, mutually-distinct clips (overlap < 50%) — this is the
+    quality tier. If the user asked for more clips than fit without overlapping
+    (e.g. 100 from one video), pass 2 relaxes: it adds the next best candidates
+    as long as their START time differs from every kept clip by at least
+    `min_start_gap` seconds, so extra clips are still distinct high-retention
+    moments rather than near-duplicates.
+    """
     ranked = sorted(cands, key=lambda c: c.score.total, reverse=True)
     kept: list[ClipCandidate] = []
+    kept_ids: set[int] = set()
+
+    # Pass 1 — strict: no two clips overlap by more than half.
     for c in ranked:
-        overlap = False
-        for k in kept:
-            inter = max(0.0, min(c.end, k.end) - max(c.start, k.start))
-            shorter = min(c.duration, k.duration) or 1.0
-            if inter / shorter > 0.5:
-                overlap = True
-                break
-        if not overlap:
-            kept.append(c)
         if len(kept) >= target:
-            break
+            return kept
+        if all(_overlap_frac(c, k) <= 0.5 for k in kept):
+            kept.append(c)
+            kept_ids.add(id(c))
+
+    # Pass 2 — relax to reach a large target, keeping starts spread out.
+    if len(kept) < target:
+        starts = [k.start for k in kept]
+        for c in ranked:
+            if len(kept) >= target:
+                break
+            if id(c) in kept_ids:
+                continue
+            if all(abs(c.start - s) >= min_start_gap for s in starts):
+                kept.append(c)
+                kept_ids.add(id(c))
+                starts.append(c.start)
+
     return kept
