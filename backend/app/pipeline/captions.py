@@ -188,7 +188,8 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         if active:
             return "{\\c" + hi + anim + "}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
         if is_kw:
-            return "{\\c" + hi + "}" + base + "{\\c" + primary + "}" + emoji
+            # persistent emphasis: power words stay coloured AND slightly larger
+            return "{\\c" + hi + r"\fscx114\fscy114}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
         return base + emoji
 
     for group_idx, group in enumerate(_chunk(words, style.max_words)):

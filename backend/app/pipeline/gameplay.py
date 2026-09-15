@@ -78,6 +78,7 @@ def compose(
         "-map", vmap, "-map", amap,
         "-t", f"{duration:.3f}",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+        "-pix_fmt", "yuv420p", "-r", "30",
         "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart",
         str(out_path),
     ]

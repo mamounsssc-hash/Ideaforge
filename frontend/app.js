@@ -1,7 +1,7 @@
 // IdeaForge Clipper — front-end logic (vanilla JS, no build step).
 const $ = (s) => document.querySelector(s);
 const API = "";
-const APP_VERSION = "2.3";
+const APP_VERSION = "2.4";
 
 // On load, confirm the backend is the same version as this page. A mismatch
 // means the Python files weren't updated (or the browser cached the old page).

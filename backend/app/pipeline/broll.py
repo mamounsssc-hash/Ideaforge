@@ -108,6 +108,7 @@ def overlay(base: Path, segments: list[dict], out: Path, tw: int, th: int) -> Pa
         "-filter_complex", filter_complex,
         "-map", f"[{last}]", "-map", "0:a?",
         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+        "-pix_fmt", "yuv420p", "-r", "30",
         "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart",
         str(out),
     ]

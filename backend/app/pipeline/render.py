@@ -62,6 +62,11 @@ def _layout_vf(source: Path, clip: ClipCandidate, opts: RenderOptions,
     if safe:
         return vf
 
+    # Subtle sharpening restores crispness lost when a 1080p crop is upscaled to
+    # fill 9:16 (luma-only, low amount, safe on already-sharp 4K sources too).
+    if opts.reframe_layout in ("fill", "track") or not opts.reframe:
+        vf += ",unsharp=5:5:0.4:5:5:0.0"
+
     grade = effects.color_grade(opts.color_grade)
     if grade:
         vf += "," + grade
@@ -135,7 +140,10 @@ def render_clip(
         extras.append(f"drawbox=x=0:y=ih-{bar_h}:w='iw*t/{duration:.3f}':h={bar_h}:color=white@0.92:t=fill")
     cap_bar = ",".join(extras)
 
-    af = "afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3,loudnorm=I=-16:TP=-1.5:LRA=11" if opts.enhance_audio else ""
+    # Voice clean-up tuned for social: de-noise, remove low rumble, gentle
+    # compression, and normalise to -14 LUFS (TikTok / Reels / Shorts target).
+    af = ("highpass=f=80,afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3,"
+          "loudnorm=I=-14:TP=-1.5:LRA=11") if opts.enhance_audio else ""
 
     # ---- main pass: try with all effects, then retry with a safe layout-only
     # chain if anything in the filter graph fails. A clip must always render.
@@ -156,6 +164,7 @@ def render_clip(
         if af:
             cmd += ["-af", af]
         cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+                "-pix_fmt", "yuv420p", "-r", "30",
                 "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(stage)]
         _run(cmd)
 
@@ -279,6 +288,7 @@ def render_faceless(
     cmd = ["ffmpeg", "-y", *inputs, "-filter_complex", filter_complex,
            "-map", "[v]", "-map", amap, "-t", f"{dur:.3f}",
            "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+           "-pix_fmt", "yuv420p", "-r", "30",
            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-shortest",
            str(out_path)]
     _run(cmd)
