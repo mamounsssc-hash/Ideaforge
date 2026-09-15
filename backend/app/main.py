@@ -19,14 +19,22 @@ from fastapi.staticfiles import StaticFiles
 
 import zipfile
 
-from .config import UPLOAD_DIR, OUTPUT_DIR, WORK_DIR, settings
+from .config import UPLOAD_DIR, OUTPUT_DIR, WORK_DIR, settings, APP_VERSION
 from .jobs import store
 from .models import RenderRequest, BatchRenderRequest, AnalyzeOptions, WordsUpdate, CreateOptions
 from .pipeline import orchestrator, render, create as create_pipeline
 from .pipeline import tts
 from .styles import all_styles, get_style
 
-app = FastAPI(title="IdeaForge Clipper", version="0.1.0")
+print(f"[IdeaForge] backend build v{APP_VERSION} ready — up to 100 clips, gameplay, frame picker",
+      flush=True)
+
+app = FastAPI(title="IdeaForge Clipper", version=APP_VERSION)
+
+
+@app.get("/api/version")
+async def version():
+    return {"version": APP_VERSION}
 app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
 )

@@ -29,7 +29,18 @@ def _get_model():
     if compute == "auto":
         compute = "float16" if device == "cuda" else "int8"
     model = resolve_whisper_model(settings.whisper_model)
-    return WhisperModel(model, device=device, compute_type=compute)
+    banner = f"[IdeaForge] Whisper '{model}' loading on {device.upper()} ({compute})"
+    print("=" * len(banner), flush=True)
+    print(banner, flush=True)
+    print("=" * len(banner), flush=True)
+    try:
+        return WhisperModel(model, device=device, compute_type=compute)
+    except Exception as e:  # noqa: BLE001 — GPU may be unavailable; fall back to CPU
+        if device != "cpu":
+            print(f"[IdeaForge] {device.upper()} failed ({type(e).__name__}); "
+                  f"falling back to CPU (int8). GPU not used.", flush=True)
+            return WhisperModel(model, device="cpu", compute_type="int8")
+        raise
 
 
 def transcribe(media_path: Path, language: str | None = None, progress=None,

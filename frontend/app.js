@@ -1,6 +1,19 @@
 // IdeaForge Clipper — front-end logic (vanilla JS, no build step).
 const $ = (s) => document.querySelector(s);
 const API = "";
+const APP_VERSION = "2.1";
+
+// On load, confirm the backend is the same version as this page. A mismatch
+// means the Python files weren't updated (or the browser cached the old page).
+(async () => {
+  try {
+    const v = (await (await fetch("/api/version")).json()).version;
+    const pill = $("#versionPill");
+    if (!pill) return;
+    if (v === APP_VERSION) { pill.textContent = "v" + v + " ✓"; pill.style.background = "#123a1f"; pill.style.color = "#7ff0a8"; }
+    else { pill.textContent = "backend v" + v + " ≠ page v" + APP_VERSION; pill.style.background = "#3a1212"; pill.style.color = "#ff9a9a"; }
+  } catch { /* backend not reachable yet */ }
+})();
 
 let currentJob = null;
 let styles = [];
