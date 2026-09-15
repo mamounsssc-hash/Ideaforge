@@ -296,9 +296,14 @@ def _apply_overrides(clip, req):
     return c
 
 
+# Background batch tracker: batch_id -> progress dict. Renders run in a worker
+# thread so exporting 100 clips never blocks (or times out) the HTTP request.
+_batches: dict[str, dict] = {}
+
+
 @app.post("/api/render_batch")
 async def render_batch(req: BatchRenderRequest):
-    """Render several clips in one style and return a single downloadable ZIP."""
+    """Start rendering several clips in one style; poll /api/render_batch/{id}."""
     job = store.get(req.job_id)
     if not job:
         raise HTTPException(404, "job not found")
@@ -310,24 +315,43 @@ async def render_batch(req: BatchRenderRequest):
     if not clips:
         raise HTTPException(400, "no clips to render")
 
-    def _work() -> Path:
-        outputs: list[Path] = []
-        for c in clips:
-            outputs.append(render.render_clip(source, c, style, job.id, req,
-                                              job.music_path, job.gameplay_path))
-        zip_path = OUTPUT_DIR / f"{job.id}_{req.style_id}_{req.aspect_ratio.replace(':', 'x')}_batch.zip"
-        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_STORED) as zf:
-            for i, (c, p) in enumerate(zip(clips, outputs), start=1):
-                safe = "".join(ch for ch in (c.title or f"clip{i}") if ch.isalnum() or ch in " -_")[:40].strip()
-                zf.write(p, arcname=f"{i:02d}_{safe or 'clip'}.mp4")
-        return zip_path
+    batch_id = uuid.uuid4().hex[:12]
+    _batches[batch_id] = {"status": "running", "done": 0, "failed": 0,
+                          "total": len(clips), "url": "", "file": "", "error": ""}
 
-    loop = asyncio.get_event_loop()
-    try:
-        zip_path: Path = await loop.run_in_executor(_executor, _work)
-    except Exception as e:  # noqa: BLE001
-        raise HTTPException(500, f"batch render failed: {type(e).__name__}: {e}")
-    return {"file": zip_path.name, "url": f"/api/file/{zip_path.name}", "count": len(clips)}
+    def _work() -> None:
+        outputs: list[tuple] = []
+        for c in clips:
+            try:
+                p = render.render_clip(source, c, style, job.id, req,
+                                       job.music_path, job.gameplay_path)
+                outputs.append((c, p))
+            except Exception:  # noqa: BLE001 — one bad clip never stops the batch
+                _batches[batch_id]["failed"] += 1
+            _batches[batch_id]["done"] += 1
+        if not outputs:
+            _batches[batch_id].update(status="error", error="all clips failed to render")
+            return
+        try:
+            zip_path = OUTPUT_DIR / f"{job.id}_{req.style_id}_{req.aspect_ratio.replace(':', 'x')}_batch.zip"
+            with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_STORED) as zf:
+                for i, (c, p) in enumerate(outputs, start=1):
+                    safe = "".join(ch for ch in (c.title or f"clip{i}") if ch.isalnum() or ch in " -_")[:40].strip()
+                    zf.write(p, arcname=f"{i:02d}_{safe or 'clip'}.mp4")
+            _batches[batch_id].update(status="ready", url=f"/api/file/{zip_path.name}", file=zip_path.name)
+        except Exception as e:  # noqa: BLE001
+            _batches[batch_id].update(status="error", error=f"{type(e).__name__}: {e}")
+
+    threading.Thread(target=_work, daemon=True).start()
+    return {"batch_id": batch_id, "total": len(clips)}
+
+
+@app.get("/api/render_batch/{batch_id}")
+async def render_batch_status(batch_id: str):
+    b = _batches.get(batch_id)
+    if not b:
+        raise HTTPException(404, "batch not found")
+    return b
 
 
 @app.get("/api/file/{name}")

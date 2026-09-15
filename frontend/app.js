@@ -450,6 +450,35 @@ function collectOptions() {
   };
 }
 
+// ---------- one-click templates ----------
+const TEMPLATES = {
+  beast:     { style: "beast",         grade: "punchy",    zoompunch: true,  sfx: "pop",    capscale: 1.1, cappos: "center", enhance: true,  emojis: true },
+  podcast:   { style: "capcut_classic",grade: "none",      zoompunch: false, sfx: "none",   capscale: 1.0, cappos: "bottom", enhance: true,  emojis: true },
+  hormozi:   { style: "hormozi_yellow",grade: "vibrant",   zoompunch: true,  sfx: "pop",    capscale: 1.05,cappos: "center", enhance: true,  emojis: true },
+  gameplay:  { style: "beast",         grade: "punchy",    zoompunch: false, sfx: "none",   capscale: 1.0, cappos: "center", enhance: true,  emojis: true, gameplay: true },
+  cinematic: { style: "clean_center",  grade: "cinematic", zoompunch: false, sfx: "whoosh", capscale: 1.0, cappos: "bottom", enhance: true,  emojis: false },
+  minimal:   { style: "clean_white",   grade: "none",      zoompunch: false, sfx: "none",   capscale: 0.95,cappos: "bottom", enhance: false, emojis: false },
+};
+function setVal(id, v) { const el = $(id); if (el) { el.value = v; el.dispatchEvent(new Event("input")); } }
+function setChk(id, v) { const el = $(id); if (el) el.checked = v; }
+$("#templateSelect")?.addEventListener("change", (e) => {
+  const t = TEMPLATES[e.target.value];
+  if (!t) return;
+  // pick the style if it exists in the dropdown
+  const ss = $("#styleSelect");
+  if (ss && [...ss.options].some((o) => o.value === t.style)) ss.value = t.style;
+  setVal("#opt_grade", t.grade);
+  setVal("#opt_sfx", t.sfx);
+  setVal("#opt_capscale", t.capscale);
+  setVal("#opt_cappos", t.cappos);
+  setChk("#opt_zoompunch", t.zoompunch);
+  setChk("#opt_enhance", t.enhance);
+  setChk("#opt_emojis", t.emojis);
+  if (t.gameplay !== undefined) setChk("#opt_gameplay", t.gameplay);
+  const st = $("#batchStatus");
+  if (st) { st.classList.remove("hidden"); st.textContent = `Template applied: ${e.target.selectedOptions[0].text}`; }
+});
+
 // caption-size label
 $("#opt_capscale").addEventListener("input", (e) => {
   $("#capScaleVal").textContent = Math.round(parseFloat(e.target.value) * 100) + "%";
@@ -521,16 +550,36 @@ $("#batchBtn").addEventListener("click", async () => {
   const status = $("#batchStatus");
   btn.disabled = true; btn.textContent = "Rendering all…";
   status.classList.remove("hidden");
-  status.textContent = "Rendering every clip in this style — this can take a while…";
+  status.textContent = "Starting…";
   try {
     const r = await fetch("/api/render_batch", {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ job_id: currentJob, clip_ids: [], ...collectOptions() }),
     });
     if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
-    const data = await r.json();
-    status.innerHTML = `✓ ${data.count} clips rendered. <a href="${data.url}" download>Download ZIP</a>`;
-    const a = document.createElement("a"); a.href = data.url; a.download = ""; a.click();
+    const { batch_id, total } = await r.json();
+    // poll progress so exporting many clips shows a live count and never times out
+    await new Promise((resolve) => {
+      const tick = async () => {
+        try {
+          const s = await (await fetch(`/api/render_batch/${batch_id}`)).json();
+          if (s.status === "running") {
+            const failed = s.failed ? ` (${s.failed} skipped)` : "";
+            status.textContent = `Rendering ${s.done}/${s.total}${failed}…`;
+            setTimeout(tick, 1500);
+          } else if (s.status === "ready") {
+            const failed = s.failed ? ` · ${s.failed} skipped` : "";
+            status.innerHTML = `✓ ${s.done - s.failed}/${total} clips ready${failed}. <a href="${s.url}" download>Download ZIP</a>`;
+            const a = document.createElement("a"); a.href = s.url; a.download = ""; a.click();
+            resolve();
+          } else {
+            status.textContent = "Batch failed: " + (s.error || "unknown error");
+            resolve();
+          }
+        } catch (e) { setTimeout(tick, 2500); }   // transient error — keep polling
+      };
+      tick();
+    });
   } catch (err) {
     status.textContent = "Batch failed: " + err.message;
   } finally {

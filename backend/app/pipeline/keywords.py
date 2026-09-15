@@ -49,6 +49,33 @@ EMOJI_MAP: dict[str, str] = {
     "check": "✅", "done": "✅", "yes": "✅", "no": "❌", "wrong": "❌",
     "gold": "🥇", "diamond": "💎", "king": "👑", "queen": "👑", "boss": "😎",
     "sun": "☀️", "star": "⭐", "night": "🌙", "rain": "🌧️", "cold": "🥶",
+    # extended vocabulary for more word-accurate emoji
+    "million": "💰", "millions": "💰", "billion": "🤑", "billions": "🤑",
+    "invest": "📈", "stock": "📈", "market": "📊", "sales": "🛒", "buy": "🛒",
+    "free": "🆓", "gift": "🎁", "deal": "🤝", "team": "🤝", "friend": "🫶",
+    "family": "👨‍👩‍👧", "baby": "👶", "kid": "🧒", "kids": "🧒", "people": "👥",
+    "world": "🌍", "future": "🔮", "dream": "💭", "dreams": "💭", "hope": "🙏",
+    "pray": "🙏", "god": "🙏", "life": "🌱", "die": "💀", "death": "💀", "kill": "💀",
+    "blood": "🩸", "war": "⚔️", "fight": "🥊", "battle": "⚔️", "gun": "🔫",
+    "lie": "🤥", "liar": "🤥", "scam": "🚨", "police": "🚔", "law": "⚖️",
+    "question": "❓", "answer": "✅", "problem": "⚠️", "solution": "💡",
+    "trick": "🪄", "magic": "✨", "special": "✨", "new": "🆕", "big": "🔠",
+    "huge": "🦣", "small": "🐜", "grow": "🌱", "build": "🏗️", "create": "🎨",
+    "art": "🎨", "paint": "🎨", "write": "✍️", "sign": "✍️", "email": "📧",
+    "message": "💬", "talk": "💬", "speak": "🗣️", "say": "🗣️", "voice": "🎙️",
+    "listen": "👂", "hear": "👂", "loud": "🔊", "quiet": "🤫",
+    "hand": "🤝", "clap": "👏", "point": "👉", "down": "👇", "up": "👆",
+    "top": "🔝", "first": "🥇", "second": "🥈", "third": "🥉", "last": "🏁",
+    "start": "🏁", "finish": "🏁", "race": "🏎️", "plane": "✈️", "rocket": "🚀",
+    "space": "🚀", "moon": "🌙", "water": "💧", "ocean": "🌊", "wave": "🌊",
+    "beach": "🏖️", "tree": "🌳", "flower": "🌸", "dog": "🐶", "cat": "🐱",
+    "lion": "🦁", "snake": "🐍", "shark": "🦈", "bird": "🐦",
+    "phone": "📱", "internet": "🌐", "online": "🌐", "code": "💻", "computer": "💻",
+    "robot": "🤖", "ai": "🤖", "tech": "⚙️", "science": "🔬", "medicine": "💊",
+    "doctor": "🧑‍⚕️", "pain": "😣", "cry": "😭", "laugh": "😂", "funny": "😂",
+    "joke": "😂", "fear": "😨", "brave": "🦁", "confidence": "💪", "believe": "🙌",
+    "faith": "🙏", "trust": "🤝", "respect": "🫡", "win": "🏆", "lose": "😞",
+    "fail": "❌", "failure": "❌", "mistake": "⚠️", "lesson": "📚", "story": "📖",
 }
 
 NUM_RE = re.compile(r"\b\d[\d,.]*\b")
@@ -82,7 +109,21 @@ def extract_keywords(text: str, top_n: int = 6) -> list[str]:
 
 
 def emoji_for(word: str) -> str | None:
-    return EMOJI_MAP.get(_clean(word))
+    w = _clean(word)
+    e = EMOJI_MAP.get(w)
+    if e:
+        return e
+    # try a simple singular form so plurals/verbs still map ("rockets"->"rocket")
+    if len(w) > 3:
+        if w.endswith("ies"):
+            e = EMOJI_MAP.get(w[:-3] + "y")
+        elif w.endswith("es"):
+            e = EMOJI_MAP.get(w[:-2])
+        if not e and w.endswith("s"):
+            e = EMOJI_MAP.get(w[:-1])
+        if not e and w.endswith("ing"):
+            e = EMOJI_MAP.get(w[:-3]) or EMOJI_MAP.get(w[:-3] + "e")
+    return e
 
 
 def hashtags(text: str, extra: list[str] | None = None, limit: int = 6) -> list[str]:
