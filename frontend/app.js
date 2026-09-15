@@ -1,7 +1,7 @@
 // IdeaForge Clipper — front-end logic (vanilla JS, no build step).
 const $ = (s) => document.querySelector(s);
 const API = "";
-const APP_VERSION = "2.2";
+const APP_VERSION = "2.3";
 
 // On load, confirm the backend is the same version as this page. A mismatch
 // means the Python files weren't updated (or the browser cached the old page).
@@ -274,8 +274,10 @@ function clipRow(c) {
       <div class="hashtags">${(c.hashtags || []).map((h) => `<span>${escapeHtml(h)}</span>`).join("")}</div>
       <button class="edit-link">✎ Edit / trim</button>
       <button class="edit-link cap-link">✎ Edit captions</button>
+      <button class="preview-link" title="Watch the clip with live captions before rendering">▶ معاينة / Preview</button>
       <button class="frame-link" title="See the video and choose which person / where to frame">🎯 اختر الوجه / Frame</button>
       ${c.social_caption ? `<button class="copy-cap" title="Copy post caption">⧉ Copy caption</button>` : ""}
+      <div class="preview-box"></div>
       <div class="frame-picker"></div>
       <div class="edit-panel">
         <input class="t-title" type="text" placeholder="Title / hook" value="${escapeHtml(c.title || "")}" />
@@ -352,7 +354,67 @@ function clipRow(c) {
     buildFramePicker(fp, c);
   });
 
+  // in-browser preview with live captions (no render needed)
+  const pv = el.querySelector(".preview-box");
+  el.querySelector(".preview-link").addEventListener("click", () => {
+    if (pv.classList.contains("open")) { pv.classList.remove("open"); const v = pv.querySelector("video"); if (v) v.pause(); return; }
+    pv.classList.add("open");
+    if (pv.dataset.loaded) return;
+    buildPreview(pv, c);
+  });
+
   return el;
+}
+
+// Play the clip's segment from the source video with a live caption overlay,
+// so the user can judge a clip (and its captions) before committing to a render.
+async function buildPreview(pv, c) {
+  if (!currentJob) { pv.innerHTML = "<span class='muted small'>Analyze a video first.</span>"; return; }
+  pv.innerHTML = "<span class='muted small'>⏳ Loading preview…</span>";
+  const start = (c._start != null) ? c._start : c.start;
+  const end = (c._end != null) ? c._end : c.end;
+
+  // words for the live caption (fetch once, then cache on the clip)
+  let words = c._words;
+  if (!words) {
+    try { words = (await (await fetch(`/api/jobs/${currentJob}/clips/${c.id}/words`)).json()).words; }
+    catch { words = []; }
+    c._words = words;
+  }
+
+  pv.innerHTML = "";
+  const wrap = document.createElement("div"); wrap.className = "pv-wrap";
+  const video = document.createElement("video");
+  video.className = "pv-video"; video.controls = true; video.playsInline = true; video.preload = "auto";
+  video.src = `/api/jobs/${currentJob}/source`;
+  const caps = document.createElement("div"); caps.className = "pv-caps";
+  wrap.appendChild(video); wrap.appendChild(caps);
+
+  const bar = document.createElement("div"); bar.className = "pv-bar";
+  const playBtn = document.createElement("button"); playBtn.className = "btn primary"; playBtn.textContent = "▶ شغّل المقطع";
+  const info = document.createElement("span"); info.className = "muted small";
+  info.textContent = `${fmt(start)} – ${fmt(end)} (${Math.round(end - start)}s)`;
+  bar.appendChild(playBtn); bar.appendChild(info);
+
+  pv.appendChild(wrap); pv.appendChild(bar);
+
+  const seekStart = () => { try { video.currentTime = start; } catch {} };
+  video.addEventListener("loadedmetadata", seekStart);
+  playBtn.addEventListener("click", () => { seekStart(); video.play(); });
+
+  // live caption: show a small window of words up to the current time
+  const MAXW = 5;
+  video.addEventListener("timeupdate", () => {
+    const t = video.currentTime;
+    if (t >= end) { video.pause(); seekStart(); caps.innerHTML = ""; return; }
+    const said = words.filter((w) => w.start <= t + 0.02);
+    const win = said.slice(-MAXW);
+    caps.innerHTML = win.map((w, i) =>
+      `<span class="${i === win.length - 1 ? "pv-active" : ""}">${escapeHtml(w.text)}</span>`
+    ).join(" ");
+  });
+
+  pv.dataset.loaded = "1";
 }
 
 // Frame picker: shows a real frame from the clip; click/drag on the person to

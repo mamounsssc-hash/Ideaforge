@@ -130,6 +130,18 @@ h2 { font-size: 19px; margin: 0 0 14px; }
 /* make the Frame button stand out as a real button, not a text link */
 .frame-link { display: inline-block; margin-top: 8px; margin-right: 8px; background: var(--brand); color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
 .frame-link:hover { filter: brightness(1.08); }
+
+/* in-browser preview player */
+.preview-link { display: inline-block; margin-top: 8px; margin-right: 8px; background: #1f6f43; color: #fff; border: none; border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.preview-link:hover { filter: brightness(1.12); }
+.preview-box { display: none; margin-top: 10px; }
+.preview-box.open { display: block; }
+.preview-box .pv-wrap { position: relative; display: inline-block; max-width: 420px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #000; }
+.preview-box .pv-video { display: block; width: 100%; height: auto; background: #000; }
+.preview-box .pv-caps { position: absolute; left: 0; right: 0; bottom: 12%; text-align: center; padding: 0 8%; pointer-events: none; font-weight: 800; font-size: clamp(16px, 5vw, 26px); line-height: 1.25; text-transform: uppercase; }
+.preview-box .pv-caps span { color: #fff; -webkit-text-stroke: 1px #000; text-shadow: 0 2px 6px rgba(0,0,0,.9); }
+.preview-box .pv-caps .pv-active { color: #f5d40a; }
+.preview-box .pv-bar { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
 .word-grid { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; background: #0e131d; border: 1px solid var(--line); border-radius: 10px; }
 .word-inp { background: #131a26; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; font-size: 13px; min-width: 3ch; }
 .word-inp:focus { border-color: var(--brand); outline: none; }

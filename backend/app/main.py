@@ -112,6 +112,21 @@ async def from_local(req: LocalRequest):
     return {"job_id": job.id}
 
 
+@app.get("/api/jobs/{job_id}/source")
+async def job_source(job_id: str):
+    """Stream the original video (range-enabled) so the browser can preview clips."""
+    job = store.get(job_id)
+    if not job:
+        raise HTTPException(404, "job not found")
+    src = Path(job.source_path)
+    if not src.exists():
+        raise HTTPException(410, "source media no longer available")
+    ext = src.suffix.lower()
+    media = {".mp4": "video/mp4", ".mov": "video/quicktime", ".webm": "video/webm",
+             ".mkv": "video/x-matroska", ".m4v": "video/mp4"}.get(ext, "video/mp4")
+    return FileResponse(src, media_type=media)   # Starlette handles HTTP Range
+
+
 @app.post("/api/jobs/{job_id}/music")
 async def upload_music(job_id: str, file: UploadFile = File(...)):
     job = store.get(job_id)
