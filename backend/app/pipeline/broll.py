@@ -79,6 +79,59 @@ def fetch_for(clip: ClipCandidate, tw: int, th: int, job_id: str) -> list[dict]:
     return segments
 
 
+def _probe_duration(src: Path) -> float:
+    try:
+        r = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+             "-of", "default=noprint_wrappers=1:nokey=1", str(src)],
+            capture_output=True, text=True, check=True,
+        )
+        return float(r.stdout.strip())
+    except Exception:  # noqa: BLE001
+        return 0.0
+
+
+def self_segments(source: Path, clip: ClipCandidate, tw: int, th: int, job_id: str) -> list[dict]:
+    """B-roll WITHOUT the internet: cut short snippets from OTHER moments of the
+    same source video and show them as picture-in-picture cutaways on keyword
+    beats. Adds visual variety for free — degrades to [] on any problem.
+    """
+    clip_dur = clip.end - clip.start
+    if clip_dur < 6:
+        return []
+    total = _probe_duration(source)
+    if total < clip.end + 4 and clip.start < 4:
+        return []
+    # source timestamps clearly OUTSIDE the clip window (a moment before / after)
+    picks = []
+    before = clip.start - 35
+    after = clip.end + 15
+    if before >= 1:
+        picks.append(before)
+    if total and after + 3 <= total:
+        picks.append(after)
+    if not picks:
+        return []
+    # place the cutaways at ~30% and ~65% through the clip, ~2.2s each
+    slots = [(clip_dur * 0.30, 2.2), (clip_dur * 0.64, 2.2)][: len(picks)]
+    segments: list[dict] = []
+    for idx, (src_t, (t0, dur)) in enumerate(zip(picks, slots)):
+        if t0 + dur > clip_dur:
+            continue
+        dest = WORK_DIR / f"{job_id}_{clip.id}_selfbroll{idx}.mp4"
+        try:
+            subprocess.run(
+                ["ffmpeg", "-y", "-ss", f"{src_t:.3f}", "-i", str(source),
+                 "-t", f"{dur:.3f}", "-an", "-c:v", "libx264", "-preset", "veryfast",
+                 "-pix_fmt", "yuv420p", str(dest)],
+                check=True, capture_output=True, text=True,
+            )
+            segments.append({"path": str(dest), "start": round(t0, 2), "end": round(t0 + dur, 2)})
+        except Exception:  # noqa: BLE001
+            continue
+    return segments
+
+
 def overlay(base: Path, segments: list[dict], out: Path, tw: int, th: int) -> Path:
     """Overlay each B-roll as a rounded PiP in the upper third during its window."""
     inputs = ["-i", str(base)]

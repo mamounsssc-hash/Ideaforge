@@ -79,7 +79,8 @@ class RenderOptions(BaseModel):
     enhance_audio: bool = False      # denoise + loudness-normalize the voice
     reframe_layout: Literal["track", "fill", "fit"] = "track"
     crop_x: float = 0.5              # manual horizontal frame position for "fill" (0=left,0.5=center,1=right)
-    broll: bool = False              # optional Pexels B-roll overlay
+    broll: bool = False              # optional B-roll cutaway overlay
+    broll_source: Literal["self", "pexels"] = "self"   # self = from same video (free), pexels = stock (needs key)
     music_volume: float = 0.0        # 0 = off; else mix job's music at this gain
     # split-screen gameplay (clip on top, looping game like Subway/Minecraft on bottom)
     gameplay: bool = False

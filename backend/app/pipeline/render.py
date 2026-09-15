@@ -179,9 +179,13 @@ def render_clip(
     current = stage
 
     # ---- optional B-roll overlay pass ----
-    if opts.broll and broll.available():
+    if opts.broll:
         try:
-            segs = broll.fetch_for(clip, tw, th, job_id)
+            src_mode = getattr(opts, "broll_source", "self")
+            if src_mode == "pexels" and broll.available():
+                segs = broll.fetch_for(clip, tw, th, job_id)          # stock (needs key)
+            else:
+                segs = broll.self_segments(source, clip, tw, th, job_id)  # from same video, free
             if segs:
                 nxt = WORK_DIR / f"{job_id}_{clip.id}_stageB.mp4"
                 broll.overlay(current, segs, nxt, tw, th)

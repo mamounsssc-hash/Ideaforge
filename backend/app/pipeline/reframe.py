@@ -24,6 +24,28 @@ log = logging.getLogger("ideaforge.reframe")
 _SAMPLE_FPS = 4.0            # face samples per second
 _SMOOTH_WIN = 7             # moving-average window over samples
 
+_announced = False
+
+
+def _announce_detector(mediapipe: bool) -> None:
+    global _announced
+    if _announced:
+        return
+    _announced = True
+    name = "MediaPipe (accurate)" if mediapipe else "OpenCV cascade"
+    print(f"[IdeaForge] Speaker tracking ON — using {name}.", flush=True)
+
+
+def _warn_no_detector() -> None:
+    global _announced
+    if _announced:
+        return
+    _announced = True
+    print("[IdeaForge] Speaker tracking OFF — no face detector available. "
+          "Install MediaPipe for auto-tracking (pip install mediapipe), or use the "
+          "🎯 Frame button to pick the person manually. Using center crop for now.",
+          flush=True)
+
 
 def _detect_face_centers(src: Path, start: float, end: float):
     """Return list of (t_rel, cx_norm) samples in [0,1], plus source (w,h)."""
@@ -52,8 +74,10 @@ def _detect_face_centers(src: Path, start: float, end: float):
             cascade = None
     # No face detector available at all -> caller will center-crop.
     if detector is None and cascade is None:
+        _warn_no_detector()
         cap.release()
         return [], (w, h)
+    _announce_detector(detector is not None)
 
     samples: list[tuple[float, float]] = []
     step = 1.0 / _SAMPLE_FPS

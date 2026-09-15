@@ -1,7 +1,7 @@
 // IdeaForge Clipper — front-end logic (vanilla JS, no build step).
 const $ = (s) => document.querySelector(s);
 const API = "";
-const APP_VERSION = "2.5";
+const APP_VERSION = "2.6";
 
 // On load, confirm the backend is the same version as this page. A mismatch
 // means the Python files weren't updated (or the browser cached the old page).
@@ -519,6 +519,7 @@ function collectOptions() {
     enhance_audio: $("#opt_enhance").checked,
     reframe_layout: $("#opt_layout").value,
     broll: $("#opt_broll").checked,
+    broll_source: "self",
     music_volume: parseFloat($("#opt_musicvol").value) || 0,
     caption_position: $("#opt_cappos").value,
     caption_scale: parseFloat($("#opt_capscale").value) || 1,
