@@ -119,7 +119,11 @@ def build_ass(
     # Per-word highlight colors (speaker coloring) if requested.
     hi_colors: list[str] | None = None
     if speaker_colors and words:
-        sp = spk.assign(words)
+        # prefer real diarization labels when present, else the pause heuristic
+        if any(getattr(w, "speaker", -1) >= 0 for w in words):
+            sp = [max(0, getattr(w, "speaker", 0)) for w in words]
+        else:
+            sp = spk.assign(words)
         hi_colors = [_ass_color(spk.color_for(s)) for s in sp]
 
     # Pre-compute emoji insertions (cap + no repeats) mapped by word identity index.

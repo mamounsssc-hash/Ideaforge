@@ -10,7 +10,7 @@ from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-APP_VERSION = "2.8"          # bump when shipping an update the user should verify
+APP_VERSION = "2.9"          # bump when shipping an update the user should verify
 
 ROOT = Path(__file__).resolve().parent.parent          # backend/
 DATA_DIR = ROOT / "data"
@@ -62,6 +62,11 @@ class Settings(BaseSettings):
 
     # ---- Optional B-roll (Pexels free API; empty => B-roll disabled) ----
     pexels_api_key: str = ""
+
+    # ---- Optional real speaker diarization (pyannote.audio) ----
+    # Needs a free HuggingFace token (accept the model terms once) + the model
+    # download (~1-2 GB). Empty => falls back to the fast pause heuristic.
+    hf_token: str = ""
 
     # ---- Text-to-speech (faceless generator) ----
     tts_engine: str = "auto"             # auto | piper | edge

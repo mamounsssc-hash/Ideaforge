@@ -2,6 +2,9 @@ import React from "react";
 import {
   AbsoluteFill,
   OffthreadVideo,
+  Img,
+  Audio,
+  Sequence,
   staticFile,
   useCurrentFrame,
   useVideoConfig,
@@ -28,12 +31,16 @@ type Style = {
   bottomPct?: number;    // distance from bottom, %
   anim?: "pop" | "scalePop" | "bounce" | "slideUp" | "typewriter"; // entry animation
 };
+type Broll = {src: string; start: number; end: number; type?: "video" | "image"};
+type Music = {src: string; volume?: number};
 type Props = {
   video: string;
   durationInSeconds: number;
   words: Word[];
   keywords?: string[];
   style?: Style;
+  music?: Music | null;   // background music from public/ (Remotion <Audio>)
+  broll?: Broll[];        // cutaway images/videos overlaid on a time window
 };
 
 const norm = (s: string) =>
@@ -44,6 +51,8 @@ export const Captioned: React.FC<Props> = ({
   words,
   keywords = [],
   style = {},
+  music = null,
+  broll = [],
 }) => {
   const frame = useCurrentFrame();
   const {fps, width} = useVideoConfig();
@@ -71,6 +80,29 @@ export const Captioned: React.FC<Props> = ({
       <AbsoluteFill style={{background: "#0e1116"}} />
     );
 
+  // ---- Remotion media layers: optional B-roll cutaways + background music ----
+  const brollNodes = (broll || []).map((b, i) => (
+    <Sequence
+      key={i}
+      from={Math.max(0, Math.round(b.start * fps))}
+      durationInFrames={Math.max(1, Math.round((b.end - b.start) * fps))}
+    >
+      <AbsoluteFill style={{justifyContent: "flex-start", alignItems: "center", paddingTop: "11%"}}>
+        <div style={{width: "64%", aspectRatio: "16 / 9", borderRadius: 18, overflow: "hidden",
+          boxShadow: "0 18px 40px rgba(0,0,0,.55)", border: "3px solid #fff"}}>
+          {b.type === "image" ? (
+            <Img src={staticFile(b.src)} style={{width: "100%", height: "100%", objectFit: "cover"}} />
+          ) : (
+            <OffthreadVideo src={staticFile(b.src)} muted style={{width: "100%", height: "100%", objectFit: "cover"}} />
+          )}
+        </div>
+      </AbsoluteFill>
+    </Sequence>
+  ));
+  const musicNode = music && music.src ? (
+    <Audio src={staticFile(music.src)} volume={music.volume ?? 0.22} />
+  ) : null;
+
   // group words into caption lines
   const groups: Word[][] = [];
   for (let i = 0; i < words.length; i += maxWords) {
@@ -89,6 +121,8 @@ export const Captioned: React.FC<Props> = ({
     return (
       <AbsoluteFill>
         <Bg />
+        {brollNodes}
+        {musicNode}
       </AbsoluteFill>
     );
   }
@@ -101,6 +135,8 @@ export const Captioned: React.FC<Props> = ({
   return (
     <AbsoluteFill>
       <Bg />
+      {brollNodes}
+      {musicNode}
       <AbsoluteFill
         style={{
           justifyContent: "flex-end",

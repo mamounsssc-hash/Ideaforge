@@ -10,6 +10,7 @@ class Word(BaseModel):
     end: float
     text: str
     prob: float = 1.0
+    speaker: int = -1        # diarization speaker index (-1 = unknown)
 
 
 class Segment(BaseModel):

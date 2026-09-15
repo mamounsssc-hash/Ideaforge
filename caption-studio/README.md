@@ -31,6 +31,13 @@ A window opens where you can watch the captions and tweak `input.json` live.
 - `maxWords`, `fontSize`, `uppercase`, `bottomPct`.
 - `anim`: entry animation — `"pop"`, `"scalePop"`, `"bounce"`, `"slideUp"`, or `"typewriter"`.
 
+## Music + B-roll (Remotion audio & composition)
+In `input.json` you can also add:
+- `"music": {"src": "music.mp3", "volume": 0.22}` — put `music.mp3` in `public\`.
+- `"broll": [{"src": "shot1.mp4", "start": 3, "end": 6, "type": "video"}]` —
+  put the file in `public\`; it appears as a picture-in-picture cutaway from
+  `start` to `end` seconds. Use `"type": "image"` for a PNG/JPG.
+
 > The CliPro app can generate `input.json` + the un‑captioned clip for you —
 > that integration is the next step. For now you can test with the sample
 > `input.json` (leave `"video": ""` to preview captions on a dark background).

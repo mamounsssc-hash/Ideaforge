@@ -15,7 +15,7 @@ from pathlib import Path
 from ..config import settings, WORK_DIR
 from ..jobs import store
 from ..models import ClipCandidate, AnalyzeOptions
-from . import download, transcribe, segment, score, llm, render, keywords
+from . import download, transcribe, segment, score, llm, render, keywords, diarize
 
 log = logging.getLogger("ideaforge.orchestrator")
 
@@ -50,6 +50,14 @@ def analyze(job_id: str, source: str, is_url: bool, opts: AnalyzeOptions) -> Non
         store.update(job_id, language=lang)
         if not segments:
             raise RuntimeError("No speech detected in the video.")
+
+        # ---- optional: real speaker diarization (who spoke when) ----
+        if diarize.available():
+            store.set_progress(job_id, "analyzing", 0.60, "Identifying speakers…")
+            try:
+                diarize.label_words(src_path, [w for s in segments for w in s.words])
+            except Exception:  # noqa: BLE001 — never let diarization break the run
+                pass
 
         topic_terms = _topic_terms(opts.topic)
 

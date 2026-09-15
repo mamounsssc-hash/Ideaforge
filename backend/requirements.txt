@@ -25,6 +25,11 @@ edge-tts>=6.1              # free neural voices (online). Offline: use piper.
 # If this line fails to install (common on the newest Python), just remove it.
 mediapipe>=0.10 ; python_version < "3.13"
 
+# ---- Optional: real speaker diarization (who spoke when). ~1-2 GB of models. ----
+# Needs a free HuggingFace token (IDEAFORGE_HF_TOKEN) + accepting the model terms.
+# Uncomment to enable; otherwise the app uses the fast pause heuristic.
+# pyannote.audio>=3.1
+
 # Notes:
 # - ffmpeg + ffprobe must be installed on the system (see START.bat / README).
 # - Everything above is free and runs locally. No paid API keys required.
