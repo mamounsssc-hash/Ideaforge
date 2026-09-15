@@ -54,10 +54,13 @@ def _norm(word: str) -> str:
 
 
 def _active_anim(style: StylePreset) -> str:
+    # Smooth, premium word emphasis. The scale eases UP to 100% (never a hard jump)
+    # so the currently-spoken word grows in gently instead of snapping/jittering.
     if style.animation == "pop":
-        return r"\fscx72\fscy72\t(0,110,\fscx100\fscy100)"
+        return r"\fscx86\fscy86\t(0,140,\fscx100\fscy100)"
     if style.animation == "bounce":
-        return r"\fscx60\fscy60\t(0,90,\fscx112\fscy112)\t(90,170,\fscx100\fscy100)"
+        # a soft settle (small overshoot, then ease back) — no violent 112% snap.
+        return r"\fscx82\fscy82\t(0,120,\fscx106\fscy106)\t(120,220,\fscx100\fscy100)"
     return ""
 
 
@@ -197,9 +200,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
             # the word being spoken RIGHT NOW: highlight colour + pop animation.
             return "{\\c" + hi + anim + "}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
         if is_kw:
-            # an "important" word: its own FIXED colour, always on, slightly larger —
-            # so key words stand out even before/after they are spoken.
-            return "{\\c" + kwcol + r"\fscx114\fscy114}" + base + "{\\c" + primary + r"\fscx100\fscy100}" + emoji
+            # an "important" word: its own FIXED colour, always on. We colour it
+            # only (no resize) — statically blowing up a single word inside a line
+            # reflows the other words and jumps off the baseline, which looks bad.
+            # Colour alone makes key words pop the way Submagic / Opus captions do.
+            return "{\\c" + kwcol + "}" + base + "{\\c" + primary + "}" + emoji
         return base + emoji
 
     for group_idx, group in enumerate(_chunk(words, style.max_words)):
