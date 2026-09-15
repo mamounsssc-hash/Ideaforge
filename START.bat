@@ -100,7 +100,7 @@ REM
 REM  -- Google Gemini (free tier) -- key: aistudio.google.com/app/apikey
 REM set "IDEAFORGE_LLM_ENABLED=true"
 REM set "IDEAFORGE_LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai"
-REM set "IDEAFORGE_LLM_MODEL=gemini-2.0-flash"
+REM set "IDEAFORGE_LLM_MODEL=gemini-2.5-flash"
 REM set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_GEMINI_KEY"
 REM set "IDEAFORGE_LLM_VISION=false"
 REM
