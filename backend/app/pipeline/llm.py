@@ -24,13 +24,24 @@ log = logging.getLogger("ideaforge.llm")
 
 
 SYSTEM = (
-    "You are a viral short-form video editor. You are given numbered transcript "
-    "candidates from a long video. For each, judge how well it would perform as a "
-    "standalone vertical short. Reply with STRICT JSON only: a list of objects "
-    '{"id": <int>, "score": <0-99 int>, "title": "<hooky 3-6 word title>", '
-    '"reason": "<one short sentence>", "caption": "<a social post caption with 1-2 '
-    'emojis>", "hashtags": ["#tag", ...]}. Higher score = stronger hook, emotion, '
-    "payoff, and completeness. Do not include any text outside the JSON."
+    "You are an elite short-form editor who has made thousands of viral clips. "
+    "You receive numbered transcript candidates cut from ONE long video. Judge each "
+    "as a STANDALONE vertical short for TikTok / Reels / Shorts.\n\n"
+    "A STRONG clip: (1) opens with a HOOK in its first sentence — a bold claim, a "
+    "question, a number, or a curiosity gap; (2) is fully understandable on its own "
+    "without the rest of the video; (3) delivers ONE clear idea with a real payoff or "
+    "conclusion; (4) carries emotion, a story, a surprising insight, or a strong "
+    "opinion; (5) does NOT start or end mid-thought.\n"
+    "A WEAK clip: rambling, no hook, needs outside context, cut off, full of filler, "
+    "or a slow setup with no payoff.\n\n"
+    "Be HARSH and DECISIVE. Most candidates are NOT strong — score those below 40. "
+    "Only genuinely scroll-stopping clips deserve 80+. Spread scores widely; do not "
+    "cluster everything around 60-75.\n\n"
+    "Reply with STRICT JSON only: a list of "
+    '{"id": <int>, "score": <0-99 int>, "title": "<3-6 word hooky title>", '
+    '"reason": "<one sentence: why it hooks or why it is weak>", '
+    '"caption": "<social caption with 1-2 emojis>", "hashtags": ["#tag", ...]}. '
+    "No text outside the JSON."
 )
 
 
@@ -87,7 +98,7 @@ def rerank(
                 {"role": "system", "content": SYSTEM},
                 {"role": "user", "content": content},
             ],
-            "temperature": 0.3,
+            "temperature": 0.2,
             "stream": False,
         }
         headers = {"Authorization": f"Bearer {settings.llm_api_key}"}
@@ -103,8 +114,8 @@ def rerank(
             if not o:
                 continue
             llm_score = float(max(0, min(99, o.get("score", c.score.total))))
-            # Blend: trust the model but keep heuristics as a floor/anchor (hybrid).
-            c.score.total = round(0.65 * llm_score + 0.35 * c.score.total, 1)
+            # Trust a decisive model heavily; keep a little heuristic as an anchor.
+            c.score.total = round(0.8 * llm_score + 0.2 * c.score.total, 1)
             c.score.source = "hybrid"
             if o.get("title"):
                 c.title = str(o["title"])[:80]

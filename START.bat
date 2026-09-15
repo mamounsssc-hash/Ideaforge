@@ -91,6 +91,25 @@ set "IDEAFORGE_LLM_ENABLED=true"
 set "IDEAFORGE_LLM_BASE_URL=http://localhost:1234/v1"
 set "IDEAFORGE_LLM_MODEL=qwen/qwen3-vl-8b"
 set "IDEAFORGE_LLM_VISION=true"
+
+REM ---------- SMARTER clip picking with a FREE cloud model (recommended) ----------
+REM A local 8B model is weak at judging clips. A free Gemini or Groq key picks
+REM MUCH stronger clips. Get a free key, then DELETE the 4 lines above and
+REM uncomment ONE block below (needs internet while analyzing):
+REM
+REM  -- Google Gemini (free tier) -- key: aistudio.google.com/app/apikey
+REM set "IDEAFORGE_LLM_ENABLED=true"
+REM set "IDEAFORGE_LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai"
+REM set "IDEAFORGE_LLM_MODEL=gemini-2.0-flash"
+REM set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_GEMINI_KEY"
+REM set "IDEAFORGE_LLM_VISION=false"
+REM
+REM  -- Groq (free, very fast) -- key: console.groq.com/keys
+REM set "IDEAFORGE_LLM_ENABLED=true"
+REM set "IDEAFORGE_LLM_BASE_URL=https://api.groq.com/openai/v1"
+REM set "IDEAFORGE_LLM_MODEL=llama-3.3-70b-versatile"
+REM set "IDEAFORGE_LLM_API_KEY=PASTE_YOUR_GROQ_KEY"
+REM set "IDEAFORGE_LLM_VISION=false"
 echo.
 echo ==========================================
 echo  Starting. Your browser opens at:
