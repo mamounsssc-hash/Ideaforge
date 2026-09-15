@@ -62,10 +62,10 @@ def _layout_vf(source: Path, clip: ClipCandidate, opts: RenderOptions,
     if safe:
         return vf
 
-    # Subtle sharpening restores crispness lost when a 1080p crop is upscaled to
-    # fill 9:16 (luma-only, low amount, safe on already-sharp 4K sources too).
-    if opts.reframe_layout in ("fill", "track") or not opts.reframe:
-        vf += ",unsharp=5:5:0.4:5:5:0.0"
+    # PERMANENT quality boost on every clip: sharpen (restores crispness lost when
+    # a 1080p crop is upscaled to 9:16) + a gentle contrast/saturation lift so
+    # clips always look crisp and punchy. Luma-only sharpen is safe on 4K too.
+    vf += ",unsharp=5:5:0.55:5:5:0.0,eq=contrast=1.04:saturation=1.06"
 
     grade = effects.color_grade(opts.color_grade)
     if grade:
@@ -164,7 +164,7 @@ def render_clip(
                "-i", str(source), "-vf", full_vf]
         if af:
             cmd += ["-af", af]
-        cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+        cmd += ["-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
                 "-pix_fmt", "yuv420p", "-r", "30",
                 "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(stage)]
         _run(cmd)
@@ -293,7 +293,7 @@ def render_faceless(
 
     cmd = ["ffmpeg", "-y", *inputs, "-filter_complex", filter_complex,
            "-map", "[v]", "-map", amap, "-t", f"{dur:.3f}",
-           "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
+           "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
            "-pix_fmt", "yuv420p", "-r", "30",
            "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", "-shortest",
            str(out_path)]

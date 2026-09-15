@@ -26,6 +26,7 @@ type Style = {
   uppercase?: boolean;
   fontSize?: number;     // px in the 1080-wide frame
   bottomPct?: number;    // distance from bottom, %
+  anim?: "pop" | "scalePop" | "bounce" | "slideUp" | "typewriter"; // entry animation
 };
 type Props = {
   video: string;
@@ -57,6 +58,7 @@ export const Captioned: React.FC<Props> = ({
   const fontSize = style.fontSize ?? Math.round(width * 0.075);
   const uppercase = style.uppercase ?? false;
   const bottomPct = style.bottomPct ?? 22;
+  const anim = style.anim ?? "pop";
   const kwset = new Set(keywords.map(norm));
 
   const Bg = () =>
@@ -123,12 +125,26 @@ export const Captioned: React.FC<Props> = ({
           {visible.map((w, j) => {
             const isActive = j === ai;
             const isKw = kwset.has(norm(w.text));
-            const pop = spring({
-              frame: frame - Math.round(w.start * fps),
-              fps,
-              config: {damping: 14, stiffness: 200, mass: 0.5},
-            });
-            const scale = isActive ? interpolate(pop, [0, 1], [0.82, 1]) : 1;
+            // Remotion animation: each word animates in on its own start frame,
+            // driven by spring() + interpolate() — the presets below use its power.
+            const f0 = frame - Math.round(w.start * fps);
+            const s = spring({frame: f0, fps, config: {damping: 12, stiffness: 180, mass: 0.6}});
+            let scale = 1, ty = 0, opacity = 1;
+            if (anim === "scalePop") {
+              scale = interpolate(s, [0, 0.6, 1], [0.2, 1.12, 1]);
+              opacity = interpolate(s, [0, 0.35], [0, 1], {extrapolateRight: "clamp"});
+            } else if (anim === "bounce") {
+              scale = interpolate(s, [0, 1], [0.55, 1]);
+              ty = interpolate(s, [0, 1], [26, 0]);
+            } else if (anim === "slideUp") {
+              ty = interpolate(s, [0, 1], [40, 0]);
+              opacity = interpolate(s, [0, 0.5], [0, 1], {extrapolateRight: "clamp"});
+            } else if (anim === "typewriter") {
+              opacity = f0 >= 0 ? 1 : 0;
+            } else {
+              // "pop" (default): only the active word pops
+              scale = isActive ? interpolate(s, [0, 1], [0.82, 1]) : 1;
+            }
             const boxed = isActive && style.activeBox;
             const color = isActive
               ? boxed
@@ -146,7 +162,8 @@ export const Captioned: React.FC<Props> = ({
                   background: boxed ? active : "transparent",
                   borderRadius: 16,
                   padding: boxed ? "0.02em 0.2em" : "0",
-                  transform: `scale(${scale})`,
+                  transform: `translateY(${ty}px) scale(${scale})`,
+                  opacity,
                   display: "inline-block",
                   WebkitTextStroke: boxed ? "0" : "2.2px #000",
                   textShadow: boxed ? "none" : "0 3px 9px rgba(0,0,0,.85)",

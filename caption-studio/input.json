@@ -23,6 +23,7 @@
     "maxWords": 4,
     "uppercase": false,
     "fontSize": 84,
-    "bottomPct": 22
+    "bottomPct": 22,
+    "anim": "scalePop"
   }
 }

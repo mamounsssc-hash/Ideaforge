@@ -15,7 +15,7 @@ from ..models import Word
 SPEAKER_COLORS = ["F5D40A", "27C7FF", "31E36B", "FF7AD9", "FF6B4A", "B6FF3C"]
 
 
-def assign(words: list[Word], turn_gap: float = 0.65, max_speakers: int = 2) -> list[int]:
+def assign(words: list[Word], turn_gap: float = 0.8, max_speakers: int = 2) -> list[int]:
     """Return a speaker index per word using pause-based turn segmentation."""
     if not words:
         return []

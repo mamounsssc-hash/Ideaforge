@@ -29,6 +29,7 @@ A window opens where you can watch the captions and tweak `input.json` live.
 - `keyword`: fixed colour for important words (listed in `keywords`).
 - `primary`: normal word colour · `font`: `"cairo"` (Arabic) or `"anton"` (English).
 - `maxWords`, `fontSize`, `uppercase`, `bottomPct`.
+- `anim`: entry animation — `"pop"`, `"scalePop"`, `"bounce"`, `"slideUp"`, or `"typewriter"`.
 
 > The CliPro app can generate `input.json` + the un‑captioned clip for you —
 > that integration is the next step. For now you can test with the sample
