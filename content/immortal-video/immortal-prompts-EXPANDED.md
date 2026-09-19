@@ -1,5 +1,5 @@
 # 🎬 برومبتات الصور والفيديو الكاملة — "What If You Woke Up Tomorrow and Could Never Die?"
-### قناة "البشر المستقبليون" · 399 برومبت جاهز للصق · ~20 فيديو AI · إيقاع سريع (Zenn / Ink Explainer)
+### قناة "البشر المستقبليون" · 399 برومبت جاهز للصق · ~7 فيديو AI · إيقاع سريع (Zenn / Ink Explainer)
 
 > **طريقة الاستخدام:** انسخ البلوك (بين علامات ```) → الصقه في Google Flow → ولّد.
 > - **لقطات شخصيتنا:** اربط **الصورة المرجعية** للشخصية + نفس الـ seed لثبات الشكل.
@@ -90,10 +90,10 @@ A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, fl
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a collage of cartoon dangers surrounding a calm STICKMAN character (round white head, orange beanie with pom-pom, blue coat) standing in the center — lightning bolts striking near him, cartoon fire on one side, falling rocks above, deep water below — but he stands untouched and calm with a flat expression, hands in pockets. All the dangers are cartoonish and non-graphic. Clean simple background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**9 — مشهد 🎥 فيديو**
+**9 — مشهد**
 🗣️ "You just keep going."
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a long straight empty road stretching to the horizon under a big sky — a simple STICKMAN character (round white head, orange beanie with pom-pom, blue coat, seen from behind) walks alone down the center of the road, getting smaller toward the vanishing point. Clouds drift slowly. The road goes on forever. Lonely, cinematic wide shot. 5-second clip: slow walking away from camera toward the horizon. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a long straight empty road stretching to the horizon under a big sky — a simple STICKMAN character (round white head, orange beanie with pom-pom, blue coat, seen from behind) walks alone down the center of the road, getting smaller toward the vanishing point. Clouds drift slowly. The road goes on forever. Lonely, cinematic wide shot. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **10 — شخصيتنا**
@@ -204,9 +204,8 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes wide open with dread, eyebrows furrowed, a small tight closed mouth, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat — extreme close-up of just his face, now fully against a dark gray-black background. The brightness is gone. He knows what is coming. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**28 — ✍️ بطاقة عنوان**
+**28 — كائن رمزي**
 🗣️ "Year one."
-✍️ النص: "YEAR 1"
 ```
 A clean minimal pure-white screen with large bold hand-written style text in the center reading "YEAR 1" in thick black ink. Lots of white space. Clean and simple. Simple flat 2D hand-drawn style, thick clean lines. 16:9. Avoid: watermark, logos, extra letters, misspelling, gibberish letters, clutter.
 ```
@@ -263,9 +262,8 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes relaxed, a flat neutral mouth, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — sits on a simple couch watching a simple TV set, feet slightly up, a small bowl of snacks beside him. Completely ordinary evening at home. Nothing remarkable. Clean white background around the scene. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**37 — ✍️ بطاقة عنوان**
+**37 — كائن رمزي**
 🗣️ "Year five."
-✍️ النص: "YEAR 5"
 ```
 A clean minimal pure-white screen with large bold hand-written style text in the center reading "YEAR 5" in thick black ink. Lots of white space. Simple flat 2D hand-drawn style, thick clean lines. 16:9. Avoid: watermark, logos, extra letters, misspelling, gibberish letters, clutter.
 ```
@@ -276,10 +274,10 @@ A clean minimal pure-white screen with large bold hand-written style text in the
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): extreme close-up of a simple cartoon mitten hand (thick black outlines, flat white fill) with a small bright red cut on one finger. The cut is fresh and visible. Clean white background. Just the hand and the cut, nothing else. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, blood, gore, clutter, gibberish letters.
 ```
 
-**39 — كائن رمزي 🎥 فيديو**
+**39 — كائن رمزي**
 🗣️ "A cut closes overnight."
 ```
-A simple 2D flat cartoon extreme close-up (crude minimalist doodle, thick bold outlines, flat colors): a simple cartoon mitten hand (round style, thick black outlines) with a small red cut on one finger — and the cut is slowly healing, the skin closing together with a faint warm golden glow. Time-lapse healing. Clean white background. 2-second clip: the cut slowly closes and disappears, glow fades. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat cartoon extreme close-up (crude minimalist doodle, thick bold outlines, flat colors): a simple cartoon mitten hand (round style, thick black outlines) with a small red cut on one finger — and the cut is slowly healing, the skin closing together with a faint warm golden glow. Time-lapse healing. Clean white background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **40 — شخصيتنا ⚡**
@@ -306,9 +304,8 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes, a small casual smile, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — stands on a clean white background looking at himself in a simple mirror, flexing one arm casually with a small shrug, an "I guess I'm healthy" expression. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**44 — ✍️ بطاقة عنوان**
+**44 — كائن رمزي**
 🗣️ "Year ten."
-✍️ النص: "YEAR 10"
 ```
 A clean minimal pure-white screen with large bold hand-written style text in the center reading "YEAR 10" in thick black ink. Lots of white space. Simple flat 2D hand-drawn style, thick clean lines. 16:9. Avoid: watermark, logos, extra letters, misspelling, gibberish letters, clutter.
 ```
@@ -366,9 +363,8 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes with happy curved eyebrows, a laughing open mouth, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — stands on a clean white background laughing politely with one hand waving dismissively, an "oh stop it" gesture. Light easy moment. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**53 — ✍️ بطاقة عنوان**
+**53 — كائن رمزي**
 🗣️ "Year twenty-five."
-✍️ النص: "YEAR 25"
 ```
 A clean minimal pure-white screen with large bold hand-written style text in the center reading "YEAR 25" in thick black ink. The numbers are getting bigger. Lots of white space. Simple flat 2D hand-drawn style, thick clean lines. 16:9. Avoid: watermark, logos, extra letters, misspelling, gibberish letters, clutter.
 ```
@@ -485,9 +481,8 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a family portrait-style composition on a clean white background — our STICKMAN protagonist (orange beanie, blue coat) standing in the center, with a WIFE figure (round white head, shoulder-length hair, green dress) on one side and the DAUGHTER (long dark hair, pink-purple outfit) on the other. A visible CRACK runs through the image between the protagonist and his family — like glass shattering, splitting him apart from them. He is on one side of the break, they are on the other. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**72 — ✍️ بطاقة عنوان**
+**72 — كائن رمزي**
 🗣️ "Year thirty."
-✍️ النص: "YEAR 30"
 ```
 A clean minimal pure-white screen with large bold hand-written style text in the center reading "YEAR 30" in thick black ink. Lots of white space. Simple flat 2D hand-drawn style, thick clean lines. 16:9. Avoid: watermark, logos, extra letters, misspelling, gibberish letters, clutter.
 ```
@@ -525,11 +520,11 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes soft and warm with adoration, eyebrows slightly raised with tenderness, a small gentle loving smile, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat — close-up of just his face looking slightly to the side (toward where his wife would be), his eyes full of quiet love. Warm golden tone. Clean simple background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**78 — مشهد 🎥 فيديو**
+**78 — مشهد**
 🗣️ "But strangers ask if she is your mother."
 [REF: الزوجة — see PROMPT 73]
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our STICKMAN protagonist (round white head, orange beanie with pom-pom, blue coat, looking young) and his WIFE (round white head, half-white hair, green dress, looking older) walking side by side holding hands on a simple street. A STRANGER STICKMAN (generic, round head, plain gray outfit) stops and does a visible double-take — head turning, eyes wide, eyebrows up — staring at the dramatic age difference between the couple. 4-second clip: the couple walks, the stranger's head turns in surprise. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our STICKMAN protagonist (round white head, orange beanie with pom-pom, blue coat, looking young) and his WIFE (round white head, half-white hair, green dress, looking older) walking side by side holding hands on a simple street. A STRANGER STICKMAN (generic, round head, plain gray outfit) stops and does a visible double-take — head turning, eyes wide, eyebrows up — staring at the dramatic age difference between the couple. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **79 — شخصيتنا ⚡**
@@ -601,9 +596,8 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the WIFE (round white head, half-white hair, green dress) seen from behind, walking away from the mirror down a dim hallway in a dark bedroom. Our protagonist (orange beanie, blue coat) stands frozen at the mirror, watching her go. The distance between them — physical and emotional — is growing. Cold blue tones. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**89 — ✍️ بطاقة عنوان**
+**89 — كائن رمزي**
 🗣️ "Year fifty."
-✍️ النص: "YEAR 50"
 ```
 A clean minimal pure-white screen with large bold hand-written style text in the center reading "YEAR 50" in thick black ink. The number feels heavier now. Lots of white space. Simple flat 2D hand-drawn style, thick clean lines. 16:9. Avoid: watermark, logos, extra letters, misspelling, gibberish letters, clutter.
 ```
@@ -650,10 +644,10 @@ A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, fl
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): close-up of our STICKMAN protagonist's arm (blue coat sleeve rolled up) with a simple cartoon needle being inserted by a gloved hand. He looks away with a tired resigned expression. Cold clinical white background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**97 — مشهد 🎥 فيديو**
+**97 — مشهد**
 🗣️ "Seven hundred samples in one year."
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a clinical laboratory — shelves and shelves and shelves filling the entire background, stacked floor to ceiling with ROWS AND ROWS of small glass blood vials, hundreds of them, neatly lined up. The sheer quantity is overwhelming. A gloved hand places one more vial onto the already overflowing shelf. Cold clinical lighting. 3-second clip: camera slowly pans across the enormous wall of vials, more keep appearing. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a clinical laboratory — shelves and shelves and shelves filling the entire background, stacked floor to ceiling with ROWS AND ROWS of small glass blood vials, hundreds of them, neatly lined up. The sheer quantity is overwhelming. A gloved hand places one more vial onto the already overflowing shelf. Cold clinical lighting. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, clutter, gibberish letters.
 ```
 
 **98 — مشهد**
@@ -991,8 +985,7 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 # ═══════════ ACT 2 — THE FADE (Year 80 – 200) ═══════════
 
-**149 — ✍️ بطاقة عنوان**
-✍️ النص: "YEAR 80"
+**149 — كائن رمزي**
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "80" fills the center of the frame in thick bold black outline, with a subtle warm golden glow behind it. A small calendar icon beside it. Clean white background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -1011,11 +1004,11 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a NEW WOMAN: a round white head, small black dot eyes with a warm kind expression, a gentle smile, short dark hair just above her shoulders, a bright yellow scarf wrapped around her neck, a simple warm red sweater, thin stick arms with small round mitten hands — standing in the same park, receiving the flowers. She looks at him with genuine warmth. Autumn leaves on the ground. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**152 — مشهد 🎥 فيديو**
+**152 — مشهد**
 🗣️ "You fall in love again."
 [REF: البطل — see PROMPT 1 · الحبيبة الجديدة — see PROMPT 41]
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): close-up of TWO HANDS reaching toward each other — our protagonist's mitten hand (blue coat sleeve) and the NEW WOMAN's mitten hand (red sweater sleeve, yellow scarf visible). Their hands are about to touch. Warm golden light between the hands. Autumn park background blurred. 3-second clip: hands slowly reach toward each other and gently clasp. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): close-up of TWO HANDS reaching toward each other — our protagonist's mitten hand (blue coat sleeve) and the NEW WOMAN's mitten hand (red sweater sleeve, yellow scarf visible). Their hands are about to touch. Warm golden light between the hands. Autumn park background blurred. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **153 — مشهد**
@@ -1053,17 +1046,16 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes with a wry resigned expression, one eyebrow slightly raised, a small crooked smile, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — one hand placed over his own chest where a small cartoon heart glows faintly through the blue coat. He chose the heart. Simple plain background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**158 — ✍️ بطاقة عنوان**
-✍️ النص: "YEAR 100"
+**158 — كائن رمزي**
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "100" fills the center of the frame in thick bold black outline, with a darker, cooler blue-gray tone behind it. Clean simple background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
 
-**159 — مشهد 🎥 فيديو**
+**159 — مشهد**
 🗣️ "The last person who knew you when you were just a normal person has died."
 [REF: البطل — see PROMPT 1]
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a row of simple cartoon people — friends, neighbors, family — standing in a line. One by one from left to right they are FADING TO TRANSPARENT, dissolving, disappearing. Only ONE remains on the far right, barely visible, flickering. Our protagonist (orange beanie, blue coat) stands at the far left watching them vanish. 4-second clip: figures fade one by one, the last one flickers and disappears. Dark muted background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a row of simple cartoon people — friends, neighbors, family — standing in a line. One by one from left to right they are FADING TO TRANSPARENT, dissolving, disappearing. Only ONE remains on the far right, barely visible, flickering. Our protagonist (orange beanie, blue coat) stands at the far left watching them vanish. Dark muted background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **160 — مشهد**
@@ -1119,8 +1111,7 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes with a tired disconnected expression, looking away from the viewer, a flat mouth, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — standing with his back half-turned, one hand hanging limp. Behind him, glowing cartoon phone/screen shapes with angry and loving emojis floating off them. He has stopped looking. Dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**168 — ✍️ بطاقة عنوان**
-✍️ النص: "YEAR 150"
+**168 — كائن رمزي**
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "150" fills the center of the frame in thick bold black outline. The number has a golden tint, as if made of coins or money. Clean white background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -1202,8 +1193,7 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes with a dry deadpan expression, a very slight shrug, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands. Around him float three small ghostly images of different currency symbols — all from different eras. Each one fading. Muted background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**181 — ✍️ بطاقة عنوان**
-✍️ النص: "YEAR 200"
+**181 — كائن رمزي**
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "200" fills the center of the frame in thick bold black outline. Clean white background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -1239,7 +1229,6 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **186 — مشهد**
 🗣️ "Technically, you have been mid-thirties for a hundred and seventy-five years."
-✍️ النص: "Mid-thirties for 175 years"
 [REF: البطل — see PROMPT 1]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the same restaurant scene — but behind our protagonist (orange beanie, blue coat) the wall shows a long TIMELINE stretching back with tick marks representing decades. The timeline stretches absurdly far to the LEFT while he sits looking exactly the same as he always has. 175 years of mid-thirties. The contrast is absurd. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
@@ -1321,8 +1310,7 @@ A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, fl
 
 # ═══════════ ACT 3 — THE WEIGHT (Year 250 – 400) ═══════════
 
-**198 — ✍️ بطاقة عنوان**
-✍️ النص: "YEAR 250"
+**198 — كائن رمزي**
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "250" fills the center of the frame in thick bold black outline. The number has a dusty, faded quality — as if it is old and weathered. Clean muted background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -1399,11 +1387,11 @@ A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, fl
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a single cartoon PAINTING in a gold frame — inside is a tiny city SKYLINE that looks like no modern city. Unfamiliar buildings, old architecture, a vanished world. The painting is very old, heavily faded, barely visible. Dark museum wall. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
 
-**210 — مشهد 🎥 فيديو**
+**210 — مشهد**
 🗣️ "And the museum keeps getting bigger while the number of visitors stays at one."
 [REF: البطل — see PROMPT 1]
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): WIDE shot — an enormous museum hallway stretching DEEP into the distance, the walls lined with hundreds of paintings that get smaller as they recede. Our tiny STICKMAN protagonist (orange beanie, blue coat) is a TINY figure in the vast space, walking alone down the infinite corridor. The scale is overwhelming. 4-second clip: slow walk forward, camera pulling back to reveal more and more paintings stretching endlessly. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): WIDE shot — an enormous museum hallway stretching DEEP into the distance, the walls lined with hundreds of paintings that get smaller as they recede. Our tiny STICKMAN protagonist (orange beanie, blue coat) is a TINY figure in the vast space, walking alone down the infinite corridor. The scale is overwhelming. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **211 — كائن رمزي**
@@ -1519,8 +1507,7 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a cartoon EYE (large, close-up) — the eye is open but completely DRY. Small crack lines radiate outward from the eye like dried desert earth. Where tears should be, there is nothing. The tear duct is empty. The eye still sees. It just cannot cry anymore. Plain dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
 
-**229 — ✍️ بطاقة عنوان**
-✍️ النص: "YEAR 350"
+**229 — كائن رمزي**
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "350" fills the center of the frame in thick bold black outline against a very DARK, almost black background. The number itself is barely visible — dark on dark. Dark mood. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -1553,11 +1540,11 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes with a dark ironic half-smile, eyebrows raised, an awkward knowing grin — the humor is pitch-black, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom. Clean white background. The darkest joke he has ever told. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**234 — مشهد 🎥 فيديو**
+**234 — مشهد**
 🗣️ "because you try everything. You jump."
 [REF: البطل — see PROMPT 1]
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our STICKMAN protagonist (orange beanie, blue coat) falling through the air from a great height — arms and legs spread, coat flapping upward, beanie staying on — the ground far below with tiny buildings. His expression is calm, almost hopeful. 3-second clip: falling through open air, wind lines streaming past. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, impact, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our STICKMAN protagonist (orange beanie, blue coat) falling through the air from a great height — arms and legs spread, coat flapping upward, beanie staying on — the ground far below with tiny buildings. His expression is calm, almost hopeful. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, impact, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **235 — شخصيتنا ⚡**
@@ -1595,11 +1582,11 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): close-up of a CRUMPLED cartoon car hood — the metal is bent and dented from impact. But where the person should have been hurt, there is nothing. Just a clean outline where a body should have fallen. The car took all the damage. The immortal took none. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, blood, gore, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**240 — شخصيتنا 🎥 فيديو**
+**240 — شخصيتنا**
 🗣️ "You just wake up. Every single time."
 [REF: البطل — see PROMPT 1]
 ```
-A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes snapping open with a DEVASTATED disappointed expression, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — sitting up in the EXACT SAME BED from the video's opening shot. Morning light through the window. Alarm clock on the nightstand. Same bed, same morning, same alarm clock. 3-second clip: eyes snap open, he sits up slowly, looks at his hands in disbelief. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes snapping open with a DEVASTATED disappointed expression, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — sitting up in the EXACT SAME BED from the video's opening shot. Morning light through the window. Alarm clock on the nightstand. Same bed, same morning, same alarm clock. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **241 — شخصيتنا**
@@ -1656,8 +1643,7 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the same dark void as before — but now tiny cartoon FLAMES flicker at the very edges of the darkness, just barely visible, licking at the borders of the frame. Is this hell? The flames are ambiguous — they could be real or imagined. Our protagonist's silhouette (orange beanie visible) sits in the center, small and still. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**249 — ✍️ بطاقة عنوان**
-✍️ النص: "YEAR 400"
+**249 — كائن رمزي**
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "400" fills the center of the frame in thick bold black outline. The number has a slightly WARMER tone than the previous year markers — a hint of amber. Clean simple background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -1754,7 +1740,6 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **263 — مشهد**
 🗣️ "'Time.'"
-✍️ النص: "TIME"
 [REF: البطل — see PROMPT 1]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our protagonist (orange beanie, blue coat) standing with his arms slightly open, and around him in all directions stretches an INFINITE landscape of clocks, calendars, sundials, hourglasses — all of time laid out before him like a field. The clocks stretch to the horizon. He has more of this resource than any human who ever lived. The question is what to do with it. Warm golden light on the horizon. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
@@ -1808,7 +1793,6 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **271 — مشهد**
 🗣️ "Right now, a man named Bryan Johnson"
-✍️ النص: "Bryan Johnson"
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a cartoon MAN — simple stickman style (round white head, short dark hair, a simple gray t-shirt, fit build) — standing confidently with arms at his sides. Clean white background with a subtle spotlight on him. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1841,14 +1825,12 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **276 — مشهد**
 🗣️ "In 2012, a scientist named Shinya Yamanaka"
-✍️ النص: "Shinya Yamanaka — 2012"
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a simple stickman-style SCIENTIST character (round white head, short black hair, a white lab coat, small round glasses) standing at a simple podium, looking accomplished. Clean white background with a subtle blue tint. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **277 — مشهد**
 🗣️ "won the Nobel Prize"
-✍️ النص: "Nobel Prize"
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the same stickman SCIENTIST (round white head, short black hair, white lab coat, small round glasses) holding up a cartoon GOLD MEDAL with a star on it — the Nobel Prize. Small sparkle stars around the medal. He stands at a simple podium. Clean, celebratory golden background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1859,15 +1841,14 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a cartoon DIAGRAM of a cell transformation — LEFT side: a wrinkled, gray, tired-looking cartoon cell with droopy eyes and age spots. A large bold arrow in the middle points RIGHT. RIGHT side: the SAME cell but now bright, smooth, colorful, young-looking, with bright eyes and a glow around it. Clean white background, educational style. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, clutter, gibberish letters.
 ```
 
-**279 — كائن رمزي 🎥 فيديو**
+**279 — كائن رمزي**
 🗣️ "old cells can be reprogrammed back to a young state."
 ```
-A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a single cartoon CELL in the center of the frame — it starts wrinkled, gray, and droopy, then smooths out, brightens, and becomes young and vibrant with a healthy glow. 3-second clip: the old cell visibly rejuvenates, wrinkles disappearing, color returning from gray to bright pink, eyes opening wide and bright. Clean white background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
+A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a single cartoon CELL in the center of the frame — it starts wrinkled, gray, and droopy, then smooths out, brightens, and becomes young and vibrant with a healthy glow. Clean white background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
 
 **280 — مشهد**
 🗣️ "In 2023, researchers at Harvard"
-✍️ النص: "Harvard — 2023"
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a simple cartoon UNIVERSITY BUILDING — a wide building with columns and a triangular pediment, a cartoon crest on the front. Three stickman scientists in white lab coats stand outside the building, each holding clipboards. Clean bright background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1891,10 +1872,10 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a large bold cartoon ARROW doing a complete U-turn — pointing forward, curving around, and pointing BACKWARD. The arrow glows bright green. Clean dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
 
-**284 — مشهد 🎥 فيديو**
+**284 — مشهد**
 🗣️ "The mice got younger."
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the young rejuvenated cartoon MOUSE — now running energetically on a small cartoon exercise wheel inside a lab cage, bright and lively. A small cartoon scientist stickman stands beside the cage taking notes, looking amazed, jaw dropped. The mouse is visibly younger, fur bright, running fast. 3-second clip: the mouse runs faster and faster on the wheel, the scientist's jaw drops lower. Clean white lab background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the young rejuvenated cartoon MOUSE — now running energetically on a small cartoon exercise wheel inside a lab cage, bright and lively. A small cartoon scientist stickman stands beside the cage taking notes, looking amazed, jaw dropped. The mouse is visibly younger, fur bright, running fast. Clean white lab background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **285 — شخصيتنا**
@@ -1938,7 +1919,6 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **291 — مشهد**
 🗣️ "The first human who lives to two hundred"
-✍️ النص: "200"
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a massive number "200" fills the center of the frame in thick bold black outline with a warm golden glow around it. The number looks futuristic and luminous. Clean dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -1975,7 +1955,6 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **296 — كائن رمزي**
 🗣️ "Year five hundred."
-✍️ النص: "سنة 500 / Year 500"
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "500" fills the center of the frame in thick bold black outline. The number feels ancient, weathered, cracked — as if carved into old stone. Dark muted background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -2013,11 +1992,11 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a single small cartoon HEART floating above an old faded PHOTO FRAME. The heart is warm red, still beating. But the photo frame below it is completely blank — white space where a face should be. The love remains. The memory is gone. Clean dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
 
-**302 — مشهد 🎥 فيديو**
+**302 — مشهد**
 🗣️ "But ten thousand faces have passed through your life since then, and hers was swallowed by the flood."
 [REF: البطل — see PROMPT 1]
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a FLOOD of thousands of tiny simple stickman FACES rushing past like a river — a torrent of round white heads with different small features flowing from left to right across the frame. Our protagonist (orange beanie, blue coat) stands in the center of the flood, being pushed by the current of faces. One faded, ghostly face (the mother) sinks below the surface of the flood and disappears. 4-second clip: faces rush past like water, the faded mother face sinks and vanishes beneath the flood. Dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a FLOOD of thousands of tiny simple stickman FACES rushing past like a river — a torrent of round white heads with different small features flowing from left to right across the frame. Our protagonist (orange beanie, blue coat) stands in the center of the flood, being pushed by the current of faces. One faded, ghostly face (the mother) sinks below the surface of the flood and disappears. Dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **303 — شخصيتنا**
@@ -2049,7 +2028,6 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **307 — كائن رمزي**
 🗣️ "Year six hundred."
-✍️ النص: "سنة 600 / Year 600"
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "600" fills the center of the frame in thick bold black outline. The number looks fossilized — like ancient stone text from an archaeological dig. Muted earthy brown background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -2091,7 +2069,6 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **313 — كائن رمزي**
 🗣️ "Year seven hundred."
-✍️ النص: "سنة 700 / Year 700"
 ```
 A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, flat colors): a large number "700" fills the center of the frame in thick bold black outline. The number is SPLIT DOWN THE MIDDLE — one half in warm golden tones, the other half in angry red. Tension between two halves. Dark background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, NO detailed background, plain simple background, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, photorealism, clutter, gibberish letters.
 ```
@@ -2114,11 +2091,11 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a crowd of angry stickman people on a dark red background — raised fists, protest signs, furious expressions, mouths open shouting. They radiate rage. Some hold burning torches. Menacing and hostile. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, weapons, blood, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**317 — مشهد 🎥 فيديو**
+**317 — مشهد**
 🗣️ "People who want your immortality. And people who want you dead because of it."
 [REF: البطل — see PROMPT 1]
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our protagonist (orange beanie, blue coat) stands in the CENTER of the frame. On the LEFT: a crowd of stickman people reaching toward him with open hands, eager faces, grabbing — they WANT what he has. On the RIGHT: a crowd of stickman people with angry faces, holding protest signs, raised fists — they want him GONE. 3-second clip: both crowds slowly press inward toward the center, closing in on him. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, weapons, blood, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our protagonist (orange beanie, blue coat) stands in the CENTER of the frame. On the LEFT: a crowd of stickman people reaching toward him with open hands, eager faces, grabbing — they WANT what he has. On the RIGHT: a crowd of stickman people with angry faces, holding protest signs, raised fists — they want him GONE. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, weapons, blood, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **318 — مشهد ⚡**
@@ -2164,10 +2141,10 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a peaceful golden-lit scene — stickman people kneeling before a large golden portrait of the protagonist's face (round head, orange beanie), candles lit all around it. Flowers are placed at the base. The atmosphere is calm, worshipful. Warm golden tones. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, real religious symbols, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**325 — مشهد 🎥 فيديو**
+**325 — مشهد**
 🗣️ "In the country next door, they burn images of you."
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a split frame down the middle. LEFT side: stickman people kneeling before a golden portrait of the protagonist's face (orange beanie), candles lit around it, peaceful worship. RIGHT side: stickman people with angry faces, a portrait of the same face (orange beanie) burning in cartoon flames, raised fists. 3-second clip: LEFT side candles flicker peacefully, RIGHT side flames lick the portrait and consume it. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, real religious symbols, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): a split frame down the middle. LEFT side: stickman people kneeling before a golden portrait of the protagonist's face (orange beanie), candles lit around it, peaceful worship. RIGHT side: stickman people with angry faces, a portrait of the same face (orange beanie) burning in cartoon flames, raised fists. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, real religious symbols, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **326 — شخصيتنا**
@@ -2562,11 +2539,11 @@ A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, fl
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — a round white head, small black dot eyes half-closed, a slow sad knowing smile, a bright orange knitted beanie with a folded ribbed brim and a round pom-pom, a long blue collared coat, thin stick arms with small round mitten hands — tired, knowing expression. He has heard this before. A thousand times. Dark background, warm light on his face. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
-**386 — مشهد 🎥 فيديو**
+**386 — مشهد**
 🗣️ "Right before year three hundred."
 ✍️ النص: "300"
 ```
-A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the timeline from earlier in the video — a long horizontal line with marks and numbers — but now the camera ZOOMS IN slowly toward the number "300" on the timeline. The 300 mark glows ominously red, pulsing. Everything else around it fades to black. 4-second clip: slow zoom toward the glowing red 300 mark on the timeline, everything else fading to dark. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
+A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the timeline from earlier in the video — a long horizontal line with marks and numbers — but now the camera ZOOMS IN slowly toward the number "300" on the timeline. The 300 mark glows ominously red, pulsing. Everything else around it fades to black. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **387 — شخصيتنا**
@@ -2671,7 +2648,7 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 > 
 > **ملاحظات:**
 > - كل برومبت جاهز للنسخ واللصق في Google Flow
-> - ~20 فيديو AI موزعة على مدار الفيديو
+> - ~7 فيديو AI موزعة على مدار الفيديو
 > - اللقطات المعلّمة بـ ⚡ تُقص في أقل من ثانية
 > - الشخصيات المتكررة مُعلَّمة بـ [REF]
 > - النص الذي تكتبه في المونتاج مُعلَّم بـ ✍️
