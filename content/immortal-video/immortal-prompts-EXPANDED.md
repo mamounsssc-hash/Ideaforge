@@ -35,8 +35,8 @@ Character reference sheet: the SAME cartoon character shown in 6 poses and expre
 | الحفيدة | ~125 | صغيرة جداً، ذيلتين، فستان وردي صغير، ~6 سنوات | THE FIRST DEATH |
 | الحبيبة الجديدة (سنة 80) | ~150 | شعر غامق قصير، وشاح أصفر | ACT 2 (Year 80) |
 | موعد المطعم (سنة 200) | ~180 | شعر مجعد، أقراط زرقاء | ACT 2 (Year 200) |
-| المعالج الأول | ~235 | نظارات، شعر رمادي، دفتر | ACT 3 (Year 400) |
-| المعالجة الأخيرة | ~240 | شعر قصير غامق، تعبير لطيف، أنثى | ACT 3 (Year 400) |
+| المعالج الأول | ~250 | نظارات، شعر رمادي، دفتر | ACT 3 (Year 400) |
+| المعالجة الأخيرة | ~256 | شعر قصير غامق، تعبير لطيف، أنثى | ACT 3 (Year 400) |
 
 ---
 
@@ -808,14 +808,14 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 
 **122 — مشهد**
 🗣️ "Your granddaughter tugs your sleeve"
-[REF: البطل — see PROMPT 1 · الحفيدة — see PROMPT 11]
+[REF: البطل — see PROMPT 1 · الحفيدة — see PROMPT 121]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the tiny GRANDDAUGHTER (pigtails, pink dress) looking UP at our protagonist (orange beanie, blue coat) with wide innocent curious eyes, her head tilted. He looks DOWN at her with a broken devastated expression — his eyes searching her face for recognition. She sees a stranger. Funeral setting in background. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **123 — مشهد**
 🗣️ "and whispers, 'Are you the man from TV?'"
-[REF: الحفيدة — see PROMPT 11]
+[REF: الحفيدة — see PROMPT 121]
 ```
 A simple 2D flat STICKMAN-style cartoon close-up (crude minimalist doodle, thick bold outlines, flat colors): the tiny GRANDDAUGHTER's face looking up — wide innocent black dot eyes, a small curious mouth, two small pigtails. She does not recognize her own grandfather. She only knows the celebrity. A small empty speech bubble floats beside her head. Close-up, intimate, heartbreaking. Funeral background blurred behind her. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1006,14 +1006,14 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **152 — مشهد**
 🗣️ "You fall in love again."
-[REF: البطل — see PROMPT 1 · الحبيبة الجديدة — see PROMPT 41]
+[REF: البطل — see PROMPT 1 · الحبيبة الجديدة — see PROMPT 152]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): close-up of TWO HANDS reaching toward each other — our protagonist's mitten hand (blue coat sleeve) and the NEW WOMAN's mitten hand (red sweater sleeve, yellow scarf visible). Their hands are about to touch. Warm golden light between the hands. Autumn park background blurred. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **153 — مشهد**
 🗣️ "You know exactly how this will end."
-[REF: البطل — see PROMPT 1 · الحبيبة الجديدة — see PROMPT 41]
+[REF: البطل — see PROMPT 1 · الحبيبة الجديدة — see PROMPT 152]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): our STICKMAN protagonist (round white head, orange beanie, blue coat) and the NEW WOMAN (short dark hair, yellow scarf, red sweater) walking side by side in the park, holding hands. But behind them, a long SHADOW stretches out that ends at a small gravestone shape. Warm autumn light in front, dark shadow behind. The future is already written. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1215,7 +1215,7 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 
 **184 — شخصية**
 🗣️ "She asks how old you are."
-[REF: موعد المطعم — see PROMPT 73]
+[REF: موعد المطعم — see PROMPT 184]
 ```
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — close-up of the DATE WOMAN: a round white head, small black dot eyes with a curious flirty expression, raised eyebrows, a small smile, curly dark hair, small blue earrings, a simple purple top. She is resting her chin on one hand, leaning forward with interest. A small empty speech bubble beside her head. Warm restaurant light. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1236,7 +1236,7 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 
 **187 — مشهد**
 🗣️ "She asks what you do."
-[REF: البطل — see PROMPT 1 · موعد المطعم — see PROMPT 73]
+[REF: البطل — see PROMPT 1 · موعد المطعم — see PROMPT 184]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): same restaurant — the DATE WOMAN (curly dark hair, blue earrings, purple top) leaning forward with animated interest, bright eyes, excited expression. Our protagonist (orange beanie, blue coat) sits back in his chair with a distant, weary expression, looking down at the table. The energy gap between them is visible. Simple candle on table. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1268,7 +1268,7 @@ A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, fl
 
 **192 — شخصية**
 🗣️ "She thinks you are being dramatic."
-[REF: موعد المطعم — see PROMPT 73]
+[REF: موعد المطعم — see PROMPT 184]
 ```
 A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD black outlines and flat colors — close-up of the DATE WOMAN (round white head, curly dark hair, blue earrings, purple top) with an amused skeptical look — one eyebrow raised, a playful grin, head tilted. She does not believe him. She thinks it is a charming exaggeration. Warm restaurant light. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1288,7 +1288,7 @@ A simple 2D flat cartoon image (crude minimalist doodle, thick bold outlines, fl
 
 **195 — مشهد**
 🗣️ "You are being literal."
-[REF: البطل — see PROMPT 1 · موعد المطعم — see PROMPT 73]
+[REF: البطل — see PROMPT 1 · موعد المطعم — see PROMPT 184]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): same restaurant table — but now shown from a wide angle. She (curly hair, blue earrings, purple top) sees a man across the table. He (orange beanie, blue coat) is a monument wearing a man's shape. The candle flickers between them. The distance between their experiences is visible in their postures — she leans IN, he leans AWAY. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1658,7 +1658,7 @@ A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bo
 
 **251 — مشهد**
 🗣️ "Your therapist retired."
-[REF: المعالج الأول — see PROMPT 140 · البطل — see PROMPT 1]
+[REF: المعالج الأول — see PROMPT 250 · البطل — see PROMPT 1]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the same therapy office — but the THERAPIST's chair is EMPTY. The notepad sits abandoned on the chair seat. A small "RETIRED" sign hangs on the office door in the background. Our protagonist (orange beanie, blue coat) still lies on the couch, staring at the empty chair. The room feels colder. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
@@ -1700,14 +1700,14 @@ A simple 2D STICKMAN cartoon character (crude minimalist doodle) with thick BOLD
 
 **257 — مشهد**
 🗣️ "But something in the last one's words stuck."
-[REF: المعالجة الأخيرة — see PROMPT 146 · البطل — see PROMPT 1]
+[REF: المعالجة الأخيرة — see PROMPT 256 · البطل — see PROMPT 1]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): the therapy office — the LAST THERAPIST (short dark hair, green blouse, warm expression) sitting in her chair, leaning forward slightly. Our protagonist (orange beanie, blue coat) sitting on the couch but for the first time sitting UPRIGHT, not lying down. He is leaning forward too. He is listening. Something is different. Warm golden light in the room. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
 
 **258 — مشهد**
 🗣️ "She said, 'You are not cursed with life.'"
-[REF: المعالجة الأخيرة — see PROMPT 146 · البطل — see PROMPT 1]
+[REF: المعالجة الأخيرة — see PROMPT 256 · البطل — see PROMPT 1]
 ```
 A simple 2D flat STICKMAN-style cartoon scene (crude minimalist doodle, thick bold outlines, flat colors): close-up of the therapy scene — the LAST THERAPIST (short dark hair, green blouse) leaning forward in her chair toward our protagonist (orange beanie, blue coat) who sits upright on the couch, listening intently for the first time in decades. A small speech bubble from her mouth. The room feels warmer than it has in fifty years. Warm golden lighting. Simple flat 2D STICKMAN cartoon, minimalist hand-drawn doodle, thick BOLD uniform black outlines, flat solid colors, NO shading, NO gradients, crude webcomic doodle look. NOT anime, NOT 3D, NOT realistic, NOT painterly, NOT rendered. 16:9. Avoid: watermark, logos, real brands, real human faces, photorealism, extra fingers, deformed hands, clutter, gibberish letters.
 ```
