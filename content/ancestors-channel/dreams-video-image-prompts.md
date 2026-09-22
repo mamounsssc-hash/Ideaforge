@@ -1,839 +1,722 @@
-# Dreams Video — Complete Image Prompts (Zenn Style)
+# Dreams Video — Image Prompts (210 Frames)
 
 **Video:** "What Did Ancient Humans Think Dreams Were?"
-**Target frames:** ~210 (matching Zenn's 212 frames / 9 min)
-**Duration:** ~8-9 minutes (~1,800 words at 200-230 wpm)
-**Style:** Zenn stickman (see zenn-visual-style-guide.md)
+**Character:** Simple stickman (Zenn style, no custom character — see style guide)
+**Total:** 210 frames | ~8:30 | ~24.7 frames/min
 
 ---
 
-## تحليل أسلوب Zenn البصري بالتفصيل
+## قواعد البرومبتات
 
-### كيف ينتقل Zenn بين الصور (Transition Patterns)
-
-من تحليل 212 إطار، Zenn يستخدم 7 أنماط انتقال أساسية:
-
-1. **البناء التدريجي (Progressive Build)**: نفس المشهد الأساسي، كل إطار جديد يضيف عنصر واحد فقط. مثال: إطار 1 = شخصية واقفة → إطار 2 = نفس الشخصية + نظارات → إطار 3 = نفس الشخصية + كتاب بيدها → إطار 4 = نفس الشخصية + نص تسمية. هذا النمط يستخدمه كثيراً عند تقديم باحث أو مفهوم جديد.
-
-2. **التكبير والتصغير (Zoom In/Out)**: لقطة واسعة للمشهد → تكبير على تفصيل مهم → رجوع للقطة واسعة. يستخدم هذا عند إبراز رقم أو حقيقة صادمة.
-
-3. **الكشف من اليسار لليمين (Left-to-Right Reveal)**: خط زمني أو تسلسل يتقدم من اليسار لليمين عبر عدة إطارات. كل إطار يضيف المرحلة التالية.
-
-4. **نفس الشخصية بوضع مختلف (Same Character, New Pose)**: الشخصية تبقى في نفس الموقع لكن تغير وضعها (واقف → جالس → يشير → يمشي).
-
-5. **تبديل النص (Text Swap)**: نفس الصورة بالضبط، فقط النص/الرقم يتغير لعكس معلومة جديدة.
-
-6. **المقارنة المقسومة (Split Compare)**: الشاشة مقسومة — يسار/يمين أو أعلى/أسفل — لمقارنة فكرتين.
-
-7. **العزل (Object Isolation)**: مشهد كامل → ثم العنصر المهم فقط معزول في المنتصف.
-
-### قواعد الاتساق (Consistency Rules)
-
-- **الشخصيات** لها نفس النسب دائماً: الرأس = دائرة بحجم ¼ من الجسم
-- **نفس الشخصية** تبدو متطابقة كل مرة تظهر (الباحث دائماً بنظارات + أصلع)
-- **لون الخلفية** ثابت داخل كل قسم (كله أبيض أو كله أخضر)
-- **أسلوب النص** ثابت: نفس الخط، نفس الحجم، نفس الموقع
-- **ترميز الألوان** ثابت: أصفر = أهمية، أزرق = علم، أحمر = خطر، وردي = دماغ
-- **حجم الشخصيات** ثابت بين الإطارات المتتالية
-
-### بين الإطارات (Between Frames)
-
-- **لا انتقالات معقدة** — hard cut أو fade بسيط فقط
-- **الاتساق البصري** يتحقق عبر:
-  - الشخصية تبقى على نفس الجانب من الإطار
-  - الخلفية ثابتة داخل القسم
-  - قاعدة 180 درجة (الكاميرا لا تقفز)
-  - الحجم ثابت (الشخصيات بنفس القياس)
-
----
-
-## CHARACTER REFERENCE SHEET
-
-> **هام**: كل prompt يجب أن يحافظ على هذه المواصفات بالضبط
-
-### DREAMER (الحالم) — الشخصية الرئيسية
-- Round circle head, small dot eyes, tiny line mouth
-- Stick body, stick arms, stick legs
-- No hair (bald/smooth circle)
-- Slightly larger than other characters
-- When sleeping: horizontal, curved-line closed eyes, ZZZ above head
-- When dreaming: same but with purple cloud above
-- **Always black outline, no fill**
-
-### ANCIENT HUMAN (الإنسان القديم)
-- Same stickman proportions as Dreamer
-- Simple brown triangle/trapezoid shape on body (animal skin/cloth)
-- Sometimes simple messy hair (3-4 short lines on top of circle head)
-- **Always same brown cloth, same proportions**
-
-### RESEARCHER (الباحث)
-- Same stickman proportions
-- Rectangular glasses on face (two small squares connected by line)
-- Bald (smooth circle head)
-- Holding clipboard (small rectangle in hand) OR pointing at something
-- **Every researcher looks the same — only the name label changes**
-
-### SPIRIT/SOUL (الروح)
-- Same stickman shape as Dreamer
-- BUT drawn with dotted/dashed lines instead of solid
-- Light purple or light blue tint
-- Slight glow effect (thin halo around body)
-- **Always dotted lines, always lighter than physical body**
-
-### GOD/DIVINE FIGURE (الإله)
-- Larger than normal stickman (1.5x size)
-- Yellow glow/rays radiating outward
-- Simple crown or halo (circle above head)
-- Elevated position (higher in frame than humans)
-- **Always glowing yellow, always elevated**
-
----
-
-## PROMPT CONSTRUCTION RULES
-
-Every prompt follows this exact structure:
-
+### الشخصية الأساسية (BASE CHARACTER — استخدم في كل prompt):
 ```
-[SCENE DESCRIPTION]. [CHARACTER DETAILS]. [OBJECTS/ELEMENTS]. [TEXT LABEL].
-[STYLE SUFFIX]
+A simple minimalist stickman with a round circle head, two small black dot eyes, a tiny line mouth, thin stick body, thin stick arms with small round hands, thin stick legs with simple feet
 ```
 
-**STYLE SUFFIX (White BG):**
-`Simple 2D stickman illustration, minimalist flat style, round circle head stick figure characters with dot eyes and line mouth, black outlines only, flat solid colors, clean pure white background, 16:9 widescreen aspect ratio, educational YouTube animation frame, no shading, no gradients, no texture, no realistic details, thick clean lines, centered composition`
+### بدون صور إلهية:
+- لا رسم أي إله أو كيان إلهي بشكل شخصية
+- الإلهي = أشعة ضوء ذهبية من أعلى + هالة + رموز مجردة
 
-**STYLE SUFFIX (Sage Green BG):**
-`Simple 2D stickman illustration, minimalist flat style, round circle head stick figure characters with dot eyes and line mouth, black outlines only, flat solid colors, muted sage green (#A8B89C) background, 16:9 widescreen aspect ratio, educational YouTube animation frame, no shading, no gradients, no texture, no realistic details, thick clean lines, centered composition`
+### المراجع:
+- عند تكرار شخصية: "same character as Prompt #X"
+- عند تكرار مشهد: "same scene as Prompt #X but..."
 
----
+### STYLE SUFFIX — WHITE (ألصقه بنهاية كل prompt بخلفية بيضاء):
+```
+Simple minimalist 2D stickman illustration, clean round-head stick figure characters, black outlines, flat solid colors, pure white background, 16:9 widescreen, educational YouTube animation frame, no shading, no gradients, no texture, no 3D, thick clean lines
+```
 
-## SECTION 1: OPENING HOOK (0:00 - 0:45)
-**Script lines:** "Every night, you die..." → "Something far more terrifying"
-**Background:** WHITE
-**Transition style:** Fast cuts, progressive build, one concept per frame
-**Frames: 1–28**
-
----
-
-### Frame 1 — TITLE CARD
-A single stickman lying horizontal on a simple rectangular bed shape, eyes closed (two curved downward lines), arms at sides, completely still. Above the figure, large bold handwritten uppercase text: "EVERY NIGHT". The scene is stark — lots of white space around the bed. Dark vignette at edges suggesting nighttime.
-
-### Frame 2 — "you die"
-Same sleeping stickman on bed from Frame 1, identical position. Now add a large red X overlaid lightly over the body. Bold text above changes to: "YOU DIE". Same composition, same bed, same character — only the X and text are new. (Progressive build from Frame 1.)
-
-### Frame 3 — "Your body goes still"
-Same sleeping stickman, same bed. Remove the red X. Add small dashes radiating outward from the body suggesting stillness/rigidity. The stickman's arms and legs are perfectly straight, locked in place. Text label: "STILL". (Same base scene, element swap.)
-
-### Frame 4 — "Your eyes close" (ZOOM IN)
-Close-up: just the stickman's round circle head filling the center of frame. Two curved downward lines for closed eyes. A tiny straight line for mouth. Nothing else — pure white around the head. No text. (Zoom in from full body to head detail.)
-
-### Frame 5 — "Your muscles shut down"
-Back to full body view. Sleeping stickman with small red X marks on each limb — one X on each arm, one X on each leg. Text label: "PARALYZED". (Zoom back out, progressive build — same sleeping pose, adding X marks.)
-
-### Frame 6 — "Heart rate drops"
-Isolated object frame: a simple pink heart shape (♥) centered, large. Next to it, a downward-pointing red arrow. Below the heart, a simple ECG heartbeat line that starts with tall spiky waves on the left and flattens to small gentle waves on the right. Text: "DROPS". (Object isolation — no character, just the concept.)
-
-### Frame 7 — "Breathing slows"
-Back to sleeping stickman. Three small curved lines near the nose/mouth area representing breath. The lines get progressively smaller and more spaced apart (left to right or top to bottom), showing breathing slowing down. No text label.
-
-### Frame 8 — "Brain disconnects"
-Stickman head in profile (circle with a bump for nose). Inside the head, a small pink brain shape. From the brain, a dotted line extends outward to the right toward the edge of the frame. A large red X cuts through the dotted line midway. Text: "DISCONNECTED". (Progressive build — same head, adding the disconnection visual.)
-
-### Frame 9 — "And then, in that silence, something starts"
-Same sleeping stickman from previous frames. Now a small purple swirly cloud begins to form just above the head. The cloud is small, just starting. Three small dots trail from the head upward into the cloud. Mysterious feeling. No text — let the visual speak.
-
-### Frame 10 — "Something starts" (BUILD)
-Same frame as 9 but the purple cloud is now LARGER, more developed, swirling more. Still above the sleeping stickman. The cloud fills about 1/3 of the upper frame. (Progressive build — cloud growing.)
-
-### Frame 11 — "You see faces that don't exist"
-Inside the purple dream cloud (which now takes up the top half of frame): three different stickman faces floating. Each face is slightly different — one with wide circle eyes, one with a frown, one with no mouth. They float at slight angles, not grounded. Below the cloud, the sleeping stickman body is still visible. (Same base + dream content appearing.)
-
-### Frame 12 — "Walk through buildings never been inside"
-Inside the dream cloud: a stickman (the dreamer, same proportions) walking through a simple rectangular building outline. The building has a door shape and two window squares. The building's lines are slightly wavy/wobbly to suggest dream-unreality. The dreamer walks through the wall as if it's not solid. Text: "NEVER BEEN INSIDE".
-
-### Frame 13 — "Fall off cliffs"
-Inside the dream cloud: a stickman falling downward with arms and legs spread out, motion lines (3-4 vertical dashes) above showing downward movement. A cliff edge visible at top-left — simple angular line forming a ledge. The stickman's mouth is an O shape (surprise). No text.
-
-### Frame 14 — "Feel the drop in your stomach"
-Close-up of a stickman's torso (just the stick body from neck to waist). Inside the stomach area, a downward arrow. Small wavy lines around the stomach area suggesting the physical sensation. Text: "THE DROP". (Zoom in to body detail.)
-
-### Frame 15 — "Talk to people who are dead"
-Inside dream cloud: two stickmen facing each other in conversation (small speech lines between them). The LEFT stickman is solid black outlines (the dreamer). The RIGHT stickman is drawn with DOTTED/DASHED lines and is slightly lighter/transparent — a ghost. Small halo or faint glow around the ghost stickman. No text.
-
-### Frame 16 — "You believe every second is real"
-The dreamer stickman standing upright (NOT sleeping now — this is inside the dream). Wide open circle eyes (large). An exclamation mark above the head. Around the stickman, dream elements (wavy building, floating face from earlier frames) but the dreamer doesn't notice they're strange. Text: "REAL?!" in red.
-
-### Frame 17 — "Then you wake up"
-Stickman sitting UPRIGHT in bed (legs still under blanket line, upper body vertical). Eyes are wide open circles. Small lines radiating outward from the head like a burst of awareness. The purple dream cloud is GONE — replaced by pure white space. Sharp, clean transition from dream to wake. Text: "WAKE UP".
-
-### Frame 18 — "25,000 times since you were born"
-Large bold text centered: "25,000 TIMES" in black. Below the text, a very small stickman looking up at the number, arms slightly raised in disbelief. Lots of white space. The number dominates the frame. (Text emphasis frame.)
-
-### Frame 19 — "Your ancestors have done it for 300,000 years"
-A horizontal timeline arrow stretching from left edge to right edge. On the far LEFT, a small ancient human stickman (with brown cloth wrap). On the far RIGHT, a modern stickman (no cloth). Above the arrow: "300,000 YEARS" in bold. Small marks along the arrow suggesting passage of time.
-
-### Frame 20 — "Nobody thought dreams were something the brain made up"
-A group of 5 ancient human stickmen (all with brown cloth wraps, slightly different heights). All looking UPWARD at a large purple dream cloud above them. Each has a question mark above their head. They look confused/awed. Text: "NOT THE BRAIN".
-
-### Frame 21 — "They thought something else was happening"
-Same group of ancient stickmen from Frame 20. Now they're pointing upward at the dream cloud. The cloud has a mysterious glowing edge. One stickman's expression has changed to fear (O-mouth). Text: "SOMETHING ELSE".
-
-### Frame 22 — "Something far more terrifying"
-Dark vignette/shading around edges of the white frame. A single stickman centered, looking small and vulnerable. Above, a HUGE purple question mark looms, casting a shadow-like presence. The stickman's eyes are wide (large circles). Text: "TERRIFYING" in red bold. (Dramatic pause frame — hold longer.)
+### STYLE SUFFIX — GREEN (ألصقه بنهاية كل prompt بخلفية خضراء):
+```
+Simple minimalist 2D stickman illustration, clean round-head stick figure characters, black outlines, flat solid colors, muted sage green background, 16:9 widescreen, educational YouTube animation frame, no shading, no gradients, no texture, no 3D, thick clean lines
+```
 
 ---
 
-## SECTION 2: SOUL TRAVEL THEORY (0:45 - 2:40)
-**Script lines:** "Your ancestors believed the soul left the body..." → "whether the bird came back"
-**Background:** SAGE GREEN (#A8B89C)
-**Transition style:** Progressive build, split compare, zoom details
-**Frames: 23–65**
+# SECTION 1: OPENING HOOK (0:00 – 0:45)
+**BG: WHITE | Frames 1–22**
 
 ---
 
-### Frame 23 — SECTION TRANSITION
-Solid sage green background. Bold text centered: "THE OLDEST EXPLANATION". Nothing else. Clean transition frame between sections. (Background color shift signals new section.)
+### Prompt #1 — "Every night, you die"
+A simple stickman (round circle head, dot eyes, line mouth, stick body and limbs) lying flat on a simple white rectangular bed, eyes shown as two small curved downward lines (closed/sleeping), arms at sides. Large bold handwritten uppercase text above: "EVERY NIGHT". Slight dark vignette at edges of frame. [WHITE SUFFIX]
 
-### Frame 24 — "The soul left the body during sleep"
-Sage green background. A sleeping stickman lying on the ground (simple horizontal line beneath). Rising OUT of the body: a SPIRIT stickman drawn with dotted/dashed lines, lighter in color, with a faint purple glow. The spirit is shown mid-rise, at a 45-degree angle, connected to the body by a thin dotted line. Arrow pointing upward from spirit. Text: "SOUL TRAVEL".
+### Prompt #2 — "you die"
+Same sleeping stickman on bed as Prompt #1, identical position. A large semi-transparent red X overlaid on the body. Bold text above: "YOU DIE". Everything else identical to Prompt #1. [WHITE SUFFIX]
 
-### Frame 25 — "Soul leaving" (BUILD)
-Same scene as Frame 24 but the spirit has risen HIGHER. Now the spirit stickman is fully above the body, floating. The dotted connection line is stretched longer. The sleeping body below is unchanged. (Progressive build — spirit rising further.)
+### Prompt #3 — "Your body goes still"
+Same sleeping stickman on bed as Prompt #1. Small dashes radiating outward from the body suggesting rigidity/stillness. Arms and legs perfectly straight. Text label: "STILL". [WHITE SUFFIX]
 
-### Frame 26 — "This wasn't a metaphor"
-Bold text frame: "NOT A METAPHOR" in large letters. The word "METAPHOR" has a thick red line struck through it (strikethrough). Below: smaller text "NOT A POETIC INTERPRETATION". Clean, direct, text-emphasis frame.
+### Prompt #4 — "Your eyes close" (ZOOM IN)
+Close-up: just the stickman's round circle head filling center of frame, two small curved downward lines (closed eyes). Nothing else, pure white around the head. No text. [WHITE SUFFIX]
 
-### Frame 27 — "Spirit physically departed and traveled somewhere else"
-Left side of frame: sleeping stickman body lying on ground. Right side: spirit stickman (dotted lines, purple glow) standing in a completely different space — a wavy-lined landscape suggesting another realm (wavy ground line, small floating shapes). A large arrow curves from the body on the left to the spirit on the right, showing the journey. Text: "TRAVELED".
+### Prompt #5 — "Your muscles shut down"
+Same sleeping stickman on bed as Prompt #1. Small red X marks on each limb — one X on each arm, one X on each leg. Text label: "PARALYZED". [WHITE SUFFIX]
 
-### Frame 28 — "Real events happening to your soul in a real place"
-The spirit stickman standing firmly in the dream landscape (wavy ground, floating elements). The spirit is INTERACTING with the landscape — touching an object, walking on the wavy ground. This is depicted as REAL, not ghostly. Text: "REAL PLACE" with a checkmark ✓.
+### Prompt #6 — "Heart rate drops"
+No character. A large simple pink heart shape (♥) centered. Next to it a downward red arrow. Below the heart, a simple ECG heartbeat line going from tall spiky waves on left to flat gentle waves on right. Text: "DROPS". [WHITE SUFFIX]
 
-### Frame 29 — "Anthropologist Edward Tylor"
-Sage green background. A researcher stickman (round bald head, rectangular glasses, holding a book shape in one hand). Standing centered. Text above: "EDWARD TYLOR". Text below: "ANTHROPOLOGIST". (Character introduction frame — clean, centered.)
+### Prompt #7 — "Breathing slows"
+Same sleeping stickman as Prompt #1. Three small curved lines near the head opening (breath), getting progressively smaller and more spaced apart, showing breathing slowing down. No text. [WHITE SUFFIX]
 
-### Frame 30 — "1871, Primitive Culture" (BUILD)
-Same researcher stickman from Frame 29, identical position. Now add a large book shape next to him, clearly visible. Text on the book cover: "PRIMITIVE CULTURE". Text below changes to: "1871". (Progressive build — adding the book.)
+### Prompt #8 — "Brain disconnects"
+The stickman's round head (same as Prompt #4) shown from the side. Inside the head, a small pink brain shape visible. A dotted line extends from the brain outward to the right. A large red X cuts through the dotted line midway. Text: "DISCONNECTED". [WHITE SUFFIX]
 
-### Frame 31 — "Soul-travel theory — every inhabited continent"
-A very simplified world map (basic outlines of continents — just recognizable shapes). On EACH continent, a small sleeping stickman with a small spirit rising out. Dotted lines connecting them all. Text: "EVERY CONTINENT". (Wide establishing shot.)
+### Prompt #9 — "Something starts"
+Same sleeping stickman on bed as Prompt #1. A small purple swirly cloud begins forming just above the head. Three small dots trail from the head upward into the cloud. Mysterious atmosphere. No text. [WHITE SUFFIX]
 
-### Frame 32 — "Australian Aboriginal Dreamtime"
-A simplified outline of Australia (recognizable continent shape). Above it, a large swirling purple/blue cloud labeled "DREAMTIME". Inside the cloud, faint outlines of spirit stickmen and abstract shapes (dots, wavy lines suggesting Aboriginal dot-art style, very simplified). Text: "DREAMTIME".
+### Prompt #10 — "Something starts" (BUILD)
+Same scene as Prompt #9 but the purple dream cloud is now much LARGER, filling about 1/3 of the upper frame. More swirling detail. Same sleeping character below. [WHITE SUFFIX]
 
-### Frame 33 — "The Dreamtime wasn't a story — it was a place"
-Split frame. LEFT side: a book with an X through it (not a story). RIGHT side: a landscape with wavy ground, floating elements, spirit stickmen walking around — depicted as solid and REAL. Text left: "NOT A STORY ✗". Text right: "A PLACE ✓".
+### Prompt #11 — "You see faces that don't exist"
+Inside a large purple dream cloud (top half of frame): three stickman faces (same as base character — Prompt #1 style) floating at different angles, slightly transparent. Below the cloud: the sleeping stickman still on bed. [WHITE SUFFIX]
 
-### Frame 34 — "Spirits of ancestors lived there"
-Inside the Dreamtime landscape (purple-tinged wavy world): several spirit stickmen (dotted lines) of different sizes, standing, sitting, existing. They look settled, not traveling — they LIVE here. Small huts or shelter shapes around them. Text: "ANCESTORS".
+### Prompt #12 — "Walk through buildings"
+Inside a purple dream cloud: a stickman (same as Prompt #1 but upright, walking pose) walking through a simple rectangular building outline with door and windows. The building lines are slightly wavy/wobbly showing dream-unreality. Character walks through the wall. Text: "NEVER BEEN INSIDE". [WHITE SUFFIX]
 
-### Frame 35 — "During sleep, spirit could enter it"
-Split frame, top/bottom. TOP: physical world — a sleeping stickman on solid ground, under a sun. BOTTOM: Dreamtime — purple-tinged wavy landscape with spirits. A dotted arrow goes from the sleeping stickman DOWN into the Dreamtime, showing the spirit traveling between worlds. Text: "ENTER".
+### Prompt #13 — "Fall off cliffs"
+Inside a purple dream cloud: a stickman (same as Prompt #1) falling downward with arms spread, motion lines (vertical dashes) above showing descent. A cliff edge at top-left — simple angular ledge. Character's eyes are wide/large circles (scared). No text. [WHITE SUFFIX]
 
-### Frame 36 — "Ancient Mesopotamia, 3,000 years ago"
-Sage green background. A simple ziggurat (stepped pyramid — 3 stacked rectangles, each smaller than the one below, in brown/orange outlines). Text: "MESOPOTAMIA" above and "3,000 YEARS AGO" below. (Location/time establishing frame.)
+### Prompt #14 — "Feel the drop"
+Close-up of a stickman's torso (same style as Prompt #1). Inside the stomach area, a downward arrow. Small wavy lines around the stomach area. Text: "THE DROP". [WHITE SUFFIX]
 
-### Frame 37 — "Dreams were messages delivered by gods through a door"
-A large rectangular door shape in the center of frame, ornately framed (simple decorative arch on top). On the LEFT side of the door: a divine figure stickman (larger, yellow glow, crown/halo). On the RIGHT side: a sleeping stickman. Glowing yellow lines passing THROUGH the door from god to sleeper. Text: "MESSAGES".
+### Prompt #15 — "Talk to people who are dead"
+Inside dream cloud: two stickmen facing each other (same as Prompt #1). LEFT one is solid/normal. RIGHT one is drawn with DOTTED/DASHED outlines, semi-transparent, faint purple glow — a spirit version. Small speech lines between them. No text. [WHITE SUFFIX]
 
-### Frame 38 — "The gate between divine realm and sleeping mind" (BUILD)
-Same door frame from Frame 37. Now add labels: LEFT side of door labeled "DIVINE REALM", RIGHT side labeled "SLEEPING MIND". The door itself labeled "THE GATE". (Progressive build — adding context labels to same visual.)
+### Prompt #16 — "You believe it's real"
+A stickman (same as Prompt #1) standing upright inside dream cloud. Eyes are extra wide/large open circle eyes (surprised). Exclamation mark above the head. Dream elements around (wavy building from Prompt #12, floating face from Prompt #11) but character doesn't notice. Text: "REAL?!" in red. [WHITE SUFFIX]
 
-### Frame 39 — "Cuneiform tablets — shuttu"
-A large clay tablet shape (rounded rectangle, beige/tan color). Small wedge-shaped marks on it suggesting cuneiform writing. Text next to it: "SHUTTU" in large letters, and below in smaller text: "(DREAM)". Text below tablet: "THOUSANDS OF TABLETS".
+### Prompt #17 — "Then you wake up"
+A stickman sitting UPRIGHT in bed (legs under blanket line, upper body vertical). Same character as Prompt #1. Eyes are wide open (large open circle eyes). Small lines radiating outward from the head like a burst of awareness. Purple dream cloud is GONE — pure white space. Text: "WAKE UP". [WHITE SUFFIX]
 
-### Frame 40 — "Baru priests — professional dream interpreters"
-A stickman wearing a tall pointed hat or headdress (triangle on top of round head). Holding a tablet in one hand. Standing in a formal pose. Text: "BARU PRIEST" above and "DREAM INTERPRETER" below. (Character introduction.)
+### Prompt #18 — "25,000 times"
+Large bold text centered: "25,000 TIMES" in black. Below the text, a very small stickman (same as Prompt #1, neutral pose) looking up at the number. Lots of white space. [WHITE SUFFIX]
 
-### Frame 41 — "Worked alongside doctors and advisors in royal courts" (BUILD)
-The baru priest stickman from Frame 40, now placed on the LEFT. Next to him, two more stickmen: one with a medical symbol (simple cross on chest = doctor), one with a scroll (advisor). They stand in a row before a seated stickman on a simple throne (the king, with a crown — small triangle points on top of head). Text: "ROYAL COURT".
+### Prompt #19 — "300,000 years"
+A horizontal timeline arrow left to right. Far LEFT: a small stickman wearing brown fur/skin wrap (ancient human variant). Far RIGHT: a standard stickman (modern — same as Prompt #1). Above the arrow: "300,000 YEARS" in bold. Small tick marks along the arrow. [WHITE SUFFIX]
 
-### Frame 42 — "King had a disturbing dream — intelligence report"
-The king stickman (crown) sleeping on a bed/throne. Above him, a dark/menacing dream cloud with a warning triangle (⚠) inside. The baru priest stands nearby, holding a tablet, writing urgently. Text: "INTELLIGENCE REPORT".
+### Prompt #20 — "Nobody thought dreams were made up"
+A group of 5 stickmen wearing brown fur wraps (ancient variant, same proportions as Prompt #1), all looking UPWARD at a large purple dream cloud above them. Each has a question mark above their head. Text: "NOT THE BRAIN". [WHITE SUFFIX]
 
-### Frame 43 — "Military campaigns delayed"
-A group of 4-5 soldier stickmen in a row (each holding a simple vertical line = spear). A large red STOP hand symbol or red X in front of them, blocking their path. Text: "CAMPAIGNS DELAYED".
+### Prompt #21 — "Something else was happening"
+Same group of ancient stickmen from Prompt #20. Now pointing upward at the cloud. The cloud has a mysterious glowing purple edge. Text: "SOMETHING ELSE". [WHITE SUFFIX]
 
-### Frame 44 — "Sacrifices were ordered"
-A simple altar shape (flat rectangle on two leg shapes). On top: orange/red flame shapes (simple pointed shapes). A stickman with raised arms standing before the altar. Text: "SACRIFICES".
-
-### Frame 45 — "The substitute king ritual"
-LEFT side: a king stickman with crown. An arrow shows the crown being LIFTED OFF his head (upward arrow from crown). RIGHT side: a plain stickman (commoner, no crown). An arrow shows a crown being PLACED ON his head (downward arrow to crown). Between them: bold text "SUBSTITUTE KING". (Split compare.)
-
-### Frame 46 — "Commoner placed on throne temporarily" (BUILD)
-The commoner stickman now SITTING on the throne (simple chair shape), wearing the crown. He looks uncomfortable (wavy mouth line). The real king stickman is visible in the background, smaller, walking away. Text: "TEMPORARY".
-
-### Frame 47 — "The real king hid"
-A stickman with the crown crouching BEHIND a wall (simple vertical rectangle). Only his head and crown peek over the top. Wide scared eyes (large circles). Text: "HID". (Slightly humorous frame.)
-
-### Frame 48 — "The substitute died in his place"
-The commoner stickman (now wearing crown) lying horizontal, X-shaped eyes (dead). The crown still on his head. Dark mood. Text: "IF THE PROPHECY CAME TRUE...". (Hold this frame longer — dramatic beat.)
-
-### Frame 49 — "They took dreams that seriously"
-Text-only emphasis frame. Bold large text centered: "THAT SERIOUSLY." An exclamation mark. Sage green background. Nothing else. (Pause beat — let it sink in.)
-
-### Frame 50 — "Ancient Egypt"
-Simple pyramid shapes: three triangles in a row, getting smaller left to right. A simple circle (sun) above the middle pyramid. Yellow/golden tint on pyramids. Text: "ANCIENT EGYPT". (Location establishing frame.)
-
-### Frame 51 — "Sleep was a miniature death"
-An equals sign (=) centered between two icons. LEFT icon: a sleeping stickman with ZZZ above (labeled "SLEEP"). RIGHT icon: a stickman with X eyes lying still (labeled "DEATH"). The equals sign is LARGE and bold. Text below: "MINIATURE DEATH". (Split compare — core concept.)
-
-### Frame 52 — "The Ba — bird with human head"
-Center of frame: a simple bird shape — two curved wing shapes extending from a small body, with a round STICKMAN HEAD on top (circle with dot eyes). The ba-bird is colored pink/purple. It's in flight. Text: "THE BA" in large letters. (Character/concept introduction — important recurring element.)
-
-### Frame 53 — "Ba depicted as bird with human head" (DETAIL)
-Zoom-in on the ba-bird from Frame 52. Larger, more detail visible: the round human head clearly has the same stickman features (dot eyes, line mouth). Wings are spread. Small motion lines suggesting flight. Text: "SOUL BIRD". (Zoom detail.)
-
-### Frame 54 — "Ba flew out of the body at night"
-Bottom of frame: sleeping stickman body lying horizontal. From the chest area, the ba-bird (pink/purple, wings spread) is flying UPWARD. A curved upward arrow traces its path. Top-right corner: simple crescent moon shape. Text: "NIGHT". (Progressive action — departure.)
-
-### Frame 55 — "Ba returned before dawn"
-Same composition as Frame 54 but REVERSED. The ba-bird is now flying DOWNWARD toward the sleeping body. A curved downward arrow traces its return path. Top-right corner: simple sun shape (circle with short rays) replacing the moon. Text: "DAWN". (Mirror image of Frame 54 — shows the cycle.)
-
-### Frame 56 — "If it didn't come back, you died"
-Sleeping stickman body at bottom. The ba-bird flying AWAY to the right, off the edge of the frame, getting smaller. A large red X over the sleeping body. Text: "NO RETURN = DEATH" in red. (Consequence frame — dramatic.)
-
-### Frame 57 — "This is why funeral practices were so elaborate"
-A mummy shape: a horizontal wrapped figure (rectangle with crossing lines suggesting bandages). The ba-bird hovering ABOVE the mummy, looking down at it. Text: "PRESERVE THE BODY". (Cause-and-effect connection.)
-
-### Frame 58 — "The ba needed a body to return to"
-Same mummy with ba-bird above. Now add a dotted curved arrow from the ba-bird DOWN to the mummy, and a small checkmark ✓ next to the mummy. The body MUST exist for the ba to return. Text: "RETURN HOME". (Progressive build — adding the connection arrow.)
-
-### Frame 59 — "Dreams and death were the same mechanism"
-Three-part comparison on sage green background. LEFT: sleeping stickman + ba leaving + ba returning = "DREAM ✓". CENTER: equals sign. RIGHT: dead stickman + ba leaving + ba NOT returning = "DEATH ✗". Text: "SAME MECHANISM". (This is the key insight — important split compare frame.)
-
-### Frame 60 — "The only difference — whether the bird came back"
-Two arrows side by side. TOP arrow: curves out and curves BACK (boomerang shape). Labeled "DREAM" with green checkmark. BOTTOM arrow: goes straight out and DOESN'T return (one-way arrow). Labeled "DEATH" with red X. Text: "THE ONLY DIFFERENCE". (Simplified version of Frame 59 — visual distillation.)
+### Prompt #22 — "Something far more terrifying"
+Dark vignette around edges. A single stickman (same as Prompt #1) centered, looking small. Above: a HUGE purple question mark looming. Character's eyes are extra wide. Text: "TERRIFYING" in red bold. (Hold 3-4 sec.) [WHITE SUFFIX]
 
 ---
 
-## SECTION 3: THE GREEK TWIST (2:40 - 4:10)
-**Script lines:** "Now here's the part nobody talks about..." → "Almost nobody listened"
-**Background:** WHITE
-**Transition style:** Dramatic text reveals, character introductions, contrast with previous section
-**Frames: 61–90**
+# SECTION 2: SOUL TRAVEL (0:45 – 2:40)
+**BG: SAGE GREEN | Frames 23–60**
 
 ---
 
-### Frame 61 — "Here's the part nobody talks about"
-White background. Large bold text centered: "HERE'S THE PART" on line 1, "NOBODY TALKS ABOUT" on line 2. Dramatic, clean, text-only. No illustrations. (Section transition — text emphasis, pattern break from sage green section.)
+### Prompt #23 — Section transition
+Solid sage green background. Bold white handwritten text centered: "THE OLDEST EXPLANATION". Nothing else. [GREEN SUFFIX]
 
-### Frame 62 — "The Greeks changed everything"
-Two simple Greek column shapes (vertical rectangles with horizontal rectangle on top — basic Doric columns). Between them, centered, a starburst/explosion shape suggesting impact. Text: "GREECE" above and "CHANGED EVERYTHING" below.
+### Prompt #24 — "The soul left the body"
+A sleeping stickman (same as Prompt #1 but horizontal, on sage green ground). Rising OUT of the body: a SPIRIT version of the same character — drawn with dotted/dashed lines, semi-transparent, faint purple glow (same spirit style as Prompt #15). Spirit is mid-rise at 45-degree angle, connected to body by thin dotted line. Arrow pointing upward. Text: "SOUL TRAVEL". [GREEN SUFFIX]
 
-### Frame 63 — "And they didn't mean to"
-Same Greek columns from Frame 62. Now add a small stickman between the columns with a confused expression (question mark above head, tilted head). Text changes to: "DIDN'T MEAN TO". (Progressive build — adding the irony.)
+### Prompt #25 — Soul rising higher (BUILD)
+Same scene as Prompt #24 but the spirit has risen HIGHER — now fully above the sleeping body, floating. The dotted connection line is stretched longer. Sleeping body unchanged. [GREEN SUFFIX]
 
-### Frame 64 — "Around 500 BC"
-A timeline arrow. A large marker/pin at one specific point. Text at the marker: "500 BC". To the LEFT of the marker: faded/smaller text "MESOPOTAMIA, EGYPT" showing what came before. Clean and specific. Text: "500 BC".
+### Prompt #26 — "Not a metaphor"
+Bold white text on sage green: "NOT A METAPHOR" — with "METAPHOR" struck through with a thick red line. Below: "NOT A POETIC INTERPRETATION". Text-only frame. [GREEN SUFFIX]
 
-### Frame 65 — "Heraclitus"
-A stickman with a small pointed beard (3-4 short lines descending from chin). Standing in a thoughtful pose: one hand on chin, head slightly tilted. Simple Greek robe suggested by a triangular body shape instead of stick body. Text: "HERACLITUS" above, "PHILOSOPHER" below. (Character introduction — clean, centered.)
+### Prompt #27 — "Spirit traveled somewhere else"
+LEFT side: sleeping stickman body on ground (same as Prompt #24). RIGHT side: spirit stickman (dotted lines, purple glow — same as Prompt #24) standing in a different space — wavy ground line, purple sky strip at top, floating abstract shapes. Large curved arrow from body to spirit showing journey. Text: "TRAVELED". [GREEN SUFFIX]
 
-### Frame 66 — "Wrote something never said before"
-Same Heraclitus stickman from Frame 65. Now add a scroll shape in his other hand. From the scroll, radiating lines suggesting importance/revelation. Text: "NEVER SAID BEFORE". (Progressive build.)
+### Prompt #28 — "Real events in a real place"
+The spirit stickman (same dotted-line style as Prompt #24) standing firmly in the dream landscape — wavy ground, floating shapes. The spirit is INTERACTING — touching an object. Text: "REAL PLACE ✓". [GREEN SUFFIX]
 
-### Frame 67 — "The dreaming mind withdraws into itself"
-A stickman round head, large, centered. Inside: a pink brain. Arrows pointing INWARD from outside the head toward the brain — the opposite direction of all the soul-travel arrows in Section 2. This visual CONTRAST is the key. Text: "WITHDRAWS INTO ITSELF". Bold arrows going IN, not out.
+### Prompt #29 — "Edward Tylor, 1871"
+A stickman wearing rectangular glasses and holding a book shape (RESEARCHER variant). Standing centered on sage green. Text above: "EDWARD TYLOR". Text below: "ANTHROPOLOGIST". [GREEN SUFFIX]
 
-### Frame 68 — CONTRAST FRAME — Soul travel vs. internal
-Split frame. LEFT: the soul-travel image from Section 2 (sleeping body, spirit rising OUT, outward arrows). Labeled "OLD VIEW". RIGHT: the Heraclitus concept (head with brain, arrows going IN). Labeled "NEW VIEW". A large "VS" or "≠" between them. (Direct visual comparison — shows the paradigm shift.)
+### Prompt #30 — "Primitive Culture" (BUILD)
+Same researcher stickman as Prompt #29, identical position. Add a large book shape next to him. Text on book cover: "PRIMITIVE CULTURE". Text below: "1871". [GREEN SUFFIX]
 
-### Frame 69 — "No longer connected to the shared world"
-A stickman inside a bubble (circle drawn around the stickman). Outside the bubble: other stickmen and objects of the waking world, all FADED/lighter in shade. The stickman inside the bubble is in clear black lines. The bubble separates dreamer from world. Text: "PRIVATE WORLD".
+### Prompt #31 — "Every inhabited continent"
+A very simplified world map outline (basic continent shapes). On EACH continent, a small sleeping stickman (same as Prompt #1 sleeping variant) with a small spirit rising out (dotted lines). Text: "EVERY CONTINENT". [GREEN SUFFIX]
 
-### Frame 70 — "Each sleeper turns away to a private one"
-Three sleeping stickmen in a row, each horizontal. Each has their OWN separate thought/dream bubble above them. Inside each bubble: different dream content (one has a tree, one has a face, one has abstract shapes). The bubbles don't connect or overlap. Text: "EACH SLEEPER" and "A PRIVATE WORLD".
+### Prompt #32 — "Australian Aboriginal Dreamtime"
+A simplified outline of Australia. Above: a large swirling purple/blue cloud labeled "DREAMTIME". Simple dot-pattern designs around the cloud (simplified). Text: "DREAMTIME". [GREEN SUFFIX]
 
-### Frame 71 — "This was radical"
-Large bold text: "RADICAL" in red, with starburst/explosion lines radiating outward from the word. White background. Text only — dramatic pause frame.
+### Prompt #33 — "Dreamtime was a place"
+Split frame. LEFT: a book with red X through it, text "NOT A STORY ✗". RIGHT: a landscape with wavy ground, spirit stickmen (same dotted style as Prompt #24) walking around on solid ground. Text: "A PLACE ✓". [GREEN SUFFIX]
 
-### Frame 72 — "For the first time in recorded history"
-A scroll unrolling from left to right. On the scroll, a simple written line. A large red circle highlighting one specific point on the scroll — the first time this idea was written. Text: "FIRST TIME IN HISTORY".
+### Prompt #34 — "Spirits of ancestors lived there"
+Inside the Dreamtime landscape (purple-tinged wavy world): several spirit stickmen (dotted lines, purple glow — same style as Prompt #24) of different sizes, standing and sitting. Small shelter shapes around them. They look SETTLED — they live here. Text: "ANCESTORS". [GREEN SUFFIX]
 
-### Frame 73 — "Dreams might come from inside — from YOU"
-A stickman with a glowing pink brain. Large bold arrows originating FROM the brain extending outward into a thought/dream cloud above. The key visual: the SOURCE is the brain, not the gods, not another dimension. Text pointing to brain: "FROM YOU" with heavy emphasis.
+### Prompt #35 — "Spirit could enter Dreamtime"
+Split frame top/bottom. TOP: physical world — sleeping stickman on solid ground, sun shape in corner. BOTTOM: Dreamtime — purple wavy landscape with spirit characters (same as Prompt #34). Dotted arrow from sleeping character DOWN into Dreamtime. Text: "ENTER". [GREEN SUFFIX]
 
-### Frame 74 — "Aristotle"
-A stickman with rectangular glasses, seated on a simple chair/stool shape. Holding a scroll in one hand, other hand gesturing as if teaching. Simple Greek robe (triangular body). Text: "ARISTOTLE" above, "350 BC" below. (Character introduction.)
+### Prompt #36 — "Ancient Mesopotamia"
+A simple ziggurat (3 stacked brown/orange rectangles, each smaller — stepped pyramid). Text: "MESOPOTAMIA" above, "3,000 YEARS AGO" below. [GREEN SUFFIX]
 
-### Frame 75 — "On Dreams — treatise" (BUILD)
-Same Aristotle stickman from Frame 74. Now a large scroll shape is prominently displayed next to him. Text on the scroll: "ON DREAMS". Text below: "~350 BC". (Progressive build — adding the scroll.)
+### Prompt #37 — "Dreams through a door"
+A large rectangular door shape in center, with simple decorative arch on top. LEFT of door: golden light rays radiating outward and downward (representing divine — NO character, just light). RIGHT of door: a sleeping stickman (same as Prompt #1 sleeping). Golden rays passing THROUGH the door toward the sleeper. Text: "MESSAGES". [GREEN SUFFIX]
 
-### Frame 76 — "Dreams were not divine messages"
-The divine figure from Section 2 (large stickman with crown and yellow glow, elevated). Speech lines going toward a sleeping stickman below. A LARGE RED X crossing out the entire scene. Text: "NOT DIVINE" in red. (Negation frame — crossing out old belief.)
+### Prompt #38 — "Gate between realms" (BUILD)
+Same door scene as Prompt #37. Now add labels: LEFT side "DIVINE REALM", RIGHT side "SLEEPING MIND". The door itself labeled "THE GATE". Golden rays still passing through. [GREEN SUFFIX]
 
-### Frame 77 — "Leftover impressions from the day"
-Two-part frame, left to right. LEFT: daytime scene — a stickman walking, sun above, objects around (a tree, a person, an animal — simple shapes). RIGHT: nighttime — same stickman sleeping, and above in dream cloud, FADED versions of the exact same objects (tree, person, animal) from the daytime scene. An arrow connects day to night. Text: "LEFTOVER IMPRESSIONS".
+### Prompt #39 — "Cuneiform tablets"
+A large clay tablet shape (rounded rectangle, beige/tan). Small wedge-shaped marks on it suggesting cuneiform. Text: "SHUTTU" large, "(DREAM)" smaller below. "THOUSANDS OF TABLETS" at bottom. [GREEN SUFFIX]
 
-### Frame 78 — "Sensory residues replayed during sleep"
-A stickman head with brain. Inside the brain: small faded images (a face, a shape) labeled with a circular arrow symbol (♻/replay). Text: "RESIDUES" and "REPLAY".
+### Prompt #40 — "Baru priests"
+A stickman (same base as Prompt #1) wearing a tall pointed hat shape ON TOP of the head (PRIEST variant). Holding a tablet shape in one hand. Formal pose. Text: "BARU PRIEST" above, "DREAM INTERPRETER" below. [GREEN SUFFIX]
 
-### Frame 79 — "Afterimage — stare at the sun"
-LEFT side: a stickman looking UP at a bright yellow sun (circle with radiating lines). Eyes open, looking directly. RIGHT side: same stickman, eyes now CLOSED (curved lines). In front of closed eyes: a faded/ghostly circle shape — the afterimage of the sun. Text: "AFTERIMAGE". (Visual metaphor — Aristotle's own analogy.)
+### Prompt #41 — "Royal court" (BUILD)
+The baru priest character from Prompt #40 on LEFT. Next to him: two more stickmen — one with a cross on chest (doctor), one with a scroll (advisor). They stand before a seated stickman on a simple throne who wears a small crown with triangular points on the head (KING variant). Text: "ROYAL COURT". [GREEN SUFFIX]
 
-### Frame 80 — "The image isn't real — sensory system winding down"
-The faded circle (afterimage) from Frame 79, now ISOLATED in center of frame. It's translucent, fading at the edges. Text: "NOT REAL" and "WINDING DOWN". (Zoom/isolation — emphasizing the point.)
+### Prompt #42 — "King's disturbing dream"
+The king stickman (same crown variant as Prompt #41) sleeping on a bed/throne. Above: a dark menacing dream cloud with a warning triangle ⚠ inside. The baru priest (same as Prompt #40) stands nearby, writing on tablet urgently. Text: "INTELLIGENCE REPORT". [GREEN SUFFIX]
 
-### Frame 81 — "Aristotle describing what neuroscience wouldn't confirm for 2,300 years"
-A very long timeline arrow. FAR LEFT: Aristotle stickman (glasses, scroll) with "350 BC". FAR RIGHT: a modern brain scan icon (brain with circular rings around it suggesting MRI) with "MODERN". The space between is VAST — labeled "2,300 YEARS". (Scale frame — showing the gap.)
+### Prompt #43 — "Military campaigns delayed"
+A group of 4-5 stickmen in a row, each holding a vertical line (spear). A large red STOP symbol or red X blocks their path. Text: "CAMPAIGNS DELAYED". [GREEN SUFFIX]
 
-### Frame 82 — "But here's the thing"
-Text frame. Bold: "BUT HERE'S THE THING." White background. Dramatic pause before the twist. (Text emphasis.)
+### Prompt #44 — "Sacrifices ordered"
+A simple altar shape (flat rectangle on two legs). Orange/red flame shapes on top. A stickman (same as Prompt #1) with raised arms standing before it. Text: "SACRIFICES". [GREEN SUFFIX]
 
-### Frame 83 — "Almost nobody listened"
-Aristotle stickman on the LEFT, speaking (speech lines emanating from mouth). On the RIGHT: a row of 5-6 stickmen, all TURNED AWAY from Aristotle. Some have hands over ears. One is walking away. Text: "NOBODY LISTENED". (Character scene — showing rejection.)
+### Prompt #45 — "Substitute king"
+LEFT: king stickman (crown variant from Prompt #41) — arrow shows crown being LIFTED OFF. RIGHT: plain stickman (no crown, same as Prompt #1) — arrow shows crown being PLACED ON. Bold text between them: "SUBSTITUTE KING". [GREEN SUFFIX]
 
-### Frame 84 — "For 2,000 years the old view remained"
-A large number: "2,000 YEARS" dominating the frame. Below: small stickmen in ancient dress praying, looking at stars, consulting priests — the old behaviors persisting. Text: "THE OLD VIEW REMAINED".
+### Prompt #46 — "Commoner on throne" (BUILD)
+The plain stickman (same as Prompt #1) now SITTING on the throne, wearing the crown (same crown style as Prompt #41). Looks uncomfortable (body slightly tilted). The real king (same as Prompt #41 but smaller) visible walking away in background. Text: "TEMPORARY". [GREEN SUFFIX]
 
-### Frame 85 — "Dreams were prophetic, divine, windows"
-Three icons in a row. Icon 1: crystal ball shape with stars = "PROPHETIC". Icon 2: divine figure with glow = "DIVINE". Icon 3: window frame shape with light coming through = "WINDOWS". All three with checkmarks — showing what people believed.
+### Prompt #47 — "Real king hid"
+A king stickman (same crown variant as Prompt #41) crouching BEHIND a wall shape. Only head and crown peek over the top. Eyes are extra wide (scared). Text: "HID". [GREEN SUFFIX]
 
----
+### Prompt #48 — "Substitute died"
+The plain stickman (now with crown, same as Prompt #46) lying horizontal, eyes shown as two small X shapes (dead variant). Crown still on head. Text: "IF THE PROPHECY CAME TRUE...". (Hold 3 sec.) [GREEN SUFFIX]
 
-## SECTION 4: RELIGIOUS/CULTURAL PERSISTENCE (4:10 - 5:00)
-**Script lines:** "The Bible is built with dreams..." → "receive messages from spirits"
-**Background:** SAGE GREEN
-**Transition style:** Quick cuts, character vignettes, geographic jumps
-**Frames: 86–103**
+### Prompt #49 — "That seriously"
+Text-only on sage green: large bold white text "THAT SERIOUSLY." with exclamation mark. Nothing else. [GREEN SUFFIX]
 
----
+### Prompt #50 — "Ancient Egypt"
+Three pyramid triangles in a row (getting smaller left to right). Simple yellow circle (sun) above middle pyramid. Golden tint on pyramids. Text: "ANCIENT EGYPT". [GREEN SUFFIX]
 
-### Frame 86 — "The Bible is built with dreams"
-Sage green background. A simple book shape (rectangle standing upright). A cross symbol on the cover. Purple dream clouds swirling around the book. Text: "THE BIBLE" and "BUILT WITH DREAMS".
+### Prompt #51 — "Sleep = miniature death"
+Equals sign (=) between two icons. LEFT: sleeping stickman (same sleep pose as Prompt #1) with ZZZ, labeled "SLEEP". RIGHT: stickman with X-eyes (dead pose), labeled "DEATH". Large bold "=" between them. Text: "MINIATURE DEATH". [GREEN SUFFIX]
 
-### Frame 87 — "Joseph interpreted Pharaoh's dream"
-Two stickmen. LEFT: Joseph (standing, simple robe — triangle body, arms gesturing/explaining). RIGHT: Pharaoh (seated on throne, Egyptian headdress — triangle on head like a simple nemes). A dream cloud above Pharaoh. Joseph pointing at the cloud.
+### Prompt #52 — "The Ba — bird with human head"
+A simple bird shape (two curved wing shapes from a small body) with a round circle head on top (same face as the stickman — dot eyes — but on a bird body). Pink/purple colored wings. Flying. Text: "THE BA" large. [GREEN SUFFIX]
 
-### Frame 88 — "Seven fat cows, seven lean cows"
-Inside the dream cloud: LEFT side — 7 round, plump cow shapes (simple oval bodies with four stick legs, well-fed). RIGHT side — 7 thin, skeletal cow shapes (same basic shape but narrow, bony). A clear dividing line between them. Text: "7 FAT / 7 LEAN".
+### Prompt #53 — "Ba detail" (ZOOM)
+Larger version of the Ba-bird from Prompt #52. Same design: bird body, character's face as head. Wings spread. Motion lines. Text: "SOUL BIRD". [GREEN SUFFIX]
 
-### Frame 89 — "Prophecy of famine"
-Below the dream cloud from Frame 88: the real world shown as cracked earth (jagged lines on ground), empty bowls, thin stickmen. An arrow from the dream above to reality below — dream predicted this. Text: "FAMINE".
+### Prompt #54 — "Ba flew out at night"
+Sleeping stickman (same as Prompt #1 sleeping) lying at bottom. The Ba-bird (same as Prompt #52) flying UPWARD from the chest area. Curved upward arrow. Top-right corner: crescent moon. Text: "NIGHT". [GREEN SUFFIX]
 
-### Frame 90 — "Daniel and Nebuchadnezzar"
-Two stickmen. LEFT: Daniel (standing, gesturing upward). RIGHT: King Nebuchadnezzar (seated, crown with pointed peaks). Above: dream cloud containing a large STATUE shape — a simple humanoid figure made of different colored sections (gold head, silver chest, bronze waist, iron legs — shown as different shading bands). Text: "THE GREAT STATUE".
+### Prompt #55 — "Ba returned before dawn"
+Same composition as Prompt #54 but REVERSED — Ba-bird flying DOWNWARD toward the sleeping body. Curved downward arrow. Top-right: sun shape (circle with rays) replacing moon. Text: "DAWN". [GREEN SUFFIX]
 
-### Frame 91 — "Rise and fall of empires"
-The statue from Frame 90, now shown CRUMBLING. Top sections intact, bottom sections breaking apart with pieces falling. An arrow showing progression from top to bottom = time passing, empires falling. Text: "EMPIRES RISE AND FALL".
+### Prompt #56 — "If it didn't come back — death"
+Sleeping stickman at bottom (same as Prompt #54). Ba-bird (same as Prompt #52) flying AWAY to the right, off the edge, getting smaller. Large red X over the sleeping body. Text: "NO RETURN = DEATH" in red. [GREEN SUFFIX]
 
-### Frame 92 — "Muhammad — revelations during sleep"
-A sleeping figure (simple horizontal stickman) with gentle radiating light lines around the head area — golden/yellow glow emanating outward. NO face details (respectful). Above: gentle light rays descending from above. Text: "REVELATIONS". (Kept respectful and non-figurative — emphasis on light and concept.)
+### Prompt #57 — "Preserve the body"
+A mummy shape (horizontal wrapped rectangle with crossing lines). Ba-bird (same as Prompt #52) hovering ABOVE the mummy, looking down. Text: "PRESERVE THE BODY". [GREEN SUFFIX]
 
-### Frame 93 — "Dream incubation"
-A simple temple or sacred space: two column shapes with a roof triangle on top, forming an entrance. Inside: a sleeping stickman on the ground. Stars or special symbols (crescents, dots) float above inside the temple space. Text: "DREAM INCUBATION" above, "DELIBERATE" below.
+### Prompt #58 — "Ba needs a body" (BUILD)
+Same mummy and Ba-bird as Prompt #57. Add a dotted curved arrow from Ba down to mummy and a green checkmark ✓ next to mummy. Text: "RETURN HOME". [GREEN SUFFIX]
 
-### Frame 94 — "Sleeping in sacred places to receive messages"
-Same temple from Frame 93. Now show the sleeping stickman with a dream cloud above containing a divine figure (god stickman, glowing). Lines of communication from god to sleeper. Text: "SACRED PLACES" and "MESSAGES FROM SPIRITS".
+### Prompt #59 — "Dreams and death — same mechanism"
+Three-part comparison. LEFT: sleeping character + Ba leaving + Ba returning = "DREAM ✓". CENTER: equals sign. RIGHT: dead character + Ba leaving + Ba NOT returning = "DEATH ✗". Text: "SAME MECHANISM". [GREEN SUFFIX]
 
-### Frame 95 — "Indigenous cultures across Americas, Africa, Asia"
-Three small vignettes in a row across the frame. LEFT: simple outline of Americas continent with a sleeping stickman. CENTER: Africa outline with sleeping stickman. RIGHT: Asia outline with sleeping stickman. Each has a small dream cloud above. Text: "EVERY CONTINENT" and "STILL TODAY".
-
-### Frame 96 — "2,000 years of persistence" (SUMMARY)
-A large horizontal bar/block labeled "2,000 YEARS" stretching across the frame. Below it, small icons of everything that maintained the old belief: Bible, temple, statue, priest. All lined up under the 2,000-year bar. Text: "THE OLD BELIEF PERSISTED".
+### Prompt #60 — "Only difference"
+Two arrows side by side. TOP: curved arrow goes out and curves BACK (boomerang shape), labeled "DREAM ✓" in green. BOTTOM: straight arrow goes out, doesn't return (one-way), labeled "DEATH ✗" in red. Text: "THE ONLY DIFFERENCE". [GREEN SUFFIX]
 
 ---
 
-## SECTION 5: FREUD (5:00 - 5:50)
-**Script lines:** "And then, in 1899, everything changed again..." → "But science moved on"
-**Background:** WHITE
-**Transition style:** Text reveals, character focus, concept visualization
-**Frames: 97–115**
+# SECTION 3: GREEK TWIST (2:40 – 4:10)
+**BG: WHITE | Frames 61–85**
 
 ---
 
-### Frame 97 — "1899 — everything changed again"
-White background. Large bold impact text: "1899" in center with starburst lines radiating outward. Below in smaller text: "EVERYTHING CHANGED AGAIN". (Time stamp impact frame.)
+### Prompt #61 — "Nobody talks about"
+White background. Large bold text: "HERE'S THE PART" line 1, "NOBODY TALKS ABOUT" line 2. Text-only transition frame. [WHITE SUFFIX]
 
-### Frame 98 — "Sigmund Freud"
-A stickman with distinctive features: round glasses (two circles connected by line across face), a small pointed beard (short lines from chin), and a simple cigar (horizontal line from mouth with small smoke curl). Standing centered, formal pose. Text: "SIGMUND FREUD" above.
+### Prompt #62 — "Greeks changed everything"
+Two simple Greek column shapes (vertical rectangles with horizontal rectangle on top). Between them, a starburst shape suggesting impact. Text: "GREECE" above, "CHANGED EVERYTHING" below. [WHITE SUFFIX]
 
-### Frame 99 — "The Interpretation of Dreams"
-A large book shape centered. Cover text: "THE INTERPRETATION OF DREAMS". Author text below: "FREUD, 1899". The book has slight glow/importance lines around it.
+### Prompt #63 — "Didn't mean to" (BUILD)
+Same Greek columns as Prompt #62. Add a small stickman (same as Prompt #1) between them with confused pose (head tilted, question mark above). Text: "DIDN'T MEAN TO". [WHITE SUFFIX]
 
-### Frame 100 — "Dreams are not random"
-Text: "NOT RANDOM" with a red X through the word. Below: scattered dots (representing randomness) also crossed out. Clean negation frame.
+### Prompt #64 — "500 BC"
+A timeline arrow. Large marker/pin at one point. Text at marker: "500 BC". To LEFT of marker: faded text "MESOPOTAMIA, EGYPT". [WHITE SUFFIX]
 
-### Frame 101 — "Not divine"
-The divine figure from earlier (glowing, elevated god stickman). Red X through it. Text: "NOT DIVINE ✗". (Series of negations — Frame 100, 101, 102 form a rhythm.)
+### Prompt #65 — "Heraclitus"
+A stickman (same base as Prompt #1) with a small pointed beard (3-4 short lines from chin) and a triangular body shape suggesting Greek robe. Thoughtful pose: one hand on chin. Text: "HERACLITUS" above, "PHILOSOPHER" below. [WHITE SUFFIX]
 
-### Frame 102 — "Disguised fulfillment of repressed wishes"
-A stickman head, large, centered. Inside the head: a locked box shape (rectangle with a padlock icon on it). From the box, curvy lines/arrows struggling UPWARD through the top of the head into a dream cloud above. The wishes are trying to escape. Text: "REPRESSED WISHES" below, "DISGUISED" above the cloud.
+### Prompt #66 — "Never said before" (BUILD)
+Same Heraclitus character as Prompt #65. Add a scroll shape in the other hand. Radiating importance lines from the scroll. Text: "NEVER SAID BEFORE". [WHITE SUFFIX]
 
-### Frame 103 — "Every dream was your unconscious trying to tell you something"
-Same head with locked box from Frame 102. Now the dream cloud above has formed into shapes — recognizable symbols (a key, a door, a face). Arrows from the box through the head to each symbol. Text: "YOUR UNCONSCIOUS SPEAKING".
+### Prompt #67 — "Mind withdraws into itself"
+A large stickman head centered (same as Prompt #4). Inside the round head: a small pink brain. Arrows pointing INWARD from outside toward the brain — the OPPOSITE direction of all the soul-travel arrows from Section 2. Text: "WITHDRAWS INTO ITSELF". [WHITE SUFFIX]
 
-### Frame 104 — "Images were symbols"
-Three simple icons in a row with equals signs and question marks: Snake shape = ?  |  Door shape = ?  |  Water waves = ?. Text above: "SYMBOLS" in bold. (Visual equation — what does each symbol REALLY mean?)
+### Prompt #68 — CONTRAST: old vs new
+Split frame. LEFT: the soul-travel image (sleeping body, spirit rising OUT with outward arrows — same concept as Prompt #24). Labeled "OLD VIEW". RIGHT: head with brain, arrows going IN (same as Prompt #67). Labeled "NEW VIEW". Large "VS" between them. [WHITE SUFFIX]
 
-### Frame 105 — "A snake wasn't just a snake"
-A simple snake shape (S-curve with small head). An equals sign. Then a question mark with multiple possible meanings radiating out (arrows going to different icons). Text: "NOT JUST A SNAKE".
+### Prompt #69 — "Private world"
+A stickman (same as Prompt #1) inside a bubble/circle. Outside: other stickmen and objects FADED/lighter. The character inside is clear and solid. Text: "PRIVATE WORLD". [WHITE SUFFIX]
 
-### Frame 106 — "Royal road to the unconscious"
-A path/road shape (two converging lines creating perspective, going from foreground into distance). At the near end: a stickman walking. At the far end: a dark doorway labeled "UNCONSCIOUS". Along the road: small dream symbols (snake, door, water). Text: "ROYAL ROAD".
+### Prompt #70 — "Each sleeper, private world"
+Three sleeping stickmen in a row (same sleep pose as Prompt #1), each horizontal. Each has their OWN separate dream bubble above — different content in each (one has a tree shape, one has a face, one has abstract shapes). Bubbles don't connect. Text: "EACH SLEEPER — A PRIVATE WORLD". [WHITE SUFFIX]
 
-### Frame 107 — "50 years — Freud dominated psychology"
-Large text: "50 YEARS" in bold. Below: silhouettes of multiple therapy scenes — couch + therapist pairs repeated 3 times showing the era. Text: "FREUD DOMINATED".
+### Prompt #71 — "Radical"
+Large bold text: "RADICAL" in red with starburst explosion lines radiating outward. White background. Text-only. [WHITE SUFFIX]
 
-### Frame 108 — "Therapists decoding dream imagery"
-Two stickmen. One lying on a COUCH shape (long horizontal rectangle elevated on legs). The other sitting in a CHAIR shape nearby, holding a notepad, wearing glasses — the therapist. Above the patient: a dream cloud with symbols inside. The therapist has a pencil/pen pointing at the cloud, analyzing. Text: "DECODING".
+### Prompt #72 — "First time in history"
+An unrolling scroll left to right. A large red circle highlights one specific written line on it. Text: "FIRST TIME IN HISTORY". [WHITE SUFFIX]
 
-### Frame 109 — "Patients on couches describing what they saw"
-Close-up variant of Frame 108: the patient stickman's head on the couch, eyes closed, with a speech bubble containing dream imagery (faces, shapes, abstract objects). The therapist visible on the right, writing. Text: "WHAT THEY SAW".
+### Prompt #73 — "From YOU"
+A stickman (same as Prompt #1) with a glowing pink brain visible inside the head. Large bold arrows originating FROM the brain outward into a dream cloud above. Text pointing to brain: "FROM YOU" emphasized. [WHITE SUFFIX]
 
-### Frame 110 — "But science moved on"
-Bold text: "BUT SCIENCE MOVED ON." Below: a forward arrow (→) with Freud's couch getting SMALLER in the distance on the left. On the right side of the arrow: new shapes — lab equipment, brain shape, electrodes. Text: "SCIENCE →". (Transition frame — era shift.)
+### Prompt #74 — "Aristotle"
+A stickman with rectangular glasses (RESEARCHER variant like Prompt #29), seated on a simple stool. Holding scroll in one hand, other hand gesturing. Triangular body suggesting Greek robe. Text: "ARISTOTLE" above, "350 BC" below. [WHITE SUFFIX]
 
----
+### Prompt #75 — "On Dreams" (BUILD)
+Same Aristotle character as Prompt #74. Large scroll prominently displayed next to him. Text on scroll: "ON DREAMS". Text: "~350 BC". [WHITE SUFFIX]
 
-## SECTION 6: REM SLEEP DISCOVERY (5:50 - 6:30)
-**Script lines:** "In 1953, two researchers..." → "measured, timed, and triggered"
-**Background:** SAGE GREEN
-**Transition style:** Progressive build, zoom on details, scientific visuals
-**Frames: 111–130**
+### Prompt #76 — "Not divine messages"
+Golden light rays descending from top of frame (same divine light style as Prompt #37 — NO character, just light rays) toward a sleeping stickman below. A LARGE RED X crosses out the entire scene — the rays, the connection. Text: "NOT DIVINE" in red. [WHITE SUFFIX]
 
----
+### Prompt #77 — "Leftover impressions"
+LEFT: daytime — stickman walking (same as Prompt #1), sun above, simple objects around (tree shape, another character, animal shape). RIGHT: nighttime — same character sleeping, dream cloud above contains FADED versions of exact same objects from daytime. Arrow connects day to night. Text: "LEFTOVER IMPRESSIONS". [WHITE SUFFIX]
 
-### Frame 111 — "1953 — University of Chicago"
-Sage green background. Large text: "1953". Below: simple rectangular building outline with a small sign labeled "UNIVERSITY OF CHICAGO". Clean establishing frame.
+### Prompt #78 — "Sensory residues replayed"
+Hooded character head (same as Prompt #4). Brain inside with small faded images and a circular replay arrow ♻. Text: "RESIDUES — REPLAY". [WHITE SUFFIX]
 
-### Frame 112 — "Eugene Aserinsky and Nathaniel Kleitman"
-Two researcher stickmen side by side (both: round head, rectangular glasses, straight posture). LEFT one slightly shorter than RIGHT. Text above LEFT: "ASERINSKY". Text above RIGHT: "KLEITMAN". (Dual character introduction.)
+### Prompt #79 — "Afterimage — sun"
+LEFT: stickman (same as Prompt #1) looking UP at bright yellow sun (circle with rays). RIGHT: same character, eyes now closed (curved lines), a faded ghostly sun circle still visible in front of face. Text: "AFTERIMAGE". [WHITE SUFFIX]
 
-### Frame 113 — "Studying a sleeping infant"
-A small baby stickman lying in a simple crib shape (rectangle with short legs/rails). The two researchers from Frame 112 standing on either side of the crib, looking down at the baby. The baby has curved-line closed eyes. Text: "SLEEPING INFANT".
+### Prompt #80 — "Not real" (ZOOM)
+The faded ghostly sun circle from Prompt #79, now ISOLATED in center. Translucent, fading edges. Text: "NOT REAL — WINDING DOWN". [WHITE SUFFIX]
 
-### Frame 114 — "Baby's eyes moving rapidly"
-ZOOM IN: close-up of the baby's round head. Eyes shown as two short horizontal lines with rapid back-and-forth ARROWS (←→) above each eye. Small motion lines (speed dashes) around the eyes. Text: "RAPID EYE MOVEMENT".
+### Prompt #81 — "2,300 years ahead"
+Long timeline arrow. FAR LEFT: Aristotle character (same as Prompt #74) with "350 BC". FAR RIGHT: a modern brain scan icon (brain with circular rings) with "MODERN". Vast empty space between. Text: "2,300 YEARS". [WHITE SUFFIX]
 
-### Frame 115 — "REM" (TEXT EMPHASIS)
-Large bold text centered: "R.E.M." — each letter large and bold. Below in smaller text: "RAPID EYE MOVEMENT". Sage green background. (Named concept frame — important discovery moment.)
+### Prompt #82 — "But here's the thing"
+Text-only: "BUT HERE'S THE THING." Bold, centered, white background. [WHITE SUFFIX]
 
-### Frame 116 — "Electrodes on adult volunteers"
-A sleeping adult stickman lying horizontal. Small circles (dots) attached to the head — 4-5 electrode dots. From each dot, a thin line extends to the right toward a simple monitor/screen shape (rectangle with a wavy line on it). Text: "ELECTRODES".
+### Prompt #83 — "Nobody listened"
+Aristotle character (same as Prompt #74) on LEFT, speech lines from face. RIGHT: 5 stickmen turned AWAY, some with hands over ears, one walking away. Text: "NOBODY LISTENED". [WHITE SUFFIX]
 
-### Frame 117 — "Brain activity spiked during REM"
-A simple graph/chart. X-axis: time. Y-axis: brain activity level. The line is LOW and flat for most of it, then SPIKES dramatically high during a shaded section labeled "REM". The spike nearly reaches the top. Text: "BRAIN ACTIVITY DURING REM".
+### Prompt #84 — "2,000 years, old view"
+Large text: "2,000 YEARS". Below: small stickmen in ancient dress looking at stars, consulting priests. Old behaviors. Text: "THE OLD VIEW REMAINED". [WHITE SUFFIX]
 
-### Frame 118 — "Almost indistinguishable from waking consciousness"
-Split comparison. LEFT: a stickman AWAKE (standing, eyes open, active pose) with a brain activity wave pattern above. RIGHT: same stickman SLEEPING with REM eye movements, with a brain activity wave pattern above. KEY: both wave patterns look NEARLY IDENTICAL. Text: "AWAKE ≈ REM".
-
-### Frame 119 — "Brain wide awake, body paralyzed"
-One stickman, vertical layout. HEAD area: glowing pink brain with lightning bolt symbols (active, alive, buzzing). BODY area: stick limbs with red X marks on each one and rigid straight lines. Text at head: "AWAKE". Text at body: "PARALYZED". (Contrast within one figure.)
-
-### Frame 120 — "Most vivid dreams during REM"
-The sleeping stickman with electrode dots. Above: a LARGE, vibrant purple dream cloud, bigger and more detailed than any dream cloud shown before. Inside: vivid shapes, faces, landscapes (simplified). Text: "MOST VIVID DREAMS".
-
-### Frame 121 — "Dreams had a physical address"
-A brain shape (pink, centered). A red location pin icon (like Google Maps pin) STUCK INTO the brain at a specific spot. Text: "PHYSICAL ADDRESS". (Key metaphor visualization.)
-
-### Frame 122 — "Could be measured"
-A stickman head with brain. A ruler shape next to the brain. Numbers on the ruler. Checkmark. Text: "MEASURED ✓".
-
-### Frame 123 — "Timed"
-A clock/stopwatch shape next to a brain. Text: "TIMED ✓". (Quick frame — part of rapid-fire sequence.)
-
-### Frame 124 — "Triggered"
-A button shape with a finger/arrow pressing it, next to a brain that lights up in response. Text: "TRIGGERED ✓". (Completing the measured-timed-triggered trio.)
+### Prompt #85 — "Prophetic, divine, windows"
+Three icons with checkmarks: crystal ball shape = "PROPHETIC ✓", golden light rays = "DIVINE ✓", window frame with light = "WINDOWS ✓". [WHITE SUFFIX]
 
 ---
 
-## SECTION 7: ACTIVATION-SYNTHESIS (6:30 - 7:05)
-**Script lines:** "In 1977, Harvard psychiatrists..." → "brain talking to itself"
-**Background:** WHITE
-**Transition style:** Concept diagrams, mechanical/scientific visuals
-**Frames: 125–140**
+# SECTION 4: RELIGION & CULTURE (4:10 – 5:00)
+**BG: SAGE GREEN | Frames 86–96**
 
 ---
 
-### Frame 125 — "1977 — Harvard"
-White background. Text: "1977" large and bold. Below: simple building outline with "HARVARD" sign. (Time/place stamp.)
+### Prompt #86 — "Bible built with dreams"
+A simple book shape with a cross symbol. Purple dream clouds swirling around it. Text: "THE BIBLE — BUILT WITH DREAMS". [GREEN SUFFIX]
 
-### Frame 126 — "Allan Hobson and Robert McCarley"
-Two researcher stickmen (glasses, formal posture). Text: "HOBSON" above left, "McCARLEY" above right. (Character introduction.)
+### Prompt #87 — "Joseph and Pharaoh"
+Two stickmen. LEFT: Joseph (standard character, Prompt #1 style, arms gesturing). RIGHT: Pharaoh variant (same character + golden triangular headdress on head, seated on throne shape). Dream cloud above Pharaoh. Joseph pointing at the cloud. [GREEN SUFFIX]
 
-### Frame 127 — "Activation-synthesis model"
-Bold text centered: "ACTIVATION-SYNTHESIS" in large letters with a box/frame around it, like a label or title card. Below: "A NEW MODEL" in smaller text.
+### Prompt #88 — "Seven fat cows, seven lean cows"
+Inside a dream cloud: LEFT — 7 round plump cow shapes (simple oval + 4 stick legs). RIGHT — 7 thin skeletal cow shapes (narrow oval + stick legs). Dividing line between them. Text: "7 FAT / 7 LEAN". [GREEN SUFFIX]
 
-### Frame 128 — "Their argument was brutal in its simplicity"
-Text frame: "BRUTAL SIMPLICITY." Strong, clean, white background. (Dramatic pause.)
+### Prompt #89 — "Famine"
+Below a dream cloud (same as Prompt #88): cracked earth (jagged lines), empty bowls, thin stickmen. Arrow from dream above to reality below. Text: "FAMINE". [GREEN SUFFIX]
 
-### Frame 129 — "Dreams are neurological noise"
-A brain shape filled with random scattered dots, zigzag lines, and static patterns — like TV static/white noise inside the brain. Chaotic, random, no pattern. Text: "NEUROLOGICAL NOISE". (Key concept frame.)
+### Prompt #90 — "Daniel and Nebuchadnezzar"
+Two stickmen. LEFT: Daniel (standard). RIGHT: king with pointed crown (same crown variant as Prompt #41). Dream cloud above containing a large statue shape (humanoid figure with different shaded bands: gold head, silver chest, bronze waist, iron legs). Text: "THE GREAT STATUE". [GREEN SUFFIX]
 
-### Frame 130 — "Brainstem fires random signals into cortex"
-Side-view brain diagram (simplified): BOTTOM section (brainstem) highlighted in blue with lightning bolt shapes shooting UPWARD. TOP section (cortex) is the target. The lightning bolts are random — going in different directions, different sizes. Arrows showing upward direction. Text at bottom: "BRAINSTEM" and at top: "CORTEX". "RANDOM SIGNALS" along the arrows.
+### Prompt #91 — "Empires crumble"
+The statue from Prompt #90, now crumbling — top intact, bottom breaking with pieces falling. Arrow showing time progression. Text: "EMPIRES RISE AND FALL". [GREEN SUFFIX]
 
-### Frame 131 — "Cortex takes noise and builds a story"
-Same brain diagram from Frame 130. Now the cortex (top section) is highlighted in pink. The random lightning bolts enter from below. From the TOP of the cortex, a neat organized thought bubble emerges containing a COHERENT scene (a house, a person walking, a tree — simple shapes, organized). Text: "STORY" above the thought bubble. (Progressive build — adding the output.)
+### Prompt #92 — "Revelations during sleep"
+A sleeping stickman (same sleep pose as Prompt #1). Gentle golden radiating light lines around the head. Golden light rays descending softly from above (NO divine figure — just light). Text: "REVELATIONS". [GREEN SUFFIX]
 
-### Frame 132 — "The noise goes in, a story comes out" (SIMPLIFIED)
-Three-step flow diagram: LEFT box = random dots and zigzags labeled "NOISE". CENTER = brain shape with arrow through it labeled "CORTEX". RIGHT box = organized scene (house, tree, person) labeled "STORY". Arrows: noise → brain → story. (Distilled version of the concept.)
+### Prompt #93 — "Dream incubation"
+A simple temple shape (two columns + triangular roof). Inside: a sleeping stickman on the ground (same as Prompt #1 sleeping). Stars and crescent shapes float inside the temple above the sleeper. Text: "DREAM INCUBATION". [GREEN SUFFIX]
 
-### Frame 133 — "Bizarre narratives, impossible physics"
-Inside a dream cloud: absurd/impossible imagery — a stickman floating upside down, a house with the roof on the bottom, stairs going in a loop, water flowing upward. Text: "BIZARRE".
+### Prompt #94 — "Sacred places, messages" (BUILD)
+Same temple scene as Prompt #93. Add a dream cloud above the sleeper. Inside the cloud: golden light rays descending (divine messages — same light style as Prompt #37, NO figure). Text: "SACRED PLACES — MESSAGES FROM SPIRITS". [GREEN SUFFIX]
 
-### Frame 134 — "Dead relatives in a grocery store"
-A simple grocery scene: a shelf shape with items on it. Two stickmen shopping side by side. One is SOLID (the dreamer). One is TRANSPARENT/DOTTED (dead relative — ghost). Both casually shopping as if normal. The absurd mundanity is the point. Text: "RANDOM".
+### Prompt #95 — "Every continent still"
+Three small vignettes. LEFT: Americas outline + sleeping stickman. CENTER: Africa outline + sleeping character. RIGHT: Asia outline + sleeping character. Each with small dream cloud. Text: "EVERY CONTINENT — STILL TODAY". [GREEN SUFFIX]
 
-### Frame 135 — "Brain trying to make sense of signals that have no meaning"
-A brain shape with a large question mark inside it. Small random signal dots entering from below. The brain has a confused expression (if you anthropomorphize it: add tiny dot eyes and a wavy line mouth to the brain). Text: "MAKING SENSE OF NOTHING".
-
-### Frame 136 — "Dreams are not messages"
-Text with red X: "NOT MESSAGES ✗". Below: all previous theories shown as small crossed-out icons (god, couch, soul travel — all with X marks).
-
-### Frame 137 — "Brain talking to itself and getting confused"
-A brain shape in center. A speech bubble emerging from the brain — but the speech bubble points BACK AT the brain itself (the brain is talking to itself). Inside the speech bubble: "???" or confused symbols. Text: "TALKING TO ITSELF".
+### Prompt #96 — "2,000 years persisted"
+Large horizontal bar labeled "2,000 YEARS". Below: small icons — Bible book, temple, statue, priest character (same as Prompt #40). Text: "THE OLD BELIEF PERSISTED". [GREEN SUFFIX]
 
 ---
 
-## SECTION 8: THREAT SIMULATION (7:05 - 7:50)
-**Script lines:** "In 2000, Antti Revonsuo..." → "Natural selection cared what dreams did"
-**Background:** SAGE GREEN
-**Transition style:** Evolutionary visuals, danger scenarios, survival diagrams
-**Frames: 141–170**
+# SECTION 5: FREUD (5:00 – 5:50)
+**BG: WHITE | Frames 97–110**
 
 ---
 
-### Frame 138 — "But that isn't the end either"
-Sage green background. Text: "BUT THAT ISN'T THE END." Forward arrow. (Transition text.)
+### Prompt #97 — "1899"
+Large bold text: "1899" with starburst lines. Below: "EVERYTHING CHANGED AGAIN". [WHITE SUFFIX]
 
-### Frame 139 — "2000 — Antti Revonsuo"
-Researcher stickman (glasses, formal). Text: "ANTTI REVONSUO" above, "UNIVERSITY OF TURKU, FINLAND" below, "2000" at bottom.
+### Prompt #98 — "Sigmund Freud"
+A stickman (same base as Prompt #1) with rectangular glasses, small pointed beard (lines from chin), and a small horizontal line from face with curl at end (cigar). Standing formally. Text: "SIGMUND FREUD". [WHITE SUFFIX]
 
-### Frame 140 — "Threat simulation theory"
-Bold text centered: "THREAT SIMULATION THEORY" with a warning triangle (⚠) icon above the text. Sage green background.
+### Prompt #99 — "Interpretation of Dreams"
+A large book shape. Cover: "THE INTERPRETATION OF DREAMS". Below: "FREUD, 1899". Importance lines around book. [WHITE SUFFIX]
 
-### Frame 141 — "For 300,000 years — environment where wrong step meant death"
-An ancient human stickman (brown cloth wrap) walking on a path (simple line). Around the path: DANGER icons on all sides — a snake coiled on left, cliff edge on right, dark predator silhouette ahead. Red warning triangles at each danger. Text: "EVERY STEP = RISK".
+### Prompt #100 — "Not random"
+Text: "NOT RANDOM" with red X through it. Scattered random dots also crossed out. [WHITE SUFFIX]
 
-### Frame 142 — "Predators" (DETAIL)
-An ancient stickman RUNNING from left to right. Behind him: a large simplified predator silhouette (cat/wolf shape — four legs, pointed ears, open jaw). Motion lines showing both running. The stickman's legs are in running pose, mouth open in O-shape fear. Text: "PREDATORS".
+### Prompt #101 — "Not divine"
+Golden light rays from top (same style as Prompt #37). Red X through the rays. Text: "NOT DIVINE ✗". [WHITE SUFFIX]
 
-### Frame 143 — "Hostile groups"
-LEFT: a single stickman (the individual, looking small). RIGHT: a group of 4 aggressive stickmen (holding simple spear shapes — vertical lines with pointed tips, forward-leaning aggressive posture). Red warning triangle above. Text: "HOSTILE".
+### Prompt #102 — "Repressed wishes"
+Stickman head large, centered (same as Prompt #4). Inside the round head: a locked box shape (rectangle + padlock icon). Curvy arrows struggling UPWARD from box through the top into a dream cloud above. Text: "REPRESSED WISHES" below, "DISGUISED" above cloud. [WHITE SUFFIX]
 
-### Frame 144 — "Cliffs, rivers, venomous animals"
-Three danger icons in a row, each in its own section. LEFT: a cliff edge (sharp angular drop) with a stickman almost falling off. CENTER: wavy water lines with a stickman struggling. RIGHT: a coiled snake with fangs. Each has a red triangle. Text: "DEADLY ENVIRONMENT".
+### Prompt #103 — "Unconscious speaking" (BUILD)
+Same head and locked box as Prompt #102. Dream cloud above has formed into recognizable symbols — a key, a door, a face. Arrows from box to each symbol. Text: "YOUR UNCONSCIOUS SPEAKING". [WHITE SUFFIX]
 
-### Frame 145 — "Dreams evolved as a rehearsal mechanism"
-KEY CONCEPT FRAME. LEFT: a sleeping stickman with a dream cloud. Inside the cloud: the sleeping stickman is RUNNING from a predator (same as Frame 142 but inside the dream). RIGHT: the stickman AWAKE, now in a confident ready stance facing the same predator, successfully responding. An arrow from dream → reality. Text: "REHEARSAL MECHANISM".
+### Prompt #104 — "Symbols"
+Three icons in a row with equals signs and question marks: Snake shape = ? | Door shape = ? | Water waves = ?. Text above: "SYMBOLS". [WHITE SUFFIX]
 
-### Frame 146 — "Sleeping brain runs threat simulations"
-A brain shape with a "▶ PLAY" button triangle on it — like pressing play on a simulation. Above the brain: small danger scenarios playing out in sequence (predator chase → cliff escape → hostile encounter). Text: "RUNNING SIMULATIONS".
+### Prompt #105 — "Not just a snake"
+A simple snake S-shape. Equals sign. Then question mark with arrows going to multiple possible icons. Text: "NOT JUST A SNAKE". [WHITE SUFFIX]
 
-### Frame 147 — "Waking brain better prepared to survive"
-An awake stickman in a STRONG, ready stance (wide legs, arms ready). Around him: the same dangers (predator, cliff, hostile group) but now with GREEN checkmarks next to each. The stickman is PREPARED for each. Text: "PREPARED TO SURVIVE".
+### Prompt #106 — "Royal road"
+A path/road shape (two converging lines into distance). Near end: stickman walking (same as Prompt #1). Far end: dark doorway labeled "UNCONSCIOUS". Small dream symbols along the road. Text: "ROYAL ROAD". [WHITE SUFFIX]
 
-### Frame 148 — "Why nightmares are so common"
-A sleeping stickman in bed. Above: MULTIPLE dark/scary dream clouds, densely packed. Inside each: a different threat (monster, falling, chasing). Text: "NIGHTMARES" and below: "COMMON FOR A REASON".
+### Prompt #107 — "50 years dominated"
+Large text: "50 YEARS". Below: silhouettes of couch + therapist character pairs repeated 3 times. Text: "FREUD DOMINATED". [WHITE SUFFIX]
 
-### Frame 149 — "Dream about being chased"
-Inside a dream cloud: a stickman running desperately from a dark shadow-shape chasing behind. The stickman's legs are blurred with motion lines. Looking back over shoulder with scared expression (wide eyes). Text: "CHASED". (Common nightmare visualization.)
+### Prompt #108 — "Therapist decoding"
+Two stickmen. One lying on a COUCH shape (patient — same as Prompt #1 lying variant). One sitting in CHAIR (therapist — same character + glasses like Prompt #29). Dream cloud above patient with symbols. Therapist pointing at cloud, holding notepad. Text: "DECODING". [WHITE SUFFIX]
 
-### Frame 150 — "About falling"
-Inside a dream cloud: a stickman in free-fall, arms and legs spread outward, motion lines streaming upward (showing downward movement). Below: empty void, no ground visible. Expression: O-mouth, wide eyes. Text: "FALLING".
+### Prompt #109 — "What they saw" (ZOOM)
+Close-up: patient character's head on couch (same as Prompt #108), eyes closed. Speech bubble with dream imagery (faces, abstract shapes). Therapist (same as Prompt #108) visible on right, writing. Text: "WHAT THEY SAW". [WHITE SUFFIX]
 
-### Frame 151 — "Danger you can't escape"
-Inside a dream cloud: a stickman in center, surrounded by walls closing in from all four sides (arrows pointing inward). Trapped. No exit visible. Panicked expression. Text: "NO ESCAPE".
-
-### Frame 152 — "Brain isn't tormenting you — it's training you"
-Split comparison frame. LEFT: "TORMENT?" with a sad stickman having nightmares, RED X through it. RIGHT: "TRAINING ✓" with the same stickman in a confident pose, GREEN checkmark. An arrow from LEFT to RIGHT showing the reframe. Text: "NOT TORMENT. TRAINING."
-
-### Frame 153 — "Threatening events appear in dreams far more often than waking life"
-A simple bar chart. Two bars. LEFT bar (tall, dark/red): labeled "IN DREAMS" — high level of threats. RIGHT bar (short, light): labeled "IN WAKING LIFE" — low level. The difference is dramatic. Text: "THREATS IN DREAMS vs. REALITY".
-
-### Frame 154 — "Children most vulnerable, most nightmares"
-Two figures side by side. LEFT: a SMALL child stickman (shorter, spiky hair) with MANY dark dream clouds above (4-5 clouds). RIGHT: an ADULT stickman (taller) with FEWER dream clouds (1-2). The contrast is clear. Text: "CHILDREN = MORE NIGHTMARES".
-
-### Frame 155 — "War zones — more threat dreams"
-Split comparison. LEFT: stickman in peaceful setting (simple house, sun, flowers) with one small dream cloud. Labeled "SAFE". RIGHT: stickman in war zone (broken building outlines, explosion shapes) with many intense dark dream clouds. Labeled "DANGEROUS". Text: "ENVIRONMENT MATTERS".
-
-### Frame 156 — "Ancestors who rehearsed threats survived"
-A flow/path diagram going left to right. Start: ancient stickman sleeping, dream cloud with threats. → Middle: same stickman awake, successfully escaping a predator. → End: stickman with small child stickmen (offspring). GREEN checkmark at end. Text: "SURVIVED → HAD CHILDREN ✓".
-
-### Frame 157 — "The ones who dreamed about flowers did not"
-Same flow diagram format. Start: ancient stickman sleeping, dream cloud with FLOWERS and pleasant images. → Middle: same stickman awake, CAUGHT by predator (predator on top of stickman). → End: RED X. No offspring. Text: "DID NOT SURVIVE ✗".
-
-### Frame 158 — "Natural selection didn't care what dreams meant"
-Bold text: "WHAT DREAMS MEANT?" with a shrug gesture stickman and question mark. Red X through "MEANT". Text below: "IRRELEVANT".
-
-### Frame 159 — "It cared what dreams did"
-Bold text: "WHAT DREAMS DID." Green checkmark. Below: the rehearsal concept in miniature — sleep → practice → survive. Text: "FUNCTION > MEANING".
+### Prompt #110 — "Science moved on"
+Bold text: "BUT SCIENCE MOVED ON." Forward arrow (→). LEFT (smaller/distant): Freud couch. RIGHT: lab equipment shapes, brain shape, electrodes. Text: "SCIENCE →". [WHITE SUFFIX]
 
 ---
 
-## SECTION 9: CLOSING (7:50 - 8:30)
-**Script lines:** "So what are dreams?..." → "brain isn't giving us a straight answer"
-**Background:** WHITE
-**Transition style:** Summary layers, world scope, philosophical punch
-**Frames: 160–210**
+# SECTION 6: REM SLEEP (5:50 – 6:30)
+**BG: SAGE GREEN | Frames 111–124**
 
 ---
 
-### Frame 160 — "So what are dreams?"
-White background. Large bold text centered: "SO WHAT ARE DREAMS?" A single large purple question mark beside it. Clean, open, inviting reflection.
+### Prompt #111 — "1953 — Chicago"
+Large text: "1953". Below: building outline with "UNIVERSITY OF CHICAGO". [GREEN SUFFIX]
 
-### Frame 161 — "After 300,000 years, we still don't have one answer"
-Text: "300,000 YEARS" in large bold. Below: "STILL NO ONE ANSWER." Multiple different-colored question marks scattered around (purple, blue, red, orange — representing different theories).
+### Prompt #112 — "Aserinsky and Kleitman"
+Two stickmen side by side, both with rectangular glasses (RESEARCHER variant like Prompt #29). LEFT slightly shorter. Text: "ASERINSKY" above left, "KLEITMAN" above right. [GREEN SUFFIX]
 
-### Frame 162 — "We have layers"
-A geological layer diagram — horizontal stacked layers, each a different color, each representing a different era's explanation. From BOTTOM (oldest) to TOP (newest). The layers are visible but not yet labeled. Text: "LAYERS". (Establishing the visual that the next frames will build on.)
+### Prompt #113 — "Sleeping infant"
+A small stickman (CHILD variant — 40% smaller than Prompt #1) lying in a simple crib shape. The two researchers from Prompt #112 standing on either side, looking down. Text: "SLEEPING INFANT". [GREEN SUFFIX]
 
-### Frame 163 — "Layer 1: Soul travel"
-Same layer diagram from Frame 162. The BOTTOM layer is now highlighted and labeled. Inside it: tiny icon of spirit leaving body. Text label on layer: "SOUL TRAVEL". Other layers faded. (Progressive build — filling in layers one at a time.)
+### Prompt #114 — "Rapid eye movement" (ZOOM)
+Close-up of the child character's head from Prompt #113. Eyes shown as small lines with rapid back-and-forth arrows (←→). Motion speed dashes around the eyes. Text: "RAPID EYE MOVEMENT". [GREEN SUFFIX]
 
-### Frame 164 — "Layer 2: Divine intelligence"
-Same diagram. The SECOND layer up is now highlighted and labeled. Inside: tiny icon of god sending message through door. Text label: "DIVINE MESSAGES". Bottom layer still labeled. (Progressive build.)
+### Prompt #115 — "R.E.M."
+Large bold text: "R.E.M." Each letter large. Below: "RAPID EYE MOVEMENT". Text-only, sage green. [GREEN SUFFIX]
 
-### Frame 165 — "Layer 3: Greeks — from within"
-Third layer highlighted. Inside: tiny brain with inward arrows. Text label: "FROM WITHIN". Two layers below still visible with their labels.
+### Prompt #116 — "Electrodes on adults"
+A sleeping stickman (same as Prompt #1 sleeping). Small circles (dots) on the head — 4-5 electrode dots. Thin lines extend from each to a monitor/screen shape on the right (rectangle with wavy line). Text: "ELECTRODES". [GREEN SUFFIX]
 
-### Frame 166 — "Layer 4: Freud — coded messages"
-Fourth layer highlighted. Inside: tiny lock/key icon. Text label: "UNCONSCIOUS". Three layers below visible.
+### Prompt #117 — "Brain activity spiked"
+A simple graph. X-axis: time. Y-axis: activity. Line is LOW then SPIKES dramatically during a shaded "REM" section. Text: "BRAIN ACTIVITY DURING REM". [GREEN SUFFIX]
 
-### Frame 167 — "Layer 5: Neuroscience — random noise"
-Fifth layer highlighted. Inside: tiny brain with static/noise. Text label: "NOISE". Four layers below visible.
+### Prompt #118 — "Awake ≈ REM"
+Split comparison. LEFT: stickman AWAKE (standing, eyes open — same as Prompt #1) with brain wave pattern above. RIGHT: same character SLEEPING with REM eye arrows, SAME brain wave pattern above. Both patterns nearly identical. Text: "AWAKE ≈ REM". [GREEN SUFFIX]
 
-### Frame 168 — "Layer 6: Evolution — survival training"
-TOP layer highlighted. Inside: tiny running stickman. Text label: "TRAINING". All six layers now visible and labeled. The full stack is complete. (Progressive build complete — this is the summary image.)
+### Prompt #119 — "Brain awake, body paralyzed"
+One stickman. HEAD area: glowing pink brain with lightning bolts (active). BODY area: limbs with red X marks, rigid. Text at head: "AWAKE". Text at body: "PARALYZED". [GREEN SUFFIX]
 
-### Frame 169 — "None of them have been fully right"
-Same complete six-layer diagram from Frame 168. Now each layer has a small question mark (?) next to its label. Text above the stack: "NONE FULLY RIGHT". The question persists through every era.
+### Prompt #120 — "Vivid dreams in REM"
+Sleeping stickman with electrodes (same as Prompt #116). Above: LARGE vibrant purple dream cloud, bigger than any before. Inside: vivid shapes and colors. Text: "MOST VIVID DREAMS". [GREEN SUFFIX]
 
-### Frame 170 — "Every human culture has tried to explain dreams"
-A simplified world map. On EVERY continent: small groups of stickmen, each with dream clouds above. Dotted lines connecting all groups. Text: "EVERY CULTURE" and "EVERY SINGLE ONE".
+### Prompt #121 — "Physical address"
+A pink brain centered. A red location pin icon (like map pin) stuck into the brain. Text: "PHYSICAL ADDRESS". [GREEN SUFFIX]
 
-### Frame 171 — "Hunter-gatherers in the Kalahari"
-A small vignette: flat desert landscape line, sun. A stickman with simple cloth wrap, sitting by a fire (small flame shape), looking up at a night sky with stars. A dream cloud above. Text: "KALAHARI".
+### Prompt #122 — "Measured"
+Brain shape + ruler next to it. Checkmark. Text: "MEASURED ✓". [GREEN SUFFIX]
 
-### Frame 172 — "Pharaohs in Egypt"
-Small vignette: pyramid silhouettes in background. A stickman with Egyptian headdress (triangular shape on head), lying on an ornate bed shape, dreaming. Dream cloud above. Text: "EGYPT".
+### Prompt #123 — "Timed"
+Clock/stopwatch shape + brain. Text: "TIMED ✓". [GREEN SUFFIX]
 
-### Frame 173 — "Philosophers in Athens"
-Small vignette: Greek column in background. A stickman with beard, seated on a stone/block, in thinking pose (hand on chin), looking at a dream cloud thoughtfully. Text: "ATHENS".
-
-### Frame 174 — "Scientists in Chicago"
-Small vignette: modern building outline in background. A stickman with glasses and lab coat, looking at a screen showing brain scan data. Text: "CHICAGO".
-
-### Frame 175 — "No one has ever shrugged and said dreams don't matter"
-A stickman in a SHRUG pose (shoulders raised, palms up) with text above: "DREAMS DON'T MATTER?" A LARGE RED X crossing out the entire scene. Text: "NOBODY. EVER." (Strong negation frame.)
-
-### Frame 176 — "Because every night"
-Text frame: "BECAUSE EVERY NIGHT..." white background, building anticipation.
-
-### Frame 177 — "You close your eyes"
-A stickman's face, close-up. Eyes transitioning from open (circles) to closed (curved lines). The moment of falling asleep. Simple, intimate.
-
-### Frame 178 — "Enter a world that feels absolutely real"
-The stickman stepping THROUGH a glowing purple portal/doorway shape. One foot still in the white background (reality), one foot in the purple dream space. The threshold moment. Text: "ABSOLUTELY REAL".
-
-### Frame 179 — "Laws of physics don't apply"
-Inside the purple dream space: objects defying physics — water flowing upward (wavy lines going up), a stickman standing on the ceiling (upside down), blocks floating in mid-air. Text: "NO PHYSICS".
-
-### Frame 180 — "The dead walk"
-Inside dream space: spirit/ghost stickmen (dotted lines, transparent) walking casually among solid stickmen. Nobody reacts — it's normal here. Text: "THE DEAD WALK".
-
-### Frame 181 — "Buildings rearrange themselves"
-Inside dream space: building shapes in mid-transformation — walls shifting position (shown with motion arrows), a door appearing where a wall was, rooms changing shape. Text: "REARRANGE".
-
-### Frame 182 — "You can fly if you believe hard enough"
-A stickman FLYING through the dream space — arms spread wide like wings, soaring upward. Motion lines trailing below. A joyful expression (upturned line mouth). Below: the dream landscape getting smaller. Text: "FLY". (Moment of wonder — the one positive dream experience.)
-
-### Frame 183 — "Every morning you wake up"
-The stickman sitting up in bed — transition from dream back to reality. The purple dream cloud above is FADING, dissolving into small particles/dots that scatter. The white background (reality) is taking over. Text: "WAKE UP".
-
-### Frame 184 — "Forget almost all of it"
-Same waking stickman from Frame 183. The dream particles are now almost completely GONE — just a few faint dots remaining. The stickman has a slightly confused expression (tilted head, question mark). Text: "FORGOTTEN" and "95%". (Most of the dream is lost.)
-
-### Frame 185 — "Your ancestors spent 300,000 years trying to figure out what that means"
-The long timeline arrow again (from Section 1, Frame 19, but now more populated). Ancient stickman on far left. Modern stickman on far right. Between them: small icons of every attempt to understand — spirit leaving body, god at door, Greek philosopher, Freud's couch, brain scan. All along the timeline. Text: "300,000 YEARS TRYING".
-
-### Frame 186 — "We've added brain scans"
-A brain inside a large MRI ring (simplified: a circle with the brain in the center). Data screens beside it. Text: "BRAIN SCANS".
-
-### Frame 187 — "Sleep labs"
-A stickman sleeping in a bed inside a clinical room (simple rectangle room outline). Electrode wires from head to monitoring equipment (screens, machines). Text: "SLEEP LABS".
-
-### Frame 188 — "Peer-reviewed papers"
-A stack of paper/document shapes piled up. Small text lines on each suggesting writing. Text: "PEER-REVIEWED PAPERS".
-
-### Frame 189 — "And we're still not sure"
-The modern scientist stickman from Frame 174. Same posture. But now with a QUESTION MARK above the head. Despite all the equipment and papers, the question remains. Text: "STILL NOT SURE".
-
-### Frame 190 — "The only thing that's changed"
-Text emphasis frame: "THE ONLY THING THAT'S CHANGED..."
-
-### Frame 191 — "We stopped asking the gods"
-The divine figure from earlier sections (large, glowing, elevated) — now FADING, becoming transparent, dissolving. Text: "STOPPED ASKING THE GODS". The god is disappearing from the frame.
-
-### Frame 192 — "Started asking the brain"
-A large pink brain, centered and prominent. A scientist stickman looking at it through a magnifying glass shape. The scientist is small compared to the brain — emphasizing the brain as the new focus of inquiry. Text: "STARTED ASKING THE BRAIN".
-
-### Frame 193 — PENULTIMATE FRAME — "The brain, so far"
-Same large brain from Frame 192, but now the scientist is GONE. Just the brain, alone, centered. An expectant feeling — we're waiting for the brain to answer. Text: "THE BRAIN, SO FAR..."
-
-### Frame 194 — FINAL FRAME — "Isn't giving us a straight answer either"
-The large pink brain, centered. A simple speech bubble emerging from it. Inside the speech bubble: only three dots "..." — silence. The brain has no answer. Clean white space around. Nothing else in the frame. Text below: "..."
-
-This is the END IMAGE. Hold for 3-4 seconds. Let it breathe.
+### Prompt #124 — "Triggered"
+Button shape with arrow pressing it + brain lighting up. Text: "TRIGGERED ✓". [GREEN SUFFIX]
 
 ---
 
-### SUPPLEMENTARY HOLD/TRANSITION FRAMES (195-210)
-
-These frames are REPEATS or MINOR VARIANTS of key frames, used to maintain the ~210 frame count at Zenn's pacing. They're placed at natural pause points where the narration holds on an idea.
-
-| Frame | Source | Variant | Placement |
-|-------|--------|---------|-----------|
-| 195 | Frame 22 | Same but without text — just the lone stickman and question mark | After "terrifying" — hold beat |
-| 196 | Frame 24 | Spirit at different height (mid-rise) | During soul-travel explanation |
-| 197 | Frame 37 | Just the door, no characters — isolated object | During Mesopotamia section |
-| 198 | Frame 49 | Same text, add a small exclamation mark | Extra emphasis hold |
-| 199 | Frame 52 | Ba-bird in different flying pose (wings up vs. wings spread) | During Egypt section |
-| 200 | Frame 59 | Just the two arrows without labels — simplified | Hold on dreams=death concept |
-| 201 | Frame 67 | Same head, arrows slightly changed angle | Hold on "withdraws" concept |
-| 202 | Frame 81 | Same timeline but zoom into center gap (vast empty space) | Emphasize 2,300 year gap |
-| 203 | Frame 102 | Box slightly more open — wishes escaping further | During Freud section |
-| 204 | Frame 119 | Same but lightning bolts brighter/more active | During REM section |
-| 205 | Frame 129 | Same but noise pattern slightly different | During activation-synthesis |
-| 206 | Frame 145 | Same but the stickman in dream is at different stage of escape | During threat simulation |
-| 207 | Frame 148 | One fewer dream cloud (progressive nightmare reveal) | Building nightmare scene |
-| 208 | Frame 168 | Same layers but each layer glows one at a time (animation breakdown) | During summary |
-| 209 | Frame 185 | Zoom into the center of the timeline | During closing |
-| 210 | Frame 194 | Same brain, speech bubble slightly larger — still "..." | Final hold — extended |
+# SECTION 7: ACTIVATION-SYNTHESIS (6:30 – 7:05)
+**BG: WHITE | Frames 125–137**
 
 ---
 
-## ملخص الإنتاج النهائي (Final Production Summary)
+### Prompt #125 — "1977 — Harvard"
+Text: "1977". Below: building outline + "HARVARD". [WHITE SUFFIX]
 
-| Section | Frames | Background | Duration | BG Change |
-|---------|--------|------------|----------|-----------|
-| 1. Opening Hook | 22 (1-22) | White | 0:00-0:45 | — |
-| 2. Soul Travel | 38 (23-60) | Sage Green | 0:45-2:40 | ✓ Switch |
-| 3. Greek Twist | 25 (61-85) | White | 2:40-4:10 | ✓ Switch |
-| 4. Religious Persistence | 11 (86-96) | Sage Green | 4:10-5:00 | ✓ Switch |
-| 5. Freud | 14 (97-110) | White | 5:00-5:50 | ✓ Switch |
-| 6. REM Discovery | 14 (111-124) | Sage Green | 5:50-6:30 | ✓ Switch |
-| 7. Activation-Synthesis | 13 (125-137) | White | 6:30-7:05 | ✓ Switch |
-| 8. Threat Simulation | 22 (138-159) | Sage Green | 7:05-7:50 | ✓ Switch |
-| 9. Closing | 35 (160-194) | White | 7:50-8:30 | ✓ Switch |
-| 10. Hold/Transition | 16 (195-210) | Mixed | Distributed | — |
-| **TOTAL** | **210** | **Alternating** | **~8:30** | **8 switches** |
+### Prompt #126 — "Hobson and McCarley"
+Two stickmen with glasses (RESEARCHER variant, same as Prompt #112). Text: "HOBSON" left, "McCARLEY" right. [WHITE SUFFIX]
 
-### الخلفية تتبدل كل قسم:
-أبيض → أخضر → أبيض → أخضر → أبيض → أخضر → أبيض → أخضر → أبيض
+### Prompt #127 — "Activation-synthesis"
+Bold text: "ACTIVATION-SYNTHESIS" in framed box. Below: "A NEW MODEL". [WHITE SUFFIX]
 
-بالضبط مثل Zenn — الخلفية تتغير مع كل بلوك محتوى جديد.
+### Prompt #128 — "Brutal simplicity"
+Text-only: "BRUTAL SIMPLICITY." Bold, dramatic. [WHITE SUFFIX]
 
-### معدل الإطارات:
-- **210 إطار ÷ 8.5 دقيقة = 24.7 إطار/دقيقة**
-- **= إطار جديد كل 2.4 ثانية**
-- **Zenn: 212 إطار ÷ 9 دقائق = 23.5 إطار/دقيقة = كل 2.55 ثانية**
-- **✓ متطابق تقريباً**
+### Prompt #129 — "Neurological noise"
+A pink brain shape filled with random scattered dots, zigzag lines, static patterns — like TV noise inside the brain. Chaotic, no pattern. Text: "NEUROLOGICAL NOISE". [WHITE SUFFIX]
 
-### ملاحظات الحركة (Motion/Animation):
-- كل إطار يُعرض مع **Ken Burns effect** بطيء (zoom in 5% خلال 2-3 ثواني)
-- الإطارات المهمة (مثل 22, 49, 128, 194) تُعرض بدون حركة وتبقى أطول (3-4 ثواني)
-- الانتقالات بين الأقسام: **fade قصير** (0.3-0.5 ثانية) عند تغيير الخلفية
-- داخل القسم: **hard cut** مباشر بين الإطارات
+### Prompt #130 — "Brainstem fires random signals"
+Side-view brain (simplified). BOTTOM section (brainstem) highlighted with lightning bolts shooting UPWARD into TOP section (cortex). Arrows random — different directions and sizes. Text: "BRAINSTEM" bottom, "CORTEX" top, "RANDOM SIGNALS" along arrows. [WHITE SUFFIX]
+
+### Prompt #131 — "Cortex builds a story" (BUILD)
+Same brain as Prompt #130. Cortex now highlighted in pink. Random bolts enter from below. From cortex TOP: a neat organized thought bubble with a coherent scene (house, character walking, tree). Text: "STORY" above bubble. [WHITE SUFFIX]
+
+### Prompt #132 — "Noise → Brain → Story"
+Three-step flow. LEFT box: random dots and zigzags = "NOISE". CENTER: brain shape with arrow through = "CORTEX". RIGHT box: organized scene = "STORY". Arrows: noise → brain → story. [WHITE SUFFIX]
+
+### Prompt #133 — "Bizarre narratives"
+Inside dream cloud: absurd imagery — a stickman (same as Prompt #1) floating upside down, house with roof on bottom, stairs in a loop, water flowing upward. Text: "BIZARRE". [WHITE SUFFIX]
+
+### Prompt #134 — "Dead relatives, grocery store"
+A grocery shelf shape. Two stickmen (same as Prompt #1) shopping side by side. LEFT is solid/normal. RIGHT is transparent/dotted (spirit variant from Prompt #15). Both casually shopping. Text: "RANDOM". [WHITE SUFFIX]
+
+### Prompt #135 — "Brain confused"
+A brain shape with a large question mark inside. Random dots entering from below. Add tiny dot eyes and a wavy line on the brain (anthropomorphized confused brain). Text: "MAKING SENSE OF NOTHING". [WHITE SUFFIX]
+
+### Prompt #136 — "Not messages"
+Text: "NOT MESSAGES ✗" in red. Below: small crossed-out icons — golden rays (divine from Prompt #37), couch (Freud from Prompt #108), spirit rising (soul from Prompt #24). All with X marks. [WHITE SUFFIX]
+
+### Prompt #137 — "Brain talking to itself"
+A brain in center. Speech bubble pointing BACK at itself. Inside the bubble: "???" Text: "TALKING TO ITSELF". [WHITE SUFFIX]
+
+---
+
+# SECTION 8: THREAT SIMULATION (7:05 – 7:50)
+**BG: SAGE GREEN | Frames 138–159**
+
+---
+
+### Prompt #138 — "Not the end"
+Text: "BUT THAT ISN'T THE END." Forward arrow. [GREEN SUFFIX]
+
+### Prompt #139 — "Antti Revonsuo, 2000"
+Hooded character with glasses (RESEARCHER variant, same as Prompt #29). Text: "ANTTI REVONSUO", "UNIVERSITY OF TURKU, FINLAND", "2000". [GREEN SUFFIX]
+
+### Prompt #140 — "Threat simulation theory"
+Bold text: "THREAT SIMULATION THEORY" with warning triangle ⚠ above. [GREEN SUFFIX]
+
+### Prompt #141 — "Every step = risk"
+An ancient stickman (brown fur variant, same as Prompt #19 left figure) walking on a path. DANGER icons on all sides: coiled snake LEFT, cliff edge RIGHT, predator silhouette AHEAD. Red warning triangles at each. Text: "EVERY STEP = RISK". [GREEN SUFFIX]
+
+### Prompt #142 — "Predators"
+Ancient stickman (same as Prompt #141) RUNNING left to right. Behind: large predator silhouette (cat/wolf — four legs, pointed ears, open jaw) chasing. Motion lines. Character's eyes extra wide. Text: "PREDATORS". [GREEN SUFFIX]
+
+### Prompt #143 — "Hostile groups"
+LEFT: single stickman (same as Prompt #1, looking small). RIGHT: group of 4 stickmen holding vertical spear lines, aggressive forward-lean. Red triangle above. Text: "HOSTILE". [GREEN SUFFIX]
+
+### Prompt #144 — "Deadly environment"
+Three danger icons in a row. LEFT: cliff with stickman almost falling. CENTER: wavy water + struggling character. RIGHT: coiled snake with fangs. Each has red triangle. Text: "DEADLY ENVIRONMENT". [GREEN SUFFIX]
+
+### Prompt #145 — "Rehearsal mechanism"
+KEY FRAME. LEFT: sleeping stickman (same as Prompt #1 sleeping) + dream cloud. Inside cloud: the character running from predator (same scenario as Prompt #142 but inside dream). RIGHT: the character AWAKE, confident strong pose, successfully escaping same predator. Arrow from dream to reality. Text: "REHEARSAL MECHANISM". [GREEN SUFFIX]
+
+### Prompt #146 — "Running simulations"
+A brain shape with a "▶ PLAY" triangle button on it. Above: small danger scenarios playing in sequence (predator chase, cliff escape, hostile encounter). Text: "RUNNING SIMULATIONS". [GREEN SUFFIX]
+
+### Prompt #147 — "Prepared to survive"
+Awake stickman (same as Prompt #1) in strong wide stance. Around: same dangers as Prompt #141 (predator, cliff, hostile group) but now with GREEN checkmarks ✓ next to each. Character is READY. Text: "PREPARED TO SURVIVE". [GREEN SUFFIX]
+
+### Prompt #148 — "Nightmares common"
+Sleeping stickman in bed (same as Prompt #1). MULTIPLE dark scary dream clouds densely packed above. Inside each: a different threat (monster shape, falling figure, chasing shadow). Text: "NIGHTMARES — COMMON FOR A REASON". [GREEN SUFFIX]
+
+### Prompt #149 — "Chased"
+Inside dream cloud: stickman (same as Prompt #1) running desperately, looking back over shoulder. Dark shadow shape chasing behind. Motion lines. Text: "CHASED". [GREEN SUFFIX]
+
+### Prompt #150 — "Falling"
+Inside dream cloud: stickman in free-fall, arms spread. Motion lines upward (showing descent). No ground visible below. Eyes wide. Text: "FALLING". [GREEN SUFFIX]
+
+### Prompt #151 — "No escape"
+Inside dream cloud: stickman centered, walls/barriers closing in from all sides (arrows pointing inward). Trapped. Text: "NO ESCAPE". [GREEN SUFFIX]
+
+### Prompt #152 — "Training, not torment"
+Split frame. LEFT: "TORMENT?" + sad character having nightmares, RED X through it. RIGHT: "TRAINING ✓" + same character in confident pose, GREEN checkmark. Text: "NOT TORMENT. TRAINING." [GREEN SUFFIX]
+
+### Prompt #153 — "Threats in dreams vs reality"
+Bar chart. LEFT bar (tall, red): "IN DREAMS" — high. RIGHT bar (short, light): "IN WAKING LIFE" — low. Dramatic difference. Text: "THREATS: DREAMS vs. REALITY". [GREEN SUFFIX]
+
+### Prompt #154 — "Children, most nightmares"
+LEFT: small child stickman (CHILD variant, 40% smaller — same as Prompt #113) with MANY dark dream clouds (4-5). RIGHT: adult stickman (same as Prompt #1) with fewer clouds (1-2). Text: "CHILDREN = MORE NIGHTMARES". [GREEN SUFFIX]
+
+### Prompt #155 — "War zones"
+Split. LEFT: character in peaceful setting (house, sun, flower), one dream cloud. "SAFE". RIGHT: character in war zone (broken buildings, explosion shapes), many dark clouds. "DANGEROUS". Text: "ENVIRONMENT MATTERS". [GREEN SUFFIX]
+
+### Prompt #156 — "Rehearsed → survived"
+Flow diagram left to right. START: ancient character sleeping (brown fur variant from Prompt #141), dream with threats. → MIDDLE: same character awake, escaping predator. → END: character with small child characters (offspring). Green ✓. Text: "SURVIVED → HAD CHILDREN ✓". [GREEN SUFFIX]
+
+### Prompt #157 — "Flowers → did not survive"
+Same flow format as Prompt #156. START: ancient character sleeping, dream with FLOWERS and pleasant images. → MIDDLE: caught by predator. → END: RED X, no offspring. Text: "DID NOT SURVIVE ✗". [GREEN SUFFIX]
+
+### Prompt #158 — "What dreams meant?"
+Text: "WHAT DREAMS MEANT?" with shrug-pose character and question mark. Red X through "MEANT". Text: "IRRELEVANT". [GREEN SUFFIX]
+
+### Prompt #159 — "What dreams did"
+Text: "WHAT DREAMS DID." Green ✓. Below: miniature sleep → practice → survive flow. Text: "FUNCTION > MEANING". [GREEN SUFFIX]
+
+---
+
+# SECTION 9: CLOSING (7:50 – 8:30)
+**BG: WHITE | Frames 160–194**
+
+---
+
+### Prompt #160 — "So what are dreams?"
+Large bold text: "SO WHAT ARE DREAMS?" + large purple question mark. [WHITE SUFFIX]
+
+### Prompt #161 — "No one answer"
+Text: "300,000 YEARS" large. Below: "STILL NO ONE ANSWER." Scattered colored question marks (purple, blue, red, orange). [WHITE SUFFIX]
+
+### Prompt #162 — "Layers"
+Geological layer diagram — horizontal stacked colored bands, 6 layers. Not yet labeled. Text: "LAYERS". [WHITE SUFFIX]
+
+### Prompt #163 — "Layer 1: Soul travel" (BUILD)
+Same layers as Prompt #162. BOTTOM layer highlighted. Tiny spirit-rising icon inside. Label: "SOUL TRAVEL". Other layers faded. [WHITE SUFFIX]
+
+### Prompt #164 — "Layer 2: Divine" (BUILD)
+Same as Prompt #163 + SECOND layer highlighted. Tiny golden light rays icon. Label: "DIVINE MESSAGES". [WHITE SUFFIX]
+
+### Prompt #165 — "Layer 3: From within" (BUILD)
+Same + THIRD layer. Tiny brain with inward arrows. Label: "FROM WITHIN". [WHITE SUFFIX]
+
+### Prompt #166 — "Layer 4: Unconscious" (BUILD)
+Same + FOURTH layer. Tiny lock/key icon. Label: "UNCONSCIOUS". [WHITE SUFFIX]
+
+### Prompt #167 — "Layer 5: Noise" (BUILD)
+Same + FIFTH layer. Tiny brain with static. Label: "NOISE". [WHITE SUFFIX]
+
+### Prompt #168 — "Layer 6: Training" (BUILD)
+All 6 layers visible and labeled. TOP layer: tiny running character. Label: "TRAINING". Complete stack. [WHITE SUFFIX]
+
+### Prompt #169 — "None fully right"
+Same complete stack as Prompt #168. Each layer has a question mark (?) next to label. Text: "NONE FULLY RIGHT". [WHITE SUFFIX]
+
+### Prompt #170 — "Every culture"
+Simplified world map. On EVERY continent: small groups of stickmen, each with dream clouds. Dotted lines connecting all groups. Text: "EVERY CULTURE — EVERY SINGLE ONE". [WHITE SUFFIX]
+
+### Prompt #171 — "Kalahari"
+Small vignette: flat desert line, sun. Ancient stickman (brown fur variant, same as Prompt #141) sitting by fire (flame shape), looking up at stars. Dream cloud above. Text: "KALAHARI". [WHITE SUFFIX]
+
+### Prompt #172 — "Egypt"
+Pyramid silhouettes in background. Hooded character with golden triangular headdress (Pharaoh variant, same as Prompt #87) lying on bed, dreaming. Dream cloud above. Text: "EGYPT". [WHITE SUFFIX]
+
+### Prompt #173 — "Athens"
+Greek column in background. Hooded character with beard (same as Prompt #65 Heraclitus style) seated on stone, thinking pose (hand on chin), looking at dream cloud. Text: "ATHENS". [WHITE SUFFIX]
+
+### Prompt #174 — "Chicago"
+Modern building outline. Hooded character with glasses (RESEARCHER, same as Prompt #29) looking at screen showing brain scan data. Text: "CHICAGO". [WHITE SUFFIX]
+
+### Prompt #175 — "Nobody ever"
+Hooded character in SHRUG pose (shoulders raised, palms up). Text: "DREAMS DON'T MATTER?" LARGE RED X crossing out entire scene. Text: "NOBODY. EVER." [WHITE SUFFIX]
+
+### Prompt #176 — "Because every night"
+Text frame: "BECAUSE EVERY NIGHT..." [WHITE SUFFIX]
+
+### Prompt #177 — "Close your eyes"
+Close-up of stickman's face (same as Prompt #4). Eyes transitioning from open (open circle eyes) to closed (curved lines). Moment of falling asleep. [WHITE SUFFIX]
+
+### Prompt #178 — "Enter a world"
+Hooded character (same as Prompt #1) stepping through a glowing purple portal/doorway. One foot in white background, one foot in purple dream space. Text: "ABSOLUTELY REAL". [WHITE SUFFIX]
+
+### Prompt #179 — "No physics"
+Inside purple dream space: objects defying physics — water flowing up, character standing on ceiling (upside down, same as Prompt #1), blocks floating. Text: "NO PHYSICS". [WHITE SUFFIX]
+
+### Prompt #180 — "Dead walk"
+Inside dream space: spirit stickmen (dotted lines, same style as Prompt #15) walking among solid characters. Nobody reacts. Text: "THE DEAD WALK". [WHITE SUFFIX]
+
+### Prompt #181 — "Buildings rearrange"
+Building shapes mid-transformation — walls shifting (motion arrows), door appearing where wall was. Text: "REARRANGE". [WHITE SUFFIX]
+
+### Prompt #182 — "You can fly"
+A stickman (same as Prompt #1) FLYING through dream space — arms spread. Motion lines trailing below. Joyful/soaring. Dream landscape getting smaller below. Text: "FLY". [WHITE SUFFIX]
+
+### Prompt #183 — "Wake up"
+Character sitting up in bed (same as Prompt #17). Purple dream cloud above FADING — dissolving into particles. White reality taking over. Text: "WAKE UP". [WHITE SUFFIX]
+
+### Prompt #184 — "Forgotten"
+Same waking character as Prompt #183. Dream particles almost completely GONE — just faint dots. Character with tilted head, question mark. Text: "FORGOTTEN" and "95%". [WHITE SUFFIX]
+
+### Prompt #185 — "300,000 years trying"
+Long timeline arrow. Ancient character on far left (same as Prompt #19 left). Modern character far right (same as Prompt #1). Between them: tiny icons of every theory — spirit rising, golden rays, philosopher, couch, brain scan. Text: "300,000 YEARS TRYING". [WHITE SUFFIX]
+
+### Prompt #186 — "Brain scans"
+Brain inside MRI ring (circle around brain). Data screens beside. Text: "BRAIN SCANS". [WHITE SUFFIX]
+
+### Prompt #187 — "Sleep labs"
+Character sleeping in clinical room (rectangle outline). Electrode wires to equipment (screens, machines). Text: "SLEEP LABS". [WHITE SUFFIX]
+
+### Prompt #188 — "Papers"
+Stack of paper/document shapes piled up, text lines on each. Text: "PEER-REVIEWED PAPERS". [WHITE SUFFIX]
+
+### Prompt #189 — "Still not sure"
+Researcher character (same as Prompt #174) same posture but with QUESTION MARK above head. Text: "STILL NOT SURE". [WHITE SUFFIX]
+
+### Prompt #190 — "Only thing changed"
+Text: "THE ONLY THING THAT'S CHANGED..." [WHITE SUFFIX]
+
+### Prompt #191 — "Stopped asking gods"
+Golden light rays from top (same as Prompt #37 style) — now FADING, becoming transparent, dissolving away. Text: "STOPPED ASKING THE GODS". [WHITE SUFFIX]
+
+### Prompt #192 — "Asking the brain"
+Large pink brain, centered and prominent. Small researcher character (same as Prompt #29) looking at it through magnifying glass shape. Character small compared to brain. Text: "STARTED ASKING THE BRAIN". [WHITE SUFFIX]
+
+### Prompt #193 — "The brain, so far"
+Same large brain as Prompt #192 but scientist is GONE. Just the brain, alone, centered. Expectant feeling. Text: "THE BRAIN, SO FAR..." [WHITE SUFFIX]
+
+### Prompt #194 — FINAL FRAME — "..."
+Large pink brain centered. Simple speech bubble from it. Inside: only "..." (three dots). Silence. Clean white space. Text below: "..." Hold 4 seconds. [WHITE SUFFIX]
+
+---
+
+# HOLD/TRANSITION FRAMES (195–210)
+
+إطارات تكرار بتعديلات بسيطة — تُوزع على الأقسام لملء الكثافة:
+
+| # | Based on | Change | Section |
+|---|----------|--------|---------|
+| 195 | Prompt #22 | Same but remove text — only character + question mark | Opening |
+| 196 | Prompt #25 | Spirit at slightly higher position | Soul Travel |
+| 197 | Prompt #37 | Just the door alone, no light rays or character | Mesopotamia |
+| 198 | Prompt #49 | Add exclamation mark to text | Soul Travel |
+| 199 | Prompt #53 | Ba-bird wings in different position (up vs spread) | Egypt |
+| 200 | Prompt #60 | Just the two arrows, no labels | Egypt |
+| 201 | Prompt #67 | Same head, arrows at slightly changed angle | Greek |
+| 202 | Prompt #81 | Zoom into center of timeline (vast empty gap) | Greek |
+| 203 | Prompt #102 | Locked box slightly more open, wishes escaping further | Freud |
+| 204 | Prompt #119 | Lightning bolts brighter and more numerous | REM |
+| 205 | Prompt #129 | Noise pattern slightly different configuration | Activation |
+| 206 | Prompt #145 | Character at different stage of escape inside dream | Threat |
+| 207 | Prompt #148 | Progressive: one fewer dream cloud (building up to full) | Threat |
+| 208 | Prompt #168 | Layers glow one at a time (animation breakdown) | Closing |
+| 209 | Prompt #185 | Zoom into center of timeline (gap between ancient/modern) | Closing |
+| 210 | Prompt #194 | Same brain, speech bubble slightly larger, still "..." | Final hold |
+
+---
+
+## ملخص الإنتاج النهائي
+
+| Section | Frames | BG | Duration |
+|---------|--------|----|----------|
+| 1. Opening Hook | 22 | White | 0:00–0:45 |
+| 2. Soul Travel | 38 | Green | 0:45–2:40 |
+| 3. Greek Twist | 25 | White | 2:40–4:10 |
+| 4. Religion & Culture | 11 | Green | 4:10–5:00 |
+| 5. Freud | 14 | White | 5:00–5:50 |
+| 6. REM Sleep | 14 | Green | 5:50–6:30 |
+| 7. Activation-Synthesis | 13 | White | 6:30–7:05 |
+| 8. Threat Simulation | 22 | Green | 7:05–7:50 |
+| 9. Closing | 35 | White | 7:50–8:30 |
+| 10. Hold/Transition | 16 | Mixed | Distributed |
+| **TOTAL** | **210** | **Alternating** | **~8:30** |
+
+**الخلفية تتبدل:** أبيض → أخضر → أبيض → أخضر → أبيض → أخضر → أبيض → أخضر → أبيض

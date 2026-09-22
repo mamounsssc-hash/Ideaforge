@@ -1,108 +1,125 @@
-# Zenn Visual Style Guide
+# Zenn-Style Visual Guide — Dreams Video (V1: No Custom Character)
 
-## تحليل الأسلوب البصري (Arabic Explanation)
-
-تحليل 212 إطار من فيديو Zenn (حوالي 8 دقائق). النتائج:
-
-### الأرقام الأساسية
-- **212 إطار** لفيديو ~8 دقائق
-- **إطار جديد كل 2-2.5 ثانية** تقريباً
-- **26 إطار بالدقيقة** تقريباً
-- كل إطار يوضح **فكرة واحدة** من السكريبت
-- الأسلوب: رسم بسيط جداً (stickman) بدون تفاصيل معقدة
-
-### شخصيات Zenn الأساسية
-1. **الباحث/العالم**: رأس أصلع دائري + نظارات + حافظة أوراق (clipboard)
-2. **الطفل**: أصغر حجماً + شعر شائك + أحياناً لهاية (pacifier)
-3. **الشخص العادي**: stickman بسيط برأس دائري وأطراف عصوية
-4. **المجموعات**: 3-5 شخصيات stickman متراصة
-
-### الألوان
-- **الخلفية**: أبيض صافي أو أخضر مريمية خافت (sage green)
-- **أشرطة سوداء/زيتوني غامق**: أعلى وأسفل الإطار (letterbox bars)
-- **أصفر**: للعملات والأموال والإبرازات
-- **أزرق**: للكتب والقياسات والعناصر الباردة
-- **أحمر**: للتحذيرات والخطر
-- **برتقالي/بني**: للمباني والأرض
-- **وردي**: للدماغ والعناصر العضوية
-
-### النصوص
-- خط عريض بخط يد (handwritten bold)
-- حروف كبيرة دائماً (UPPERCASE)
-- أمثلة: "UNETHICAL", "AGE 8", "SENSITIVE PERIOD", "24 MONTHS"
-- النص يكون تسمية (label) وليس جملة كاملة
-
-### تركيب الإطار
-- نسبة 16:9 (widescreen)
-- الموضوع الرئيسي في المنتصف دائماً
-- تركيب بسيط جداً: شخصية + عنصر واحد أو اثنين
-- لا توجد خلفيات معقدة أبداً
+> **ملاحظة**: الفيديو الأول بدون شخصية مخصصة — stickman بسيط مثل Zenn بالضبط.
+> الشخصية ذات القلنسوة محفوظة للفيديوهات القادمة.
 
 ---
 
-## English Style Reference (for AI Image Prompts)
+## الشخصية: Stickman بسيط (Zenn Style)
 
-### Art Style
-- Simple 2D stickman illustration
-- Round circle heads, stick limbs, minimal body detail
-- Black outlines, clean lines, no shading or gradients
-- Flat colors, no textures
-- Children's educational illustration aesthetic
-- NOT anime, NOT realistic, NOT cartoon — strictly minimalist stickman
+### الوصف البصري
+- رأس دائري بسيط (circle)
+- عينان نقطتان صغيرتان سوداوان (dot eyes)
+- فم خط مستقيم صغير
+- جسم عصوي بسيط (stick body)
+- أذرع عصوية بأيدي دائرية صغيرة
+- أرجل عصوية بأقدام بسيطة
+- **بدون تفاصيل إضافية** — أبسط ما يمكن
 
-### Characters
-| Character | Features |
-|-----------|----------|
-| Generic Person | Round head, dot eyes, straight line mouth, stick arms and legs |
-| Researcher/Scientist | Bald round head, rectangular glasses, holding clipboard or pointing |
-| Child | Smaller body, spiky messy hair, sometimes pacifier |
-| Ancient Human | Same stickman but with a simple fur/cloth wrap |
-| Group/Crowd | 3-5 stickmen standing together, slight variation in height |
-| Sleeping Person | Horizontal stickman, closed eyes (curved lines), ZZZ symbols |
+### كيف تتغير حسب الدور
+| الدور | التعديل |
+|-------|---------|
+| الراوي / المشاهد | Stickman أساسي بدون تعديل |
+| الباحث / العالم | + نظارات مستطيلة + حافظة أوراق |
+| الإنسان القديم | + مثلث بني على الجسم (فرو/جلد حيوان) |
+| الروح / Spirit | نفس الشكل بخطوط متقطعة + شفاف + توهج بنفسجي |
+| طفل | نفس الشكل أصغر بـ 40% + شعر شائك |
+| مجموعة | 3-5 stickmen بأحجام مختلفة قليلاً |
+| ملك / فرعون | + تاج (مثلثات صغيرة فوق الرأس) |
+| فرعون مصري | + قطعة رأس مثلثية ذهبية |
+| كاهن | + قبعة طويلة مدببة |
+| نائم | أفقي، عيون مغلقة (خطوط منحنية)، ZZZ |
+| ميت | أفقي، عيون X |
 
-### Backgrounds
-- **Primary**: Pure white (#FFFFFF)
-- **Secondary**: Muted sage green (#A8B89C or similar)
-- **Letterbox bars**: Dark olive/black at top and bottom edges
-- **NEVER**: Complex scenes, detailed environments, realistic landscapes
+### قاعدة: لا صور إلهية
+- لا رسم أي إله أو كيان إلهي على شكل شخصية
+- الإلهي = أشعة ضوء ذهبية من أعلى + هالة + رموز مجردة
 
-### Color Palette
-| Color | Hex Estimate | Used For |
-|-------|-------------|----------|
-| Black | #2D2D2D | Outlines, characters, text |
-| White | #FFFFFF | Primary background |
-| Sage Green | #A8B89C | Secondary background |
-| Yellow | #F5C842 | Money, highlights, sun, important items |
-| Blue | #4A90D9 | Books, science, measurements, cold |
-| Red | #E74C3C | Danger, warnings, hearts, fire |
-| Orange/Brown | #C67B30 | Buildings, earth, ancient objects |
-| Pink | #E891B0 | Brain, organic, body parts |
-| Purple | #8B5CF6 | Mystery, spiritual, dreams |
-| Dark Olive | #3D4A2E | Letterbox bars |
+---
+
+## English Character Reference
+
+### BASE CHARACTER (use in every prompt):
+```
+A simple minimalist stickman character with a round circle head, two small black dot eyes, a tiny straight line mouth, a thin stick body, thin stick arms with small round hands, thin stick legs with simple feet. Black outlines on white.
+```
+
+### VARIANTS:
+| Role | Added to base |
+|------|---------------|
+| Researcher | `wearing small rectangular glasses, holding a clipboard` |
+| Ancient Human | `wearing a simple brown triangular animal skin wrap on the body` |
+| Spirit/Soul | `drawn with dotted/dashed outlines, semi-transparent, faint purple glow` |
+| Child | `40% smaller, with short spiky hair lines on top of head` |
+| King | `with a small golden crown (triangular points) on top of head` |
+| Egyptian Pharaoh | `with a triangular gold headdress on head` |
+| Priest/Baru | `with a tall pointed hat on head` |
+| Sleeping | `lying horizontal, eyes are curved downward lines (closed), ZZZ above` |
+| Dead | `lying horizontal, eyes are X shapes` |
+
+---
+
+## STYLE RULES
+
+### Backgrounds (alternating every section)
+- **White**: Pure white (#FFFFFF)
+- **Sage Green**: Muted (#A8B89C)
+
+### Colors
+| Color | Used For |
+|-------|----------|
+| Black (#2D2D2D) | Characters, outlines, text |
+| Brown (#8B6914) | Ancient human clothing |
+| Yellow/Gold (#F5C842) | Crowns, divine light, highlights |
+| Blue (#4A90D9) | Books, science |
+| Red (#E74C3C) | Danger, X marks, warnings |
+| Pink (#E891B0) | Brain |
+| Purple (#8B5CF6) | Dreams, dream clouds |
+| Sage Green (#A8B89C) | Secondary background |
 
 ### Text Labels
-- Bold handwritten uppercase font
-- Always a SHORT label (1-3 words max)
-- Placed near the relevant object
-- Examples: "300,000 YEARS", "REM SLEEP", "THE SOUL", "1871"
+- Bold handwritten uppercase (marker style)
+- 1-3 words max
+- Black on white BG, white on green BG
 
-### Composition Rules
-1. 16:9 aspect ratio always
-2. Subject centered or slightly off-center
-3. Maximum 2-3 elements per frame
-4. Lots of white/negative space
-5. One clear focal point per frame
-6. No busy or cluttered compositions
+### Composition
+- 16:9 aspect ratio
+- Centered subject
+- Max 2-3 elements per frame
+- Lots of negative space
 
-### Frame Pacing
-- 1 new image every 2-2.5 seconds of narration
-- Each image = ONE concept from the script
-- Hold longer on emotionally resonant images
-- Quick cuts during fast-paced fact sequences
+### Divine Elements (NO humanoid figure)
+- Golden light rays from above
+- Glowing halo circles (no person)
+- Radiating yellow lines
+- Abstract symbols
 
-### Consistent Prompt Suffix
-All prompts should end with:
-`Simple 2D stickman illustration, minimalist style, round head stick figure characters, black outlines, flat colors, clean white background, 16:9 aspect ratio, educational YouTube video frame, no shading, no gradients, no realistic details`
+---
 
-For sage green background variant:
-`Simple 2D stickman illustration, minimalist style, round head stick figure characters, black outlines, flat colors, muted sage green background, 16:9 aspect ratio, educational YouTube video frame, no shading, no gradients, no realistic details`
+## STYLE SUFFIX — WHITE BG:
+```
+Simple minimalist 2D stickman illustration, clean round-head stick figure characters, black outlines, flat solid colors, pure white background, 16:9 widescreen aspect ratio, educational YouTube animation frame, no shading, no gradients, no texture, no realistic details, thick clean lines, centered composition
+```
+
+## STYLE SUFFIX — GREEN BG:
+```
+Simple minimalist 2D stickman illustration, clean round-head stick figure characters, black outlines, flat solid colors, muted sage green (#A8B89C) background, 16:9 widescreen aspect ratio, educational YouTube animation frame, no shading, no gradients, no texture, no realistic details, thick clean lines, centered composition
+```
+
+---
+
+## TRANSITIONS (Zenn's 7 types)
+1. **Progressive Build**: Same scene + ONE new element
+2. **Zoom In/Out**: Wide → detail → wide
+3. **Left-to-Right Reveal**: Timeline progresses
+4. **Same Character, New Pose**: Position changes
+5. **Text Swap**: Same image, text changes
+6. **Split Compare**: Screen divided
+7. **Object Isolation**: Scene → isolated object
+
+## PACING
+- ~24-25 frames/minute
+- 1 frame every ~2.4 seconds
+- Hold dramatic frames 3-4 sec
+- Ken Burns slow zoom (5%) on each
+- Hard cuts within sections, short fade between sections
